@@ -1,0 +1,4 @@
+#Wed May 11 18:27:09 EDT 2022
+base.0=/Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
