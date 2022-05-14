@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import '../../constants/color_shades.dart';
 //import 'package:practice_app/screens/auth/login.dart';
 //import 'package:email_validator/email_validator.dart';
 
@@ -40,7 +41,7 @@ class _SignUpState extends State<SignUp> {
   //                          MEDIHEALTH
   AppBar banner() {
     return AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorShades.text1,
         title: const Text('MediHealth',
             style: TextStyle(fontFamily: 'Oleo Script Swash Caps')));
   }
@@ -51,25 +52,25 @@ class _SignUpState extends State<SignUp> {
 
   Column signUpWelcome() {
     return Column(
-      children: const [
+      children: [
         // Login
         Center(
             child: Text('Sign Up',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: ColorShades.text1,
                   fontSize: 60,
                 ))),
         Center(
           child: Text('Welcome to MediHealth!',
               style: TextStyle(
-                color: Colors.white,
+                color: ColorShades.text1,
                 fontSize: 30,
               )),
         ),
         Center(
           child: Text('Please fill the following fields',
               style: TextStyle(
-                color: Colors.white,
+                color: ColorShades.text1,
                 fontSize: 30,
               )),
         ),
@@ -81,10 +82,10 @@ class _SignUpState extends State<SignUp> {
     return RichText(
       text: TextSpan(
         children: [
-          const TextSpan(
+          TextSpan(
               text: 'Already have an account?',
               style: TextStyle(
-                  color: Colors.black,
+                  color: ColorShades.text2,
                   fontWeight: FontWeight.bold,
                   fontSize: 20)),
           const TextSpan(text: '    '),
@@ -93,9 +94,9 @@ class _SignUpState extends State<SignUp> {
                 ..onTap = () =>
                     Navigator.canPop(context) ? Navigator.pop(context) : null,
               text: 'Login here',
-              style: const TextStyle(
+              style: TextStyle(
                   decoration: TextDecoration.underline,
-                  color: Colors.black,
+                  color: ColorShades.text2,
                   fontWeight: FontWeight.bold,
                   fontSize: 20))
         ],
@@ -113,8 +114,8 @@ class _SignUpState extends State<SignUp> {
         children: [
           TextSpan(
               text: desiredHeader,
-              style: const TextStyle(
-                color: Colors.black,
+              style: TextStyle(
+                color: ColorShades.text2,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               )),
@@ -174,13 +175,13 @@ class _SignUpState extends State<SignUp> {
           return null;
         }
       },
-      style: const TextStyle(color: Colors.black),
+      style: TextStyle(color: ColorShades.text2),
       decoration: InputDecoration(
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(25.0),
         ),
-        fillColor: Colors.white,
+        fillColor: ColorShades.text1,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
           borderRadius: BorderRadius.circular(25.0),
@@ -209,13 +210,13 @@ class _SignUpState extends State<SignUp> {
           return null;
         }
       },
-      style: const TextStyle(color: Colors.black),
+      style: TextStyle(color: ColorShades.text2),
       decoration: InputDecoration(
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(25.0),
         ),
-        fillColor: Colors.white,
+        fillColor: ColorShades.text1,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
           borderRadius: BorderRadius.circular(25.0),
@@ -242,17 +243,17 @@ class _SignUpState extends State<SignUp> {
           return null;
         }
       },
-      style: const TextStyle(color: Colors.black),
+      style: TextStyle(color: ColorShades.text2),
       decoration: InputDecoration(
         hintText: 'Format: someone@example.com',
         hintStyle:
             TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
         border: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white, width: 2.0),
+          borderSide:  BorderSide(color: ColorShades.text1, width: 2.0),
           borderRadius: BorderRadius.circular(25.0),
         ),
-        fillColor: Colors.white,
+        fillColor: ColorShades.text1,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
           borderRadius: BorderRadius.circular(25.0),
@@ -282,7 +283,7 @@ class _SignUpState extends State<SignUp> {
           return null;
         }
       },
-      style: const TextStyle(color: Colors.black),
+      style: TextStyle(color: ColorShades.text2),
       decoration: InputDecoration(
         suffixIcon: GestureDetector(
           onTap: () {
@@ -296,7 +297,7 @@ class _SignUpState extends State<SignUp> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(25.0),
         ),
-        fillColor: Colors.white,
+        fillColor: ColorShades.text1,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
           borderRadius: BorderRadius.circular(25.0),
@@ -308,27 +309,27 @@ class _SignUpState extends State<SignUp> {
   MaterialButton signUpButton() {
     return MaterialButton(
       onPressed: _submitSignUpForm,
-      color: const Color(0xFFc70039),
+      color: ColorShades.primaryColor1,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               'Sign up',
               style: TextStyle(
-                color: Colors.white,
+                color: ColorShades.text1,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Icon(
               Icons.person_add,
-              color: Colors.white,
+              color: ColorShades.text1,
             )
           ],
         ),
@@ -339,12 +340,12 @@ class _SignUpState extends State<SignUp> {
   Container signUpPageContent() {
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           //border: Border.all(color: Colors.black),
           gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-        Color(0xFFFF0000),
-        Color(0xFFFFA500),
-        Color(0xFFFFD700)
+        ColorShades.secondaryColor2,
+        ColorShades.secondaryColor3,
+        ColorShades.primaryColor3
       ])),
       child: Column(
         children: [
@@ -352,9 +353,9 @@ class _SignUpState extends State<SignUp> {
           verticalSpace(40),
           Expanded(
             child: Container(
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                  color: ColorShades.text1,
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(60),
                       topRight: Radius.circular(60))),
               child: SingleChildScrollView(

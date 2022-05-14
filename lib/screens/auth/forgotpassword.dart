@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import '../../constants/color_shades.dart';
+
 //import 'package:email_validator/email_validator.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -28,11 +30,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   //  <
   AppBar banner() {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorShades.text1,
       title: const Text('MediHealth',
           style: TextStyle(fontFamily: 'Oleo Script Swash Caps')),
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios, color: Colors.grey),
+        icon: Icon(Icons.arrow_back_ios, color: ColorShades.text2),
         onPressed: () => Navigator.of(context).pop(),
       ),
     );
@@ -45,25 +47,25 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   Column forgotpasswordDontworryFillemail() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children: [
         // Login
         Center(
             child: Text('Forgot password?',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: ColorShades.text1,
                   fontSize: 60,
                 ))),
         Center(
           child: Text('Don\'t worry!',
               style: TextStyle(
-                color: Colors.white,
+                color: ColorShades.text1,
                 fontSize: 30,
               )),
         ),
         Center(
           child: Text('Fill in your email and we will send the steps',
               style: TextStyle(
-                color: Colors.white,
+                color: ColorShades.text1,
                 fontSize: 30,
               )),
         ),
@@ -81,8 +83,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         children: [
           TextSpan(
               text: desiredHeader,
-              style: const TextStyle(
-                color: Colors.black,
+              style: TextStyle(
+                color: ColorShades.text2,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               )),
@@ -123,17 +125,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           return null;
         }
       },
-      style: const TextStyle(color: Colors.black),
+      style: TextStyle(color: ColorShades.text2),
       decoration: InputDecoration(
         hintText: 'Format: someone@example.com',
         hintStyle:
             TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
         border: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white, width: 2.0),
+          borderSide: BorderSide(color: ColorShades.text1, width: 2.0),
           borderRadius: BorderRadius.circular(25.0),
         ),
-        fillColor: Colors.white,
+        fillColor: ColorShades.text1,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
           borderRadius: BorderRadius.circular(25.0),
@@ -145,27 +147,27 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   MaterialButton submitButton() {
     return MaterialButton(
       onPressed: _submitLoginForm,
-      color: const Color(0xFFc70039),
+      color: ColorShades.primaryColor1,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               'Submit',
               style: TextStyle(
-                color: Colors.white,
+                color: ColorShades.text1,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Icon(
               Icons.ads_click_outlined,
-              color: Colors.white,
+              color: ColorShades.text1,
             )
           ],
         ),
@@ -180,9 +182,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           ..onTap =
               () => Navigator.canPop(context) ? Navigator.pop(context) : null,
         text: 'Back to login',
-        style: const TextStyle(
+        style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.black,
+            color: ColorShades.text2,
             fontWeight: FontWeight.bold,
             fontSize: 20),
       ),
@@ -192,12 +194,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   Container loginPageContent() {
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           //border: Border.all(color: Colors.black),
           gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-        Color(0xFFFF0000),
-        Color(0xFFFFA500),
-        Color(0xFFFFD700)
+        ColorShades.secondaryColor2,
+         ColorShades.secondaryColor3,
+         ColorShades.primaryColor3
       ])),
       child: Column(
         children: [
@@ -205,9 +207,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           verticalSpace(40),
           Expanded(
             child: Container(
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                  color:  ColorShades.text1,
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(60),
                       topRight: Radius.circular(60))),
               child: SingleChildScrollView(

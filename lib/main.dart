@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:practice_app/screens/medicine_screen.dart';
 //import 'screens/auth/login.dart';
-import 'screens/auth/medicine_screen.dart';
+import 'screens/medicine_screen.dart';
 
 void main() {
   runApp(const MyApp());
