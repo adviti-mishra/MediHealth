@@ -64,25 +64,33 @@ class _MedicineWidgetState extends State<MedicineWidget> {
 
   AlertDialog deletePopup() {
     return AlertDialog(
-      actions: [
-        SizedBox(
-          height: 100,
-          width: 300,
-          child: TextButton(
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(ColorShades.primaryColor2)),
-              onPressed: () {},
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(Icons.delete, color: ColorShades.text1, size: 40),
-                    Text('Delete',
-                        style: TextStyle(color: ColorShades.text1, fontSize: 40))
-                  ])),
+        backgroundColor: ColorShades.text1,
+        title: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.delete, color: ColorShades.primaryColor1),
+            ),
+            Padding(
+                padding: const EdgeInsets.all(8.0),
+                child:
+                    Text('Delete', style: TextStyle(color: ColorShades.text2)))
+          ],
         ),
-      ],
-    );
+        content: Text(
+            "Do you want to delete this medicine?",
+            style: TextStyle(color: ColorShades.text2)),
+        actions: [
+          TextButton(
+              onPressed: () {},
+              child: Text('Yes',
+                  style: TextStyle(color: ColorShades.text2))),
+          TextButton(
+              onPressed: () {
+                Navigator.canPop(context) ? Navigator.pop(context) : null;
+              },
+              child: Text('No', style: TextStyle(color: ColorShades.text2))),
+        ]);
   }
 
   ListTile medicineCardContent() {
@@ -96,7 +104,9 @@ class _MedicineWidgetState extends State<MedicineWidget> {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              fontWeight: FontWeight.bold, color: ColorShades.text2, fontSize: 40)),
+              fontWeight: FontWeight.bold,
+              color: ColorShades.text2,
+              fontSize: 40)),
       subtitle: medicineCardSubdetails(),
       trailing: deleteButton(),
     );
@@ -107,10 +117,10 @@ class _MedicineWidgetState extends State<MedicineWidget> {
         elevation: 10,
         margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: ColorShades.text2, width: 2),
+          side: const BorderSide(color: Colors.black, width: 2),
           borderRadius: BorderRadius.circular(10),
         ),
-        color: ColorShades.primaryColor3,
+        color: const Color(0xFFFFD700),
         child: medicineCardContent());
     // cancel
     // downarrow

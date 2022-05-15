@@ -11,9 +11,7 @@ class MedicineScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const DrawerWidget(),
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(80.0), // here the desired height
-        child: AppBar(
+      appBar: AppBar(
           backgroundColor: ColorShades.primaryColor1,
           title: Center(
               child: Text('Your schedule',
@@ -32,7 +30,6 @@ class MedicineScreen extends StatelessWidget {
             },
           ),
         ),
-      ),
       body: ListView.builder(itemBuilder: (BuildContext context, int index) {
         return const MedicineWidget();
       }),

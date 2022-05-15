@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:practice_app/screens/medicine_screen.dart';
 //import 'screens/auth/login.dart';
 import 'screens/medicine_screen.dart';
+import '../../constants/color_shades.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
         //scaffoldBackgroundColor: ,
-        primaryColor: Colors.black,
+        primaryColor: ColorShades.text1,
       ),
       home: const MedicineScreen(),
     );
