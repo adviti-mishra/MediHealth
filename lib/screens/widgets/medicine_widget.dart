@@ -120,7 +120,7 @@ class _MedicineWidgetState extends State<MedicineWidget> {
           side: const BorderSide(color: Colors.black, width: 2),
           borderRadius: BorderRadius.circular(10),
         ),
-        color: const Color(0xFFFFD700),
+        color: ColorShades.primaryColor3,
         child: medicineCardContent());
     // cancel
     // downarrow

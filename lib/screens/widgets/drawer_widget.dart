@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practice_app/screens/inner_screens/add_medicine.dart';
 import '../../constants/color_shades.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -29,11 +30,11 @@ class DrawerWidget extends StatelessWidget {
                 ),
                 Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('Sign out',
+                    child: Text('Log out',
                         style: TextStyle(color: ColorShades.text2)))
               ],
             ),
-            content: Text("Do you want to sign out?",
+            content: Text("Do you want to log out?",
                 style: TextStyle(color: ColorShades.text2)),
             actions: [
               TextButton(
@@ -51,6 +52,11 @@ class DrawerWidget extends StatelessWidget {
     );
   }
 
+  void navigatetoAddMedicineScreen(context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const AddMedicine()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -60,6 +66,13 @@ class DrawerWidget extends StatelessWidget {
           decoration: BoxDecoration(color: ColorShades.text1),
           child: Image.network('assets/images/MediHealth_logo.png'),
         ),
+        const SizedBox(height: 30),
+        drawerMenuOption(
+            label: "Add a medicine",
+            icon: Icons.add,
+            ftor: () {
+              navigatetoAddMedicineScreen(context);
+            }),
         const SizedBox(height: 30),
         drawerMenuOption(label: "Account", icon: Icons.person, ftor: () {}),
         const SizedBox(height: 30),
@@ -80,7 +93,7 @@ class DrawerWidget extends StatelessWidget {
         ),
         const SizedBox(height: 30),
         drawerMenuOption(
-            label: "Logout",
+            label: "Log out",
             icon: Icons.logout_outlined,
             ftor: () {
               logOutPopup(context);

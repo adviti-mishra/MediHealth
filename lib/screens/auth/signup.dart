@@ -13,13 +13,13 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final TextEditingController _emailTextController =
-      TextEditingController(text: ' ');
+      TextEditingController();
   final TextEditingController _passwordTextController =
-      TextEditingController(text: ' ');
+      TextEditingController();
   final TextEditingController _firstnameTextController =
-      TextEditingController(text: ' ');
+      TextEditingController();
   final TextEditingController _lastnameTextController =
-      TextEditingController(text: ' ');
+      TextEditingController();
 
   bool _obscureText = true;
   final _signUpFormKey = GlobalKey<FormState>();
