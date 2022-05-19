@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practice_app/constants/color_shades.dart';
+import 'package:practice_app/constants/date_formatting.dart';
+import 'package:weekday_selector/weekday_selector.dart';
 
 class AddMedicine extends StatefulWidget {
   const AddMedicine({Key? key}) : super(key: key);
@@ -29,6 +31,10 @@ class _AddMedicine extends State<AddMedicine> {
 
   DateTime? startDate;
   DateTime? endDate;
+
+  // We start with all days not selected.
+  List<bool> values = List.filled(7, false);
+
 
   @override
   // deconstructor : TextEditingControllers
@@ -126,11 +132,9 @@ class _AddMedicine extends State<AddMedicine> {
       firstDate: DateTime.now().subtract(const Duration(days: 0)),
       lastDate: DateTime(2100),
     );
-    //print('Start date picked$startDate');
     if (startDate != null) {
       setState(() {
-        _startDateTextController.text =
-            '${startDate!.year}-${startDate!.month}-${startDate!.day}';
+        _startDateTextController.text = formattedDate(startDate);
       });
     }
   }
@@ -145,8 +149,7 @@ class _AddMedicine extends State<AddMedicine> {
     //print('End date picked$endDate');
     if (endDate != null) {
       setState(() {
-        _endDateTextController.text =
-            '${endDate!.year}-${endDate!.month}-${endDate!.day}';
+        _endDateTextController.text = formattedDate(endDate);
       });
     }
   }
@@ -186,7 +189,7 @@ class _AddMedicine extends State<AddMedicine> {
           // BLANK LINE
           verticalSpace(20),
           // Add medicine BUTTON
-          uploadMedicineButton()
+          uploadMedicineButton(),
         ],
       ),
     );
@@ -225,12 +228,25 @@ class _AddMedicine extends State<AddMedicine> {
       Align(
           alignment: Alignment.bottomLeft,
           child: mandatoryHeader(desiredHeader: 'Days of intake ')),
-      fieldValidation(
-          valueKey: 'medicineDays',
-          controller: _medicineDaysTextController,
-          enabled: false,
-          ftor: () {},
-          maxlength: 100)
+      WeekdaySelectorTheme(
+        data: WeekdaySelectorThemeData(
+          color: ColorShades.text2,
+          fillColor: ColorShades.text1,
+          disabledFillColor: ColorShades.text1,
+          selectedFillColor: ColorShades.primaryColor1,
+        ),
+        child: WeekdaySelector(
+          onChanged: (int day) {
+            setState(() {
+              // Use module % 7 as Sunday's index in the array is 0 and
+              final index = day % 7;
+              // We "flip" the value
+              values[index] = !values[index];
+            });
+          },
+          values: values,
+        ),
+      )
     ]);
   }
 
@@ -292,7 +308,7 @@ class _AddMedicine extends State<AddMedicine> {
           controller: _medicineDescriptionTextController,
           enabled: true,
           ftor: () {},
-          maxlength: 100)
+          maxlength: 250)
     ]);
   }
 

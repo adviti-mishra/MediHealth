@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
         //scaffoldBackgroundColor: ,
-        primaryColor: ColorShades.text1,
+        primaryColor: ColorShades.primaryColor1,
       ),
       home: const AddMedicine(),
     );
