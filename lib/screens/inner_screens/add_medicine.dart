@@ -35,7 +35,6 @@ class _AddMedicine extends State<AddMedicine> {
   // We start with all days not selected.
   List<bool> values = List.filled(7, false);
 
-
   @override
   // deconstructor : TextEditingControllers
   void dispose() {
@@ -127,11 +126,27 @@ class _AddMedicine extends State<AddMedicine> {
 
   void pickStartDateDialog() async {
     startDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now().subtract(const Duration(days: 0)),
-      lastDate: DateTime(2100),
-    );
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now().subtract(const Duration(days: 0)),
+        lastDate: DateTime(2100),
+        builder: (context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.light(
+                primary: ColorShades.primaryColor1, // header background color
+                onPrimary: ColorShades.text1, // header text color
+                onSurface: ColorShades.text2 // body text color
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  primary: ColorShades.primaryColor1, // button text color
+                ),
+              ),
+            ),
+            child: child!,
+          );
+        });
     if (startDate != null) {
       setState(() {
         _startDateTextController.text = formattedDate(startDate);
@@ -145,6 +160,23 @@ class _AddMedicine extends State<AddMedicine> {
       initialDate: DateTime.now(),
       firstDate: DateTime.now().subtract(const Duration(days: 0)),
       lastDate: DateTime(2100),
+       builder: (context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.light(
+                primary: ColorShades.primaryColor1, // header background color
+                onPrimary: ColorShades.text1, // header text color
+                onSurface: ColorShades.text2 // body text color
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  primary: ColorShades.primaryColor1, // button text color
+                ),
+              ),
+            ),
+            child: child!,
+          );
+        }
     );
     //print('End date picked$endDate');
     if (endDate != null) {
@@ -176,12 +208,24 @@ class _AddMedicine extends State<AddMedicine> {
           timesofDayField(),
           // BLANK LINE
           verticalSpace(20),
-          // Start date of medication:
-          startDateField(),
-          // BLANK LINE
-          verticalSpace(20),
-          // Start date of medication:
-          endDateField(),
+          Text("Duration of medication: ",
+              style: TextStyle(
+                color: ColorShades.text2,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              )),
+          // Start date :              End date:
+          Row(
+            children: [
+              Expanded(child: startDateField()),
+              const SizedBox(
+                width: 50,
+              ),
+              Expanded(
+                child: endDateField(),
+              ),
+            ],
+          ),
           // BLANK LINE
           verticalSpace(20),
           // Additional info:
@@ -268,8 +312,7 @@ class _AddMedicine extends State<AddMedicine> {
     return Column(children: [
       Align(
           alignment: Alignment.bottomLeft,
-          child: mandatoryHeader(
-              desiredHeader: 'Start date of medicine schedule ')),
+          child: mandatoryHeader(desiredHeader: 'Start date ')),
       fieldValidation(
           valueKey: 'medicineStartDate',
           controller: _startDateTextController,
@@ -285,8 +328,7 @@ class _AddMedicine extends State<AddMedicine> {
     return Column(children: [
       Align(
           alignment: Alignment.bottomLeft,
-          child:
-              mandatoryHeader(desiredHeader: 'End date of medicine schedule ')),
+          child: mandatoryHeader(desiredHeader: 'End date ')),
       fieldValidation(
           valueKey: 'medicineEndDate',
           controller: _endDateTextController,
