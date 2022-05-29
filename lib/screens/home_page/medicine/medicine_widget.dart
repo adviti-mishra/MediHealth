@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../constants/color_shades.dart';
+import '../../../utils/utils_all.dart';
 
 class MedicineWidget extends StatefulWidget {
   const MedicineWidget({Key? key}) : super(key: key);
@@ -44,60 +44,9 @@ class _MedicineWidgetState extends State<MedicineWidget> {
     );
   }
 
-  RawMaterialButton deleteButton() {
-    return RawMaterialButton(
-        child: Icon(
-          Icons.cancel_outlined,
-          color: ColorShades.primaryColor1,
-          size: 40,
-        ),
-        shape: const CircleBorder(),
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (ctx) {
-              return deletePopup();
-            },
-          );
-        });
-  }
-
-  AlertDialog deletePopup() {
-    return AlertDialog(
-        backgroundColor: ColorShades.text1,
-        title: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.delete, color: ColorShades.primaryColor1),
-            ),
-            Padding(
-                padding: const EdgeInsets.all(8.0),
-                child:
-                    Text('Delete', style: TextStyle(color: ColorShades.text2)))
-          ],
-        ),
-        content: Text(
-            "Do you want to delete this medicine?",
-            style: TextStyle(color: ColorShades.text2)),
-        actions: [
-          TextButton(
-              onPressed: () {},
-              child: Text('Yes',
-                  style: TextStyle(color: ColorShades.text2))),
-          TextButton(
-              onPressed: () {
-                Navigator.canPop(context) ? Navigator.pop(context) : null;
-              },
-              child: Text('No', style: TextStyle(color: ColorShades.text2))),
-        ]);
-  }
-
   ListTile medicineCardContent() {
     return ListTile(
-      onTap: () {
-        
-      },
+      onTap: () {},
       contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
       leading: medicineIcon(),
       title: Text('Medicine',
@@ -108,8 +57,8 @@ class _MedicineWidgetState extends State<MedicineWidget> {
               color: ColorShades.text2,
               fontSize: 40)),
       subtitle: medicineCardSubdetails(),
-      trailing: deleteButton(),
-    );
+      trailing: deleteButton(context),
+      );
   }
 
   Card medicineWidgetContent() {

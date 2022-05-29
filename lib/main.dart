@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:practice_app/screens/home_page/medicine/medicine_details.dart';
 import 'package:practice_app/screens/home_page/medicine/medicine_screen.dart';
-//import 'screens/auth/login.dart';
-import 'screens/home_page/medicine/medicine_screen.dart';
-import '../../constants/color_shades.dart';
+import '../../utils/color_shades.dart';
 
 void main() {
   runApp(const MyApp());

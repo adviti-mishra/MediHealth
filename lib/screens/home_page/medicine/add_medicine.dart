@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practice_app/constants/color_shades.dart';
-import 'package:practice_app/constants/date_formatting.dart';
+import 'package:practice_app/utils/utils_all.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 
 class AddMedicine extends StatefulWidget {
@@ -48,33 +47,7 @@ class _AddMedicine extends State<AddMedicine> {
     _medicineDescriptionTextController.dispose();
   }
 
-  RichText mandatoryHeader({required String desiredHeader}) {
-    return RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-              text: desiredHeader,
-              style: TextStyle(
-                color: ColorShades.text2,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              )),
-          const TextSpan(
-              text: '*',
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              )),
-        ],
-      ),
-    );
-  }
-
-  SizedBox verticalSpace(double desiredHeight) {
-    return SizedBox(height: desiredHeight);
-  }
-
+  
   void _uploadTaskForm() {
     final isValid = _uploadMedicineFormKey.currentState!.validate();
     if (isValid) {

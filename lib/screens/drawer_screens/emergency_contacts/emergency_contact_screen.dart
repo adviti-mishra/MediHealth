@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practice_app/screens/drawer_screens/emergency_contacts/add_emergency_contact.dart';
-import '../../../constants/color_shades.dart';
+import '../../../utils/color_shades.dart';
+import 'emergency_contact_details.dart';
 import 'emergency_contact_widget.dart';
 
 class EmergencyContactScreen extends StatelessWidget {
@@ -17,6 +18,21 @@ class EmergencyContactScreen extends StatelessWidget {
       onPressed: () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const AddEmergencyContact()));
+      },
+    );
+  }
+ 
+ RawMaterialButton emergencyContactDetailsButton(BuildContext context) {
+    return RawMaterialButton(
+      child: Icon(
+        Icons.info,
+        color: ColorShades.text1,
+        size: 40,
+      ),
+      shape: const CircleBorder(),
+      onPressed: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const EmergencyContactDetails()));
       },
     );
   }
@@ -46,7 +62,7 @@ class EmergencyContactScreen extends StatelessWidget {
                       color: ColorShades.text1,
                       fontSize: 40))),
           // Add a contact
-          actions: [addButton(context)],
+          actions: [addButton(context), emergencyContactDetailsButton(context)],
         ),
         body: ListView.builder(itemBuilder: (BuildContext context, int index) {
           return const EmergencyContactWidget();

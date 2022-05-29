@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import '../../constants/color_shades.dart';
-//import 'package:practice_app/screens/auth/login.dart';
-//import 'package:email_validator/email_validator.dart';
+import 'package:practice_app/screens/auth/login.dart';
+import '../../utils/utils_all.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -36,14 +35,6 @@ class _SignUpState extends State<SignUp> {
   void _submitSignUpForm() {
     final isValid = _signUpFormKey.currentState!.validate();
     if (isValid) {}
-  }
-
-  //                          MEDIHEALTH
-  AppBar banner() {
-    return AppBar(
-        backgroundColor: ColorShades.text1,
-        title: const Text('MediHealth',
-            style: TextStyle(fontFamily: 'Oleo Script Swash Caps')));
   }
 
 // ________________________________________________________________________
@@ -91,41 +82,16 @@ class _SignUpState extends State<SignUp> {
           const TextSpan(text: '    '),
           TextSpan(
               recognizer: TapGestureRecognizer()
-                ..onTap = () =>
-                    Navigator.canPop(context) ? Navigator.pop(context) : null,
+                ..onTap = () {
+                  Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const Login()));
+                },
               text: 'Login here',
               style: TextStyle(
                   decoration: TextDecoration.underline,
                   color: ColorShades.text2,
                   fontWeight: FontWeight.bold,
                   fontSize: 20))
-        ],
-      ),
-    );
-  }
-
-  SizedBox verticalSpace(double desiredHeight) {
-    return SizedBox(height: desiredHeight);
-  }
-
-  RichText mandatoryHeader(String desiredHeader) {
-    return RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-              text: desiredHeader,
-              style: TextStyle(
-                color: ColorShades.text2,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              )),
-          const TextSpan(
-              text: '*',
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              )),
         ],
       ),
     );
@@ -159,7 +125,7 @@ class _SignUpState extends State<SignUp> {
     return Column(children: [
       Align(
           alignment: Alignment.bottomLeft,
-          child: mandatoryHeader("First name: ")),
+          child: mandatoryHeader(desiredHeader: "First name: ")),
       firstnameValidation()
     ]);
   }
@@ -194,7 +160,7 @@ class _SignUpState extends State<SignUp> {
     return Column(children: [
       Align(
           alignment: Alignment.bottomLeft,
-          child: mandatoryHeader("Last name: ")),
+          child: mandatoryHeader(desiredHeader: "Last name: ")),
       lastnameValidation()
     ]);
   }
@@ -227,7 +193,7 @@ class _SignUpState extends State<SignUp> {
 
   Column emailField() {
     return Column(children: [
-      Align(alignment: Alignment.bottomLeft, child: mandatoryHeader("Email: ")),
+      Align(alignment: Alignment.bottomLeft, child: mandatoryHeader(desiredHeader: "Email: ")),
       emailValidation()
     ]);
   }
@@ -266,7 +232,7 @@ class _SignUpState extends State<SignUp> {
     return Column(children: [
       Align(
           alignment: Alignment.bottomLeft,
-          child: mandatoryHeader("Password: ")),
+          child: mandatoryHeader(desiredHeader: "Password: ")),
       passwordValidation()
     ]);
   }

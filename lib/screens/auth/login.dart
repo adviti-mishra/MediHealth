@@ -2,8 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'signup.dart';
 import 'forgotpassword.dart';
-import '../../constants/color_shades.dart';
-//import 'package:email_validator/email_validator.dart';
+import '../../utils/utils_all.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -30,15 +29,6 @@ class _LoginState extends State<Login> {
   void _submitLoginForm() {
     final isValid = _loginFormKey.currentState!.validate();
     if (isValid) {}
-  }
-
-  //                          MEDIHEALTH
-  
-    AppBar banner() {
-    return AppBar(
-        backgroundColor: ColorShades.text1,
-        title: const Text('MediHealth',
-            style: TextStyle(fontFamily: 'Oleo Script Swash Caps')));
   }
 
 // ________________________________________________________________________
@@ -102,33 +92,6 @@ class _LoginState extends State<Login> {
     );
   }
 
-  SizedBox verticalSpace(double desiredHeight) {
-    return SizedBox(height: desiredHeight);
-  }
-
-  RichText mandatoryHeader(String desiredHeader) {
-    return RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-              text: desiredHeader,
-              style: TextStyle(
-                color: ColorShades.text2,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              )),
-          const TextSpan(
-              text: '*',
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              )),
-        ],
-      ),
-    );
-  }
-
   Form emailPassword() {
     return Form(
       key: _loginFormKey,
@@ -147,7 +110,7 @@ class _LoginState extends State<Login> {
 
   Column emailField() {
     return Column(children: [
-      Align(alignment: Alignment.bottomLeft, child: mandatoryHeader("Email: ")),
+      Align(alignment: Alignment.bottomLeft, child: mandatoryHeader(desiredHeader: "Email: ")),
       emailValidation()
     ]);
   }
@@ -186,7 +149,7 @@ class _LoginState extends State<Login> {
     return Column(children: [
       Align(
           alignment: Alignment.bottomLeft,
-          child: mandatoryHeader("Password: ")),
+          child: mandatoryHeader(desiredHeader:"Password: ")),
       passwordValidation()
     ]);
   }

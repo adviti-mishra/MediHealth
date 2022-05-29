@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practice_app/constants/color_shades.dart';
+import 'package:practice_app/utils/utils_all.dart';
 
 class AddEmergencyContact extends StatefulWidget {
   const AddEmergencyContact({Key? key}) : super(key: key);
@@ -26,34 +26,7 @@ class _AddEmergencyContact extends State<AddEmergencyContact> {
     _contactNumberTextController.dispose();
     _contactEmailTextController.dispose();
   }
-
-  RichText mandatoryHeader({required String desiredHeader}) {
-    return RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-              text: desiredHeader,
-              style: TextStyle(
-                color: ColorShades.text2,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              )),
-          const TextSpan(
-              text: '*',
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              )),
-        ],
-      ),
-    );
-  }
-
-  SizedBox verticalSpace(double desiredHeight) {
-    return SizedBox(height: desiredHeight);
-  }
-
+  
   void _uploadContactForm() {
     final isValid = _uploadContactFormKey.currentState!.validate();
     if (isValid) {
@@ -155,7 +128,7 @@ class _AddEmergencyContact extends State<AddEmergencyContact> {
     ]);
   }
 
-    Column contactEmailField() {
+  Column contactEmailField() {
     return Column(children: [
       Align(
           alignment: Alignment.bottomLeft,
@@ -214,7 +187,8 @@ class _AddEmergencyContact extends State<AddEmergencyContact> {
         leading: Builder(
           builder: (ctx) {
             return IconButton(
-              icon: Icon(Icons.arrow_back_ios_new_sharp, color: ColorShades.text1),
+              icon: Icon(Icons.arrow_back_ios_new_sharp,
+                  color: ColorShades.text1),
               onPressed: () {
                 Navigator.canPop(context) ? Navigator.pop(context) : null;
               },

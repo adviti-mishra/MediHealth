@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practice_app/constants/color_shades.dart';
+import 'package:practice_app/utils/utils_all.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -8,26 +8,6 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfile extends State<UserProfile> {
-  SizedBox verticalSpace(double desiredHeight) {
-    return SizedBox(height: desiredHeight);
-  }
-
-  Text header(String desiredHeader) {
-    return Text(desiredHeader,
-        style: TextStyle(
-          color: ColorShades.text2,
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
-        ));
-  }
-
-  Text content(String desiredContent) {
-    return Text(desiredContent,
-        style: TextStyle(
-          color: ColorShades.text2,
-          fontSize: 30,
-        ));
-  }
 
   Column userInformationEditProfile() {
     return Column(
@@ -41,88 +21,6 @@ class _UserProfile extends State<UserProfile> {
                 fontSize: 30,
               )),
         ),
-      ],
-    );
-  }
-
-  void logOutPopup(context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-            backgroundColor: ColorShades.text1,
-            title: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.logout, color: ColorShades.primaryColor1),
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Log out',
-                        style: TextStyle(color: ColorShades.text2)))
-              ],
-            ),
-            content: Text("Do you want to log out?",
-                style: TextStyle(color: ColorShades.text2)),
-            actions: [
-              TextButton(
-                  onPressed: () {},
-                  child:
-                      Text('Yes', style: TextStyle(color: ColorShades.text2))),
-              TextButton(
-                  onPressed: () {
-                    Navigator.canPop(context) ? Navigator.pop(context) : null;
-                  },
-                  child:
-                      Text('No', style: TextStyle(color: ColorShades.text2))),
-            ]);
-      },
-    );
-  }
-
-  MaterialButton logoutButton() {
-    return MaterialButton(
-      onPressed: () {
-        logOutPopup(context);
-      },
-      color: ColorShades.primaryColor1,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Logout',
-              style: TextStyle(
-                color: ColorShades.text1,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Icon(
-              Icons.logout,
-              color: ColorShades.text1,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Row userField({required String header_in, required String content_in}) {
-    return Row(
-  crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        header(header_in),
-        //const SizedBox(width: 50),
-        content(content_in),
-        //const SizedBox(width: 50),
-        const Expanded(child: Icon(Icons.edit))
       ],
     );
   }
@@ -153,32 +51,31 @@ class _UserProfile extends State<UserProfile> {
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   // constrain height of List [Email, Password]
                   child: Column(
-                      children: [
-                        verticalSpace(20),
-                        // First name
-                        userField(
-                            header_in: 'First name: ', content_in: 'Adviti'),
-                        verticalSpace(20),
-                        // Last name
-                        userField(
-                            header_in: 'Last name: ', content_in: 'Mishra'),
-                        verticalSpace(20),
-                        // Email
-                        userField(
-                            header_in: 'Email: ',
-                            content_in: 'advitimishra@gmail.com'),
-                        // *******************************************************
-                        verticalSpace(100),
-                        // Login button
-                        logoutButton(),
-                      ],
-                    ),
+                    children: [
+                      verticalSpace(20),
+                      // First name
+                      userField(
+                          header_in: 'First name: ', content_in: 'Adviti'),
+                      verticalSpace(20),
+                      // Last name
+                      userField(header_in: 'Last name: ', content_in: 'Mishra'),
+                      verticalSpace(20),
+                      // Email
+                      userField(
+                          header_in: 'Email: ',
+                          content_in: 'advitimishra@gmail.com'),
+                      // *******************************************************
+                      verticalSpace(100),
+                      // Login button
+                      editButton(context),
+                    ],
                   ),
                 ),
               ),
             ),
+          ),
         ],
-    ),
+      ),
     );
   }
 
@@ -196,7 +93,8 @@ class _UserProfile extends State<UserProfile> {
         leading: Builder(
           builder: (ctx) {
             return IconButton(
-              icon: Icon(Icons.arrow_back_ios_new_outlined, color: ColorShades.text1),
+              icon: Icon(Icons.arrow_back_ios_new_outlined,
+                  color: ColorShades.text1),
               onPressed: () {
                 Navigator.canPop(context) ? Navigator.pop(context) : null;
               },

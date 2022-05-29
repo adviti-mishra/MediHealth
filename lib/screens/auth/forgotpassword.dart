@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import '../../constants/color_shades.dart';
-
-//import 'package:email_validator/email_validator.dart';
+import '../../utils/utils_all.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -14,7 +12,7 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   final TextEditingController _emailTextController =
       TextEditingController();
-  final _loginFormKey = GlobalKey<FormState>();
+  final _ForgetPasswordFormKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -22,22 +20,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     _emailTextController.dispose();
   }
 
-  void _submitLoginForm() {
-    final isValid = _loginFormKey.currentState!.validate();
+  void _submitForgetPasswordForm() {
+    final isValid = _ForgetPasswordFormKey.currentState!.validate();
     if (isValid) {}
-  }
-
-  //  <
-  AppBar banner() {
-    return AppBar(
-      backgroundColor: ColorShades.text1,
-      title: const Text('MediHealth',
-          style: TextStyle(fontFamily: 'Oleo Script Swash Caps')),
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios, color: ColorShades.text2),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
-    );
   }
 
 // ________________________________________________________________________
@@ -73,43 +58,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
-  SizedBox verticalSpace(double desiredHeight) {
-    return SizedBox(height: desiredHeight);
-  }
-
-  RichText mandatoryHeader(String desiredHeader) {
-    return RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-              text: desiredHeader,
-              style: TextStyle(
-                color: ColorShades.text2,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              )),
-          const TextSpan(
-              text: '*',
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              )),
-        ],
-      ),
-    );
-  }
-
   Form email() {
     return Form(
-      key: _loginFormKey,
+      key: _ForgetPasswordFormKey,
       child: emailField(),
     );
   }
 
   Column emailField() {
     return Column(children: [
-      Align(alignment: Alignment.bottomLeft, child: mandatoryHeader("Email: ")),
+      Align(alignment: Alignment.bottomLeft, child: mandatoryHeader(desiredHeader: "Email: ")),
       emailValidation()
     ]);
   }
@@ -146,7 +104,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   MaterialButton submitButton() {
     return MaterialButton(
-      onPressed: _submitLoginForm,
+      onPressed: _submitForgetPasswordForm,
       color: ColorShades.primaryColor1,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Padding(
@@ -191,7 +149,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
-  Container loginPageContent() {
+  Container forgetPasswordPageContent() {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -242,9 +200,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //MEDIHEALTH
-      //appBar: banner(),
-      body: loginPageContent(),
+      body: forgetPasswordPageContent(),
     );
   }
 }

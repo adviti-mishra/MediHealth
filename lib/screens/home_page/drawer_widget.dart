@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practice_app/screens/drawer_screens/user_profile.dart';
-import 'package:practice_app/screens/drawer_screens/emergency_contacts/emergency_contacts_screen.dart';
-import '../../constants/color_shades.dart';
+import 'package:practice_app/screens/drawer_screens/emergency_contacts/emergency_contact_screen.dart';
+import '../../utils/color_shades.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({Key? key}) : super(key: key);

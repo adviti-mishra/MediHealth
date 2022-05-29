@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../constants/color_shades.dart';
+import '../../../utils/color_shades.dart';
 
 class EmergencyContactWidget extends StatefulWidget {
   const EmergencyContactWidget({Key? key}) : super(key: key);
