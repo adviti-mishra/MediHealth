@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../constants/color_shades.dart';
+import '../../../constants/color_shades.dart';
 
 class MedicineWidget extends StatefulWidget {
   const MedicineWidget({Key? key}) : super(key: key);
@@ -31,10 +31,10 @@ class _MedicineWidgetState extends State<MedicineWidget> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           // start date:
-          Text('Start date: ',
+          Text('Dosage: 20ml',
               style: TextStyle(color: ColorShades.text2, fontSize: 20)),
           // end date:
-          Text('End date: ',
+          Text('Times: 1PM, 6PM, 10PM',
               style: TextStyle(color: ColorShades.text2, fontSize: 20)),
           // Days: Monday, Wednesday, Friday
           Text('Days: Monday, Wednesday, Friday',
@@ -96,7 +96,7 @@ class _MedicineWidgetState extends State<MedicineWidget> {
   ListTile medicineCardContent() {
     return ListTile(
       onTap: () {
-        print('Open detailed Medicine card');
+        
       },
       contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
       leading: medicineIcon(),

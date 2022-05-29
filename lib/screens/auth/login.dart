@@ -42,7 +42,9 @@ class _LoginState extends State<Login> {
   }
 
 // ________________________________________________________________________
-// Login                              Don't have an account? Register here
+//                                Login                             
+//                            Welcome back!
+//                    Please fill your credentials 
 // ________________________________________________________________________
 
   Column loginWelcomeBack() {

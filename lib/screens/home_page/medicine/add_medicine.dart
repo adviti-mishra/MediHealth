@@ -78,9 +78,9 @@ class _AddMedicine extends State<AddMedicine> {
   void _uploadTaskForm() {
     final isValid = _uploadMedicineFormKey.currentState!.validate();
     if (isValid) {
-      print('it is valid');
+      //print('it is valid');
     } else {
-      print('it is not valid');
+      //print('it is not valid');
     }
   }
 
@@ -122,68 +122,6 @@ class _AddMedicine extends State<AddMedicine> {
         ),
       ),
     );
-  }
-
-  void pickStartDateDialog() async {
-    startDate = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime.now().subtract(const Duration(days: 0)),
-        lastDate: DateTime(2100),
-        builder: (context, child) {
-          return Theme(
-            data: Theme.of(context).copyWith(
-              colorScheme: ColorScheme.light(
-                primary: ColorShades.primaryColor1, // header background color
-                onPrimary: ColorShades.text1, // header text color
-                onSurface: ColorShades.text2 // body text color
-              ),
-              textButtonTheme: TextButtonThemeData(
-                style: TextButton.styleFrom(
-                  primary: ColorShades.primaryColor1, // button text color
-                ),
-              ),
-            ),
-            child: child!,
-          );
-        });
-    if (startDate != null) {
-      setState(() {
-        _startDateTextController.text = formattedDate(startDate);
-      });
-    }
-  }
-
-  void pickEndDateDialog() async {
-    endDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now().subtract(const Duration(days: 0)),
-      lastDate: DateTime(2100),
-       builder: (context, child) {
-          return Theme(
-            data: Theme.of(context).copyWith(
-              colorScheme: ColorScheme.light(
-                primary: ColorShades.primaryColor1, // header background color
-                onPrimary: ColorShades.text1, // header text color
-                onSurface: ColorShades.text2 // body text color
-              ),
-              textButtonTheme: TextButtonThemeData(
-                style: TextButton.styleFrom(
-                  primary: ColorShades.primaryColor1, // button text color
-                ),
-              ),
-            ),
-            child: child!,
-          );
-        }
-    );
-    //print('End date picked$endDate');
-    if (endDate != null) {
-      setState(() {
-        _endDateTextController.text = formattedDate(endDate);
-      });
-    }
   }
 
   Form nameDosageDaysTimeStartEndDescription() {
@@ -324,6 +262,36 @@ class _AddMedicine extends State<AddMedicine> {
     ]);
   }
 
+  void pickStartDateDialog() async {
+    startDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now().subtract(const Duration(days: 0)),
+        lastDate: DateTime(2100),
+        builder: (context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.light(
+                  primary: ColorShades.primaryColor1, // header background color
+                  onPrimary: ColorShades.text1, // header text color
+                  onSurface: ColorShades.text2 // body text color
+                  ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  primary: ColorShades.primaryColor1, // button text color
+                ),
+              ),
+            ),
+            child: child!,
+          );
+        });
+    if (startDate != null) {
+      setState(() {
+        _startDateTextController.text = formattedDate(startDate);
+      });
+    }
+  }
+
   Column endDateField() {
     return Column(children: [
       Align(
@@ -338,6 +306,37 @@ class _AddMedicine extends State<AddMedicine> {
           },
           maxlength: 100)
     ]);
+  }
+
+  void pickEndDateDialog() async {
+    endDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now().subtract(const Duration(days: 0)),
+        lastDate: DateTime(2100),
+        builder: (context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.light(
+                  primary: ColorShades.primaryColor1, // header background color
+                  onPrimary: ColorShades.text1, // header text color
+                  onSurface: ColorShades.text2 // body text color
+                  ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  primary: ColorShades.primaryColor1, // button text color
+                ),
+              ),
+            ),
+            child: child!,
+          );
+        });
+    //print('End date picked$endDate');
+    if (endDate != null) {
+      setState(() {
+        _endDateTextController.text = formattedDate(endDate);
+      });
+    }
   }
 
   Column descriptionField() {
@@ -388,6 +387,25 @@ class _AddMedicine extends State<AddMedicine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ColorShades.primaryColor1,
+        title: Center(
+            child: Text('Add a medicine',
+                style: TextStyle(
+                    fontFamily: 'Oleo Script Swash Caps',
+                    color: ColorShades.text1,
+                    fontSize: 40))),
+        leading: Builder(
+          builder: (ctx) {
+            return IconButton(
+              icon: Icon(Icons.arrow_back_ios_new_sharp, color: ColorShades.text1),
+              onPressed: () {
+                Navigator.canPop(context) ? Navigator.pop(context) : null;
+              },
+            );
+          },
+        ),
+      ),
       body: Card(
         elevation: 10,
         margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),

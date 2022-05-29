@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/inner_screens/add_medicine.dart';
+import 'package:practice_app/screens/drawer_screens/user_profile.dart';
+import 'package:practice_app/screens/drawer_screens/emergency_contacts/emergency_contacts_screen.dart';
 import '../../constants/color_shades.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -52,9 +53,16 @@ class DrawerWidget extends StatelessWidget {
     );
   }
 
-  void navigatetoAddMedicineScreen(context) {
+  void navigatetoUserProfileScreen(context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const AddMedicine()));
+        context, MaterialPageRoute(builder: (context) => const UserProfile()));
+  }
+
+  void navigatetoEmergencyContactScreen(context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const EmergencyContactScreen()));
   }
 
   @override
@@ -68,16 +76,18 @@ class DrawerWidget extends StatelessWidget {
         ),
         const SizedBox(height: 30),
         drawerMenuOption(
-            label: "Add a medicine",
-            icon: Icons.add,
+            label: "Account",
+            icon: Icons.person,
             ftor: () {
-              navigatetoAddMedicineScreen(context);
+              navigatetoUserProfileScreen(context);
             }),
         const SizedBox(height: 30),
-        drawerMenuOption(label: "Account", icon: Icons.person, ftor: () {}),
-        const SizedBox(height: 30),
         drawerMenuOption(
-            label: "Emergency contacts", icon: Icons.people, ftor: () {}),
+            label: "Emergency contacts",
+            icon: Icons.people,
+            ftor: () {
+              navigatetoEmergencyContactScreen(context);
+            }),
         const SizedBox(height: 30),
         drawerMenuOption(
             label: "Statistics on medicine usage",
