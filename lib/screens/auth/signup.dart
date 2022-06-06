@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:practice_app/screens/auth/login.dart';
 import '../../utils/utils_all.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -11,30 +12,33 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  final TextEditingController _emailTextController =
-      TextEditingController();
-  final TextEditingController _passwordTextController =
-      TextEditingController();
-  final TextEditingController _firstnameTextController =
-      TextEditingController();
-  final TextEditingController _lastnameTextController =
+  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _nameTextController = TextEditingController();
+  final TextEditingController _phoneNumberTextController =
       TextEditingController();
 
   bool _obscureText = true;
   final _signUpFormKey = GlobalKey<FormState>();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void dispose() {
     super.dispose();
     _emailTextController.dispose();
     _passwordTextController.dispose();
-    _firstnameTextController.dispose();
-    _lastnameTextController.dispose();
+    _nameTextController.dispose();
+    _phoneNumberTextController.dispose();
   }
 
-  void _submitSignUpForm() {
+  void _submitSignUpForm() async {
     final isValid = _signUpFormKey.currentState!.validate();
-    if (isValid) {}
+    if (isValid) {
+      await _auth.createUserWithEmailAndPassword(
+          email: _emailTextController.text.trim().toLowerCase(),
+          password: _passwordTextController.text);
+    }
   }
 
 // ________________________________________________________________________
@@ -59,7 +63,7 @@ class _SignUpState extends State<SignUp> {
               )),
         ),
         Center(
-          child: Text('Please fill the following fields',
+          child: Text('Please fill the following',
               style: TextStyle(
                 color: ColorShades.text1,
                 fontSize: 30,
@@ -84,7 +88,7 @@ class _SignUpState extends State<SignUp> {
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const Login()));
+                      MaterialPageRoute(builder: (context) => const Login()));
                 },
               text: 'Login here',
               style: TextStyle(
@@ -102,12 +106,8 @@ class _SignUpState extends State<SignUp> {
       key: _signUpFormKey,
       child: Column(
         children: [
-          // First name
-          firstnameField(),
-          // BLANK LINE
-          verticalSpace(20),
-          // Last name
-          lastnameField(),
+          // Name
+          nameField(),
           // BLANK LINE
           verticalSpace(20),
           // Email
@@ -116,27 +116,30 @@ class _SignUpState extends State<SignUp> {
           verticalSpace(20),
           // Password
           passwordField(),
+          verticalSpace(20),
+          // Phone number
+          phoneNumberField(),
         ],
       ),
     );
   }
 
-  Column firstnameField() {
+  Column nameField() {
     return Column(children: [
       Align(
           alignment: Alignment.bottomLeft,
-          child: mandatoryHeader(desiredHeader: "First name: ")),
-      firstnameValidation()
+          child: mandatoryHeader(desiredHeader: "Name: ")),
+      nameValidation()
     ]);
   }
 
-  TextFormField firstnameValidation() {
+  TextFormField nameValidation() {
     return TextFormField(
       keyboardType: TextInputType.name,
-      controller: _firstnameTextController,
+      controller: _nameTextController,
       validator: (value) {
         if ((value!.isEmpty)) {
-          return "Please enter your first name";
+          return "Please enter your name";
         } else {
           return null;
         }
@@ -156,22 +159,22 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Column lastnameField() {
+   Column phoneNumberField() {
     return Column(children: [
       Align(
           alignment: Alignment.bottomLeft,
-          child: mandatoryHeader(desiredHeader: "Last name: ")),
-      lastnameValidation()
+          child: mandatoryHeader(desiredHeader: "Phone number: ")),
+      phoneNumberValidation()
     ]);
   }
 
-  TextFormField lastnameValidation() {
+  TextFormField phoneNumberValidation() {
     return TextFormField(
       keyboardType: TextInputType.name,
-      controller: _lastnameTextController,
+      controller: _phoneNumberTextController,
       validator: (value) {
         if ((value!.isEmpty)) {
-          return "Please enter your last name";
+          return "Please enter your phone number";
         } else {
           return null;
         }
@@ -193,7 +196,9 @@ class _SignUpState extends State<SignUp> {
 
   Column emailField() {
     return Column(children: [
-      Align(alignment: Alignment.bottomLeft, child: mandatoryHeader(desiredHeader: "Email: ")),
+      Align(
+          alignment: Alignment.bottomLeft,
+          child: mandatoryHeader(desiredHeader: "Email: ")),
       emailValidation()
     ]);
   }
@@ -216,7 +221,7 @@ class _SignUpState extends State<SignUp> {
             TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
         border: OutlineInputBorder(
-          borderSide:  BorderSide(color: ColorShades.text1, width: 2.0),
+          borderSide: BorderSide(color: ColorShades.text1, width: 2.0),
           borderRadius: BorderRadius.circular(25.0),
         ),
         fillColor: ColorShades.text1,
@@ -306,21 +311,18 @@ class _SignUpState extends State<SignUp> {
   Container signUpPageContent() {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: BoxDecoration(color: ColorShades.primaryColor3
           //border: Border.all(color: Colors.black),
-          gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-        ColorShades.secondaryColor2,
-        ColorShades.secondaryColor3,
-        ColorShades.primaryColor3
-      ])),
+          ),
       child: Column(
         children: [
-          Center(child: signUpWelcome()),
+          verticalSpace(60),
+          signUpWelcome(),
           verticalSpace(40),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                  color: ColorShades.text1,
+                  color: ColorShades.primaryColor2,
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(60),
                       topRight: Radius.circular(60))),
@@ -356,8 +358,6 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //MEDIHEALTH
-      //appBar: banner(),
       body: signUpPageContent(),
     );
   }

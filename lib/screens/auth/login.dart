@@ -248,20 +248,18 @@ class _LoginState extends State<Login> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
+          color: ColorShades.primaryColor3,
           //border: Border.all(color: Colors.black),
-          gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          ColorShades.secondaryColor2,
-          ColorShades.secondaryColor3,
-          ColorShades.primaryColor3
-      ])),
+         ),
       child: Column(
         children: [
+          verticalSpace(60),
           loginWelcomeBack(),
           verticalSpace(40),
           Expanded(
             child: Container(
               decoration:  BoxDecoration(
-                  color:  ColorShades.text1,
+                  color:  ColorShades.primaryColor2,
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(60),
                       topRight: Radius.circular(60))),
@@ -299,7 +297,6 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       //MEDIHEALTH
-      //appBar: banner(),
       body: loginPageContent(),
     );
   }

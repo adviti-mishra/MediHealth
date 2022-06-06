@@ -72,31 +72,31 @@ class DrawerWidget extends StatelessWidget {
       child: ListView(children: [
         DrawerHeader(
           decoration: BoxDecoration(color: ColorShades.text1),
-          child: Image.network('assets/images/MediHealth_logo.png'),
+          child: Image.asset('assets/images/MediHealth_logo.png'),
         ),
-        const SizedBox(height: 30),
+        const Divider(thickness: 2.0, color: Colors.black),
         drawerMenuOption(
             label: "Account",
             icon: Icons.person,
             ftor: () {
               navigatetoUserProfileScreen(context);
             }),
-        const SizedBox(height: 30),
+        const Divider(thickness: 2.0, color: Colors.black),
         drawerMenuOption(
             label: "Emergency contacts",
             icon: Icons.people,
             ftor: () {
               navigatetoEmergencyContactScreen(context);
             }),
-        const SizedBox(height: 30),
+        const Divider(thickness: 2.0, color: Colors.black),
         drawerMenuOption(
             label: "Statistics on medicine usage",
             icon: Icons.auto_graph_rounded,
             ftor: () {}),
-        const SizedBox(height: 30),
+        const Divider(thickness: 2.0, color: Colors.black),
         drawerMenuOption(
             label: "Accessibility features", icon: Icons.settings, ftor: () {}),
-        const SizedBox(height: 30),
+        const Divider(thickness: 2.0, color: Colors.black),
         Divider(
           thickness: 2,
           color: ColorShades.text1,

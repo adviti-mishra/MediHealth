@@ -13,7 +13,7 @@ class _AddMedicine extends State<AddMedicine> {
   final TextEditingController _medicineNameTextController =
       TextEditingController();
   final TextEditingController _medicineDosageTextController =
-      TextEditingController(text: 'Choose quantity, type');
+      TextEditingController();
   final TextEditingController _medicineDaysTextController =
       TextEditingController(text: 'Choose days');
   final TextEditingController _medicineTimeofDayTextController =
@@ -47,7 +47,6 @@ class _AddMedicine extends State<AddMedicine> {
     _medicineDescriptionTextController.dispose();
   }
 
-  
   void _uploadTaskForm() {
     final isValid = _uploadMedicineFormKey.currentState!.validate();
     if (isValid) {
@@ -85,6 +84,7 @@ class _AddMedicine extends State<AddMedicine> {
         decoration: InputDecoration(
           filled: true,
           border: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.black, width: 4.0),
             borderRadius: BorderRadius.circular(25.0),
           ),
           fillColor: ColorShades.text1,
@@ -103,7 +103,7 @@ class _AddMedicine extends State<AddMedicine> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Name of Medicine:
+          // Name:
           medicineNameField(),
           // BLANK LINE
           verticalSpace(20),
@@ -119,7 +119,7 @@ class _AddMedicine extends State<AddMedicine> {
           timesofDayField(),
           // BLANK LINE
           verticalSpace(20),
-          Text("Duration of medication: ",
+          Text("Medication duration: ",
               style: TextStyle(
                 color: ColorShades.text2,
                 fontSize: 30,
@@ -129,9 +129,9 @@ class _AddMedicine extends State<AddMedicine> {
           Row(
             children: [
               Expanded(child: startDateField()),
-              const SizedBox(
-                width: 50,
-              ),
+              //const SizedBox(
+              // width: 50,
+              //),
               Expanded(
                 child: endDateField(),
               ),
@@ -139,7 +139,7 @@ class _AddMedicine extends State<AddMedicine> {
           ),
           // BLANK LINE
           verticalSpace(20),
-          // Additional info:
+          // More info:
           descriptionField(),
           // BLANK LINE
           verticalSpace(20),
@@ -154,7 +154,7 @@ class _AddMedicine extends State<AddMedicine> {
     return Column(children: [
       Align(
           alignment: Alignment.bottomLeft,
-          child: mandatoryHeader(desiredHeader: 'Name of the medicine ')),
+          child: mandatoryHeader(desiredHeader: 'Name: ')),
       fieldValidation(
           valueKey: 'medicineName',
           controller: _medicineNameTextController,
@@ -172,7 +172,7 @@ class _AddMedicine extends State<AddMedicine> {
       fieldValidation(
           valueKey: 'medicineDosage',
           controller: _medicineDosageTextController,
-          enabled: false,
+          enabled: true,
           ftor: () {},
           maxlength: 100)
     ]);
@@ -185,9 +185,10 @@ class _AddMedicine extends State<AddMedicine> {
           child: mandatoryHeader(desiredHeader: 'Days of intake ')),
       WeekdaySelectorTheme(
         data: WeekdaySelectorThemeData(
-          color: ColorShades.text2,
+          
+          color: Colors.black,
           fillColor: ColorShades.text1,
-          disabledFillColor: ColorShades.text1,
+          disabledFillColor: ColorShades.primaryColor2,
           selectedFillColor: ColorShades.primaryColor1,
         ),
         child: WeekdaySelector(
@@ -316,7 +317,7 @@ class _AddMedicine extends State<AddMedicine> {
     return Column(children: [
       Align(
           alignment: Alignment.bottomLeft,
-          child: mandatoryHeader(desiredHeader: 'Additional information ')),
+          child: mandatoryHeader(desiredHeader: 'More information ')),
       fieldValidation(
           valueKey: 'medicineDescription',
           controller: _medicineDescriptionTextController,
@@ -360,18 +361,17 @@ class _AddMedicine extends State<AddMedicine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorShades.primaryColor3,
       appBar: AppBar(
         backgroundColor: ColorShades.primaryColor1,
         title: Center(
             child: Text('Add a medicine',
-                style: TextStyle(
-                    fontFamily: 'Oleo Script Swash Caps',
-                    color: ColorShades.text1,
-                    fontSize: 40))),
+                style: TextStyle(color: ColorShades.text1, fontSize: 40))),
         leading: Builder(
           builder: (ctx) {
             return IconButton(
-              icon: Icon(Icons.arrow_back_ios_new_sharp, color: ColorShades.text1),
+              icon: Icon(Icons.arrow_back_ios_new_sharp,
+                  color: ColorShades.text1),
               onPressed: () {
                 Navigator.canPop(context) ? Navigator.pop(context) : null;
               },
@@ -381,23 +381,23 @@ class _AddMedicine extends State<AddMedicine> {
       ),
       body: Card(
         elevation: 10,
-        margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         shape: RoundedRectangleBorder(
           side: const BorderSide(color: Colors.black, width: 2),
           borderRadius: BorderRadius.circular(10),
         ),
-        color: ColorShades.primaryColor3,
+        color: ColorShades.primaryColor2,
         child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             // Medicine Information
-            Padding(
-                padding: const EdgeInsets.only(top: 50, right: 10, left: 10),
+            const Padding(
+                padding: EdgeInsets.only(top: 50, right: 10, left: 10),
                 child: Align(
                     alignment: Alignment.center,
                     child: Text('Medicine Information',
                         style: TextStyle(
-                            color: ColorShades.text2,
+                            color: Colors.black,
                             fontWeight: FontWeight.bold,
                             fontSize: 40)))),
             const SizedBox(height: 10),
@@ -405,7 +405,7 @@ class _AddMedicine extends State<AddMedicine> {
             const Divider(thickness: 1),
             // <body>
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(10.0),
               child: nameDosageDaysTimeStartEndDescription(),
             )
           ]),

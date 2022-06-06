@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.practice_app">
+    package="com.medihealth.MediHealth">
    <application
         android:label="practice_app"
         android:name="${applicationName}"

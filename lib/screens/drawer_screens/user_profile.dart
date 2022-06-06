@@ -8,7 +8,6 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfile extends State<UserProfile> {
-
   Column userInformationEditProfile() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,7 +17,7 @@ class _UserProfile extends State<UserProfile> {
           child: Text('Customize your profile below',
               style: TextStyle(
                 color: ColorShades.text1,
-                fontSize: 30,
+                fontSize: 20,
               )),
         ),
       ],
@@ -30,11 +29,13 @@ class _UserProfile extends State<UserProfile> {
       width: double.infinity,
       decoration: BoxDecoration(
           //border: Border.all(color: Colors.black),
+          color: ColorShades.primaryColor3,
+          /*
           gradient: LinearGradient(begin: Alignment.topCenter, colors: [
         ColorShades.secondaryColor2,
         ColorShades.secondaryColor3,
         ColorShades.primaryColor3
-      ])),
+      ])*/),
       child: Column(
         children: [
           userInformationEditProfile(),
@@ -51,6 +52,7 @@ class _UserProfile extends State<UserProfile> {
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   // constrain height of List [Email, Password]
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       verticalSpace(20),
                       // First name
@@ -87,9 +89,8 @@ class _UserProfile extends State<UserProfile> {
         title: Center(
             child: Text('User information',
                 style: TextStyle(
-                    fontFamily: 'Oleo Script Swash Caps',
                     color: ColorShades.text1,
-                    fontSize: 40))),
+                    fontSize: 20))),
         leading: Builder(
           builder: (ctx) {
             return IconButton(

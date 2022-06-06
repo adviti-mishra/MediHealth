@@ -13,7 +13,7 @@ class MedicineScreen extends StatelessWidget {
       child: Icon(
         Icons.add_circle_outline,
         color: ColorShades.text1,
-        size: 40,
+        size: 60,
       ),
       shape: const CircleBorder(),
       onPressed: () {
@@ -41,6 +41,7 @@ class MedicineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorShades.primaryColor3,
         drawer: const DrawerWidget(),
         appBar: AppBar(
           backgroundColor: ColorShades.primaryColor1,
@@ -59,9 +60,8 @@ class MedicineScreen extends StatelessWidget {
           title: Center(
               child: Text('Your schedule',
                   style: TextStyle(
-                      fontFamily: 'Oleo Script Swash Caps',
                       color: ColorShades.text1,
-                      fontSize: 40))),
+                      fontSize: 20))),
           // Add a medicine
           actions: [addButton(context),medicineDetailsButton(context)],
         ),

@@ -176,12 +176,12 @@ class _AddEmergencyContact extends State<AddEmergencyContact> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorShades.primaryColor3,
       appBar: AppBar(
         backgroundColor: ColorShades.primaryColor1,
         title: Center(
             child: Text('Add an emergency contact',
                 style: TextStyle(
-                    fontFamily: 'Oleo Script Swash Caps',
                     color: ColorShades.text1,
                     fontSize: 40))),
         leading: Builder(
@@ -198,12 +198,12 @@ class _AddEmergencyContact extends State<AddEmergencyContact> {
       ),
       body: Card(
         elevation: 10,
-        margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         shape: RoundedRectangleBorder(
           side: const BorderSide(color: Colors.black, width: 2),
           borderRadius: BorderRadius.circular(10),
         ),
-        color: ColorShades.primaryColor3,
+        color: ColorShades.primaryColor2,
         child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

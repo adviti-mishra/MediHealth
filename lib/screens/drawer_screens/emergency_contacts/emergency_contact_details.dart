@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../utils/utils_all.dart';
 
 class EmergencyContactDetails extends StatefulWidget {
@@ -10,7 +11,6 @@ class EmergencyContactDetails extends StatefulWidget {
 }
 
 class _EmergencyContactDetailsState extends State<EmergencyContactDetails> {
-
   Container emergencyContactIcon() {
     return Container(
       height: 100,
@@ -30,28 +30,34 @@ class _EmergencyContactDetailsState extends State<EmergencyContactDetails> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: ColorShades.text1,
+        color: ColorShades.primaryColor3,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           verticalSpace(40),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                  color: ColorShades.primaryColor3,
+                  color: ColorShades.primaryColor2,
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(60),
-                      topRight: Radius.circular(60))),
+                      topRight: Radius.circular(60)),
+                  border: Border.all(color: ColorShades.text2, width: 2)),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 // constrain height of List [Email, Password]
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     verticalSpace(20),
                     Row(
-                      children: [const Spacer(), deleteButton(context)],
+                      children: [
+                        emergencyContactIcon(),
+                        const Spacer(),
+                        deleteButton(context)
+                      ],
                     ),
-                    Expanded(child: emergencyContactIcon()),
                     verticalSpace(20),
                     // First name
                     userField(header_in: 'Name: ', content_in: 'Adviti Mishra'),
@@ -63,9 +69,10 @@ class _EmergencyContactDetailsState extends State<EmergencyContactDetails> {
                         icon_in: Icons.call),
                     verticalSpace(20),
                     // Email
+
                     userFieldIcon(
                         header_in: 'Email: ',
-                        content_in: 'advitimishra@gmail.com',
+                        content_in: 'adviti@gmail.com',
                         icon_in: Icons.mail),
                     // *******************************************************
                     verticalSpace(100),
@@ -84,6 +91,7 @@ class _EmergencyContactDetailsState extends State<EmergencyContactDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorShades.primaryColor3,
       appBar: AppBar(
           backgroundColor: ColorShades.primaryColor1,
           // Back button
@@ -101,10 +109,7 @@ class _EmergencyContactDetailsState extends State<EmergencyContactDetails> {
           // Medicine details
           title: Center(
               child: Text('Emergency contact details',
-                  style: TextStyle(
-                      fontFamily: 'Oleo Script Swash Caps',
-                      color: ColorShades.text1,
-                      fontSize: 40)))),
+                  style: TextStyle(color: ColorShades.text1, fontSize: 40)))),
       body: emergencyContactDetails(),
     );
   }

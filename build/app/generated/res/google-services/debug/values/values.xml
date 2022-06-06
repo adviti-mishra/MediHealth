@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">1072273542439-9vm25vueele6g1qf9ostu4rs8k74sggt.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">1072273542439</string>
+    <string name="google_api_key" translatable="false">AIzaSyD7oJIiSn9WSCe61W70x-LmE4VJNr6n38A</string>
+    <string name="google_app_id" translatable="false">1:1072273542439:android:ce4514cdff6a81e68a6d02</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD7oJIiSn9WSCe61W70x-LmE4VJNr6n38A</string>
+    <string name="google_storage_bucket" translatable="false">medihealth-5cf82.appspot.com</string>
+    <string name="project_id" translatable="false">medihealth-5cf82</string>
+</resources>

@@ -1,30 +1,41 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:practice_app/screens/home_page/medicine/medicine_details.dart';
+import 'package:practice_app/screens/auth/login.dart';
+import 'package:practice_app/screens/drawer_screens/emergency_contacts/emergency_contact_screen.dart';
 import 'package:practice_app/screens/home_page/medicine/medicine_screen.dart';
-import '../../utils/color_shades.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder(
+      future:_initialization,
+      builder: (context, snapshot){
+        if(snapshot.connectionState == ConnectionState.waiting){
+          return const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: Scaffold(body: Center(child: Center(child: CircularProgressIndicator())))
+          );
+        }
+   else{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Practice app',
-      theme: ThemeData(
-        textTheme: GoogleFonts.ptSerifTextTheme(
-          Theme.of(context).textTheme,
-        ),
-        //scaffoldBackgroundColor: ,
-        primaryColor: ColorShades.primaryColor1,
-      ),
+      theme: ThemeData(fontFamily: 'Arial'),
       home: const MedicineScreen(),
     );
+
+        }
+      } );
+   
   }
 }

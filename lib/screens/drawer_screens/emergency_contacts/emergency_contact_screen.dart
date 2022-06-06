@@ -12,17 +12,19 @@ class EmergencyContactScreen extends StatelessWidget {
       child: Icon(
         Icons.add_circle_outline,
         color: ColorShades.text1,
-        size: 40,
+        size: 60,
       ),
       shape: const CircleBorder(),
       onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const AddEmergencyContact()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const AddEmergencyContact()));
       },
     );
   }
- 
- RawMaterialButton emergencyContactDetailsButton(BuildContext context) {
+
+  RawMaterialButton emergencyContactDetailsButton(BuildContext context) {
     return RawMaterialButton(
       child: Icon(
         Icons.info,
@@ -31,8 +33,10 @@ class EmergencyContactScreen extends StatelessWidget {
       ),
       shape: const CircleBorder(),
       onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const EmergencyContactDetails()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const EmergencyContactDetails()));
       },
     );
   }
@@ -40,6 +44,7 @@ class EmergencyContactScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: ColorShades.primaryColor3,
         appBar: AppBar(
           backgroundColor: ColorShades.primaryColor1,
           // Back to Menu
@@ -57,10 +62,7 @@ class EmergencyContactScreen extends StatelessWidget {
           // Emergency Contacts
           title: Center(
               child: Text('Emergency Contacts',
-                  style: TextStyle(
-                      fontFamily: 'Oleo Script Swash Caps',
-                      color: ColorShades.text1,
-                      fontSize: 40))),
+                  style: TextStyle(color: ColorShades.text1, fontSize: 30))),
           // Add a contact
           actions: [addButton(context), emergencyContactDetailsButton(context)],
         ),

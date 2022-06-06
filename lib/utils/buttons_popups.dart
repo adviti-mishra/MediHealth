@@ -70,20 +70,20 @@ MaterialButton editButton(context) {
 
 RawMaterialButton deleteButton(context) {
   return RawMaterialButton(
-      child: Icon(
-        Icons.cancel_outlined,
-        color: ColorShades.primaryColor1,
-        size: 40,
-      ),
-      shape: const CircleBorder(),
-      onPressed: () {
-        showDialog(
-          context: context,
-          builder: (ctx) {
-            return deletePopup(context);
-          },
-        );
-      });
+        child: const Icon(
+          Icons.cancel_outlined,
+          color: Colors.red,
+          size: 60,
+        ),
+        shape: const CircleBorder(),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (ctx) {
+              return deletePopup(context);
+            },
+          );
+        });
 }
 
 AlertDialog deletePopup(context) {
@@ -114,3 +114,18 @@ AlertDialog deletePopup(context) {
       ]);
 }
 
+Container medicinePicIcon() {
+  return Container(
+    height: 200,
+    width: 100,
+    padding: const EdgeInsets.only(right: 12),
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      border: Border.all(color: Colors.black, width: 4.0),
+      image: const DecorationImage(
+          image: NetworkImage(
+              'https://cdn-icons-png.flaticon.com/512/172/172835.png'),
+          fit: BoxFit.fill),
+    ),
+  );
+}

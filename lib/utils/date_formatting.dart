@@ -13,22 +13,8 @@ const Map<int, String> monthsInYear = {
   11: "November",
   12: "December"
 };
-const Map<int, String> daysSuffix = {
-  1: "st",
-  2: "nd",
-  3: "rd",
-  4: "th",
-  5: "th",
-  6: "th",
-  7: "th",
-  8: "th",
-  9: "th",
-  10: "th",
-  11: "th",
-  12: "th",
-};
 
 String formattedDate(DateTime? date){
-  return '${date!.day}${daysSuffix[date.day%10]} ${monthsInYear[date.month]},  ${date.year}';
+  return '${date!.day} ${monthsInYear[date.month]},  ${date.year}';
 }
 
