@@ -79,11 +79,7 @@ Column userFieldIcon({
           contactBy(
               icon_in: icon_in,
               ftr: () {
-                if (header_in == 'Email: ') {
-                  openEmail();
-                } else {
-                  openCall();
-                }
+                header_in == 'Email: ' ? openEmail() : openCall();
               })
         ],
       )
@@ -99,6 +95,5 @@ Row mandatoryHeader({required String desiredHeader}) {
   return Row(children: [
     header(desiredHeader),
     content(desiredContent: '*', desiredColor: Colors.red)
-  ]
-  );
+  ]);
 }

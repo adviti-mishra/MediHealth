@@ -129,3 +129,35 @@ Container medicinePicIcon() {
     ),
   );
 }
+
+void errorPopup(context, error) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+          backgroundColor: ColorShades.text1,
+          title: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(Icons.error_outline, color: ColorShades.primaryColor1),
+              ),
+              Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child:
+                      Text('Error occured', style: TextStyle(color: ColorShades.text2)))
+            ],
+          ),
+          content: Text(error,
+              style: TextStyle(color: ColorShades.text2)),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.canPop(context) ? Navigator.pop(context) : null;
+                },
+                child: Text('Ok', style: TextStyle(color: ColorShades.text2))),
+          ]);
+    },
+  );
+}
+

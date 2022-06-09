@@ -57,8 +57,9 @@ class MedicineScreen extends StatelessWidget {
             },
           ),
           // Your Schedule
-          title: Center(
-              child: Text('Your schedule',
+          title: FittedBox(
+                fit: BoxFit.contain,
+                child: Text('Your schedule',
                   style: TextStyle(
                       color: ColorShades.text1,
                       fontSize: 20))),

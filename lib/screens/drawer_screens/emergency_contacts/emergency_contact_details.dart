@@ -69,7 +69,6 @@ class _EmergencyContactDetailsState extends State<EmergencyContactDetails> {
                         icon_in: Icons.call),
                     verticalSpace(20),
                     // Email
-
                     userFieldIcon(
                         header_in: 'Email: ',
                         content_in: 'adviti@gmail.com',
@@ -107,9 +106,10 @@ class _EmergencyContactDetailsState extends State<EmergencyContactDetails> {
             },
           ),
           // Medicine details
-          title: Center(
-              child: Text('Emergency contact details',
-                  style: TextStyle(color: ColorShades.text1, fontSize: 40)))),
+          title: FittedBox(
+                fit: BoxFit.contain,
+                child:  Text('Emergency contact details',
+                  style: TextStyle(color: ColorShades.text1)))),
       body: emergencyContactDetails(),
     );
   }

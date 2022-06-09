@@ -12,8 +12,8 @@ class _Statistics extends State<Statistics> {
     return Column(
       children: const [
         Text('1. Bar graph of medicine time delay vs medicine'),
-        Text('Name of medicine usually haven late : '),
-        Text('Suggestion : '),
+        Text('2. Name of medicine usually consumed late : '),
+        Text('3. Suggestion to have medicine on time : '),
       ],
     );
   }

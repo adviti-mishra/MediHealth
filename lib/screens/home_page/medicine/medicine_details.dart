@@ -108,9 +108,10 @@ class _MedicineDetailsState extends State<MedicineDetails> {
             },
           ),
           // Medicine details
-          title: Center(
-              child: Text('Medicine details',
-                  style: TextStyle(color: ColorShades.text1, fontSize: 40)))),
+          title: FittedBox(
+                fit: BoxFit.contain,
+                child:  Text('Medicine details',
+                  style: TextStyle(color: ColorShades.text1)))),
       body: medicineDetails(),
     );
   }

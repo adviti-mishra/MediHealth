@@ -364,9 +364,10 @@ class _AddMedicine extends State<AddMedicine> {
       backgroundColor: ColorShades.primaryColor3,
       appBar: AppBar(
         backgroundColor: ColorShades.primaryColor1,
-        title: Center(
-            child: Text('Add a medicine',
-                style: TextStyle(color: ColorShades.text1, fontSize: 40))),
+        title: FittedBox(
+                fit: BoxFit.contain,
+                child: Text('Add a medicine',
+                style: TextStyle(color: ColorShades.text1))),
         leading: Builder(
           builder: (ctx) {
             return IconButton(

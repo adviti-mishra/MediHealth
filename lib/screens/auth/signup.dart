@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:practice_app/screens/auth/login.dart';
+import 'package:practice_app/screens/home_page/medicine/medicine_screen.dart';
 import '../../utils/utils_all.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -22,6 +24,7 @@ class _SignUpState extends State<SignUp> {
   final _signUpFormKey = GlobalKey<FormState>();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -35,10 +38,33 @@ class _SignUpState extends State<SignUp> {
   void _submitSignUpForm() async {
     final isValid = _signUpFormKey.currentState!.validate();
     if (isValid) {
-      await _auth.createUserWithEmailAndPassword(
-          email: _emailTextController.text.trim().toLowerCase(),
-          password: _passwordTextController.text);
+      setState(() {
+        _isLoading = true;
+      });
+      try {
+        await _auth.createUserWithEmailAndPassword(
+            email: _emailTextController.text.trim().toLowerCase(),
+            password: _passwordTextController.text);
+        final User? user = _auth.currentUser;
+        final _uid = user!.uid;
+        FirebaseFirestore.instance.collection('user').doc(_uid).set({
+          'id': _uid,
+          'name': _nameTextController.text,
+          'email': _emailTextController.text,
+          'phoneNumber': _phoneNumberTextController.text,
+          'createdAt': Timestamp.now()
+        });
+        Navigator.canPop(context) ? Navigator.pop(context) : null;
+      } catch (error) {
+        setState(() {
+          _isLoading = false;
+        });
+        errorPopup(context, error.toString());
+      }
     }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
 // ________________________________________________________________________
@@ -159,7 +185,7 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-   Column phoneNumberField() {
+  Column phoneNumberField() {
     return Column(children: [
       Align(
           alignment: Alignment.bottomLeft,
@@ -208,7 +234,7 @@ class _SignUpState extends State<SignUp> {
       keyboardType: TextInputType.emailAddress,
       controller: _emailTextController,
       validator: (email) {
-        if (email != null || (email != null && !email.contains('@'))) {
+        if (email!.isEmpty) {
           return "Please enter a valid email address";
         } else {
           return null;
@@ -277,35 +303,42 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  MaterialButton signUpButton() {
-    return MaterialButton(
-      onPressed: _submitSignUpForm,
-      color: ColorShades.primaryColor1,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Sign up',
-              style: TextStyle(
-                color: ColorShades.text1,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
+  Widget signUpButton() {
+    return _isLoading
+        ? Center(
+            child: Container(
+                width: 70,
+                height: 70,
+                child: const CircularProgressIndicator()))
+        : MaterialButton(
+            onPressed: _submitSignUpForm,
+            color: ColorShades.primaryColor1,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Sign up',
+                    style: TextStyle(
+                      color: ColorShades.text1,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Icon(
+                    Icons.person_add,
+                    color: ColorShades.text1,
+                  )
+                ],
               ),
             ),
-            const SizedBox(
-              width: 10,
-            ),
-            Icon(
-              Icons.person_add,
-              color: ColorShades.text1,
-            )
-          ],
-        ),
-      ),
-    );
+          );
   }
 
   Container signUpPageContent() {

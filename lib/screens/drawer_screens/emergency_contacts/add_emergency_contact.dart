@@ -179,11 +179,12 @@ class _AddEmergencyContact extends State<AddEmergencyContact> {
       backgroundColor: ColorShades.primaryColor3,
       appBar: AppBar(
         backgroundColor: ColorShades.primaryColor1,
-        title: Center(
-            child: Text('Add an emergency contact',
+        title: FittedBox(
+                fit: BoxFit.contain,
+                child:  Text('Add an emergency contact',
                 style: TextStyle(
                     color: ColorShades.text1,
-                    fontSize: 40))),
+                    ))),
         leading: Builder(
           builder: (ctx) {
             return IconButton(

@@ -110,7 +110,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		oAfKdlLER/L8ZSUp0pvTljOyuG4=
+		eEzneu/FbUVmMPFwR39l3xfEu2o=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -118,19 +118,23 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		08W2iPpOAX5ALnRo3pu1cCTcv98=
+		F48rF5TwW+inwZgTset8DeYA8Sk=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
-		tRk44jNaLX9Xe9puZOGCUy4TspI=
+		mrOp3gZVfndwGYgpBPVPkoUVMpc=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<data>
-		dk3yMGK+sADgioIiPS6Ta+wUEg8=
+		FlLoro4MSacgv2GQhgm0J50bRDw=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
 		ALDqik61JG2YDJlTP+RNjhg5B0c=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/fonts/Arial.ttf</key>
+		<data>
+		BW0grFa+dtB2SAwsq1OBH++5G3M=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/fonts/OleoScriptSwashCaps-Bold.ttf</key>
 		<data>
@@ -140,9 +144,17 @@
 		<data>
 		H2fGMxnKtyVt3P9HLD2CMCv6ri0=
 		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/fonts/Times.ttf</key>
+		<data>
+		suFrY/AEf0CW7Vu8O2kcRL57P8c=
+		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/images/MediHealth_logo.png</key>
 		<data>
 		i9gdN+4Ews4F3BjkR8idaHMWFFw=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/images/Medicine_Icon.png</key>
+		<data>
+		L7sRjNqkzLcP0BohQd57ltju5go=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/images/Search_icon.png</key>
 		<data>
@@ -158,7 +170,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		aPoR9R/XnMjTfcrm2O6gJSPvAsk=
+		YYuODVe8PEIS+YDBKRdo7Vn8o94=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -573,7 +585,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			BClpZaEOL+pfXsSyIIr23WLX99egqiB0CEnNqxxSh0s=
+			G8iIVj3/ATgjgsQQ2thPDRUCJE4q+YWqSZe0xMABDE8=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -587,21 +599,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1Eu8nkt5BY7QxAuEukmeWD37BKvuLgw75EveNgF01SE=
+			Bdltzmci77wpxvfLyLIS7QWmiXn6TkjjAOjCNZk2sZM=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Jfu6SvfDl+1kq9dUXnrzUQ6aKoYsdPLsAzGZORbgrbk=
+			kDfWRQmf8/Yq8dLERubZXwS1mhnQxFfiLlETIIrT/8k=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Gzlob9mxTxwTly5gTna+6PSsttCgjeKyahnPtJ/Y6YA=
+			ER4AbYEFmefenFQceoIYT+hbwGwfmcOZYSxNv5CiHsY=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
@@ -609,6 +621,13 @@
 			<key>hash2</key>
 			<data>
 			HsXNTH2QDyBjbcwg03TUOipHewW1fVd2DyXC/PO8A1Y=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/fonts/Arial.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			QTx4+RvTnhNPPAuyBLHVqQ8p35793I/SaVCheAWNXXQ=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/fonts/OleoScriptSwashCaps-Bold.ttf</key>
@@ -625,11 +644,25 @@
 			rUSsnc6q/tODpYlv/pBkk3+3S72eU5vrvE+LRTe9LOg=
 			</data>
 		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/fonts/Times.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			UZZrJ86dWj9YvEiQuYvdCO/ZaDuSZSUd2vCbiWWoSeo=
+			</data>
+		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/images/MediHealth_logo.png</key>
 		<dict>
 			<key>hash2</key>
 			<data>
 			dGzVAQ5etkRwlCPxNXFEh4q1Q/RlG3LgTYh4sW75SEw=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/images/Medicine_Icon.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			JYK9GaxbjfQ98PvIL86LhTzol7kKZS0XUx1Lq/uMpdk=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/images/Search_icon.png</key>
@@ -657,7 +690,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			YncUySOzwQlj8tUcUh6FyIwu31AvhETCyjOW3EnDz+I=
+			jxAMwOCdoeVScaD4yB1/kPqCfUqDt2Rhn34Zl9KUbeQ=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

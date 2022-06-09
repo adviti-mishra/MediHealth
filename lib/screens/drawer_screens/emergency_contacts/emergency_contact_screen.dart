@@ -60,8 +60,9 @@ class EmergencyContactScreen extends StatelessWidget {
             },
           ),
           // Emergency Contacts
-          title: Center(
-              child: Text('Emergency Contacts',
+          title: FittedBox(
+                fit: BoxFit.contain,
+                child: Text('Emergency Contacts',
                   style: TextStyle(color: ColorShades.text1, fontSize: 30))),
           // Add a contact
           actions: [addButton(context), emergencyContactDetailsButton(context)],

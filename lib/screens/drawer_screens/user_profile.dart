@@ -1,13 +1,49 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/utils/utils_all.dart';
 
 class UserProfile extends StatefulWidget {
-  const UserProfile({Key? key}) : super(key: key);
+  final String userID;
+
+  const UserProfile({required this.userID});
   @override
   _UserProfile createState() => _UserProfile();
 }
 
 class _UserProfile extends State<UserProfile> {
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
+  bool _isLoading = false;
+  String phoneNumber = "";
+  String name = "";
+  String email = "";
+  String createdAt = "";
+
+  void getUserData() async {
+    try {
+      _isLoading = true;
+      final DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('user')
+          .doc(widget.userID)
+          .get();
+      if (userDoc == null) {
+        return;
+      } else {
+        setState(() {
+          email = userDoc.get('email');
+          name = userDoc.get('name');
+          phoneNumber = userDoc.get('phoneNumber');
+        });
+      }
+    } catch (error) {} finally {
+      _isLoading = false;
+    }
+  }
+
   Column userInformationEditProfile() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,14 +64,15 @@ class _UserProfile extends State<UserProfile> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-          //border: Border.all(color: Colors.black),
-          color: ColorShades.primaryColor3,
-          /*
+        //border: Border.all(color: Colors.black),
+        color: ColorShades.primaryColor3,
+        /*
           gradient: LinearGradient(begin: Alignment.topCenter, colors: [
         ColorShades.secondaryColor2,
         ColorShades.secondaryColor3,
         ColorShades.primaryColor3
-      ])*/),
+      ])*/
+      ),
       child: Column(
         children: [
           userInformationEditProfile(),
@@ -56,16 +93,14 @@ class _UserProfile extends State<UserProfile> {
                     children: [
                       verticalSpace(20),
                       // First name
-                      userField(
-                          header_in: 'First name: ', content_in: 'Adviti'),
+                      userField(header_in: 'Name: ', content_in: name),
                       verticalSpace(20),
                       // Last name
-                      userField(header_in: 'Last name: ', content_in: 'Mishra'),
+                      userField(header_in: 'Email: ', content_in: email),
                       verticalSpace(20),
                       // Email
                       userField(
-                          header_in: 'Email: ',
-                          content_in: 'advitimishra@gmail.com'),
+                          header_in: 'Phone number: ', content_in: phoneNumber),
                       // *******************************************************
                       verticalSpace(100),
                       // Login button
@@ -88,9 +123,7 @@ class _UserProfile extends State<UserProfile> {
         backgroundColor: ColorShades.primaryColor1,
         title: Center(
             child: Text('User information',
-                style: TextStyle(
-                    color: ColorShades.text1,
-                    fontSize: 20))),
+                style: TextStyle(color: ColorShades.text1, fontSize: 20))),
         leading: Builder(
           builder: (ctx) {
             return IconButton(
@@ -103,7 +136,9 @@ class _UserProfile extends State<UserProfile> {
           },
         ),
       ),
-      body: userProfileContent(),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : userProfileContent(),
     );
   }
 }

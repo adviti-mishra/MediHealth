@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import '../home_page/medicine/medicine_screen.dart';
 import 'signup.dart';
 import 'forgotpassword.dart';
 import '../../utils/utils_all.dart';
@@ -16,8 +18,12 @@ class _LoginState extends State<Login> {
       TextEditingController();
   final TextEditingController _passwordTextController =
       TextEditingController();
+
   bool _obscureText = true;
   final _loginFormKey = GlobalKey<FormState>();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -26,9 +32,26 @@ class _LoginState extends State<Login> {
     _passwordTextController.dispose();
   }
 
-  void _submitLoginForm() {
+  void _submitLoginForm() async{
     final isValid = _loginFormKey.currentState!.validate();
-    if (isValid) {}
+     if (isValid) {
+      setState(() {
+        _isLoading = true;
+      });
+      try {
+        await _auth.signInWithEmailAndPassword(
+            email: _emailTextController.text.trim().toLowerCase(),
+            password: _passwordTextController.text);
+      } catch (error) {
+        setState(() {
+          _isLoading = false;
+        });
+        errorPopup(context, error.toString());
+      }
+    }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
 // ________________________________________________________________________
