@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/utils/utils_all.dart';
 
 class AddEmergencyContact extends StatefulWidget {
-  const AddEmergencyContact({Key? key}) : super(key: key);
+  final String userID;
+  const AddEmergencyContact({required this.userID});
+
   @override
   _AddEmergencyContact createState() => _AddEmergencyContact();
 }
@@ -18,7 +22,12 @@ class _AddEmergencyContact extends State<AddEmergencyContact> {
 
   final _uploadContactFormKey = GlobalKey<FormState>();
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
+  void initState() {
+    super.initState();
+  }
   // deconstructor : TextEditingControllers
   void dispose() {
     super.dispose();
@@ -26,14 +35,21 @@ class _AddEmergencyContact extends State<AddEmergencyContact> {
     _contactNumberTextController.dispose();
     _contactEmailTextController.dispose();
   }
-  
+
   void _uploadContactForm() {
+    final User? user = _auth.currentUser;
+    final _uid = user!.uid;
     final isValid = _uploadContactFormKey.currentState!.validate();
     if (isValid) {
-      //print('it is valid');
-    } else {
-      //print('it is not valid');
-    }
+
+      final data = {
+        "name": _contactNameTextController.text,
+        "phoneNumber": _contactNumberTextController.text,
+        "email": _contactEmailTextController.text
+      };
+
+      FirebaseFirestore.instance.collection('user').doc(_uid).collection('emergencyContacts').add(data);
+    } else {}
   }
 
   InkWell fieldValidation(
@@ -180,11 +196,11 @@ class _AddEmergencyContact extends State<AddEmergencyContact> {
       appBar: AppBar(
         backgroundColor: ColorShades.primaryColor1,
         title: FittedBox(
-                fit: BoxFit.contain,
-                child:  Text('Add an emergency contact',
+            fit: BoxFit.contain,
+            child: Text('Add an emergency contact',
                 style: TextStyle(
-                    color: ColorShades.text1,
-                    ))),
+                  color: ColorShades.text1,
+                ))),
         leading: Builder(
           builder: (ctx) {
             return IconButton(

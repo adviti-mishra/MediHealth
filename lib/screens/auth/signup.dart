@@ -47,13 +47,26 @@ class _SignUpState extends State<SignUp> {
             password: _passwordTextController.text);
         final User? user = _auth.currentUser;
         final _uid = user!.uid;
+
         FirebaseFirestore.instance.collection('user').doc(_uid).set({
           'id': _uid,
           'name': _nameTextController.text,
           'email': _emailTextController.text,
           'phoneNumber': _phoneNumberTextController.text,
-          'createdAt': Timestamp.now()
+          'createdAt': Timestamp.now(),
         });
+        /*
+            FirebaseFirestore.instance.collection('user').doc(_uid).collection('emergencyContacts').doc().set({
+              'name': "",
+          'email': "",
+          'phoneNumber': "",
+        
+            }
+           
+            
+            );
+   */
+
         Navigator.canPop(context) ? Navigator.pop(context) : null;
       } catch (error) {
         setState(() {

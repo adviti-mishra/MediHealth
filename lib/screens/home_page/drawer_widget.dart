@@ -73,10 +73,14 @@ class DrawerWidget extends StatelessWidget {
   }
 
   void navigatetoEmergencyContactScreen(context) {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = _auth.currentUser;
+    final String uid = user!.uid;
+
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => const EmergencyContactScreen()));
+            builder: (context) => EmergencyContactScreen(userID: uid)));
   }
 
   void navigatetoStatisticsScreen(context) {

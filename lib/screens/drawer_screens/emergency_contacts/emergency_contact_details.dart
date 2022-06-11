@@ -3,7 +3,16 @@ import 'package:flutter/material.dart';
 import '../../../../utils/utils_all.dart';
 
 class EmergencyContactDetails extends StatefulWidget {
-  const EmergencyContactDetails({Key? key}) : super(key: key);
+
+  final String name;
+  final String email;
+  final String phoneNumber;
+
+  const EmergencyContactDetails({
+    required this.name,
+    required this.email,
+    required this.phoneNumber,
+  });
 
   @override
   _EmergencyContactDetailsState createState() =>
@@ -21,8 +30,9 @@ class _EmergencyContactDetailsState extends State<EmergencyContactDetails> {
         child: CircleAvatar(
             backgroundColor: ColorShades.primaryColor1,
             radius: 70,
-            child: const Text('AM', style: TextStyle(fontSize: 40))),
+            child: const Icon(Icons.person)//const Text('AM', style: TextStyle(fontSize: 40))),
       ),
+      )
     );
   }
 
@@ -44,11 +54,13 @@ class _EmergencyContactDetailsState extends State<EmergencyContactDetails> {
                       topLeft: Radius.circular(60),
                       topRight: Radius.circular(60)),
                   border: Border.all(color: ColorShades.text2, width: 2)),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                // constrain height of List [Email, Password]
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: SizedBox(
+                    height: 600, // constrain height of List [Email, Password]
+                    child: ListView(
+                  //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     verticalSpace(20),
                     Row(
@@ -60,18 +72,18 @@ class _EmergencyContactDetailsState extends State<EmergencyContactDetails> {
                     ),
                     verticalSpace(20),
                     // First name
-                    userField(header_in: 'Name: ', content_in: 'Adviti Mishra'),
+                    userField(header_in: 'Name: ', content_in: widget.name),
                     verticalSpace(20),
                     // Last name
                     userFieldIcon(
                         header_in: 'Phone: ',
-                        content_in: '2694625272',
+                        content_in: widget.phoneNumber,
                         icon_in: Icons.call),
                     verticalSpace(20),
                     // Email
                     userFieldIcon(
                         header_in: 'Email: ',
-                        content_in: 'adviti@gmail.com',
+                        content_in: widget.email,
                         icon_in: Icons.mail),
                     // *******************************************************
                     verticalSpace(100),
@@ -82,8 +94,10 @@ class _EmergencyContactDetailsState extends State<EmergencyContactDetails> {
               ),
             ),
           ),
-        ],
+            )
       ),
+        ],
+    ),
     );
   }
 

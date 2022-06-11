@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/utils/utils_all.dart';
 import 'package:weekday_selector/weekday_selector.dart';
@@ -34,6 +36,8 @@ class _AddMedicine extends State<AddMedicine> {
   // We start with all days not selected.
   List<bool> values = List.filled(7, false);
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   // deconstructor : TextEditingControllers
   void dispose() {
@@ -48,8 +52,19 @@ class _AddMedicine extends State<AddMedicine> {
   }
 
   void _uploadTaskForm() {
+    final User? user = _auth.currentUser;
+    final _uid = user!.uid;
     final isValid = _uploadMedicineFormKey.currentState!.validate();
     if (isValid) {
+        FirebaseFirestore.instance.collection('user').doc(_uid).collection('medicines').doc().set({
+          'id': _uid,
+          'name': _medicineNameTextController.text,
+          'dosage': _medicineDosageTextController.text,
+          'days': values, // true - day selected
+          'startDate': _startDateTextController.text,
+          'endDate': _endDateTextController.text,
+          'moreInfo':_medicineDescriptionTextController.text
+        });
       //print('it is valid');
     } else {
       //print('it is not valid');
