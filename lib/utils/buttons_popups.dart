@@ -68,25 +68,25 @@ MaterialButton editButton(context) {
   );
 }
 
-RawMaterialButton deleteButton(context) {
+RawMaterialButton deleteButton(context, ftor) {
   return RawMaterialButton(
-        child: const Icon(
-          Icons.cancel_outlined,
-          color: Colors.red,
-          size: 60,
-        ),
-        shape: const CircleBorder(),
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (ctx) {
-              return deletePopup(context);
-            },
-          );
-        });
+      child: const Icon(
+        Icons.cancel_outlined,
+        color: Colors.red,
+        size: 60,
+      ),
+      shape: const CircleBorder(),
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (ctx) {
+            return deletePopup(context, ftor);
+          },
+        );
+      });
 }
 
-AlertDialog deletePopup(context) {
+AlertDialog deletePopup(context, ftor) {
   return AlertDialog(
       backgroundColor: ColorShades.text1,
       title: Row(
@@ -104,7 +104,9 @@ AlertDialog deletePopup(context) {
           style: TextStyle(color: ColorShades.text2)),
       actions: [
         TextButton(
-            onPressed: () {},
+            onPressed: () {
+              ftor;
+            },
             child: Text('Yes', style: TextStyle(color: ColorShades.text2))),
         TextButton(
             onPressed: () {
@@ -140,16 +142,16 @@ void errorPopup(context, error) {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Icon(Icons.error_outline, color: ColorShades.primaryColor1),
+                child:
+                    Icon(Icons.error_outline, color: ColorShades.primaryColor1),
               ),
               Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child:
-                      Text('Error occured', style: TextStyle(color: ColorShades.text2)))
+                  child: Text('Error occured',
+                      style: TextStyle(color: ColorShades.text2)))
             ],
           ),
-          content: Text(error,
-              style: TextStyle(color: ColorShades.text2)),
+          content: Text(error, style: TextStyle(color: ColorShades.text2)),
           actions: [
             TextButton(
                 onPressed: () {
@@ -160,4 +162,3 @@ void errorPopup(context, error) {
     },
   );
 }
-

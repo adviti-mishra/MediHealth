@@ -49,6 +49,8 @@ class _AddEmergencyContact extends State<AddEmergencyContact> {
       };
 
       FirebaseFirestore.instance.collection('user').doc(_uid).collection('emergencyContacts').add(data);
+
+       Navigator.canPop(context) ? Navigator.pop(context) : null;
     } else {}
   }
 

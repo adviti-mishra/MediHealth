@@ -102,8 +102,11 @@ class _EmergencyContactWidgetState extends State<EmergencyContactWidget> {
           maxLines: 2,
           style: const TextStyle(
               fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20)),
-      trailing: deleteButton(context),
+      trailing: deleteButton(context, deleteContact),
     );
+  }
+  void deleteContact(){
+    FirebaseFirestore.instance.collection("user").doc(widget.uID).collection('emergencyContacts').doc(widget.docID).delete();
   }
 
   Card emergencyContactWidgetContent() {

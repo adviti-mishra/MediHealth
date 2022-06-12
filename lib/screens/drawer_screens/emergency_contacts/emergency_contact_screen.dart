@@ -31,20 +31,6 @@ class EmergencyContactScreen extends StatelessWidget {
     );
   }
 
-  RawMaterialButton emergencyContactDetailsButton(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(
-        Icons.info,
-        color: ColorShades.text1,
-        size: 40,
-      ),
-      shape: const CircleBorder(),
-      onPressed: () {
-
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +55,7 @@ class EmergencyContactScreen extends StatelessWidget {
             child: Text('Emergency Contacts',
                 style: TextStyle(color: ColorShades.text1, fontSize: 30))),
         // Add a contact
-        actions: [addButton(context), emergencyContactDetailsButton(context)],
+        actions: [addButton(context)],
       ),
       body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
@@ -98,39 +84,9 @@ class EmergencyContactScreen extends StatelessWidget {
               }
             }
             return const Center(
-              child: Text('error'),
+              child: Text('No contacts have been added yet'),
             );
           }),
     );
   }
 }
-/*
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return ;
-            } else if (snapshot.connectionState == ConnectionState.active) {
-              if (snapshot.data!.docs.isNotEmpty) {
-                return 
-              } else {
-                return const Center(
-                  child: Text('There is no emergency contact yet'),
-                );
-              }
-            }
-            return const Center(
-                child: Text(
-              'Something went wrong',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-            ));
-          },
-        ));
-        /*
-        ListView.builder(itemBuilder: (BuildContext context, int index) {
-          return const EmergencyContactWidget();
-        })*/
-        (/));
-  
-  }
-}
-
-  }
-*/
