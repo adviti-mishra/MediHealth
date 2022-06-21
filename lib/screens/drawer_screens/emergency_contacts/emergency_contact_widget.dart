@@ -65,26 +65,6 @@ class _EmergencyContactWidgetState extends State<EmergencyContactWidget> {
         );
   }
 
-  SingleChildScrollView emergencyContactCardSubdetails() {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          // Phone number: 2694625272
-          Text('Phone number: ',
-              style: TextStyle(color: ColorShades.text2, fontSize: 20)),
-          Text(phoneNumber,
-              style: TextStyle(color: ColorShades.text2, fontSize: 20)),
-          // Email: advitimishra@gmail.com
-          Text('Email: ',
-              style: TextStyle(color: ColorShades.text2, fontSize: 20)),
-          Text(email, style: TextStyle(color: ColorShades.text2, fontSize: 20)),
-        ],
-      ),
-    );
-  }
-
   ListTile emergencyContactCardContent() {
     return ListTile(
       onTap: () {
@@ -92,7 +72,7 @@ class _EmergencyContactWidgetState extends State<EmergencyContactWidget> {
               context,
               MaterialPageRoute(
                 builder: (context) =>  EmergencyContactDetails(
-            name: widget.name, email: widget.email, phoneNumber: widget.phoneNumber)
+            uID: widget.uID, docID: widget.docID, name: widget.name, email: widget.email, phoneNumber: widget.phoneNumber)
               ),
             );
       },
@@ -102,7 +82,7 @@ class _EmergencyContactWidgetState extends State<EmergencyContactWidget> {
           maxLines: 2,
           style: const TextStyle(
               fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20)),
-      trailing: deleteButton(context, deleteContact),
+      trailing: deleteButton(context),
     );
   }
   void deleteContact(){
@@ -122,6 +102,55 @@ class _EmergencyContactWidgetState extends State<EmergencyContactWidget> {
     // cancel
     // downarrow
   }
+
+  RawMaterialButton deleteButton(context) {
+  return RawMaterialButton(
+      child: const Icon(
+        Icons.cancel_outlined,
+        color: Colors.red,
+        size: 60,
+      ),
+      shape: const CircleBorder(),
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (ctx) {
+            return deletePopup(context);
+          },
+        );
+      });
+}
+
+AlertDialog deletePopup(context) {
+  return AlertDialog(
+      backgroundColor: ColorShades.text1,
+      title: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.delete, color: ColorShades.primaryColor1),
+          ),
+          Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('Delete', style: TextStyle(color: ColorShades.text2)))
+        ],
+      ),
+      content: Text("Do you want to delete this?",
+          style: TextStyle(color: ColorShades.text2)),
+      actions: [
+        TextButton(
+            onPressed: () {
+              FirebaseFirestore.instance.collection("user").doc(widget.uID).collection('emergencyContacts').doc(widget.docID).delete();
+              Navigator.canPop(context) ? Navigator.pop(context) : null;
+            },
+            child: Text('Yes', style: TextStyle(color: ColorShades.text2))),
+        TextButton(
+            onPressed: () {
+              Navigator.canPop(context) ? Navigator.pop(context) : null;
+            },
+            child: Text('No', style: TextStyle(color: ColorShades.text2))),
+      ]);
+}
 
   @override
   Widget build(BuildContext context) {

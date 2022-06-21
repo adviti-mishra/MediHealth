@@ -1,21 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+
+import 'package:practice_app/screens/home_page/medicine/medicine_screen.dart';
+import 'package:practice_app/utils/text_to_speach.dart';
 import '../../../../utils/utils_all.dart';
 
 class MedicineDetails extends StatefulWidget {
-  const MedicineDetails({Key? key}) : super(key: key);
+  final String uID;
+  final String docID;
+  final String name;
+  final String dosage;
+  //final List<String> days;
+  final String times;
+  final String startDate;
+  final String endDate;
+  final String moreInfo;
+
+  const MedicineDetails({
+    required this.uID,
+    required this.docID,
+    required this.name,
+    required this.dosage,
+    // required this.days,
+    required this.times,
+    required this.startDate,
+    required this.endDate,
+    required this.moreInfo,
+  });
 
   @override
   _MedicineDetailsState createState() => _MedicineDetailsState();
 }
 
 class _MedicineDetailsState extends State<MedicineDetails> {
-
+  final FlutterTts flutterTts = FlutterTts();
 
   Container medicineDetails() {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: ColorShades.primaryColor3,
+        color: Theme.of(context).colorScheme.background,
       ),
       child: Column(
         children: [
@@ -23,12 +47,12 @@ class _MedicineDetailsState extends State<MedicineDetails> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                  color: ColorShades.primaryColor2,
+                  color: Theme.of(context).colorScheme.secondary,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(60),
                     topRight: Radius.circular(60),
                   ),
-                  border: Border.all(color: ColorShades.text2, width: 2)),
+                  border: Border.all(color: Theme.of(context).colorScheme.onSecondary, width: 2)),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 // constrain height of List [Email, Password]
@@ -36,24 +60,27 @@ class _MedicineDetailsState extends State<MedicineDetails> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      audio(
+                          'Name: ${widget.name}, Dosage: ${widget.dosage}, Times: ${widget.times}, Days: ,Monday, Wednesday, Friday, start date: ${widget.startDate}, end date: ${widget.endDate}, additional info: ${widget.moreInfo}',
+                          flutterTts),
                       //verticalSpace(20),
                       Row(
                         children: [
                           medicinePicIcon(),
                           const Spacer(),
-                          deleteButton(context)
+                          deleteButton(context, () {})
                         ],
                       ),
                       //verticalSpace(20),
                       // Name
-                      userField(header_in: 'Name: ', content_in: 'Ibuprofin'),
+                      userField(header_in: 'Name: ', content_in: widget.name),
                       verticalSpace(20),
                       // Dosage
-                      userField(header_in: 'Dosage: ', content_in: '20ml'),
+                      userField(
+                          header_in: 'Dosage: ', content_in: widget.dosage),
                       verticalSpace(20),
                       // Times
-                      userField(
-                          header_in: 'Times: ', content_in: '1PM, 6PM, 10PM'),
+                      userField(header_in: 'Times: ', content_in: widget.times),
                       verticalSpace(20),
                       // Days
                       userField(
@@ -63,17 +90,16 @@ class _MedicineDetailsState extends State<MedicineDetails> {
                       // Start date
                       userField(
                           header_in: 'Start date: ',
-                          content_in: '14th June, 2022'),
+                          content_in: widget.startDate),
                       verticalSpace(20),
                       // End date
                       userField(
-                          header_in: 'End date: ',
-                          content_in: '15th July, 2022'),
+                          header_in: 'End date: ', content_in: widget.endDate),
                       verticalSpace(20),
                       // Additional information
                       userField(
                           header_in: 'Additional information: ',
-                          content_in: 'Swallow immediately.'),
+                          content_in: widget.moreInfo),
                       // *******************************************************
                       verticalSpace(80),
                       // Login button
@@ -92,26 +118,31 @@ class _MedicineDetailsState extends State<MedicineDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorShades.primaryColor3,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-          backgroundColor: ColorShades.primaryColor1,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           // Back button
           leading: Builder(
             builder: (ctx) {
               return IconButton(
                 icon: Icon(Icons.arrow_back_ios_new_outlined,
-                    color: ColorShades.text1),
+                    color: Theme.of(context).colorScheme.onPrimary),
                 onPressed: () {
-                  Navigator.canPop(context) ? Navigator.pop(context) : null;
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            MedicineScreen(userID: widget.uID)),
+                  );
                 },
               );
             },
           ),
           // Medicine details
           title: FittedBox(
-                fit: BoxFit.contain,
-                child:  Text('Medicine details',
-                  style: TextStyle(color: ColorShades.text1)))),
+              fit: BoxFit.contain,
+              child: Text('Medicine details',
+                  style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)))),
       body: medicineDetails(),
     );
   }

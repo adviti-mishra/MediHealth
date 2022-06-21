@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:practice_app/utils/utils_all.dart';
 import 'package:weekday_selector/weekday_selector.dart';
+
+import '../../../utils/text_to_speach.dart';
 
 class AddMedicine extends StatefulWidget {
   const AddMedicine({Key? key}) : super(key: key);
@@ -19,7 +22,7 @@ class _AddMedicine extends State<AddMedicine> {
   final TextEditingController _medicineDaysTextController =
       TextEditingController(text: 'Choose days');
   final TextEditingController _medicineTimeofDayTextController =
-      TextEditingController(text: 'Choose time of day');
+      TextEditingController();
 
   final TextEditingController _startDateTextController =
       TextEditingController(text: 'Choose start date');
@@ -32,6 +35,8 @@ class _AddMedicine extends State<AddMedicine> {
 
   DateTime? startDate;
   DateTime? endDate;
+
+  final FlutterTts flutterTts = FlutterTts();
 
   // We start with all days not selected.
   List<bool> values = List.filled(7, false);
@@ -51,24 +56,24 @@ class _AddMedicine extends State<AddMedicine> {
     _medicineDescriptionTextController.dispose();
   }
 
-  void _uploadTaskForm() {
+  void _uploadMedicineForm() {
     final User? user = _auth.currentUser;
     final _uid = user!.uid;
     final isValid = _uploadMedicineFormKey.currentState!.validate();
     if (isValid) {
-        FirebaseFirestore.instance.collection('user').doc(_uid).collection('medicines').doc().set({
+      final data = {
           'id': _uid,
           'name': _medicineNameTextController.text,
           'dosage': _medicineDosageTextController.text,
-          'days': values, // true - day selected
+          'days': toListOfDays(values),
+          'times': _medicineTimeofDayTextController.text, // true - day selected
           'startDate': _startDateTextController.text,
           'endDate': _endDateTextController.text,
           'moreInfo':_medicineDescriptionTextController.text
-        });
-      //print('it is valid');
-    } else {
-      //print('it is not valid');
-    }
+        };
+      FirebaseFirestore.instance.collection('user').doc(_uid).collection('medicines').add(data);
+      Navigator.canPop(context) ? Navigator.pop(context) : null;
+    } else {}
   }
 
   InkWell fieldValidation(
@@ -95,16 +100,16 @@ class _AddMedicine extends State<AddMedicine> {
             return null;
           }
         },
-        style: TextStyle(color: ColorShades.text2),
+        style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
         decoration: InputDecoration(
           filled: true,
           border: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.black, width: 4.0),
             borderRadius: BorderRadius.circular(25.0),
           ),
-          fillColor: ColorShades.text1,
+          fillColor: Theme.of(context).colorScheme.surface,
           errorBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.red, width: 2.0),
+            borderSide: BorderSide(color: Theme.of(context).colorScheme.onError, width: 2.0),
             borderRadius: BorderRadius.circular(25.0),
           ),
         ),
@@ -136,7 +141,7 @@ class _AddMedicine extends State<AddMedicine> {
           verticalSpace(20),
           Text("Medication duration: ",
               style: TextStyle(
-                color: ColorShades.text2,
+                color: Theme.of(context).colorScheme.onSurface,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               )),
@@ -144,9 +149,6 @@ class _AddMedicine extends State<AddMedicine> {
           Row(
             children: [
               Expanded(child: startDateField()),
-              //const SizedBox(
-              // width: 50,
-              //),
               Expanded(
                 child: endDateField(),
               ),
@@ -201,10 +203,10 @@ class _AddMedicine extends State<AddMedicine> {
       WeekdaySelectorTheme(
         data: WeekdaySelectorThemeData(
           
-          color: Colors.black,
-          fillColor: ColorShades.text1,
-          disabledFillColor: ColorShades.primaryColor2,
-          selectedFillColor: ColorShades.primaryColor1,
+          color: Theme.of(context).colorScheme.onSurface,
+          fillColor: Theme.of(context).colorScheme.surface,
+          disabledFillColor: Theme.of(context).colorScheme.secondary,
+          selectedFillColor:  Theme.of(context).colorScheme.primary,
         ),
         child: WeekdaySelector(
           onChanged: (int day) {
@@ -229,7 +231,7 @@ class _AddMedicine extends State<AddMedicine> {
       fieldValidation(
           valueKey: 'medicineTimesofDay',
           controller: _medicineTimeofDayTextController,
-          enabled: false,
+          enabled: true,
           ftor: () {},
           maxlength: 100)
     ]);
@@ -261,13 +263,13 @@ class _AddMedicine extends State<AddMedicine> {
           return Theme(
             data: Theme.of(context).copyWith(
               colorScheme: ColorScheme.light(
-                  primary: ColorShades.primaryColor1, // header background color
-                  onPrimary: ColorShades.text1, // header text color
-                  onSurface: ColorShades.text2 // body text color
+                  primary:  Theme.of(context).colorScheme.primary, // header background color
+                  onPrimary:  Theme.of(context).colorScheme.onPrimary, // header text color
+                  onSurface:  Theme.of(context).colorScheme.onSecondary // body text color
                   ),
               textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(
-                  primary: ColorShades.primaryColor1, // button text color
+                  primary:  Theme.of(context).colorScheme.primary // button text color
                 ),
               ),
             ),
@@ -307,13 +309,13 @@ class _AddMedicine extends State<AddMedicine> {
           return Theme(
             data: Theme.of(context).copyWith(
               colorScheme: ColorScheme.light(
-                  primary: ColorShades.primaryColor1, // header background color
-                  onPrimary: ColorShades.text1, // header text color
-                  onSurface: ColorShades.text2 // body text color
+                  primary: Theme.of(context).colorScheme.primary, // header background color
+                  onPrimary: Theme.of(context).colorScheme.onPrimary, // header text color
+                  onSurface: Theme.of(context).colorScheme.onSecondary// body text color
                   ),
               textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(
-                  primary: ColorShades.primaryColor1, // button text color
+                  primary: Theme.of(context).colorScheme.primary, // button text color
                 ),
               ),
             ),
@@ -344,8 +346,8 @@ class _AddMedicine extends State<AddMedicine> {
 
   MaterialButton uploadMedicineButton() {
     return MaterialButton(
-      onPressed: _uploadTaskForm,
-      color: ColorShades.primaryColor1,
+      onPressed: _uploadMedicineForm,
+      color: Theme.of(context).colorScheme.primary,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -355,7 +357,7 @@ class _AddMedicine extends State<AddMedicine> {
             Text(
               'Add medicine ',
               style: TextStyle(
-                color: ColorShades.text1,
+                color:  Theme.of(context).colorScheme.onPrimary,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
@@ -365,7 +367,7 @@ class _AddMedicine extends State<AddMedicine> {
             ),
             Icon(
               Icons.upload_file_outlined,
-              color: ColorShades.text1,
+              color:  Theme.of(context).colorScheme.onPrimary,
             )
           ],
         ),
@@ -376,18 +378,18 @@ class _AddMedicine extends State<AddMedicine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorShades.primaryColor3,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: ColorShades.primaryColor1,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: FittedBox(
                 fit: BoxFit.contain,
                 child: Text('Add a medicine',
-                style: TextStyle(color: ColorShades.text1))),
+                style: TextStyle(color: Theme.of(context).colorScheme.onPrimary))),
         leading: Builder(
           builder: (ctx) {
             return IconButton(
               icon: Icon(Icons.arrow_back_ios_new_sharp,
-                  color: ColorShades.text1),
+                  color: Theme.of(context).colorScheme.onPrimary),
               onPressed: () {
                 Navigator.canPop(context) ? Navigator.pop(context) : null;
               },
@@ -399,23 +401,34 @@ class _AddMedicine extends State<AddMedicine> {
         elevation: 10,
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         shape: RoundedRectangleBorder(
-          side: const BorderSide(color: Colors.black, width: 2),
+          side: BorderSide(color: Theme.of(context).colorScheme.onSurface, width: 2),
           borderRadius: BorderRadius.circular(10),
         ),
-        color: ColorShades.primaryColor2,
+        color: Theme.of(context).colorScheme.surface,
         child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             // Medicine Information
-            const Padding(
-                padding: EdgeInsets.only(top: 50, right: 10, left: 10),
+            Padding(
+                padding: const EdgeInsets.only(top: 50, right: 10, left: 10),
                 child: Align(
-                    alignment: Alignment.center,
-                    child: Text('Medicine Information',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 40)))),
+                    alignment: Alignment.bottomLeft,
+                    child: audio(
+                          'Please enter the following fields :  Name: , Dosage: , Days of intake: ,  Times of day: , the start date of your medication, the end date of your medication, and any additional information you may have',
+                          flutterTts),
+                    )
+                    ),
+            Padding(
+              padding: const EdgeInsets.only(top: 50, right: 10, left: 10),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Text('Medicine Information',
+                                style: TextStyle(
+                                    color: Theme.of(context).colorScheme.onSurface,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 40)),
+              ),
+            ),
             const SizedBox(height: 10),
             //__________________________
             const Divider(thickness: 1),

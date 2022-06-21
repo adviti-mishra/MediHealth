@@ -5,7 +5,7 @@ import 'package:practice_app/screens/home_page/medicine/medicine_screen.dart';
 
 class UserState extends StatelessWidget {
   const UserState({Key? key}) : super(key: key);
-
+   
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -17,7 +17,7 @@ class UserState extends StatelessWidget {
             return const Login();
           } else if (userSnapshot.hasData) {
             print('User is already logged in in');
-            return const MedicineScreen();
+            return MedicineScreen(userID: FirebaseAuth.instance.currentUser!.uid);
           } else if (userSnapshot.hasError) {
             return const Scaffold(
                 body: Center(child: Text('An error has occured')));

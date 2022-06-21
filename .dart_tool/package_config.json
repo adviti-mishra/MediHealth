@@ -56,6 +56,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "color_blindness",
+      "rootUri": "file:///Users/advitimishra/Documents/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/color_blindness-0.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "crypto",
       "rootUri": "file:///Users/advitimishra/Documents/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.2",
       "packageUri": "lib/",
@@ -144,6 +150,12 @@
       "rootUri": "file:///Users/advitimishra/Documents/FLUTTER/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_tts",
+      "rootUri": "file:///Users/advitimishra/Documents/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_web_plugins",
@@ -398,7 +410,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-06-09T18:57:06.121430Z",
+  "generated": "2022-06-16T05:01:41.354921Z",
   "generator": "pub",
   "generatorVersion": "2.17.1"
 }

@@ -1,14 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 import '../../../../utils/utils_all.dart';
+import '../../../utils/text_to_speach.dart';
 
 class EmergencyContactDetails extends StatefulWidget {
-
+  
+  final String uID;
+  final String docID;
   final String name;
   final String email;
   final String phoneNumber;
 
   const EmergencyContactDetails({
+    required this.uID,
+    required this.docID,
     required this.name,
     required this.email,
     required this.phoneNumber,
@@ -20,6 +27,9 @@ class EmergencyContactDetails extends StatefulWidget {
 }
 
 class _EmergencyContactDetailsState extends State<EmergencyContactDetails> {
+
+  final FlutterTts flutterTts = FlutterTts();
+
   Container emergencyContactIcon() {
     return Container(
       height: 100,
@@ -35,7 +45,11 @@ class _EmergencyContactDetailsState extends State<EmergencyContactDetails> {
       )
     );
   }
-
+  
+  void deleteContact(){
+    FirebaseFirestore.instance.collection("user").doc(widget.uID).collection('emergencyContacts').doc(widget.docID).delete();
+  }
+  
   Container emergencyContactDetails() {
     return Container(
       width: double.infinity,
@@ -59,43 +73,51 @@ class _EmergencyContactDetailsState extends State<EmergencyContactDetails> {
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: SizedBox(
                     height: 600, // constrain height of List [Email, Password]
-                    child: ListView(
-                  //crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    verticalSpace(20),
-                    Row(
+                      child: ListView(
+                                     // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        emergencyContactIcon(),
-                        const Spacer(),
-                        deleteButton(context)
-                      ],
+                      verticalSpace(20),
+                       Align(
+                         alignment: Alignment.centerLeft,
+                         child: audio(
+                              'Name: ${widget.name}, Phone: ${widget.phoneNumber}, Email: ${widget.email}',
+                              flutterTts),
+                       ),
+                      Row(
+                        children: [
+                          emergencyContactIcon(),
+                          const Spacer(),
+                          deleteButton(context, deleteContact)
+                        ],
+                      ),
+                      verticalSpace(20),
+                      // First name
+                      userField(header_in: 'Name: ', content_in: widget.name),
+                      verticalSpace(20),
+                      // Last name
+                      userFieldIcon(
+                          header_in: 'Phone: ',
+                          content_in: widget.phoneNumber,
+                          icon_in: Icons.call,
+                          dataHeader: widget.phoneNumber),
+                      verticalSpace(20),
+                      // Email
+                      userFieldIcon(
+                          header_in: 'Email: ',
+                          content_in: widget.email,
+                          icon_in: Icons.mail,
+                          dataHeader: widget.email),
+                      // *******************************************************
+                      verticalSpace(100),
+                      // Login button
+                      editButton(context),
+                                      ],
+                                    ),
                     ),
-                    verticalSpace(20),
-                    // First name
-                    userField(header_in: 'Name: ', content_in: widget.name),
-                    verticalSpace(20),
-                    // Last name
-                    userFieldIcon(
-                        header_in: 'Phone: ',
-                        content_in: widget.phoneNumber,
-                        icon_in: Icons.call),
-                    verticalSpace(20),
-                    // Email
-                    userFieldIcon(
-                        header_in: 'Email: ',
-                        content_in: widget.email,
-                        icon_in: Icons.mail),
-                    // *******************************************************
-                    verticalSpace(100),
-                    // Login button
-                    editButton(context),
-                  ],
-                ),
               ),
             ),
           ),
             )
-      ),
         ],
     ),
     );

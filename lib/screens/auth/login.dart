@@ -302,7 +302,7 @@ class _LoginState extends State<Login> {
                       verticalSpace(20),
                       forgotPassword(),
                       // *******************************************************
-                      verticalSpace(100),
+                      verticalSpace(80),
                       // Login button
                       loginButton(),
                     ],

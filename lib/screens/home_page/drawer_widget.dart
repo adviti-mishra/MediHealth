@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/drawer_screens/accessibility_features.dart';
+import 'package:practice_app/screens/drawer_screens/accessibility/accessibility_features.dart';
 import 'package:practice_app/screens/drawer_screens/user_profile.dart';
 import 'package:practice_app/screens/drawer_screens/emergency_contacts/emergency_contact_screen.dart';
 import '../../utils/color_shades.dart';
+import '../drawer_screens/personal_notes/personal_note_screen.dart';
 import '../drawer_screens/statistics.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -93,6 +94,14 @@ class DrawerWidget extends StatelessWidget {
         MaterialPageRoute(builder: (context) => const AccessibilityFeatures()));
   }
 
+  void navigatetoPersonalNotesScreen(context){
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = _auth.currentUser;
+    final String uid = user!.uid;
+     Navigator.push(context,
+        MaterialPageRoute(builder: (context) => PersonalNoteScreen(userID: uid)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -129,6 +138,13 @@ class DrawerWidget extends StatelessWidget {
             icon: Icons.settings,
             ftor: () {
               navigatetoAccessibilityFeaturesScreen(context);
+            }),
+         // const Divider(thickness: 2.0, color: Colors.black),
+          drawerMenuOption(
+            label: "Personal note page",
+            icon: Icons.note,
+            ftor: () {
+              navigatetoPersonalNotesScreen(context);
             }),
         // const Divider(thickness: 2.0, color: Colors.black),
         Divider(

@@ -45,7 +45,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.medihealth.MediHealth"
-        minSdkVersion 19 // CHANGED FROM : flutter.minSdkVersion
+        minSdkVersion 21 // CHANGED FROM : flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

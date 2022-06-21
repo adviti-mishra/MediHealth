@@ -68,10 +68,11 @@ MERGED from [:cloud_firestore] /Users/advitimishra/Documents/FLUTTER/Practice/pr
 MERGED from [:firebase_core] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-15:12
 MERGED from [:url_launcher_android] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-14:12
 MERGED from [:path_provider_android] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/path_provider_android/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.multidex:multidex:2.0.0] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/02d04e6dfdbeb319e115f5728d226784/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [:flutter_tts] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-13:12
 MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/a3b86b42fafb2019c6d99a912992ce19/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/cea45e25bbe77c9713c39e234ccfd7bd/jetified-window-1.0.0-beta04/AndroidManifest.xml:17:1-33:12
 MERGED from [com.google.firebase:firebase-analytics:21.0.0] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/438ab8934de6f4a0bcc184c8e9f43636/jetified-firebase-analytics-21.0.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.multidex:multidex:2.0.0] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/02d04e6dfdbeb319e115f5728d226784/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-auth:21.0.5] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/37271fa97da0c7d74a0f2501820cafef/jetified-firebase-auth-21.0.5/AndroidManifest.xml:17:1-73:12
 MERGED from [com.google.firebase:firebase-firestore:24.1.2] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/f5bbed170b360fd19b200a85558d3766/jetified-firebase-firestore-24.1.2/AndroidManifest.xml:2:1-26:12
 MERGED from [com.google.android.gms:play-services-measurement-api:21.0.0] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/1cd6b35bba78aa82ebfb4f3fdea2085f/jetified-play-services-measurement-api-21.0.0/AndroidManifest.xml:17:1-37:12
@@ -149,14 +150,16 @@ MERGED from [:url_launcher_android] /Users/advitimishra/Documents/FLUTTER/Practi
 MERGED from [:url_launcher_android] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider_android] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/path_provider_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider_android] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/path_provider_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
-MERGED from [androidx.multidex:multidex:2.0.0] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/02d04e6dfdbeb319e115f5728d226784/multidex-2.0.0/AndroidManifest.xml:20:5-43
-MERGED from [androidx.multidex:multidex:2.0.0] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/02d04e6dfdbeb319e115f5728d226784/multidex-2.0.0/AndroidManifest.xml:20:5-43
+MERGED from [:flutter_tts] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_tts] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/a3b86b42fafb2019c6d99a912992ce19/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
 MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/a3b86b42fafb2019c6d99a912992ce19/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/cea45e25bbe77c9713c39e234ccfd7bd/jetified-window-1.0.0-beta04/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/cea45e25bbe77c9713c39e234ccfd7bd/jetified-window-1.0.0-beta04/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.firebase:firebase-analytics:21.0.0] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/438ab8934de6f4a0bcc184c8e9f43636/jetified-firebase-analytics-21.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-analytics:21.0.0] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/438ab8934de6f4a0bcc184c8e9f43636/jetified-firebase-analytics-21.0.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.multidex:multidex:2.0.0] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/02d04e6dfdbeb319e115f5728d226784/multidex-2.0.0/AndroidManifest.xml:20:5-43
+MERGED from [androidx.multidex:multidex:2.0.0] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/02d04e6dfdbeb319e115f5728d226784/multidex-2.0.0/AndroidManifest.xml:20:5-43
 MERGED from [com.google.firebase:firebase-auth:21.0.5] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/37271fa97da0c7d74a0f2501820cafef/jetified-firebase-auth-21.0.5/AndroidManifest.xml:21:5-44
 MERGED from [com.google.firebase:firebase-auth:21.0.5] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/37271fa97da0c7d74a0f2501820cafef/jetified-firebase-auth-21.0.5/AndroidManifest.xml:21:5-44
 MERGED from [com.google.firebase:firebase-firestore:24.1.2] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/f5bbed170b360fd19b200a85558d3766/jetified-firebase-firestore-24.1.2/AndroidManifest.xml:7:5-9:41
@@ -325,6 +328,14 @@ ADDED from [:url_launcher_android] /Users/advitimishra/Documents/FLUTTER/Practic
 		ADDED from [:url_launcher_android] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-71
 	android:name
 		ADDED from [:url_launcher_android] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-74
+queries
+ADDED from [:flutter_tts] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-11:15
+intent#action:name:android.intent.action.TTS_SERVICE
+ADDED from [:flutter_tts] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-10:18
+action#android.intent.action.TTS_SERVICE
+ADDED from [:flutter_tts] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-72
+	android:name
+		ADDED from [:flutter_tts] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:9:21-69
 uses-library#androidx.window.extensions
 ADDED from [androidx.window:window:1.0.0-beta04] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/cea45e25bbe77c9713c39e234ccfd7bd/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
 	android:required

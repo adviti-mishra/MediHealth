@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:practice_app/utils/utils_all.dart';
+
+import '../../../utils/text_to_speach.dart';
 
 class AddEmergencyContact extends StatefulWidget {
   final String userID;
@@ -23,6 +26,8 @@ class _AddEmergencyContact extends State<AddEmergencyContact> {
   final _uploadContactFormKey = GlobalKey<FormState>();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  final FlutterTts flutterTts = FlutterTts();
 
   @override
   void initState() {
@@ -226,6 +231,15 @@ class _AddEmergencyContact extends State<AddEmergencyContact> {
         child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+             Padding(
+                padding: const EdgeInsets.only(top: 50, right: 10, left: 10),
+                child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: audio(
+                          'Please enter the following fields for your emergency contact:  their Name, Phone number, and email ',
+                          flutterTts),
+                    )
+                    ),
             // Medicine Information
             Padding(
                 padding: const EdgeInsets.only(top: 50, right: 10, left: 10),

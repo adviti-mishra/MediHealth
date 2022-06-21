@@ -75,7 +75,7 @@ class EmergencyContactScreen extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return EmergencyContactWidget(
                         uID: userID,
-                        docID: index.toString(),
+                        docID: snapshot.data!.docs[index].id.toString(),//index.toString(),
                         name: snapshot.data!.docs[index]['name'],
                         email: snapshot.data!.docs[index]['email'],
                         phoneNumber: snapshot.data!.docs[index]['phoneNumber'],

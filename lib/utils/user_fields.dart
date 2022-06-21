@@ -43,10 +43,10 @@ Container contactBy({required IconData icon_in, required Function ftr}) {
       ));
 }
 
-void openEmail() async {
+void openEmail(String dataHeader) async {
   final mailtoUri = Uri(
       scheme: 'mailto',
-      path: 'advitimishra@gmail.com',
+      path: dataHeader,
       queryParameters: {'subject': '*Username\'s MediHealth schedule'});
 
   if (!await launchUrl(mailtoUri)) {
@@ -54,8 +54,8 @@ void openEmail() async {
   }
 }
 
-void openCall() async {
-  final calltoUri = Uri(scheme: 'tel', path: '2694625272');
+void openCall(String dataHeader) async {
+  final calltoUri = Uri(scheme: 'tel', path: dataHeader);
   //queryParameters: {'subject': '*Username\'s MediHealth schedule'});
 
   if (!await launchUrl(calltoUri)) {
@@ -63,11 +63,11 @@ void openCall() async {
   }
 }
 
-Column userFieldIcon({
-  required String header_in,
-  required String content_in,
-  required IconData icon_in,
-}) {
+Column userFieldIcon(
+    {required String header_in,
+    required String content_in,
+    required IconData icon_in,
+    required String dataHeader}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -79,7 +79,9 @@ Column userFieldIcon({
           contactBy(
               icon_in: icon_in,
               ftr: () {
-                header_in == 'Email: ' ? openEmail() : openCall();
+                header_in == 'Email: '
+                    ? openEmail(dataHeader)
+                    : openCall(dataHeader);
               })
         ],
       )

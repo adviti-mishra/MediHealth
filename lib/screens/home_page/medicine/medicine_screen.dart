@@ -1,18 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/home_page/medicine/medicine_details.dart';
 import 'add_medicine.dart';
 import '../drawer_widget.dart';
 import 'medicine_widget.dart';
-import '../../../../utils/color_shades.dart';
 
 class MedicineScreen extends StatelessWidget {
-  const MedicineScreen({Key? key}) : super(key: key);
+  final String userID;
+
+  const MedicineScreen({required this.userID});
 
   RawMaterialButton addButton(BuildContext context) {
     return RawMaterialButton(
       child: Icon(
         Icons.add_circle_outline,
-        color: ColorShades.text1,
+        color: Theme.of(context).colorScheme.onPrimary,
         size: 60,
       ),
       shape: const CircleBorder(),
@@ -23,53 +24,67 @@ class MedicineScreen extends StatelessWidget {
     );
   }
 
-  RawMaterialButton medicineDetailsButton(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(
-        Icons.info,
-        color: ColorShades.text1,
-        size: 40,
-      ),
-      shape: const CircleBorder(),
-      onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const MedicineDetails()));
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorShades.primaryColor3,
-        drawer: const DrawerWidget(),
-        appBar: AppBar(
-          backgroundColor: ColorShades.primaryColor1,
-          // Menu button
-          leading: Builder(
-            builder: (ctx) {
-              return IconButton(
-                icon: Icon(Icons.menu_rounded, color: ColorShades.text1),
-                onPressed: () {
-                  Scaffold.of(ctx).openDrawer();
-                },
-              );
-            },
-          ),
-          // Your Schedule
-          title: FittedBox(
-                fit: BoxFit.contain,
-                child: Text('Your schedule',
-                  style: TextStyle(
-                      color: ColorShades.text1,
-                      fontSize: 20))),
-          // Add a medicine
-          actions: [addButton(context),medicineDetailsButton(context)],
+      backgroundColor: Theme.of(context).colorScheme.background,
+      drawer: const DrawerWidget(),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        // Menu button
+        leading: Builder(
+          builder: (ctx) {
+            return IconButton(
+              icon: Icon(Icons.menu_rounded, color:  Theme.of(context).colorScheme.onPrimary),
+              onPressed: () {
+                Scaffold.of(ctx).openDrawer();
+              },
+            );
+          },
         ),
-        body: ListView.builder(itemBuilder: (BuildContext context, int index) {
-          return const MedicineWidget();
-        }
-        )
-        );
+        // Your Schedule
+        title: FittedBox(
+            fit: BoxFit.contain,
+            child: Text('Your schedule',
+                style: TextStyle(color: Theme.of(context).colorScheme.onPrimary, fontSize: 20))),
+        // Add a medicine
+        actions: [addButton(context)],
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('user')
+              .doc(userID)
+              .collection('medicines')
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.connectionState == ConnectionState.active) {
+              if (snapshot.data!.docs.isNotEmpty) {
+                return ListView.builder(
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return MedicineWidget(
+                          uID: userID,
+                          docID: snapshot.data!.docs[index].id.toString(),
+                          name: snapshot.data!.docs[index]['name'],
+                          dosage: snapshot.data!.docs[index]['dosage'],
+                          //days: snapshot.data!.docs[index]['days'],
+                          times: snapshot.data!.docs[index]['times'],
+                          startDate: snapshot.data!.docs[index]['startDate'],
+                          endDate: snapshot.data!.docs[index]['endDate'],
+                          moreInfo: snapshot.data!.docs[index]['moreInfo']);
+                    });
+              }
+            }
+            return Center(
+              child: Text('No medicines have been added yet',
+              style: TextStyle(color:Theme.of(context).colorScheme.onBackground)),
+            );
+          }),
+    );
   }
 }
