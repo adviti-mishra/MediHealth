@@ -5,7 +5,6 @@ import 'package:practice_app/screens/drawer_screens/user_profile.dart';
 import 'package:practice_app/screens/drawer_screens/emergency_contacts/emergency_contact_screen.dart';
 import '../../utils/color_shades.dart';
 import '../drawer_screens/personal_notes/personal_note_screen.dart';
-import '../drawer_screens/statistics.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({Key? key}) : super(key: key);
@@ -84,11 +83,6 @@ class DrawerWidget extends StatelessWidget {
             builder: (context) => EmergencyContactScreen(userID: uid)));
   }
 
-  void navigatetoStatisticsScreen(context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const Statistics()));
-  }
-
   void navigatetoAccessibilityFeaturesScreen(context) {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const AccessibilityFeatures()));
@@ -126,12 +120,6 @@ class DrawerWidget extends StatelessWidget {
               navigatetoEmergencyContactScreen(context);
             }),
         // const Divider(thickness: 2.0, color: Colors.black),
-        drawerMenuOption(
-            label: "Statistics on medicine usage",
-            icon: Icons.auto_graph_rounded,
-            ftor: () {
-              navigatetoStatisticsScreen(context);
-            }),
         // const Divider(thickness: 2.0, color: Colors.black),
         drawerMenuOption(
             label: "Accessibility features",

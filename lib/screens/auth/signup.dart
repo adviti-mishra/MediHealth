@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:practice_app/screens/auth/login.dart';
+import 'package:practice_app/screens/auth/login/login_page.dart';
 import 'package:practice_app/screens/home_page/medicine/medicine_screen.dart';
 import '../../utils/utils_all.dart';
 import 'package:firebase_auth/firebase_auth.dart';
