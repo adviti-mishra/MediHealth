@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-in/values-in.xml",
+            "outputFile": "/Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-in/values-in.xml",
             "map": [
                 {
                     "source": "/Users/advitimishra/.gradle/caches/transforms-2/files-2.1/e220a32ca2be066bb9a75eda3346b92d/browser-1.4.0/res/values-in/values-in.xml",

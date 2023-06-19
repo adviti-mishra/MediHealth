@@ -13,8 +13,10 @@ Row navigate_to_forgotPassword(BuildContext context) {
                     builder: (context) => const ForgotPassword()));
           },
           // TO DO : forgot password? formatting
-          child: const Text('forgot password?')
-          )
+          child: const Text(
+            'forgot password?',
+            style: TextStyle(color: Colors.black),
+          ))
     ],
   );
 }

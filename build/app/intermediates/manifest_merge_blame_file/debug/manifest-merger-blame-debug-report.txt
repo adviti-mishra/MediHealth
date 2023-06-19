@@ -12,16 +12,16 @@
 12         to allow setting breakpoints, to provide hot reload, etc.
 13    -->
 14    <uses-permission android:name="android.permission.INTERNET" />
-14-->/Users/advitimishra/Documents/FLUTTER/Practice/practice_app/android/app/src/debug/AndroidManifest.xml:6:5-66
-14-->/Users/advitimishra/Documents/FLUTTER/Practice/practice_app/android/app/src/debug/AndroidManifest.xml:6:22-64
+14-->/Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/android/app/src/debug/AndroidManifest.xml:6:5-66
+14-->/Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/android/app/src/debug/AndroidManifest.xml:6:22-64
 15
 16    <queries>
-16-->[:flutter_tts] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-11:15
+16-->[:flutter_tts] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-11:15
 17        <intent>
-17-->[:flutter_tts] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-10:18
+17-->[:flutter_tts] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-10:18
 18            <action android:name="android.intent.action.TTS_SERVICE" />
-18-->[:flutter_tts] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-72
-18-->[:flutter_tts] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:9:21-69
+18-->[:flutter_tts] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-72
+18-->[:flutter_tts] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:9:21-69
 19        </intent>
 20    </queries>
 21
@@ -39,7 +39,7 @@
 25-->[com.google.android.gms:play-services-measurement:21.0.0] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/3b1d1e5571522f703c316a9309413648/jetified-play-services-measurement-21.0.0/AndroidManifest.xml:26:22-107
 26
 27    <application
-28        android:name="android.app.Application"
+28        android:name="io.flutter.app.FlutterMultiDexApplication"
 29        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 29-->[androidx.core:core:1.6.0] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/14b93615368c2249f1830e26ca064ab5/core-1.6.0/AndroidManifest.xml:24:18-86
 30        android:debuggable="true"
@@ -79,31 +79,31 @@
 64            android:value="2" />
 65
 66        <service
-66-->[:firebase_auth] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-12:19
+66-->[:firebase_auth] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-12:19
 67            android:name="com.google.firebase.components.ComponentDiscoveryService"
-67-->[:firebase_auth] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:8:18-89
+67-->[:firebase_auth] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:8:18-89
 68            android:directBootAware="true"
 68-->[com.google.firebase:firebase-common:20.1.1] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/0f67b2d2737c37bf1274c8f8df4996b1/jetified-firebase-common-20.1.1/AndroidManifest.xml:35:13-43
 69            android:exported="false" >
 69-->[com.google.firebase:firebase-auth:21.0.5] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/37271fa97da0c7d74a0f2501820cafef/jetified-firebase-auth-21.0.5/AndroidManifest.xml:66:13-37
 70            <meta-data
-70-->[:firebase_auth] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-11:85
+70-->[:firebase_auth] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-11:85
 71                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
-71-->[:firebase_auth] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:10:17-124
+71-->[:firebase_auth] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:10:17-124
 72                android:value="com.google.firebase.components.ComponentRegistrar" />
-72-->[:firebase_auth] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:11:17-82
+72-->[:firebase_auth] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:11:17-82
 73            <meta-data
-73-->[:cloud_firestore] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/cloud_firestore/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-11:85
+73-->[:cloud_firestore] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/cloud_firestore/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-11:85
 74                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
-74-->[:cloud_firestore] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/cloud_firestore/intermediates/library_manifest/debug/AndroidManifest.xml:10:17-134
+74-->[:cloud_firestore] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/cloud_firestore/intermediates/library_manifest/debug/AndroidManifest.xml:10:17-134
 75                android:value="com.google.firebase.components.ComponentRegistrar" />
-75-->[:cloud_firestore] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/cloud_firestore/intermediates/library_manifest/debug/AndroidManifest.xml:11:17-82
+75-->[:cloud_firestore] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/cloud_firestore/intermediates/library_manifest/debug/AndroidManifest.xml:11:17-82
 76            <meta-data
-76-->[:firebase_core] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-11:85
+76-->[:firebase_core] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-11:85
 77                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
-77-->[:firebase_core] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:10:17-124
+77-->[:firebase_core] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:10:17-124
 78                android:value="com.google.firebase.components.ComponentRegistrar" />
-78-->[:firebase_core] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:11:17-82
+78-->[:firebase_core] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:11:17-82
 79            <meta-data
 79-->[com.google.firebase:firebase-auth:21.0.5] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/37271fa97da0c7d74a0f2501820cafef/jetified-firebase-auth-21.0.5/AndroidManifest.xml:67:13-69:85
 80                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
@@ -131,13 +131,13 @@
 91        </service>
 92
 93        <activity
-93-->[:url_launcher_android] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-11:74
+93-->[:url_launcher_android] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-11:74
 94            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-94-->[:url_launcher_android] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-74
+94-->[:url_launcher_android] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-74
 95            android:exported="false"
-95-->[:url_launcher_android] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:10:13-37
+95-->[:url_launcher_android] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:10:13-37
 96            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-96-->[:url_launcher_android] /Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-71
+96-->[:url_launcher_android] /Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-71
 97
 98        <uses-library
 98-->[androidx.window:window:1.0.0-beta04] /Users/advitimishra/.gradle/caches/transforms-2/files-2.1/cea45e25bbe77c9713c39e234ccfd7bd/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40

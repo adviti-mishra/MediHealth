@@ -13,7 +13,7 @@ class MedicineScreen extends StatelessWidget {
     return RawMaterialButton(
       child: Icon(
         Icons.add_circle_outline,
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: Theme.of(context).colorScheme.primary,
         size: 60,
       ),
       shape: const CircleBorder(),
@@ -24,19 +24,19 @@ class MedicineScreen extends StatelessWidget {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       drawer: const DrawerWidget(),
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.onError,
         // Menu button
         leading: Builder(
           builder: (ctx) {
             return IconButton(
-              icon: Icon(Icons.menu_rounded, color:  Theme.of(context).colorScheme.onPrimary),
+              icon: Icon(Icons.menu_rounded,
+                  color: Theme.of(context).colorScheme.onPrimary),
               onPressed: () {
                 Scaffold.of(ctx).openDrawer();
               },
@@ -47,7 +47,9 @@ class MedicineScreen extends StatelessWidget {
         title: FittedBox(
             fit: BoxFit.contain,
             child: Text('Your schedule',
-                style: TextStyle(color: Theme.of(context).colorScheme.onPrimary, fontSize: 20))),
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: 20))),
         // Add a medicine
         actions: [addButton(context)],
       ),
@@ -82,7 +84,8 @@ class MedicineScreen extends StatelessWidget {
             }
             return Center(
               child: Text('No medicines have been added yet',
-              style: TextStyle(color:Theme.of(context).colorScheme.onBackground)),
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onBackground)),
             );
           }),
     );

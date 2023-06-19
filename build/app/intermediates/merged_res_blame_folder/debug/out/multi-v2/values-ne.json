@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/advitimishra/Documents/FLUTTER/Practice/practice_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-ne/values-ne.xml",
+            "outputFile": "/Users/advitimishra/Documents/FLUTTER/MediHealth/MediHealth/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-ne/values-ne.xml",
             "map": [
                 {
                     "source": "/Users/advitimishra/.gradle/caches/transforms-2/files-2.1/4a1e8147c3db656939cfc830651ce63e/jetified-play-services-basement-18.0.0/res/values-ne/values.xml",
