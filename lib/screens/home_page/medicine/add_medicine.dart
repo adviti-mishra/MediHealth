@@ -62,16 +62,20 @@ class _AddMedicine extends State<AddMedicine> {
     final isValid = _uploadMedicineFormKey.currentState!.validate();
     if (isValid) {
       final data = {
-          'id': _uid,
-          'name': _medicineNameTextController.text,
-          'dosage': _medicineDosageTextController.text,
-          'days': toListOfDays(values),
-          'times': _medicineTimeofDayTextController.text, // true - day selected
-          'startDate': _startDateTextController.text,
-          'endDate': _endDateTextController.text,
-          'moreInfo':_medicineDescriptionTextController.text
-        };
-      FirebaseFirestore.instance.collection('user').doc(_uid).collection('medicines').add(data);
+        'id': _uid,
+        'name': _medicineNameTextController.text,
+        'dosage': _medicineDosageTextController.text,
+        'days': toListOfDays(values),
+        'times': _medicineTimeofDayTextController.text, // true - day selected
+        'startDate': _startDateTextController.text,
+        'endDate': _endDateTextController.text,
+        'moreInfo': _medicineDescriptionTextController.text
+      };
+      FirebaseFirestore.instance
+          .collection('user')
+          .doc(_uid)
+          .collection('medicines')
+          .add(data);
       Navigator.canPop(context) ? Navigator.pop(context) : null;
     } else {}
   }
@@ -109,7 +113,8 @@ class _AddMedicine extends State<AddMedicine> {
           ),
           fillColor: Theme.of(context).colorScheme.surface,
           errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Theme.of(context).colorScheme.onError, width: 2.0),
+            borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.onError, width: 2.0),
             borderRadius: BorderRadius.circular(25.0),
           ),
         ),
@@ -202,11 +207,10 @@ class _AddMedicine extends State<AddMedicine> {
           child: mandatoryHeader(desiredHeader: 'Days of intake ')),
       WeekdaySelectorTheme(
         data: WeekdaySelectorThemeData(
-          
           color: Theme.of(context).colorScheme.onSurface,
           fillColor: Theme.of(context).colorScheme.surface,
           disabledFillColor: Theme.of(context).colorScheme.secondary,
-          selectedFillColor:  Theme.of(context).colorScheme.primary,
+          selectedFillColor: Theme.of(context).colorScheme.background,
         ),
         child: WeekdaySelector(
           onChanged: (int day) {
@@ -263,14 +267,22 @@ class _AddMedicine extends State<AddMedicine> {
           return Theme(
             data: Theme.of(context).copyWith(
               colorScheme: ColorScheme.light(
-                  primary:  Theme.of(context).colorScheme.primary, // header background color
-                  onPrimary:  Theme.of(context).colorScheme.onPrimary, // header text color
-                  onSurface:  Theme.of(context).colorScheme.onSecondary // body text color
+                  primary: Theme.of(context)
+                      .colorScheme
+                      .background, // header background color
+                  onPrimary: Theme.of(context)
+                      .colorScheme
+                      .primary, // header text color
+                  onSurface: Theme.of(context)
+                      .colorScheme
+                      .onSecondary // body text color
                   ),
               textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(
-                  primary:  Theme.of(context).colorScheme.primary // button text color
-                ),
+                    primary: Theme.of(context)
+                        .colorScheme
+                        .background // button text color
+                    ),
               ),
             ),
             child: child!,
@@ -309,14 +321,22 @@ class _AddMedicine extends State<AddMedicine> {
           return Theme(
             data: Theme.of(context).copyWith(
               colorScheme: ColorScheme.light(
-                  primary: Theme.of(context).colorScheme.primary, // header background color
-                  onPrimary: Theme.of(context).colorScheme.onPrimary, // header text color
-                  onSurface: Theme.of(context).colorScheme.onSecondary// body text color
+                  primary: Theme.of(context)
+                      .colorScheme
+                      .background, // header background color
+                  onPrimary: Theme.of(context)
+                      .colorScheme
+                      .primary, // header text color
+                  onSurface: Theme.of(context)
+                      .colorScheme
+                      .onSecondary // body text color
                   ),
               textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(
-                  primary: Theme.of(context).colorScheme.primary, // button text color
-                ),
+                    primary: Theme.of(context)
+                        .colorScheme
+                        .background // button text color
+                    ),
               ),
             ),
             child: child!,
@@ -347,7 +367,7 @@ class _AddMedicine extends State<AddMedicine> {
   MaterialButton uploadMedicineButton() {
     return MaterialButton(
       onPressed: _uploadMedicineForm,
-      color: Theme.of(context).colorScheme.primary,
+      color: Theme.of(context).colorScheme.background,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -357,7 +377,7 @@ class _AddMedicine extends State<AddMedicine> {
             Text(
               'Add medicine ',
               style: TextStyle(
-                color:  Theme.of(context).colorScheme.onPrimary,
+                color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
@@ -367,7 +387,7 @@ class _AddMedicine extends State<AddMedicine> {
             ),
             Icon(
               Icons.upload_file_outlined,
-              color:  Theme.of(context).colorScheme.onPrimary,
+              color: Theme.of(context).colorScheme.primary,
             )
           ],
         ),
@@ -382,9 +402,10 @@ class _AddMedicine extends State<AddMedicine> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: FittedBox(
-                fit: BoxFit.contain,
-                child: Text('Add a medicine',
-                style: TextStyle(color: Theme.of(context).colorScheme.onPrimary))),
+            fit: BoxFit.contain,
+            child: Text('Add a medicine',
+                style:
+                    TextStyle(color: Theme.of(context).colorScheme.onPrimary))),
         leading: Builder(
           builder: (ctx) {
             return IconButton(
@@ -401,7 +422,8 @@ class _AddMedicine extends State<AddMedicine> {
         elevation: 10,
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: Theme.of(context).colorScheme.onSurface, width: 2),
+          side: BorderSide(
+              color: Theme.of(context).colorScheme.onSurface, width: 2),
           borderRadius: BorderRadius.circular(10),
         ),
         color: Theme.of(context).colorScheme.surface,
@@ -412,21 +434,20 @@ class _AddMedicine extends State<AddMedicine> {
             Padding(
                 padding: const EdgeInsets.only(top: 50, right: 10, left: 10),
                 child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: audio(
-                          'Please enter the following fields :  Name: , Dosage: , Days of intake: ,  Times of day: , the start date of your medication, the end date of your medication, and any additional information you may have',
-                          flutterTts),
-                    )
-                    ),
+                  alignment: Alignment.bottomLeft,
+                  child: audio(
+                      'Please enter the following fields :  Name: , Dosage: , Days of intake: ,  Times of day: , the start date of your medication, the end date of your medication, and any additional information you may have',
+                      flutterTts),
+                )),
             Padding(
               padding: const EdgeInsets.only(top: 50, right: 10, left: 10),
               child: Align(
                 alignment: Alignment.bottomLeft,
                 child: Text('Medicine Information',
-                                style: TextStyle(
-                                    color: Theme.of(context).colorScheme.onSurface,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 40)),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40)),
               ),
             ),
             const SizedBox(height: 10),

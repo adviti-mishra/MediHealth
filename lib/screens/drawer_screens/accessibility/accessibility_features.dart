@@ -11,7 +11,9 @@ class _AccessibilityFeatures extends State<AccessibilityFeatures> {
   Column accessibilityContent() {
     return Column(
       children: const [
-        Text('1. color schemes/font size adjustment for various visibility-related disabilities,'),
+        Text('To implement in main app: '),
+        Text(
+            '1. color schemes/font size adjustment for various visibility-related disabilities,'),
         Text('2. text-to-speech button for audio disability,'),
         Text('3. Multiple languages'),
       ],
@@ -24,10 +26,8 @@ class _AccessibilityFeatures extends State<AccessibilityFeatures> {
       appBar: AppBar(
         backgroundColor: ColorShades.primaryColor1,
         title: Center(
-            child: Text('Accessibility features',
-                style: TextStyle(
-                    color: ColorShades.text1,
-                    fontSize: 40))),
+            child: Text('Accessibility',
+                style: TextStyle(color: ColorShades.text1, fontSize: 40))),
         leading: Builder(
           builder: (ctx) {
             return IconButton(

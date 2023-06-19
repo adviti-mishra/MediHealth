@@ -47,12 +47,14 @@ class _MedicineDetailsState extends State<MedicineDetails> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.primary,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(60),
                     topRight: Radius.circular(60),
                   ),
-                  border: Border.all(color: Theme.of(context).colorScheme.onSecondary, width: 2)),
+                  border: Border.all(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      width: 2)),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 // constrain height of List [Email, Password]
@@ -120,13 +122,13 @@ class _MedicineDetailsState extends State<MedicineDetails> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Theme.of(context).colorScheme.onError,
           // Back button
           leading: Builder(
             builder: (ctx) {
               return IconButton(
                 icon: Icon(Icons.arrow_back_ios_new_outlined,
-                    color: Theme.of(context).colorScheme.onPrimary),
+                    color: Theme.of(context).colorScheme.primary),
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
@@ -142,7 +144,8 @@ class _MedicineDetailsState extends State<MedicineDetails> {
           title: FittedBox(
               fit: BoxFit.contain,
               child: Text('Medicine details',
-                  style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)))),
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary)))),
       body: medicineDetails(),
     );
   }
