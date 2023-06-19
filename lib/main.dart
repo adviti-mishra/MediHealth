@@ -29,9 +29,9 @@ class MyApp extends StatelessWidget {
                         child: Center(child: CircularProgressIndicator()))));
           } else {
             return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'Flutter Practice app',
-              theme: ThemeData(
+                debugShowCheckedModeBanner: false,
+                title: 'Flutter Practice app',
+                theme: ThemeData(
                   fontFamily: 'Arial',
                   /*
                   colorScheme:
@@ -51,14 +51,14 @@ class MyApp extends StatelessWidget {
                       ),
                       ColorBlindnessType.tritanopia)),
                       */
-              
+
                   colorScheme: const ColorScheme(
-                    primary: Color(0xFFDC143C), //defines primary
-                    secondary: Colors.white,
+                    primary: Colors.white, //defines primary
+                    secondary: Color(0xF102542),
                     background: Color(0xFF267AA0),
                     surface: Colors.white,
                     error: Colors.black,
-                    onPrimary: Colors.white,
+                    onPrimary: Colors.black,
                     onSecondary: Colors.black,
                     onSurface: Colors.black,
                     onBackground: Colors.white,
@@ -66,9 +66,8 @@ class MyApp extends StatelessWidget {
                     brightness: Brightness.light,
                   ),
                 ),
-              
-              home: const UserState() // const NotificationInfo(), // 
-            );
+                home: const UserState() // const NotificationInfo(), //
+                );
           }
         });
   }

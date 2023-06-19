@@ -33,17 +33,17 @@ class _LoginState extends State<Login> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.background,
       ),
       child: Column(
         children: [
-          verticalSpace(40),
+          verticalSpace(20),
           welcomeBackMessage(context),
-          verticalSpace(40),
+          verticalSpace(20),
           getInfoTile(
               emailPassword: emailPassword(),
               forgotPassword: navigate_to_forgotPassword(context)),
-          verticalSpace(80),
+          verticalSpace(20),
           loginButton(),
         ],
       ),
