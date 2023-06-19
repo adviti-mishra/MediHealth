@@ -191,11 +191,28 @@ class _LoginState extends State<Login> {
   MaterialButton loginButton() {
     return MaterialButton(
       onPressed: _submitLoginForm,
+      color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [],
+          children: [
+            const Text(
+              'Login',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            const Icon(
+              Icons.login,
+              color: Colors.black,
+            )
+          ],
         ),
       ),
     );

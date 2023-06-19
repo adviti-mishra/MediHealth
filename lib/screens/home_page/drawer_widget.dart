@@ -68,8 +68,8 @@ class DrawerWidget extends StatelessWidget {
     final User? user = _auth.currentUser;
     final String uid = user!.uid;
 
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => UserProfile(userID: uid)));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => UserProfile(userID: uid)));
   }
 
   void navigatetoEmergencyContactScreen(context) {
@@ -88,12 +88,14 @@ class DrawerWidget extends StatelessWidget {
         MaterialPageRoute(builder: (context) => const AccessibilityFeatures()));
   }
 
-  void navigatetoPersonalNotesScreen(context){
+  void navigatetoPersonalNotesScreen(context) {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = _auth.currentUser;
     final String uid = user!.uid;
-     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => PersonalNoteScreen(userID: uid)));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => PersonalNoteScreen(userID: uid)));
   }
 
   @override
@@ -106,12 +108,12 @@ class DrawerWidget extends StatelessWidget {
           child: Image.asset('assets/images/MediHealth_logo.png'),
         ),
         // const Divider(thickness: 2.0, color: Colors.black),
-        drawerMenuOption(
-            label: "Account",
-            icon: Icons.person,
-            ftor: () {
-              navigatetoUserProfileScreen(context);
-            }),
+        //drawerMenuOption(
+        //  label: "Account",
+        // icon: Icons.person,
+        // ftor: () {
+        //   navigatetoUserProfileScreen(context);
+        // }),
         // const Divider(thickness: 2.0, color: Colors.black),
         drawerMenuOption(
             label: "Emergency contacts",
@@ -122,13 +124,13 @@ class DrawerWidget extends StatelessWidget {
         // const Divider(thickness: 2.0, color: Colors.black),
         // const Divider(thickness: 2.0, color: Colors.black),
         drawerMenuOption(
-            label: "Accessibility features",
+            label: "Accessibility",
             icon: Icons.settings,
             ftor: () {
               navigatetoAccessibilityFeaturesScreen(context);
             }),
-         // const Divider(thickness: 2.0, color: Colors.black),
-          drawerMenuOption(
+        // const Divider(thickness: 2.0, color: Colors.black),
+        drawerMenuOption(
             label: "Personal note page",
             icon: Icons.note,
             ftor: () {
