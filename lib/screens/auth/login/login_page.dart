@@ -196,8 +196,8 @@ class _LoginState extends State<Login> {
         padding: const EdgeInsets.all(10.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const Text(
+          children: const [
+            Text(
               'Login',
               style: TextStyle(
                 color: Colors.black,
@@ -205,10 +205,10 @@ class _LoginState extends State<Login> {
                 fontSize: 20,
               ),
             ),
-            const SizedBox(
+            SizedBox(
               width: 10,
             ),
-            const Icon(
+            Icon(
               Icons.login,
               color: Colors.black,
             )
