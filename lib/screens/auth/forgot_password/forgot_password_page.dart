@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:practice_app/screens/auth/forgot_password/forgot_password_message.dart';
+import 'package:practice_app/screens/auth/forgot_password/forgot_password_tile.dart';
+import 'package:practice_app/screens/auth/login/login_page.dart';
 import '../../../utils/utils_all.dart';
+import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
+
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -9,6 +13,7 @@ class ForgotPassword extends StatefulWidget {
   @override
   _ForgotPasswordState createState() => _ForgotPasswordState();
 }
+
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   final TextEditingController _emailTextController = TextEditingController();
@@ -23,15 +28,30 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
 // TO DO : implement forgotPasswordPageContent similar to loginPageContent
   Container forgetPasswordPageContent() {
-    return Container();
-  }
-
-  // TO DO : implement submitButton similar to loginButton
-  MaterialButton submitButton() {
-    return MaterialButton(
-      onPressed: _submitForgetPasswordForm,
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+      ),
+      child: Column(
+        children: [
+          verticalSpace(100),
+          welcomeBackMessage(context),
+          verticalSpace(20),
+          forgotPasswordTile(
+            recoveryEmail: email(),
+            submitButton: submitButton()
+          ),
+          verticalSpace(20),
+          backLoginButton(),
+        ],
+      ),
     );
   }
+
+  ///
+  /// FORGOT PASSWORD FORM
+  ///
 
   @override
   void dispose() {
@@ -44,6 +64,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     if (isValid) {}
   }
 
+  // Recovery email
   Form email() {
     return Form(
       key: _ForgetPasswordFormKey,
@@ -55,7 +76,27 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return Column(children: [
       Align(
           alignment: Alignment.bottomLeft,
-          child: mandatoryHeader(desiredHeader: "Email: ")),
+          child: Row(
+            children: [
+              Text(
+                "Email",
+                style: TextStyle(
+                  color: ColorShades.maize,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                "*", // Mandatory indicator
+                style: TextStyle(
+                  color: Colors.red, // Indicator color
+                  fontSize: 30,
+                ),
+              ),
+            ]
+          )
+        ),
+      verticalSpace(10),     
       emailValidation()
     ]);
   }
@@ -65,7 +106,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       keyboardType: TextInputType.emailAddress,
       controller: _emailTextController,
       validator: (email) {
-        if (email!.isEmpty || !email.contains('@')) {
+        if (email!.isEmpty || !email.contains('@') || !email.contains('.')) {
           return "Please enter a valid email address";
         } else {
           return null;
@@ -73,20 +114,69 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       },
       style: TextStyle(color: ColorShades.text2),
       decoration: InputDecoration(
-        hintText: 'Format: someone@example.com',
+        hintText: 'name@example.com',
         hintStyle:
             TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorShades.text1, width: 2.0),
-          borderRadius: BorderRadius.circular(25.0),
-        ),
-        fillColor: ColorShades.text1,
+        border: OutlineInputBorder(),
+        fillColor: Colors.white,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
-          borderRadius: BorderRadius.circular(25.0),
+        ),
+        errorStyle: TextStyle(
+          color: Colors.red,
+          fontFamily: 'WorkSans',  // Set the desired color for the error text
         ),
       ),
+    cursorColor: Colors.black,
+    );
+  }
+
+
+  // TO DO : implement submitButton similar to loginButton
+  MaterialButton submitButton() {
+    return MaterialButton(
+      onPressed: _submitForgetPasswordForm,
+      color: ColorShades.maize,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              'Submit',
+              style: TextStyle(
+                color: Color(0xff102542),
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  TextButton backLoginButton() {
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Login()
+          )
+        );
+      },
+      child: const Text(
+        'Return to Login',
+        style: TextStyle(
+          color: Color(0xff102542),
+          fontSize: 24,
+        ),
+      )
     );
   }
 }

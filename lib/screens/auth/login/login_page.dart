@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:practice_app/screens/auth/forgot_password/forgot_password_page.dart';
 import '../../../utils/utils_all.dart';
 import 'package:practice_app/screens/auth/login/login_data_tile.dart';
 import 'package:practice_app/screens/auth/login/login_message.dart';
-import 'package:practice_app/screens/auth/login/forgot_password_link.dart';
+import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
+
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -33,18 +35,22 @@ class _LoginState extends State<Login> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: Colors.white,
       ),
       child: Column(
         children: [
-          verticalSpace(20),
+          verticalSpace(80),
           welcomeBackMessage(context),
           verticalSpace(20),
           getInfoTile(
-              emailPassword: emailPassword(),
-              forgotPassword: navigate_to_forgotPassword(context)),
+            emailPassword: emailPassword(),
+            loginButton: loginButton()
+
+          ),
           verticalSpace(20),
-          loginButton(),
+          forgotButton(),
+          verticalSpace(20),
+          backWelcomeButton(),
         ],
       ),
     );
@@ -69,9 +75,11 @@ class _LoginState extends State<Login> {
       });
       try {
         await _auth.signInWithEmailAndPassword(
-            email: _emailTextController.text.trim().toLowerCase(),
-            password: _passwordTextController.text);
-      } catch (error) {
+          email: _emailTextController.text.trim().toLowerCase(),
+          password: _passwordTextController.text
+        );
+      } 
+      catch (error) {
         setState(() {
           _isLoading = false;
         });
@@ -94,7 +102,7 @@ class _LoginState extends State<Login> {
           // BLANK LINE
           verticalSpace(20),
           // Password field
-          passwordField(),
+          passwordField(),        
         ],
       ),
     );
@@ -102,12 +110,34 @@ class _LoginState extends State<Login> {
 
   // Email field
   Column emailField() {
-    return Column(children: [
-      Align(
+    return Column(
+      children: [
+        Align(
           alignment: Alignment.bottomLeft,
-          child: mandatoryHeader(desiredHeader: "email: ")),
-      emailValidation()
-    ]);
+          child: Row(
+            children: [
+              Text(
+                "Email",
+                style: TextStyle(
+                  color: ColorShades.maize,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                "*", // Mandatory indicator
+                style: TextStyle(
+                  color: Colors.red, // Indicator color
+                  fontSize: 30,
+                ),
+              ),
+            ]
+          )
+        ),
+        verticalSpace(10),
+        emailValidation(),
+      ],
+    );
   }
 
   // Email validation
@@ -116,39 +146,62 @@ class _LoginState extends State<Login> {
       keyboardType: TextInputType.emailAddress,
       controller: _emailTextController,
       validator: (email) {
-        if (email!.isEmpty || !email.contains('@')) {
+        if (email!.isEmpty || !email.contains('@') || !email.contains('@')) {
           return "Please enter a valid email address";
-        } else {
+        } 
+        else {
           return null;
         }
       },
       style: TextStyle(color: ColorShades.text2),
       decoration: InputDecoration(
-        hintText: 'Format: someone@example.com',
+        hintText: 'name@example.com',
         hintStyle:
             TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorShades.text1, width: 2.0),
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        fillColor: const Color(0xFFCDD7D6),
+        border: OutlineInputBorder(),
+        fillColor: Colors.white,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
-          borderRadius: BorderRadius.circular(15.0),
+        ),
+        errorStyle: TextStyle(
+          color: Colors.red, // Set the desired color for the error text
         ),
       ),
+    cursorColor: Colors.black,
     );
   }
 
   // Password field
   Column passwordField() {
-    return Column(children: [
-      Align(
+    return Column(
+      children: [
+        Align(
           alignment: Alignment.bottomLeft,
-          child: mandatoryHeader(desiredHeader: "password: ")),
-      passwordValidation()
-    ]);
+          child: Row(
+            children: [
+              Text(
+                "Password",
+                style: TextStyle(
+                  color: ColorShades.maize,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                "*", // Mandatory indicator
+                style: TextStyle(
+                  color: Colors.red, // Indicator color
+                  fontSize: 30,
+                ),
+              ),
+            ]
+          )
+        ),
+        verticalSpace(10),
+        passwordValidation(),
+      ],
+    );
   }
 
   // Password validation
@@ -159,7 +212,7 @@ class _LoginState extends State<Login> {
       controller: _passwordTextController,
       validator: (value) {
         if (value!.isEmpty || value.length < 8) {
-          return "Please enter a password containing more than 8 characters";
+          return "Please enter password with at least 8 characters";
         } else {
           return null;
         }
@@ -175,15 +228,16 @@ class _LoginState extends State<Login> {
           child: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
         ),
         filled: true,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        fillColor: const Color(0xFFCDD7D6),
+        border: OutlineInputBorder(),
+        fillColor: Colors.white,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
-          borderRadius: BorderRadius.circular(15.0),
+        ),
+        errorStyle: TextStyle(
+          color: Colors.red, // Set the desired color for the error text
         ),
       ),
+      cursorColor: Colors.black,
     );
   }
 
@@ -191,16 +245,16 @@ class _LoginState extends State<Login> {
   MaterialButton loginButton() {
     return MaterialButton(
       onPressed: _submitLoginForm,
-      color: Colors.white,
+      color: ColorShades.maize,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(20.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Text(
-              'Login',
+              'Sign In',
               style: TextStyle(
-                color: Colors.black,
+                color: Color(0xff102542),
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
@@ -210,11 +264,54 @@ class _LoginState extends State<Login> {
             ),
             Icon(
               Icons.login,
-              color: Colors.black,
+              color: Color(0xff102542),
             )
           ],
         ),
       ),
+    );
+  }
+
+  // TO DO : implement the forgot Button
+  TextButton forgotButton() {
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ForgotPassword()
+          )
+        );
+      },
+      // TO DO : forgot password? formatting
+      child: const Text(
+        'Forgot Password?',
+        style: TextStyle(
+          color: Color(0xff102542),
+          fontSize: 24,
+        ),
+      )
+    );
+  }
+
+  // TO DO : implement the back to welcome Button
+  TextButton backWelcomeButton() {
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Welcome()
+          )
+        );
+      },
+      child: const Text(
+        'Back',
+        style: TextStyle(
+          color: Color(0xff102542),
+          fontSize: 24,
+        ),
+      )
     );
   }
 }
