@@ -12,12 +12,12 @@ Column welcomeMessage(BuildContext context) {
       ),
       SizedBox(height: 20,),
       Text(
-        'Lets heal Together!',
+        'Lets Heal Together',
         textAlign: TextAlign.center,
         style: TextStyle(
             fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
       ),
-      SizedBox(height: 10,),
+      SizedBox(height: 20,),
       Text(
         'Welcome!',
         textAlign: TextAlign.center,

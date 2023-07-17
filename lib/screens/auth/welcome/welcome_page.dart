@@ -1,12 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/auth/forgot_password/forgot_password_page.dart';
-import 'package:practice_app/screens/auth/login/login_page.dart';
-import 'package:practice_app/screens/auth/signup/signup.dart';
 import '../../../utils/utils_all.dart';
 import 'package:practice_app/screens/auth/welcome/welcome_tile.dart';
 import 'package:practice_app/screens/auth/welcome/welcome_message.dart';
-// to do import the welcome page
+import 'package:practice_app/screens/auth/login/login_page.dart';
+import 'package:practice_app/screens/auth/signup/signup.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);

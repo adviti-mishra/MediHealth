@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'package:practice_app/screens/auth/login/login_page.dart';
-import 'package:practice_app/screens/home_page/medicine/medicine_screen.dart';
-import '../../../utils/utils_all.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import '../../../utils/utils_all.dart';
+import 'package:flutter/gestures.dart';
+import 'package:practice_app/screens/auth/signup/signup_message.dart';
+import 'package:practice_app/screens/auth/signup/signup_tile.dart';
+import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
+import 'package:practice_app/screens/auth/login/login_page.dart';
+
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -16,6 +19,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _rePasswordTextController = TextEditingController();
   final TextEditingController _nameTextController = TextEditingController();
   final TextEditingController _phoneNumberTextController =
       TextEditingController();
@@ -25,6 +29,33 @@ class _SignUpState extends State<SignUp> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _isLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: signUpPageContent(context),
+    );
+  }
+
+  Container signUpPageContent(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+      ),
+      child: Column(
+        children: [
+          verticalSpace(80),
+          welcomeInMessage(context),
+          signUpTile(
+            nameEmailPassword: nameEmailPassword(),
+            createButton: createButton()
+          ),
+          loginPageButton(),
+        ],
+      ),
+    );
+  }
 
   @override
   void dispose() {
@@ -80,67 +111,8 @@ class _SignUpState extends State<SignUp> {
     });
   }
 
-// ________________________________________________________________________
-// Login                              Don't have an account? Register here
-// ________________________________________________________________________
-
-  Column signUpWelcome() {
-    return Column(
-      children: [
-        // Login
-        Center(
-            child: Text('Sign Up',
-                style: TextStyle(
-                  color: ColorShades.text1,
-                  fontSize: 60,
-                ))),
-        Center(
-          child: Text('Welcome to MediHealth!',
-              style: TextStyle(
-                color: ColorShades.text1,
-                fontSize: 30,
-              )),
-        ),
-        Center(
-          child: Text('Please fill the following',
-              style: TextStyle(
-                color: ColorShades.text1,
-                fontSize: 30,
-              )),
-        ),
-      ],
-    );
-  }
-
-  RichText loginHere() {
-    return RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-              text: 'Already have an account?',
-              style: TextStyle(
-                  color: ColorShades.text2,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20)),
-          const TextSpan(text: '    '),
-          TextSpan(
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Login()));
-                },
-              text: 'Login here',
-              style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  color: ColorShades.text2,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20))
-        ],
-      ),
-    );
-  }
-
-  Form firstnameLastnameEmailPassword() {
+// Name, Email, Password
+  Form nameEmailPassword() {
     return Form(
       key: _signUpFormKey,
       child: Column(
@@ -148,14 +120,19 @@ class _SignUpState extends State<SignUp> {
           // Name
           nameField(),
           // BLANK LINE
-          verticalSpace(20),
+          verticalSpace(5),
           // Email
           emailField(),
           // BLANK LINE
-          verticalSpace(20),
+          verticalSpace(5),
           // Password
           passwordField(),
-          verticalSpace(20),
+          // BLANK LINE
+          verticalSpace(5),
+          // Password
+          rePasswordField(),
+          // BLANK LINE
+          verticalSpace(5),
           // Phone number
           phoneNumberField(),
         ],
@@ -163,15 +140,29 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
+  // Name field
   Column nameField() {
     return Column(children: [
       Align(
-          alignment: Alignment.bottomLeft,
-          child: mandatoryHeader(desiredHeader: "Name: ")),
-      nameValidation()
+        alignment: Alignment.bottomLeft,
+        child: Row(
+          children: [
+            Text(
+              "Full Name",
+              style: TextStyle(
+                color: ColorShades.maize,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ]
+        )
+      ),
+      nameValidation(),
     ]);
   }
-
+  
+  // Name validation
   TextFormField nameValidation() {
     return TextFormField(
       keyboardType: TextInputType.name,
@@ -185,28 +176,46 @@ class _SignUpState extends State<SignUp> {
       },
       style: TextStyle(color: ColorShades.text2),
       decoration: InputDecoration(
+        hintText: 'FirstName LastName',
+        hintStyle:
+            TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25.0),
-        ),
-        fillColor: ColorShades.text1,
+        border: OutlineInputBorder(),
+        fillColor: Colors.white,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
-          borderRadius: BorderRadius.circular(25.0),
+        ),
+        errorStyle: TextStyle(
+          color: Colors.red,
         ),
       ),
+    cursorColor: Colors.black,
     );
   }
 
+  // Phone Number
   Column phoneNumberField() {
     return Column(children: [
       Align(
-          alignment: Alignment.bottomLeft,
-          child: mandatoryHeader(desiredHeader: "Phone number: ")),
-      phoneNumberValidation()
+        alignment: Alignment.bottomLeft,
+        child: Row(
+          children: [
+            Text(
+              "Phone Number",
+              style: TextStyle(
+                color: ColorShades.maize,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ]
+        )
+      ),
+      phoneNumberValidation(),
     ]);
   }
 
+  // Phone Number Validation
   TextFormField phoneNumberValidation() {
     return TextFormField(
       keyboardType: TextInputType.name,
@@ -220,26 +229,44 @@ class _SignUpState extends State<SignUp> {
       },
       style: TextStyle(color: ColorShades.text2),
       decoration: InputDecoration(
+        hintText: '##########',
+        hintStyle:
+            TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25.0),
-        ),
-        fillColor: ColorShades.text1,
+        border: OutlineInputBorder(),
+        fillColor: Colors.white,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
-          borderRadius: BorderRadius.circular(25.0),
+        ),
+        errorStyle: TextStyle(
+          color: Colors.red,
         ),
       ),
+    cursorColor: Colors.black,
     );
   }
 
   Column emailField() {
-    return Column(children: [
-      Align(
+    return Column(
+      children: [
+        Align(
           alignment: Alignment.bottomLeft,
-          child: mandatoryHeader(desiredHeader: "Email: ")),
-      emailValidation()
-    ]);
+          child: Row(
+            children: [
+              Text(
+                "Email",
+                style: TextStyle(
+                  color: ColorShades.maize,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ]
+          )
+        ),
+        emailValidation(),
+      ],
+    );
   }
 
   TextFormField emailValidation() {
@@ -255,156 +282,192 @@ class _SignUpState extends State<SignUp> {
       },
       style: TextStyle(color: ColorShades.text2),
       decoration: InputDecoration(
-        hintText: 'Format: someone@example.com',
+        hintText: 'name@example.com',
         hintStyle:
             TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorShades.text1, width: 2.0),
-          borderRadius: BorderRadius.circular(25.0),
-        ),
-        fillColor: ColorShades.text1,
+        border: OutlineInputBorder(),
+        fillColor: Colors.white,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
-          borderRadius: BorderRadius.circular(25.0),
+        ),
+        errorStyle: TextStyle(
+          color: Colors.red,
         ),
       ),
+      cursorColor: Colors.black,
     );
   }
 
   Column passwordField() {
-    return Column(children: [
-      Align(
+    return Column(
+      children: [
+        Align(
           alignment: Alignment.bottomLeft,
-          child: mandatoryHeader(desiredHeader: "Password: ")),
-      passwordValidation()
-    ]);
+          child: Row(
+            children: [
+              Text(
+                "Password",
+                style: TextStyle(
+                  color: ColorShades.maize,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ]
+          )
+        ),
+        passwordValidation(),
+      ],
+    );
   }
 
   TextFormField passwordValidation() {
     return TextFormField(
-      obscureText: _obscureText,
       keyboardType: TextInputType.visiblePassword,
       controller: _passwordTextController,
       validator: (value) {
         if (value!.isEmpty || value.length < 8) {
-          return "Please enter a password containing more than 8 characters";
+          return "Please enter password with at least 8 characters";
         } else {
           return null;
         }
       },
       style: TextStyle(color: ColorShades.text2),
       decoration: InputDecoration(
-        suffixIcon: GestureDetector(
-          onTap: () {
-            setState(() {
-              _obscureText = !_obscureText;
-            });
-          },
-          child: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
-        ),
         filled: true,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25.0),
-        ),
-        fillColor: ColorShades.text1,
+        border: OutlineInputBorder(),
+        fillColor: Colors.white,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
-          borderRadius: BorderRadius.circular(25.0),
+        ),
+        errorStyle: TextStyle(
+          color: Colors.red,
+        ),
+      ),
+      cursorColor: Colors.black,
+    );
+  }
+
+  Column rePasswordField() {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.bottomLeft,
+          child: Row(
+            children: [
+              Text(
+                "Repeat Password",
+                style: TextStyle(
+                  color: ColorShades.maize,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ]
+          )
+        ),
+        rePasswordValidation(),
+      ],
+    );
+  }
+
+  TextFormField rePasswordValidation() {
+    return TextFormField(
+      keyboardType: TextInputType.visiblePassword,
+      controller: _rePasswordTextController,
+      validator: (value) {
+        if (value!.isEmpty || value != _passwordTextController) {
+          return "Please make sure passwords match";
+        } else {
+          return null;
+        }
+      },
+      style: TextStyle(color: ColorShades.text2),
+      decoration: InputDecoration(
+        filled: true,
+        border: OutlineInputBorder(),
+        fillColor: Colors.white,
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+        ),
+        errorStyle: TextStyle(
+          color: Colors.red,
+        ),
+      ),
+      cursorColor: Colors.black,
+    );
+  }
+
+  MaterialButton createButton() {
+    return MaterialButton(
+      onPressed: _submitSignUpForm,
+      color: ColorShades.maize,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              'Create Account',
+              style: TextStyle(
+                color: Color(0xff102542),
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Icon(
+              Icons.login,
+              color: Color(0xff102542),
+            )
+          ],
         ),
       ),
     );
   }
 
-  Widget signUpButton() {
-    return _isLoading
-        ? Center(
-            child: Container(
-                width: 70,
-                height: 70,
-                child: const CircularProgressIndicator()))
-        : MaterialButton(
-            onPressed: _submitSignUpForm,
-            color: ColorShades.primaryColor1,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Sign up',
-                    style: TextStyle(
-                      color: ColorShades.text1,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Icon(
-                    Icons.person_add,
-                    color: ColorShades.text1,
-                  )
-                ],
-              ),
-            ),
-          );
-  }
-
-  Container signUpPageContent() {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(color: ColorShades.primaryColor3
-          //border: Border.all(color: Colors.black),
-          ),
-      child: Column(
-        children: [
-          verticalSpace(60),
-          signUpWelcome(),
-          verticalSpace(40),
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                  color: ColorShades.primaryColor2,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(60),
-                      topRight: Radius.circular(60))),
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: SizedBox(
-                    height: 600, // constrain height of List [Email, Password]
-                    child: ListView(
-                      children: [
-                        verticalSpace(20),
-                        // Already have an account? Login here
-                        Center(child: loginHere()),
-                        verticalSpace(20),
-                        // First name, Last name, Email, Password
-                        firstnameLastnameEmailPassword(),
-                        // *******************************************************
-                        verticalSpace(40),
-                        // Sign Up button
-                        signUpButton(),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+  // Login Page Button
+  TextButton loginPageButton() {
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Login()
+          )
+        );
+      },
+      child: const Text(
+        "Already have an account? Login",
+        style: TextStyle(
+          color: Color(0xff102542),
+          fontSize: 20,
+        ),
+      )
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: signUpPageContent(),
+  // Back Button
+  TextButton backWelcomeButton() {
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Welcome()
+          )
+        );
+      },
+      child: const Text(
+        "Back",
+        style: TextStyle(
+          color: Color(0xff102542),
+          fontSize: 24,
+        ),
+      )
     );
   }
 }

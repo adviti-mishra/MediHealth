@@ -1,11 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
+import '../../../utils/utils_all.dart';
 import 'package:practice_app/screens/auth/forgot_password/forgot_password_message.dart';
 import 'package:practice_app/screens/auth/forgot_password/forgot_password_tile.dart';
 import 'package:practice_app/screens/auth/login/login_page.dart';
-import '../../../utils/utils_all.dart';
-import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
-
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -19,6 +17,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   final TextEditingController _emailTextController = TextEditingController();
   final _ForgetPasswordFormKey = GlobalKey<FormState>();
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +27,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
-// TO DO : implement forgotPasswordPageContent similar to loginPageContent
+// Forgot Password Page Content
   Container forgetPasswordPageContent() {
     return Container(
       width: double.infinity,
@@ -35,7 +36,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       ),
       child: Column(
         children: [
-          verticalSpace(100),
+          verticalSpace(200),
           welcomeBackMessage(context),
           verticalSpace(20),
           forgotPasswordTile(
@@ -59,9 +60,27 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     _emailTextController.dispose();
   }
 
-  void _submitForgetPasswordForm() {
+  void _submitForgetPasswordForm() async{
     final isValid = _ForgetPasswordFormKey.currentState!.validate();
-    if (isValid) {}
+    if (isValid) {
+      setState(() {
+        _isLoading = true;
+      });
+      try {
+        await _auth.sendPasswordResetEmail(
+          email: _emailTextController.text.trim().toLowerCase(),
+        );
+      } 
+      catch (error) {
+        setState(() {
+          _isLoading = false;
+        });
+        errorPopup(context, error.toString());
+      }
+    }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   // Recovery email
@@ -84,13 +103,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   color: ColorShades.maize,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                "*", // Mandatory indicator
-                style: TextStyle(
-                  color: Colors.red, // Indicator color
-                  fontSize: 30,
                 ),
               ),
             ]
@@ -125,7 +137,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
         errorStyle: TextStyle(
           color: Colors.red,
-          fontFamily: 'WorkSans',  // Set the desired color for the error text
         ),
       ),
     cursorColor: Colors.black,

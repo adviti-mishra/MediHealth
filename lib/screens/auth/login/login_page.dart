@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/auth/forgot_password/forgot_password_page.dart';
+import 'package:practice_app/screens/auth/signup/signup.dart';
 import '../../../utils/utils_all.dart';
 import 'package:practice_app/screens/auth/login/login_data_tile.dart';
 import 'package:practice_app/screens/auth/login/login_message.dart';
 import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
-
+import 'package:practice_app/screens/auth/forgot_password/forgot_password_page.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -47,9 +47,11 @@ class _LoginState extends State<Login> {
             loginButton: loginButton()
 
           ),
-          verticalSpace(20),
+          verticalSpace(5),
           forgotButton(),
-          verticalSpace(20),
+          verticalSpace(5),
+          signupPageButton(),
+          verticalSpace(5),
           backWelcomeButton(),
         ],
       ),
@@ -124,13 +126,6 @@ class _LoginState extends State<Login> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
-                "*", // Mandatory indicator
-                style: TextStyle(
-                  color: Colors.red, // Indicator color
-                  fontSize: 30,
-                ),
-              ),
             ]
           )
         ),
@@ -165,7 +160,7 @@ class _LoginState extends State<Login> {
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
         ),
         errorStyle: TextStyle(
-          color: Colors.red, // Set the desired color for the error text
+          color: Colors.red,
         ),
       ),
     cursorColor: Colors.black,
@@ -186,13 +181,6 @@ class _LoginState extends State<Login> {
                   color: ColorShades.maize,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                "*", // Mandatory indicator
-                style: TextStyle(
-                  color: Colors.red, // Indicator color
-                  fontSize: 30,
                 ),
               ),
             ]
@@ -225,7 +213,7 @@ class _LoginState extends State<Login> {
               _obscureText = !_obscureText;
             });
           },
-          child: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+          child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
         ),
         filled: true,
         border: OutlineInputBorder(),
@@ -234,7 +222,7 @@ class _LoginState extends State<Login> {
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
         ),
         errorStyle: TextStyle(
-          color: Colors.red, // Set the desired color for the error text
+          color: Colors.red,
         ),
       ),
       cursorColor: Colors.black,
@@ -252,7 +240,7 @@ class _LoginState extends State<Login> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Text(
-              'Sign In',
+              'Login',
               style: TextStyle(
                 color: Color(0xff102542),
                 fontWeight: FontWeight.bold,
@@ -272,7 +260,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  // TO DO : implement the forgot Button
+  // Forgot Button
   TextButton forgotButton() {
     return TextButton(
       onPressed: () {
@@ -283,7 +271,6 @@ class _LoginState extends State<Login> {
           )
         );
       },
-      // TO DO : forgot password? formatting
       child: const Text(
         'Forgot Password?',
         style: TextStyle(
@@ -294,7 +281,28 @@ class _LoginState extends State<Login> {
     );
   }
 
-  // TO DO : implement the back to welcome Button
+  // Signup Page Button
+  TextButton signupPageButton() {
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const SignUp()
+          )
+        );
+      },
+      child: const Text(
+        "Don't have an account? Sign Up",
+        style: TextStyle(
+          color: Color(0xff102542),
+          fontSize: 24,
+        ),
+      )
+    );
+  }
+
+  // Back Button
   TextButton backWelcomeButton() {
     return TextButton(
       onPressed: () {
@@ -306,7 +314,7 @@ class _LoginState extends State<Login> {
         );
       },
       child: const Text(
-        'Back',
+        "Back",
         style: TextStyle(
           color: Color(0xff102542),
           fontSize: 24,
