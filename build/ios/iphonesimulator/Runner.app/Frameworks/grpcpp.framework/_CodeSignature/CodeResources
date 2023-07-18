@@ -6,31 +6,11 @@
 	<dict>
 		<key>Info.plist</key>
 		<data>
-		i0LkCBYjLnCRMMsh99ZjVW4xDHA=
+		5NsXmi88FeItq5xYdp8nesLBzG4=
 		</data>
 		<key>gRPCCertificates-Cpp.bundle/Info.plist</key>
 		<data>
-		f7cYpskBFvLtwwDEPCCMbSPzFL4=
-		</data>
-		<key>gRPCCertificates-Cpp.bundle/_CodeSignature/CodeDirectory</key>
-		<data>
-		zOTFuEg5Gp8weiB2hBBnhIAqxIw=
-		</data>
-		<key>gRPCCertificates-Cpp.bundle/_CodeSignature/CodeRequirements</key>
-		<data>
-		OnX22wWFKRSOFN1+obRynMCeyXM=
-		</data>
-		<key>gRPCCertificates-Cpp.bundle/_CodeSignature/CodeRequirements-1</key>
-		<data>
-		7TBFNUctN6m6RCSzUfWoOedqrLo=
-		</data>
-		<key>gRPCCertificates-Cpp.bundle/_CodeSignature/CodeResources</key>
-		<data>
-		lD20QLF41Z6JAfWiAzKftf/Hioo=
-		</data>
-		<key>gRPCCertificates-Cpp.bundle/_CodeSignature/CodeSignature</key>
-		<data>
-		2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+		trKOHdr3i0kxUDgvSUmAphx86a4=
 		</data>
 		<key>gRPCCertificates-Cpp.bundle/roots.pem</key>
 		<data>
@@ -41,48 +21,21 @@
 	<dict>
 		<key>gRPCCertificates-Cpp.bundle/Info.plist</key>
 		<dict>
-			<key>hash2</key>
+			<key>hash</key>
 			<data>
-			Jpp2LEYSI29Klj015Jq6pGnXUNuRfegZ+vhOn+TCAwA=
+			trKOHdr3i0kxUDgvSUmAphx86a4=
 			</data>
-		</dict>
-		<key>gRPCCertificates-Cpp.bundle/_CodeSignature/CodeDirectory</key>
-		<dict>
 			<key>hash2</key>
 			<data>
-			DUuBz+KpVFVimrErUn0UBcMm8gQNqcel+76O5YBI6xU=
-			</data>
-		</dict>
-		<key>gRPCCertificates-Cpp.bundle/_CodeSignature/CodeRequirements</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			mHkgkE6rZQ51eIwFSqCwUk5qgL/HGqMt+NI3phdD+YY=
-			</data>
-		</dict>
-		<key>gRPCCertificates-Cpp.bundle/_CodeSignature/CodeRequirements-1</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			p5lkiulyxYr/g2NCqLvNIHhdP8tJ9k/nNrIBdUVLQpo=
-			</data>
-		</dict>
-		<key>gRPCCertificates-Cpp.bundle/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			rkQT8y7IjYx1BZmWKGvWqc/3aSQ5ZMXvtyNQv/YwsRw=
-			</data>
-		</dict>
-		<key>gRPCCertificates-Cpp.bundle/_CodeSignature/CodeSignature</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+			O81cluEpcGwPk3szkn1c7KxAA0flzSRV0dhZPxfHkcE=
 			</data>
 		</dict>
 		<key>gRPCCertificates-Cpp.bundle/roots.pem</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			fKPpDnXJArmBT4pB8zmpeWVIzCc=
+			</data>
 			<key>hash2</key>
 			<data>
 			lhQzRMSuEJWIElssQdXa9lSl+vxuI/rDf3uj0p2n53Y=

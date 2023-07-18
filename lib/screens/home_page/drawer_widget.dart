@@ -12,15 +12,24 @@ class DrawerWidget extends StatelessWidget {
   Card drawerMenuOption(
       {required String label, required IconData icon, required Function ftor}) {
     return Card(
-        //color: ColorShades.primaryColor1,
-        //elevation: 16,
-        child: ListTile(
-            onTap: () {
-              ftor();
-            },
-            leading: Icon(icon, color: ColorShades.text2),
-            title: Text(label,
-                style: TextStyle(fontSize: 20, color: ColorShades.text2))));
+      color: Color(0xFF2D3047),
+      //elevation: 16,
+      child: ListTile(
+        onTap: () {
+          ftor();
+        },
+        // leading: Icon(icon, color: ColorShades.text2),
+        title: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 40,
+            color: Color(0xFFF8CD51),
+            fontFamily: 'Tahoma',
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+    );
   }
 
   void logOutPopup(context) {
@@ -101,54 +110,108 @@ class DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: ColorShades.primaryColor2,
-      child: ListView(children: [
-        DrawerHeader(
-          decoration: BoxDecoration(color: ColorShades.text1),
-          child: Image.asset('assets/images/MediHealth_logo.png'),
-        ),
-        // const Divider(thickness: 2.0, color: Colors.black),
-        //drawerMenuOption(
-        //  label: "Account",
-        // icon: Icons.person,
-        // ftor: () {
-        //   navigatetoUserProfileScreen(context);
-        // }),
-        // const Divider(thickness: 2.0, color: Colors.black),
-        drawerMenuOption(
-            label: "Emergency contacts",
-            icon: Icons.people,
-            ftor: () {
-              navigatetoEmergencyContactScreen(context);
-            }),
-        // const Divider(thickness: 2.0, color: Colors.black),
-        // const Divider(thickness: 2.0, color: Colors.black),
-        drawerMenuOption(
-            label: "Accessibility",
-            icon: Icons.settings,
-            ftor: () {
-              navigatetoAccessibilityFeaturesScreen(context);
-            }),
-        // const Divider(thickness: 2.0, color: Colors.black),
-        drawerMenuOption(
-            label: "Personal note page",
-            icon: Icons.note,
-            ftor: () {
-              navigatetoPersonalNotesScreen(context);
-            }),
-        // const Divider(thickness: 2.0, color: Colors.black),
-        Divider(
-          thickness: 2,
-          color: ColorShades.text1,
-        ),
-        const SizedBox(height: 30),
-        drawerMenuOption(
-            label: "Log out",
-            icon: Icons.logout_outlined,
-            ftor: () {
-              logOutPopup(context);
-            })
-      ]),
-    );
+        backgroundColor: const Color(0xFF2D3047),
+        child: Container(
+            // decoration: const BoxDecoration(
+            //   gradient: LinearGradient(
+            //       begin: Alignment.topCenter,
+            //       end: Alignment.bottomCenter,
+            //       colors: [Color(0xFF2D3047), Color(0xFFACBED8)]),
+            // ),
+            child: ListView(
+          children: [
+            // DrawerHeader(
+            //   decoration: BoxDecoration(color: ColorShades.text1),
+            //   child: Image.asset('assets/images/MediHealth_logo.png'),
+            // ),
+            const SizedBox(height: 90),
+            const Card(
+              color: Color(0xFF2D3047),
+              child: ListTile(
+                title: Text(
+                  "Privacy",
+                  style: TextStyle(
+                    color: Color(0xFFF8CD51),
+                    fontFamily: 'Tahoma',
+                    fontWeight: FontWeight.w400,
+                    fontSize: 32,
+                  ),
+                ),
+              ),
+            ),
+            const Card(
+              color: Color(0xFF2D3047),
+              child: ListTile(
+                title: Text(
+                  "Credits",
+                  style: TextStyle(
+                    color: Color(0xFFF8CD51),
+                    fontFamily: 'Tahoma',
+                    fontWeight: FontWeight.w400,
+                    fontSize: 32,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 30),
+            const Divider(
+              color: Colors.white,
+              thickness: 2,
+              indent: 20,
+              endIndent: 20,
+            ),
+            drawerMenuOption(
+                label: "Profile",
+                icon: Icons.account_circle,
+                ftor: () {
+                  navigatetoEmergencyContactScreen(context);
+                }),
+            drawerMenuOption(
+                label: "Accessibility",
+                icon: Icons.settings,
+                ftor: () {
+                  navigatetoAccessibilityFeaturesScreen(context);
+                }),
+            drawerMenuOption(
+                label: "My Circle",
+                icon: Icons.people,
+                ftor: () {
+                  navigatetoPersonalNotesScreen(context);
+                }),
+            drawerMenuOption(
+                label: "Old Media",
+                icon: Icons.perm_media,
+                ftor: () {
+                  navigatetoPersonalNotesScreen(context);
+                }),
+            const Divider(
+              thickness: 2,
+              color: Color(0xFF2D3047),
+            ),
+            const SizedBox(height: 60),
+            const Card(
+              color: Color(0xFF2D3047),
+              child: ListTile(
+                title: Text(
+                  "Logout",
+                  style: TextStyle(
+                    fontSize: 40,
+                    color: Color(0xFFFFFFFF),
+                    fontFamily: 'Tahoma',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                trailing: Icon(Icons.cancel_outlined, color: Color(0xFFFFFFFF)),
+              ),
+            ),
+            // drawerMenuOption(
+            //     label: "Logout",
+            //     icon: Icons.logout_outlined,
+            //     ftor: () {
+            //       logOutPopup(context);
+            //     }),
+            // Icon(Icons.exit_to_app, color: ColorShades.text2),
+          ],
+        )));
   }
 }
