@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/drawer_screens/emergency_contacts/add_emergency_contact.dart';
 import 'package:practice_app/screens/drawer_screens/personal_notes/personal_note_widget.dart';
 import '../../../utils/color_shades.dart';
 import 'add_personal_note.dart';
@@ -9,7 +8,7 @@ import 'add_personal_note.dart';
 class PersonalNoteScreen extends StatelessWidget {
   final String userID;
 
-  const PersonalNoteScreen({required this.userID});
+  const PersonalNoteScreen({Key? key, required this.userID}) : super(key: key);
 
   RawMaterialButton addButton(BuildContext context) {
     return RawMaterialButton(

@@ -7,7 +7,7 @@ import 'medicine_widget.dart';
 class MedicineScreen extends StatelessWidget {
   final String userID;
 
-  const MedicineScreen({required this.userID});
+  const MedicineScreen({Key? key, required this.userID}) : super(key: key);
 
   RawMaterialButton addButton(BuildContext context) {
     return RawMaterialButton(

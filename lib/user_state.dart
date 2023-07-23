@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/screens/auth/login/login_page.dart';
+import 'package:practice_app/screens/home_page/drawer_widget.dart';
 import 'package:practice_app/screens/home_page/medicine/medicine_screen.dart';
-
-import 'screens/home_page/drawer_widget.dart';
+import 'package:practice_app/screens/landing_page/landing_page.dart';
 
 class UserState extends StatelessWidget {
   const UserState({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class UserState extends StatelessWidget {
           if (userSnapshot.data == null) {
             print('User has not logged in yet');
             // return Login page
-            return const DrawerWidget();
+            return LandingPage();
           }
           // case 2 : user is already logged in
           else if (userSnapshot.hasData) {

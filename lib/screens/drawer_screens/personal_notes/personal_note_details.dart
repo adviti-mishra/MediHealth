@@ -12,12 +12,12 @@ class NoteDetails extends StatefulWidget {
   final String title;
   final String content;
 
-  const NoteDetails({
+  const NoteDetails({Key? key, 
     required this.uID,
     required this.docID,
     required this.title,
     required this.content,
-  });
+  }) : super(key: key);
 
   @override
   _NoteDetailsState createState() =>

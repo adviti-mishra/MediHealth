@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'color_shades.dart';
 
-Text header(String desiredHeader_in) {
-  return Text(desiredHeader_in,
+Text header(String desiredheaderIn) {
+  return Text(desiredheaderIn,
       style: TextStyle(
         color: ColorShades.text2,
         fontSize: 30,

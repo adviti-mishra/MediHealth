@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:practice_app/screens/auth/login/login_page.dart';
-import 'package:practice_app/screens/home_page/medicine/medicine_screen.dart';
 import '../../utils/utils_all.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -318,11 +317,11 @@ class _SignUpState extends State<SignUp> {
 
   Widget signUpButton() {
     return _isLoading
-        ? Center(
-            child: Container(
+        ? const Center(
+            child: SizedBox(
                 width: 70,
                 height: 70,
-                child: const CircularProgressIndicator()))
+                child: CircularProgressIndicator()))
         : MaterialButton(
             onPressed: _submitSignUpForm,
             color: ColorShades.primaryColor1,

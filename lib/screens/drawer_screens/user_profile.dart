@@ -5,7 +5,7 @@ import 'package:practice_app/utils/utils_all.dart';
 class UserProfile extends StatefulWidget {
   final String userID;
 
-  const UserProfile({required this.userID});
+  const UserProfile({Key? key, required this.userID}) : super(key: key);
   @override
   _UserProfile createState() => _UserProfile();
 }
@@ -39,7 +39,7 @@ class _UserProfile extends State<UserProfile> {
           phoneNumber = userDoc.get('phoneNumber');
         });
       }
-    } catch (error) {} finally {
+    } finally {
       _isLoading = false;
     }
   }

@@ -9,10 +9,10 @@ import '../drawer_screens/personal_notes/personal_note_screen.dart';
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({Key? key}) : super(key: key);
 
-  Card drawerMenuOption(
+  Container drawerMenuOption(
       {required String label, required IconData icon, required Function ftor}) {
-    return Card(
-      color: Color(0xFF2D3047),
+    return Container(
+      color: Colors.transparent,
       //elevation: 16,
       child: ListTile(
         onTap: () {
@@ -110,24 +110,19 @@ class DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        backgroundColor: const Color(0xFF2D3047),
-        child: Container(
-            // decoration: const BoxDecoration(
-            //   gradient: LinearGradient(
-            //       begin: Alignment.topCenter,
-            //       end: Alignment.bottomCenter,
-            //       colors: [Color(0xFF2D3047), Color(0xFFACBED8)]),
-            // ),
-            child: ListView(
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0xFF2D3047), Color(0xFFACBED8)]),
+        ),
+        child: ListView(
           children: [
-            // DrawerHeader(
-            //   decoration: BoxDecoration(color: ColorShades.text1),
-            //   child: Image.asset('assets/images/MediHealth_logo.png'),
-            // ),
             const SizedBox(height: 90),
-            const Card(
-              color: Color(0xFF2D3047),
-              child: ListTile(
+            Container(
+              color: Colors.transparent,
+              child: const ListTile(
                 title: Text(
                   "Privacy",
                   style: TextStyle(
@@ -139,9 +134,9 @@ class DrawerWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const Card(
-              color: Color(0xFF2D3047),
-              child: ListTile(
+            Container(
+              color: Colors.transparent,
+              child: const ListTile(
                 title: Text(
                   "Credits",
                   style: TextStyle(
@@ -186,13 +181,15 @@ class DrawerWidget extends StatelessWidget {
                 }),
             const Divider(
               thickness: 2,
-              color: Color(0xFF2D3047),
+              color: Color(0xFFFFFFFF),
+              indent: 20,
+              endIndent: 20,
             ),
             const SizedBox(height: 60),
-            const Card(
-              color: Color(0xFF2D3047),
+            Container(
+              color: Colors.transparent,
               child: ListTile(
-                title: Text(
+                title: const Text(
                   "Logout",
                   style: TextStyle(
                     fontSize: 40,
@@ -201,17 +198,18 @@ class DrawerWidget extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                trailing: Icon(Icons.cancel_outlined, color: Color(0xFFFFFFFF)),
+                trailing: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.cancel_outlined,
+                      color: Color(0xFFFFFFFF)),
+                ),
               ),
             ),
-            // drawerMenuOption(
-            //     label: "Logout",
-            //     icon: Icons.logout_outlined,
-            //     ftor: () {
-            //       logOutPopup(context);
-            //     }),
-            // Icon(Icons.exit_to_app, color: ColorShades.text2),
           ],
-        )));
+        ),
+      ),
+    );
   }
 }
