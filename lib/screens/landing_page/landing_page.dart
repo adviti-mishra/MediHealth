@@ -1,7 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/home_page/drawer_widget.dart';
+import 'package:practice_app/utils/bottom_bar.dart';
+import 'package:practice_app/utils/color_shades.dart';
+import 'package:practice_app/utils/drawer_widget.dart';
 import 'package:practice_app/screens/landing_page/message_screen.dart';
+import 'package:practice_app/utils/app_bar.dart';
 
 class LandingPage extends StatelessWidget {
   LandingPage({Key? key}) : super(key: key);
@@ -39,81 +41,32 @@ class LandingPage extends StatelessWidget {
     );
   }
 
-  void navigatetoMenu(context) {
-    if (scaffoldKey.currentState!.isDrawerOpen) {
-      scaffoldKey.currentState!.closeDrawer();
-    } else {
-      scaffoldKey.currentState!.openDrawer();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
       drawer: const DrawerWidget(),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF2D3047),
-        leading: IconButton(
-          onPressed: () {
-            navigatetoMenu(context);
-          },
-          icon: Icon(
-            Icons.menu,
-            color: Colors.yellow[700],
-            size: 40,
-          ),
-        ),
-        centerTitle: true,
-        title: Text(
-          'MediHealth',
-          style: TextStyle(
-            color: Colors.yellow[700],
-            fontSize: 40,
-            fontFamily: 'Tahoma',
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        toolbarHeight: 60,
-        actions: [
-          Column(
-            children: [
-              Icon(
-                Icons.help_outline,
-                color: Colors.yellow[700],
-                size: 30,
-              ),
-              Text(
-                "Help",
-                style: TextStyle(
-                  color: Colors.yellow[700],
-                ),
-              )
-            ],
-          ),
-          const SizedBox(width: 20)
-        ],
-      ),
+      appBar: MediAppBar(importedKey: scaffoldKey),
+      key: scaffoldKey,
       body: Container(
         width: double.infinity,
         margin: const EdgeInsets.only(top: 20, bottom: 20),
         child: Center(
           child: Column(
             children: [
-              const Text(
+              Text(
                 "Hello, ____",
                 style: TextStyle(
-                  color: Color(0xFF102542),
+                  color: ColorShades.primaryColor1,
                   fontSize: 40,
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Tahoma',
                 ),
               ),
               const SizedBox(height: 30),
-              const Text(
+              Text(
                 "Welcome back to your account",
                 style: TextStyle(
-                  color: Color(0xFF102542),
+                  color: ColorShades.primaryColor1,
                   fontSize: 24,
                   fontWeight: FontWeight.w400,
                   fontFamily: 'Tahoma',
@@ -150,32 +103,7 @@ class LandingPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: const Color(0xFF2D3047),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              IconButton(
-                onPressed: () {
-                  // Handle back arrow icon click
-                },
-                icon: Icon(Icons.arrow_back, color: Colors.yellow[700]),
-              ),
-              Text(
-                'Back',
-                style: TextStyle(
-                  color: Colors.yellow[700],
-                  fontSize: 18,
-                  fontFamily: "Tahoma",
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      bottomNavigationBar: const BottomBar(),
     );
   }
 }

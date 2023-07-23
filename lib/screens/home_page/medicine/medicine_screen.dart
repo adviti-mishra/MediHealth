@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'add_medicine.dart';
-import '../drawer_widget.dart';
+import '../../../utils/drawer_widget.dart';
 import 'medicine_widget.dart';
 
 class MedicineScreen extends StatelessWidget {
