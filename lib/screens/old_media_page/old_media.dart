@@ -3,6 +3,7 @@ import 'package:practice_app/utils/app_bar.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
 import 'package:practice_app/utils/utils_all.dart';
+import 'package:iconly/iconly.dart';
 
 class OldMedia extends StatelessWidget {
   OldMedia({Key? key}) : super(key: key);
@@ -64,18 +65,18 @@ class OldMedia extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                mediaBubble(Icons.abc, "Photos"),
+                mediaBubble(IconlyBold.image, "Photos"),
                 const SizedBox(width: 20),
-                mediaBubble(Icons.abc, "Videos"),
+                mediaBubble(IconlyBold.video, "Videos"),
               ],
             ),
             const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                mediaBubble(Icons.abc, "Voice Memos"),
+                mediaBubble(IconlyBold.volume_up, "Voice Memos"),
                 const SizedBox(width: 20),
-                mediaBubble(Icons.abc, "Messages"),
+                mediaBubble(IconlyBold.chat, "Messages"),
               ],
             ),
           ],

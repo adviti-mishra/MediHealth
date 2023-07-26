@@ -39,6 +39,7 @@ dependencies:
   firebase_core: ^2.12.0
   cloud_firestore: ^4.8.0
   flutter_tts: ^3.4.0
+  iconly: ^1.0.1
 
 dev_dependencies:
   flutter_test:
