@@ -12,15 +12,16 @@ class DrawerWidget extends StatelessWidget {
   Card drawerMenuOption(
       {required String label, required IconData icon, required Function ftor}) {
     return Card(
-        //color: ColorShades.primaryColor1,
-        //elevation: 16,
-        child: ListTile(
-            onTap: () {
-              ftor();
-            },
-            leading: Icon(icon, color: ColorShades.text2),
-            title: Text(label,
-                style: TextStyle(fontSize: 20, color: ColorShades.text2))));
+      child: ListTile(
+          onTap: () {
+            ftor();
+          },
+          leading: Icon(icon, color: ColorShades.text2),
+          title: Text(label,
+              style: TextStyle(fontSize: 20, color: ColorShades.text2)
+          )
+      )
+    );
   }
 
   void logOutPopup(context) {

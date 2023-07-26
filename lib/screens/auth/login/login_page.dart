@@ -41,17 +41,12 @@ class _LoginState extends State<Login> {
         children: [
           verticalSpace(80),
           welcomeBackMessage(context),
-          verticalSpace(20),
           getInfoTile(
             emailPassword: emailPassword(),
             loginButton: loginButton()
-
           ),
-          verticalSpace(5),
           forgotButton(),
-          verticalSpace(5),
           signupPageButton(),
-          verticalSpace(5),
           backWelcomeButton(),
         ],
       ),
@@ -213,7 +208,10 @@ class _LoginState extends State<Login> {
               _obscureText = !_obscureText;
             });
           },
-          child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
+          child: Icon(
+            _obscureText ? Icons.visibility_off : Icons.visibility, 
+            color: Color(0xff102542)
+          ),
         ),
         filled: true,
         border: OutlineInputBorder(),

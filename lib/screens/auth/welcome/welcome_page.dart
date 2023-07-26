@@ -4,6 +4,8 @@ import 'package:practice_app/screens/auth/welcome/welcome_tile.dart';
 import 'package:practice_app/screens/auth/welcome/welcome_message.dart';
 import 'package:practice_app/screens/auth/login/login_page.dart';
 import 'package:practice_app/screens/auth/signup/signup.dart';
+//DELETE EVENTUALLY
+import 'package:practice_app/screens/settings/settings.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
@@ -32,7 +34,9 @@ class _WelcomeState extends State<Welcome> {
           welcomeMessage(context),
           welcomeTile(
             loginPageButton: loginPageButton(),
-            signupPageButton: signupPageButton()
+            signupPageButton: signupPageButton(),
+            //Delete
+            delete: settingsPageButton(),
           ),
         ],
       ),
@@ -90,6 +94,40 @@ class _WelcomeState extends State<Welcome> {
           children: const [
             Text(
               'Sign Up',
+              style: TextStyle(
+                color: Color(0xff102542),
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // DELETE ALL OF THIS BELOW
+  MaterialButton settingsPageButton() {
+    return MaterialButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Settings()
+          )
+        );
+      },
+      color: ColorShades.maize,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              'Settings',
               style: TextStyle(
                 color: Color(0xff102542),
                 fontWeight: FontWeight.bold,

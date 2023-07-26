@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practice_app/utils/utils_all.dart';
 
-Center signUpTile({required Form nameEmailPassword, required MaterialButton createButton}) {
+Center signUpTile({required Form emailPasswords, required MaterialButton nextButton}) {
   return Center(
     child: Padding(
       padding: const EdgeInsets.all(20.0),
@@ -16,11 +16,11 @@ Center signUpTile({required Form nameEmailPassword, required MaterialButton crea
             padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 35),
             child: Column(
               children: [
-                // Email and Password
-                nameEmailPassword,
-                verticalSpace(20),
+                // Passwords
+                emailPasswords,
+                verticalSpace(40),
                 // Sign In
-                createButton,
+                nextButton,
               ],
             ),
           ),

@@ -8,11 +8,11 @@ Column welcomeInMessage(BuildContext context) {
         'Create Your Account',
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: 32, fontWeight: FontWeight.bold, color: Color(0xff102542)),
+            fontSize: 40, fontWeight: FontWeight.bold, color: Color(0xff102542)),
       ),
-      SizedBox(height: 5,),
+      SizedBox(height: 20,),
       Text(
-        'Please Fill In Your Information',
+        'Fill In Your Login Information',
         textAlign: TextAlign.center,
         style: TextStyle(
             fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff102542)),

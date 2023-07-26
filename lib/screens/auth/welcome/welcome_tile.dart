@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practice_app/utils/utils_all.dart';
 
-Center welcomeTile({required MaterialButton loginPageButton, required MaterialButton signupPageButton}) {
+Center welcomeTile({required MaterialButton loginPageButton, required MaterialButton signupPageButton, required MaterialButton delete}) {
   return Center(
     child: Padding(
       padding: const EdgeInsets.all(20.0),
@@ -29,6 +29,7 @@ Center welcomeTile({required MaterialButton loginPageButton, required MaterialBu
                 verticalSpace(20),
                 // Sign In Button
                 signupPageButton,
+                delete,
               ],
             ),
           ),
