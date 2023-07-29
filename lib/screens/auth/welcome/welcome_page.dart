@@ -6,6 +6,7 @@ import 'package:practice_app/screens/auth/login/login_page.dart';
 import 'package:practice_app/screens/auth/signup/signup.dart';
 //DELETE EVENTUALLY
 import 'package:practice_app/screens/settings/settings.dart';
+import 'package:practice_app/screens/landingPage/promptPage.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
@@ -37,6 +38,7 @@ class _WelcomeState extends State<Welcome> {
             signupPageButton: signupPageButton(),
             //Delete
             delete: settingsPageButton(),
+            delete2: promptPageButton(),
           ),
         ],
       ),
@@ -66,9 +68,6 @@ class _WelcomeState extends State<Welcome> {
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
               ),
-            ),
-            SizedBox(
-              width: 10,
             ),
           ],
         ),
@@ -100,9 +99,6 @@ class _WelcomeState extends State<Welcome> {
                 fontSize: 24,
               ),
             ),
-            SizedBox(
-              width: 10,
-            ),
           ],
         ),
       ),
@@ -110,8 +106,8 @@ class _WelcomeState extends State<Welcome> {
   }
 
   // DELETE ALL OF THIS BELOW
-  MaterialButton settingsPageButton() {
-    return MaterialButton(
+  TextButton settingsPageButton() {
+    return TextButton(
       onPressed: () {
         Navigator.push(
           context,
@@ -120,7 +116,6 @@ class _WelcomeState extends State<Welcome> {
           )
         );
       },
-      color: ColorShades.maize,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(
@@ -134,8 +129,34 @@ class _WelcomeState extends State<Welcome> {
                 fontSize: 24,
               ),
             ),
-            SizedBox(
-              width: 10,
+          ],
+        ),
+      ),
+    );
+  }
+
+  TextButton promptPageButton() {
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const PromptPage()
+          )
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              'Prompt',
+              style: TextStyle(
+                color: Color(0xff102542),
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
             ),
           ],
         ),

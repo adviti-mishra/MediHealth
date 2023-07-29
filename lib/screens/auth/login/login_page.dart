@@ -245,9 +245,6 @@ class _LoginState extends State<Login> {
                 fontSize: 20,
               ),
             ),
-            SizedBox(
-              width: 10,
-            ),
             Icon(
               Icons.login,
               color: Color(0xff102542),

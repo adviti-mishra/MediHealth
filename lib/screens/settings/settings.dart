@@ -3,11 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/screens/auth/signup/signup.dart';
 import '../../../../utils/utils_all.dart';
+import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:practice_app/screens/settings/settings_title.dart';
-
-
-
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -20,6 +18,8 @@ class _SettingsState extends State<Settings> {
   // values for sliders
   double _fontSize = 5;
   bool textToSpeechEnabled = false;
+  bool highContrastEnabled = false;
+  bool somethingElseEnabled = false;
   double _speechSpeed = 5;
 
   @override
@@ -53,9 +53,15 @@ class _SettingsState extends State<Settings> {
   Container textSize() {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Color(0xff102542),
-          width: 5.0, 
+        border: Border(
+          left: BorderSide(color: Color(0xff102542),
+            width: 4.0), 
+          right: BorderSide(color: Color(0xff102542),
+            width: 4.0), 
+          top: BorderSide(color: Color(0xff102542),
+            width: 4.0), 
+          bottom: BorderSide(color: Color(0xff102542),
+            width: 2.0),
         ),
       ),
       padding: const EdgeInsets.all(20.0),
@@ -76,8 +82,46 @@ class _SettingsState extends State<Settings> {
               ],
             ),
           ),
-          verticalSpace(10),
-          textSizeSlider(),
+          verticalSpace(20),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Row(
+              children: [
+                Text( 
+                  "Size",
+                  style: TextStyle(
+                    color: Color(0xff102542),
+                    fontSize: 24,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Row(
+              children: [
+                Text(
+                  ".5x",
+                  style: TextStyle(
+                    color: Color(0xff102542),
+                    fontSize: 20,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                textSizeSlider(),
+                Text(
+                  "2x",
+                  style: TextStyle(
+                    color: Color(0xff102542),
+                    fontSize: 20,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -86,24 +130,24 @@ class _SettingsState extends State<Settings> {
   // Text Size slider content
   Container textSizeSlider(){
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
-        decoration: new BoxDecoration(
-          color: Colors.white,
-            borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
-        ),
-        child: new Slider(
-          value: _fontSize,
-          activeColor: Color(0xff102542),
-          inactiveColor: ColorShades.maize,
-          onChanged: (double s) {
-            setState(() {
-              _fontSize = s;
-            });
-          },
-          divisions: 9,
-          min: 1.0,
-          max: 10.0,
-        ),
+      width: 330,
+      decoration: new BoxDecoration(
+        color: Colors.white,
+          borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
+      ),
+      child: new Slider(
+        value: _fontSize,
+        activeColor: Color(0xff102542),
+        inactiveColor: ColorShades.maize,
+        onChanged: (double s) {
+          setState(() {
+            _fontSize = s;
+          });
+        },
+        divisions: 9,
+        min: 1.0,
+        max: 10.0,
+      ),
     );
   }
 
@@ -111,9 +155,15 @@ class _SettingsState extends State<Settings> {
   Container textToSpeech() {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Color(0xff102542),
-          width: 5.0, 
+        border: Border(
+          left: BorderSide(color: Color(0xff102542),
+            width: 4.0), 
+          right: BorderSide(color: Color(0xff102542),
+            width: 4.0), 
+          top: BorderSide(color: Color(0xff102542),
+            width: 2.0), 
+          bottom: BorderSide(color: Color(0xff102542),
+            width: 2.0),
         ),
       ),
       padding: const EdgeInsets.all(20.0),
@@ -131,13 +181,51 @@ class _SettingsState extends State<Settings> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(width: 120),
+                SizedBox(width: 150),
                 textToSpeechToggle(),
               ],
             ),
           ),
-          verticalSpace(10),
-          textToSpeechSpeed(),
+          verticalSpace(20),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Row(
+              children: [
+                Text( 
+                  "Speed",
+                  style: TextStyle(
+                    color: Color(0xff102542),
+                    fontSize: 24,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Row(
+              children: [
+                Text(
+                  ".5x",
+                  style: TextStyle(
+                    color: Color(0xff102542),
+                    fontSize: 20,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                textToSpeechSpeed(),
+                Text(
+                  "2x",
+                  style: TextStyle(
+                    color: Color(0xff102542),
+                    fontSize: 20,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -162,24 +250,24 @@ class _SettingsState extends State<Settings> {
   // Text To Speech Speed
   Container textToSpeechSpeed(){
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
-        decoration: new BoxDecoration(
-          color: Colors.white,
-            borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
-        ),
-        child: new Slider(
-          value: _speechSpeed,
-          activeColor: Color(0xff102542),
-          inactiveColor: ColorShades.maize,
-          onChanged: (double s) {
-            setState(() {
-              _speechSpeed = s;
-            });
-          },
-          divisions: 9,
-          min: 1.0,
-          max: 10.0,
-        ),
+      width: 330,
+      decoration: new BoxDecoration(
+        color: Colors.white,
+          borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
+      ),
+      child: new Slider(
+        value: _speechSpeed,
+        activeColor: Color(0xff102542),
+        inactiveColor: ColorShades.maize,
+        onChanged: (double s) {
+          setState(() {
+            _speechSpeed = s;
+          });
+        },
+        divisions: 9,
+        min: 1.0,
+        max: 10.0,
+      ),
     );
   }
     
@@ -188,11 +276,17 @@ class _SettingsState extends State<Settings> {
 Container colorScheme() {
   return Container(
     decoration: BoxDecoration(
-      border: Border.all(
-        color: Color(0xff102542),
-        width: 5.0, 
+        border: Border(
+          left: BorderSide(color: Color(0xff102542),
+            width: 4.0), 
+          right: BorderSide(color: Color(0xff102542),
+            width: 4.0), 
+          top: BorderSide(color: Color(0xff102542),
+            width: 2.0), 
+          bottom: BorderSide(color: Color(0xff102542),
+            width: 4.0),
+        ),
       ),
-    ),
     padding: const EdgeInsets.all(20.0),
     child: Column(
       children: [
@@ -211,10 +305,76 @@ Container colorScheme() {
             ],
           ),
         ),
+        verticalSpace(20),
+        Align(
+          alignment: Alignment.bottomLeft,
+          child: Row(
+            children: [
+              Text( 
+                "High Contrast",
+                style: TextStyle(
+                  color: Color(0xff102542),
+                  fontSize: 24,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+              SizedBox(width: 175),
+              highContrastToggle(),
+            ],
+          ),
+        ),
+        verticalSpace(10),
+        Align(
+          alignment: Alignment.bottomLeft,
+          child: Row(
+            children: [
+              Text( 
+                "Something Else",
+                style: TextStyle(
+                  color: Color(0xff102542),
+                  fontSize: 24,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+              SizedBox(width: 154),
+              somethingElseToggle(),
+            ],
+          ),
+        ),
       ],
     ),
   );
 }
+
+Switch highContrastToggle() {
+    return Switch(
+      activeTrackColor: Color.fromARGB(200, 16, 37, 66),
+      activeColor: Color(0xff102542),
+      inactiveTrackColor: Color.fromARGB(100, 16, 37, 66),
+      inactiveThumbColor: Color(0xff102542),
+      value: highContrastEnabled,
+      onChanged: (value) {
+        setState(() {
+          highContrastEnabled = value;
+        });
+      },
+    );
+  }
+
+  Switch somethingElseToggle() {
+    return Switch(
+      activeTrackColor: Color.fromARGB(200, 16, 37, 66),
+      activeColor: Color(0xff102542),
+      inactiveTrackColor: Color.fromARGB(100, 16, 37, 66),
+      inactiveThumbColor: Color(0xff102542),
+      value: somethingElseEnabled,
+      onChanged: (value) {
+        setState(() {
+          somethingElseEnabled = value;
+        });
+      },
+    );
+  }
 
 
 //WILL BE DELETED ONCE DRAWER IS PUT IN
@@ -225,14 +385,14 @@ Container colorScheme() {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const SignUp()
+            builder: (context) => const Welcome()
           )
         );
       },
       child: const Text(
         "Back",
         style: TextStyle(
-          color: Color(0xff102542),
+          color: Colors.white,
           fontSize: 24,
         ),
       )

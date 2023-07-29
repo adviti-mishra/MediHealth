@@ -117,9 +117,13 @@ class _SignUpState extends State<SignUp> {
       keyboardType: TextInputType.emailAddress,
       controller: _emailTextController,
       validator: (email) {
-        if (email!.isEmpty || !email.contains('@') || !email.contains('.')) {
+        if (email!.isEmpty) {
           return "Please enter a valid email address";
-        } else {
+        } 
+        else if (!email.contains('@') || !email.contains('.')) {
+          return "Email address is not valid";
+        }
+        else {
           return null;
         }
       },
@@ -172,9 +176,13 @@ class _SignUpState extends State<SignUp> {
       keyboardType: TextInputType.visiblePassword,
       controller: _passwordTextController,
       validator: (value) {
-        if (value!.isEmpty || value.length < 8) {
-          return "Please enter password with at least 8 characters";
-        } else {
+        if (value!.isEmpty) {
+          return "Please enter a password";
+        } 
+        else if (value.length < 8) {
+          return "Password must contain at least 8 characters";
+        }
+        else {
           return null;
         }
       },
@@ -235,9 +243,13 @@ class _SignUpState extends State<SignUp> {
       keyboardType: TextInputType.visiblePassword,
       controller: _rePasswordTextController,
       validator: (value) {
-        if (value!.isEmpty || value != _passwordTextController.text) {
-          return "Please make sure passwords match";
-        } else {
+        if (value!.isEmpty) {
+          return "Please repeat password";
+        } 
+        else if (value != _passwordTextController.text) {
+          return "Password does not match";
+        }
+        else {
           return null;
         }
       },
@@ -271,7 +283,6 @@ class _SignUpState extends State<SignUp> {
   MaterialButton nextButton() {
   return MaterialButton(
     onPressed: () {
-      // Trigger form validation
       if (_signUpFormKey.currentState!.validate()) {
         // All fields are valid, proceed to the next screen
         Navigator.push(
@@ -299,9 +310,6 @@ class _SignUpState extends State<SignUp> {
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
-          ),
-          SizedBox(
-            width: 10,
           ),
         ],
       ),

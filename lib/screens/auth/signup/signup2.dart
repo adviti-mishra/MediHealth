@@ -28,7 +28,8 @@ class SignUp2 extends StatefulWidget {
 }
 
 class _SignUpState2 extends State<SignUp2> {
-  final TextEditingController _nameTextController = TextEditingController();
+  final TextEditingController _firstNameTextController = TextEditingController();
+  final TextEditingController _lastNameTextController = TextEditingController();
   final TextEditingController _phoneNumberTextController = TextEditingController();
   final TextEditingController _dobTextController = TextEditingController();
   
@@ -36,6 +37,7 @@ class _SignUpState2 extends State<SignUp2> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _isLoading = false;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,8 @@ class _SignUpState2 extends State<SignUp2> {
   @override
   void dispose() {
     super.dispose();
-    _nameTextController.dispose();
+    _firstNameTextController.dispose();
+    _lastNameTextController.dispose();
     _phoneNumberTextController.dispose();
     _dobTextController.dispose();
   }
@@ -89,7 +92,8 @@ class _SignUpState2 extends State<SignUp2> {
 
         FirebaseFirestore.instance.collection('user').doc(_uid).set({
           'id': _uid,
-          'name': _nameTextController.text,
+          'firstName': _firstNameTextController.text,
+          'lastName': _lastNameTextController.text,
           'email': widget.emailTextController.text,
           'phoneNumber': _phoneNumberTextController.text,
           'dob': _dobTextController.text,
@@ -130,44 +134,53 @@ class _SignUpState2 extends State<SignUp2> {
 
   // Name field
   Column nameField() {
-    return Column(children: [
-      Align(
-        alignment: Alignment.bottomLeft,
-        child: Row(
-          children: [
-            Text(
-              "Full Name",
-              style: TextStyle(
-                color: ColorShades.maize,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.bottomLeft,
+          child: Text(
+            "Full Name",
+            style: TextStyle(
+              color: ColorShades.maize,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
             ),
-          ]
-        )
-      ),
-      verticalSpace(10),
-      firstNameValidation(),
-    ]);
+          ),
+        ),
+        verticalSpace(10),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 0),
+          child: Row(
+            children: [
+              Expanded(
+                child: firstNameValidation(),
+              ),
+              SizedBox(width: 16),
+              Expanded(
+                child: lastNameValidation(),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
   
-  // Name validation
   TextFormField firstNameValidation() {
     return TextFormField(
       keyboardType: TextInputType.name,
-      controller: _nameTextController,
+      controller: _firstNameTextController,
       validator: (value) {
-        if ((value!.isEmpty)) {
-          return "Please enter your name";
+        if (value!.isEmpty) {
+          return "Please enter your first name";
         } else {
           return null;
         }
       },
-      style: TextStyle(color: ColorShades.text2),
+      style: TextStyle(color: Colors.black),
       decoration: InputDecoration(
-        hintText: 'FirstName LastName',
-        hintStyle:
-            TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
+        hintText: 'First Name',
+        hintStyle: TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
         border: OutlineInputBorder(),
         fillColor: Colors.white,
@@ -178,27 +191,25 @@ class _SignUpState2 extends State<SignUp2> {
           color: Colors.red,
         ),
       ),
-    cursorColor: Colors.black,
+      cursorColor: Colors.black,
     );
   }
 
-  // Name validation
   TextFormField lastNameValidation() {
     return TextFormField(
       keyboardType: TextInputType.name,
-      controller: _nameTextController,
+      controller: _lastNameTextController,
       validator: (value) {
-        if ((value!.isEmpty)) {
-          return "Please enter your name";
+        if (value!.isEmpty) {
+          return "Please enter your last name";
         } else {
           return null;
         }
       },
-      style: TextStyle(color: ColorShades.text2),
+      style: TextStyle(color: Colors.black),
       decoration: InputDecoration(
-        hintText: 'FirstName LastName',
-        hintStyle:
-            TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
+        hintText: 'Last Name',
+        hintStyle: TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
         border: OutlineInputBorder(),
         fillColor: Colors.white,
@@ -209,7 +220,7 @@ class _SignUpState2 extends State<SignUp2> {
           color: Colors.red,
         ),
       ),
-    cursorColor: Colors.black,
+      cursorColor: Colors.black,
     );
   }
 
@@ -240,12 +251,16 @@ class _SignUpState2 extends State<SignUp2> {
   TextFormField phoneNumberValidation() {
     return TextFormField(
       keyboardType: TextInputType.phone,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly], // Use FilteringTextInputFormatter to allow only digits
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       controller: _phoneNumberTextController,
       validator: (value) {
-        if ((value!.isEmpty) || (value.length < 10)) {
+        if (value!.isEmpty) {
           return "Please enter your phone number";
-        } else {
+        }
+        else if (value.length != 10) {
+          return "Phone number must be 10 digits";
+        }
+        else {
           return null;
         }
       },
@@ -295,11 +310,16 @@ class _SignUpState2 extends State<SignUp2> {
   TextFormField dobValidation() {
     return TextFormField(
       keyboardType: TextInputType.datetime,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       controller: _dobTextController,
       validator: (value) {
-        if ((value!.isEmpty) || (value.length < 8)) {
+        if (value!.isEmpty) {
           return "Please enter your date of birth";
-        } else {
+        }
+        else if (value.length != 8) {
+          return "Enter in format MMDDYYYY";
+        }
+        else {
           return null;
         }
       },
@@ -375,9 +395,6 @@ class _SignUpState2 extends State<SignUp2> {
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
-            ),
-            SizedBox(
-              width: 10,
             ),
           ],
         ),

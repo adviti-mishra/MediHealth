@@ -38,12 +38,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         children: [
           verticalSpace(200),
           welcomeBackMessage(context),
-          verticalSpace(20),
           forgotPasswordTile(
             recoveryEmail: email(),
             submitButton: submitButton()
           ),
-          verticalSpace(20),
           backLoginButton(),
         ],
       ),
@@ -118,9 +116,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       keyboardType: TextInputType.emailAddress,
       controller: _emailTextController,
       validator: (email) {
-        if (email!.isEmpty || !email.contains('@') || !email.contains('.')) {
+        if (email!.isEmpty) {
           return "Please enter a valid email address";
-        } else {
+        } 
+        else if (!email.contains('@') || !email.contains('.')) {
+          return "Email address is not valid";
+        }
+        else {
           return null;
         }
       },
@@ -161,9 +163,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
-            ),
-            SizedBox(
-              width: 10,
             ),
           ],
         ),
