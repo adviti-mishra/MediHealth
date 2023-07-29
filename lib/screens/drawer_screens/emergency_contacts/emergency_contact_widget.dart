@@ -10,13 +10,13 @@ class EmergencyContactWidget extends StatefulWidget {
   final String email;
   final String phoneNumber;
 
-  const EmergencyContactWidget({
+  const EmergencyContactWidget({Key? key, 
     required this.uID,
     required this.docID,
     required this.name,
     required this.email,
     required this.phoneNumber,
-  });
+  }) : super(key: key);
   @override
   _EmergencyContactWidgetState createState() => _EmergencyContactWidgetState();
 }
@@ -46,7 +46,6 @@ class _EmergencyContactWidgetState extends State<EmergencyContactWidget> {
           phoneNumber = userDoc.get('phoneNumber');
         });
       }
-    } catch (error) {
     } finally {
       _isLoading = false;
     }

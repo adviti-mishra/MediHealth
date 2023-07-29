@@ -14,7 +14,7 @@ class MedicineWidget extends StatefulWidget {
   final String endDate;
   final String moreInfo;
 
-  const MedicineWidget({
+  const MedicineWidget({Key? key, 
     required this.uID,
     required this.docID,
     required this.name,
@@ -24,7 +24,7 @@ class MedicineWidget extends StatefulWidget {
     required this.startDate,
     required this.endDate,
     required this.moreInfo,
-  });
+  }) : super(key: key);
 
   @override
   _MedicineWidgetState createState() => _MedicineWidgetState();

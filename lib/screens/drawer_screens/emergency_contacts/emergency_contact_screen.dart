@@ -3,13 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/screens/drawer_screens/emergency_contacts/add_emergency_contact.dart';
 import '../../../utils/color_shades.dart';
-import 'emergency_contact_details.dart';
 import 'emergency_contact_widget.dart';
 
 class EmergencyContactScreen extends StatelessWidget {
   final String userID;
 
-  const EmergencyContactScreen({required this.userID});
+  const EmergencyContactScreen({Key? key, required this.userID}) : super(key: key);
 
   RawMaterialButton addButton(BuildContext context) {
     return RawMaterialButton(

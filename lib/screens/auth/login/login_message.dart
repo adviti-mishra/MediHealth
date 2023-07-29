@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 Column welcomeBackMessage(BuildContext context) {
-  return Column(
+  return const Column(
     crossAxisAlignment: CrossAxisAlignment.start,
-    children: const [
+    children: [
       Text(
         'MediHealth',
         textAlign: TextAlign.center,

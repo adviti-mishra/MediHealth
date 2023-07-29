@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'package:practice_app/screens/auth/forgot_password/forgot_password_message.dart';
 import '../../../utils/utils_all.dart';
 
 class ForgotPassword extends StatefulWidget {

@@ -8,7 +8,7 @@ import '../../../utils/text_to_speach.dart';
 
 class AddEmergencyContact extends StatefulWidget {
   final String userID;
-  const AddEmergencyContact({required this.userID});
+  const AddEmergencyContact({Key? key, required this.userID}) : super(key: key);
 
   @override
   _AddEmergencyContact createState() => _AddEmergencyContact();
@@ -34,6 +34,7 @@ class _AddEmergencyContact extends State<AddEmergencyContact> {
     super.initState();
   }
   // deconstructor : TextEditingControllers
+  @override
   void dispose() {
     super.dispose();
     _contactNameTextController.dispose();

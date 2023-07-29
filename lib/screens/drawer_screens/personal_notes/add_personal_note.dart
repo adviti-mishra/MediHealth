@@ -8,7 +8,7 @@ import '../../../utils/text_to_speach.dart';
 
 class AddNote extends StatefulWidget {
   final String userID;
-  const AddNote({required this.userID});
+  const AddNote({Key? key, required this.userID}) : super(key: key);
 
   @override
   _AddNote createState() => _AddNote();
@@ -32,6 +32,7 @@ class _AddNote extends State<AddNote> {
     super.initState();
   }
   // deconstructor : TextEditingControllers
+  @override
   void dispose() {
     super.dispose();
     _titleTextController.dispose();

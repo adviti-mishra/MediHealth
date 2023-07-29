@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/drawer_screens/emergency_contacts/emergency_contact_details.dart';
 import 'package:practice_app/screens/drawer_screens/personal_notes/personal_note_details.dart';
 import '../../../utils/utils_all.dart';
 
@@ -10,12 +9,12 @@ class PersonalNoteWidget extends StatefulWidget {
   final String title;
   final String content;
 
-  const PersonalNoteWidget({
+  const PersonalNoteWidget({Key? key, 
     required this.uID,
     required this.docID,
     required this.title,
     required this.content,
-  });
+  }) : super(key: key);
   @override
   _PersonalNoteWidgetState createState() => _PersonalNoteWidgetState();
 }
@@ -43,7 +42,6 @@ class _PersonalNoteWidgetState extends State<PersonalNoteWidget> {
           content = userDoc.get('name');
         });
       }
-    } catch (error) {
     } finally {
       _isLoading = false;
     }

@@ -13,13 +13,13 @@ class EmergencyContactDetails extends StatefulWidget {
   final String email;
   final String phoneNumber;
 
-  const EmergencyContactDetails({
+  const EmergencyContactDetails({Key? key, 
     required this.uID,
     required this.docID,
     required this.name,
     required this.email,
     required this.phoneNumber,
-  });
+  }) : super(key: key);
 
   @override
   _EmergencyContactDetailsState createState() =>
