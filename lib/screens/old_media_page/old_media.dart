@@ -9,34 +9,39 @@ class OldMedia extends StatelessWidget {
   OldMedia({Key? key}) : super(key: key);
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  Container mediaBubble(IconData mediaIcon, String mediaText) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            mediaIcon,
-            color: ColorShades.primaryColor4,
-            size: 100,
-          ),
-          Text(
-            mediaText,
-            textAlign: TextAlign.center,
-            style: TextStyle(
+  InkWell mediaBubble(IconData mediaIcon, String mediaText) {
+    return InkWell(
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              mediaIcon,
               color: ColorShades.primaryColor4,
-              fontFamily: "Tahoma",
-              fontSize: 32,
-              fontWeight: FontWeight.w700,
+              size: 100,
             ),
-          ),
-        ],
+            Text(
+              mediaText,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: ColorShades.primaryColor4,
+                fontFamily: "Tahoma",
+                fontSize: 28,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
+        ),
+        decoration: BoxDecoration(
+          color: ColorShades.primaryColor1,
+          borderRadius: BorderRadius.circular(40),
+        ),
+        height: 240,
+        width: 170,
       ),
-      decoration: BoxDecoration(
-        color: ColorShades.primaryColor1,
-        borderRadius: BorderRadius.circular(40),
-      ),
-      height: 240,
-      width: 170,
+      onTap: () {
+        print("Tapped");
+      },
     );
   }
 
@@ -61,12 +66,12 @@ class OldMedia extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 mediaBubble(IconlyBold.image, "Photos"),
-                const SizedBox(width: 20),
+                const SizedBox(width: 35),
                 mediaBubble(IconlyBold.video, "Videos"),
               ],
             ),
@@ -75,7 +80,7 @@ class OldMedia extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 mediaBubble(IconlyBold.volume_up, "Voice Memos"),
-                const SizedBox(width: 20),
+                const SizedBox(width: 35),
                 mediaBubble(IconlyBold.chat, "Messages"),
               ],
             ),

@@ -16,7 +16,9 @@ class BottomBar extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
               },
               icon: Icon(Icons.arrow_back, color: ColorShades.primaryColor4),
             ),
