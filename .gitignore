@@ -42,3 +42,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Needed for Dishita :(
+build/ios/Debug-iphonesimulator/gRPC-Core/grpc.framework/grpc
