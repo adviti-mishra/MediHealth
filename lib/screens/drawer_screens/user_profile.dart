@@ -1,20 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/utils/app_bar.dart';
+import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/utils_all.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
 import 'package:practice_app/utils/color_shades.dart';
 
 class UserProfile extends StatefulWidget {
+  const UserProfile({Key? key, required this.userID}) : super(key: key);
   final String userID;
-
-  const UserProfile({required this.userID});
 
   @override
   _UserProfileState createState() => _UserProfileState();
 }
 
-final scaffoldKey = GlobalKey<ScaffoldState>();
+var scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _UserProfileState extends State<UserProfile> {
   bool editMode = false;
@@ -41,15 +41,11 @@ class _UserProfileState extends State<UserProfile> {
           .doc(widget.userID)
           .get();
 
-      if (userDoc == null) {
-        return;
-      } else {
-        setState(() {
-          email = userDoc.get('email');
-          name = userDoc.get('name');
-          phoneNumber = userDoc.get('phoneNumber');
-        });
-      }
+      setState(() {
+        email = userDoc.get('email');
+        name = userDoc.get('name');
+        phoneNumber = userDoc.get('phoneNumber');
+      });
     } catch (error) {
       // Handle error
     } finally {
@@ -59,24 +55,26 @@ class _UserProfileState extends State<UserProfile> {
     }
   }
 
-  Widget userField({required String header_in, required String content_in}) {
+  Widget userField({required String headerIn, required String contentIn}) {
     return Row(
       children: [
         Text(
-          header_in,
+          headerIn,
           style: TextStyle(
             fontSize: 18,
-            color: Color(0xFF2D3047),
+            color: ColorShades.primaryColor1,
             fontWeight: FontWeight.bold,
+            fontFamily: 'Tahoma',
           ),
         ),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Text(
-          content_in,
+          contentIn,
           style: TextStyle(
             fontSize: 18,
-            color: Color(0xFF2D3047),
+            color: ColorShades.primaryColor1,
             fontWeight: FontWeight.bold,
+            fontFamily: 'Tahoma',
           ),
         ),
       ],
@@ -95,6 +93,7 @@ class _UserProfileState extends State<UserProfile> {
               color: ColorShades.text1,
               fontSize: 20,
               fontWeight: FontWeight.bold,
+              fontFamily: 'Tahoma',
             ),
           ),
         ),
@@ -108,7 +107,7 @@ class _UserProfileState extends State<UserProfile> {
       color: Colors.white,
       child: Column(
         children: [
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -117,27 +116,28 @@ class _UserProfileState extends State<UserProfile> {
                 'Profile',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Color(0xFF2D3047),
+                  color: ColorShades.primaryColor1,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Tahoma',
                 ),
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Align(
             alignment: Alignment.center,
             child: Stack(
               children: [
                 CircleAvatar(
                   radius: 80,
-                  backgroundColor: Color(0xFF2D3047),
+                  backgroundColor: ColorShades.primaryColor1,
                   child: CircleAvatar(
                     radius: 78,
-                    backgroundColor: Colors.yellow[700],
+                    backgroundColor: ColorShades.primaryColor4,
                     child: Icon(
                       Icons.account_circle,
                       size: 160,
-                      color: Color(0xFF2D3047),
+                      color: ColorShades.primaryColor1,
                     ),
                   ),
                 ),
@@ -151,28 +151,31 @@ class _UserProfileState extends State<UserProfile> {
                       },
                       child: CircleAvatar(
                         radius: 20,
-                        backgroundColor: Color(0xFF2D3047),
-                        child:
-                            Icon(Icons.camera_alt, color: Colors.yellow[700]),
+                        backgroundColor: ColorShades.primaryColor1,
+                        child: Icon(
+                          Icons.camera_alt,
+                          color: ColorShades.primaryColor4,
+                        ),
                       ),
                     ),
                   ),
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Align(
             alignment: Alignment.center,
             child: Text(
               'Your profile code:',
               style: TextStyle(
                 fontSize: 18,
-                color: Color(0xFF2D3047),
+                color: ColorShades.primaryColor1,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Tahoma',
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Align(
             alignment: Alignment.center,
             child: Padding(
@@ -184,22 +187,23 @@ class _UserProfileState extends State<UserProfile> {
                     'Share your code',
                     style: TextStyle(
                       fontSize: 18,
-                      color: Color(0xFF2D3047),
+                      color: ColorShades.primaryColor1,
                       fontWeight: FontWeight.bold,
                       decoration: TextDecoration.underline,
+                      fontFamily: 'Tahoma',
                     ),
                   ),
-                  SizedBox(width: 4),
+                  const SizedBox(width: 4),
                   Icon(
                     Icons.account_tree_sharp,
-                    color: Color(0xFF2D3047),
+                    color: ColorShades.primaryColor1,
                     size: 20,
                   ),
                 ],
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -208,13 +212,14 @@ class _UserProfileState extends State<UserProfile> {
                 'Name:',
                 style: TextStyle(
                   fontSize: 18,
-                  color: Color(0xFF2D3047),
+                  color: ColorShades.primaryColor1,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Tahoma',
                 ),
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Align(
             alignment: Alignment.center,
             child: Padding(
@@ -223,13 +228,14 @@ class _UserProfileState extends State<UserProfile> {
                 name,
                 style: TextStyle(
                   fontSize: 18,
-                  color: Color(0xFF2D3047),
+                  color: ColorShades.primaryColor1,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Tahoma',
                 ),
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -238,13 +244,14 @@ class _UserProfileState extends State<UserProfile> {
                 'Email:',
                 style: TextStyle(
                   fontSize: 18,
-                  color: Color(0xFF2D3047),
+                  color: ColorShades.primaryColor1,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Tahoma',
                 ),
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Align(
             alignment: Alignment.center,
             child: Padding(
@@ -253,13 +260,14 @@ class _UserProfileState extends State<UserProfile> {
                 email,
                 style: TextStyle(
                   fontSize: 18,
-                  color: Color(0xFF2D3047),
+                  color: ColorShades.primaryColor1,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Tahoma',
                 ),
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Align(
             alignment: Alignment.center,
             child: ElevatedButton.icon(
@@ -268,19 +276,20 @@ class _UserProfileState extends State<UserProfile> {
                   editMode = true;
                 });
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.edit,
                 color: Colors.white,
               ),
-              label: Text(
+              label: const Text(
                 'Edit profile information',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Tahoma',
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                primary: Color(0xFF2D3047),
+                backgroundColor: ColorShades.primaryColor1,
               ),
             ),
           ),
@@ -295,21 +304,21 @@ class _UserProfileState extends State<UserProfile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Align(
           alignment: Alignment.center,
           child: Stack(
             children: [
               CircleAvatar(
                 radius: 80,
-                backgroundColor: Color(0xFF2D3047),
+                backgroundColor: ColorShades.primaryColor1,
                 child: CircleAvatar(
                   radius: 78,
-                  backgroundColor: Colors.yellow[700],
+                  backgroundColor: ColorShades.primaryColor4,
                   child: Icon(
                     Icons.account_circle,
                     size: 160,
-                    color: Color(0xFF2D3047),
+                    color: ColorShades.primaryColor1,
                   ),
                 ),
               ),
@@ -322,15 +331,18 @@ class _UserProfileState extends State<UserProfile> {
                   },
                   child: CircleAvatar(
                     radius: 20,
-                    backgroundColor: Color(0xFF2D3047),
-                    child: Icon(Icons.camera_alt, color: Colors.yellow[700]),
+                    backgroundColor: ColorShades.primaryColor1,
+                    child: Icon(
+                      Icons.camera_alt,
+                      color: ColorShades.primaryColor4,
+                    ),
                   ),
                 ),
               ),
             ],
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Align(
           alignment: Alignment.centerLeft,
           child: Padding(
@@ -339,14 +351,15 @@ class _UserProfileState extends State<UserProfile> {
               'Change profile picture',
               style: TextStyle(
                 fontSize: 18,
-                color: Color(0xFF2D3047),
+                color: ColorShades.primaryColor1,
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline,
+                fontFamily: 'Tahoma',
               ),
             ),
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Align(
           alignment: Alignment.centerLeft,
           child: Padding(
@@ -355,13 +368,14 @@ class _UserProfileState extends State<UserProfile> {
               'Name:',
               style: TextStyle(
                 fontSize: 18,
-                color: Color(0xFF2D3047),
+                color: ColorShades.primaryColor1,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Tahoma',
               ),
             ),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Align(
           alignment: Alignment.center,
           child: Padding(
@@ -371,8 +385,9 @@ class _UserProfileState extends State<UserProfile> {
               decoration: InputDecoration(
                 labelText: 'Click to start typing',
                 labelStyle: TextStyle(
-                  color: Color(0xFF2D3047),
+                  color: ColorShades.primaryColor1,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Tahoma',
                 ),
               ),
               onChanged: (value) {
@@ -383,7 +398,7 @@ class _UserProfileState extends State<UserProfile> {
             ),
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Align(
           alignment: Alignment.centerLeft,
           child: Padding(
@@ -392,13 +407,14 @@ class _UserProfileState extends State<UserProfile> {
               'Email:',
               style: TextStyle(
                 fontSize: 18,
-                color: Color(0xFF2D3047),
+                color: ColorShades.primaryColor1,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Tahoma',
               ),
             ),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Align(
           alignment: Alignment.center,
           child: Padding(
@@ -409,8 +425,9 @@ class _UserProfileState extends State<UserProfile> {
               decoration: InputDecoration(
                 labelText: 'Click to start typing',
                 labelStyle: TextStyle(
-                  color: Color(0xFF2D3047),
+                  color: ColorShades.primaryColor1,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Tahoma',
                 ),
               ),
               onChanged: (value) {
@@ -421,7 +438,7 @@ class _UserProfileState extends State<UserProfile> {
             ),
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Align(
           alignment: Alignment.bottomRight,
           child: Padding(
@@ -432,15 +449,16 @@ class _UserProfileState extends State<UserProfile> {
                   editMode = false;
                 });
               },
-              child: Text(
+              child: const Text(
                 'Save edits',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
+                  fontFamily: 'Tahoma',
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                primary: Color(0xFF2D3047),
+                backgroundColor: ColorShades.primaryColor1,
               ),
             ),
           ),
@@ -452,88 +470,18 @@ class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: const DrawerWidget(),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF2D3047),
-        leading: IconButton(
-          onPressed: () {
-            //navigatetoMenu(context);
-          },
-          icon: Icon(
-            Icons.menu,
-            color: Colors.yellow[700],
-            size: 40,
-          ),
-        ),
-        centerTitle: true,
-        title: Text(
-          'MediHealth',
-          style: TextStyle(
-            color: Colors.yellow[700],
-            fontSize: 40,
-            fontFamily: 'Tahoma',
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        toolbarHeight: 60,
-        actions: [
-          Column(
-            children: [
-              Icon(
-                Icons.help_outline,
-                color: Colors.yellow[700],
-                size: 30,
-              ),
-              Text(
-                "Help",
-                style: TextStyle(
-                  color: Colors.yellow[700],
-                ),
-              )
-            ],
-          ),
-          const SizedBox(width: 20)
-        ],
-      ),
-      // appBar: MediAppBar(importedKey: scaffoldKey),
-      // key: scaffoldKey,
+      drawer: const DrawerWidget(),
+      appBar: MediAppBar(importedKey: scaffoldKey),
+      key: scaffoldKey,
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Stack(
               children: [
                 if (!editMode) userProfileContent(),
                 if (editMode) editProfileContent(),
               ],
             ),
-      bottomNavigationBar: BottomAppBar(
-        color: Color(0xFF2D3047),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              IconButton(
-                onPressed: () {
-                  // Handle back arrow icon click
-                },
-                icon: Icon(Icons.arrow_back, color: Colors.yellow[700]),
-              ),
-              Text(
-                'Back',
-                style: TextStyle(
-                  color: Colors.yellow[700],
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      bottomNavigationBar: const BottomBar(),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(home: UserProfile(userID: 'YOUR_USER_ID')));
 }

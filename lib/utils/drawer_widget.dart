@@ -1,12 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/screens/drawer_screens/accessibility/accessibility_features.dart';
+import 'package:practice_app/screens/drawer_screens/my_circle.dart';
 import 'package:practice_app/screens/drawer_screens/user_profile.dart';
-import 'package:practice_app/screens/drawer_screens/emergency_contacts/emergency_contact_screen.dart';
 import 'package:practice_app/screens/landing_page/landing_page.dart';
 import 'package:practice_app/screens/old_media_page/old_media.dart';
 import 'color_shades.dart';
-import '../screens/drawer_screens/personal_notes/personal_note_screen.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({Key? key}) : super(key: key);
@@ -73,12 +72,14 @@ class DrawerWidget extends StatelessWidget {
   }
 
   void navigatetoUserProfileScreen(context) {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final User? user = _auth.currentUser;
-    final String uid = user!.uid;
+    // final FirebaseAuth _auth = FirebaseAuth.instance;
+    // final User? user = _auth.currentUser;
+    // final String uid = user!.uid;
 
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => UserProfile(userID: uid)));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const UserProfile(userID: 'YOUR USER ID')));
   }
 
   void navigagetoLandingPageScreen(context) {
@@ -99,14 +100,15 @@ class DrawerWidget extends StatelessWidget {
         MaterialPageRoute(builder: (context) => const AccessibilityFeatures()));
   }
 
-  void navigatetoPersonalNotesScreen(context) {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final User? user = _auth.currentUser;
-    final String uid = user!.uid;
+  void navigatetoCircleScreen(context) {
+    // final FirebaseAuth _auth = FirebaseAuth.instance;
+    // final User? user = _auth.currentUser;
+    // final String uid = user!.uid;
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => PersonalNoteScreen(userID: uid)));
+          builder: (context) => MyCircle(),
+        ));
   }
 
   void navigatetoOldMediaScreen(context) {
@@ -191,7 +193,7 @@ class DrawerWidget extends StatelessWidget {
                 label: "My Circle",
                 icon: Icons.people,
                 ftor: () {
-                  navigatetoPersonalNotesScreen(context);
+                  navigatetoCircleScreen(context);
                 }),
             drawerMenuOption(
                 label: "Old Media",
@@ -220,7 +222,9 @@ class DrawerWidget extends StatelessWidget {
                 ),
                 trailing: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    if (Navigator.canPop(context)) {
+                      Navigator.pop(context);
+                    }
                   },
                   icon: Icon(
                     Icons.cancel_outlined,

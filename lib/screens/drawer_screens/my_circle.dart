@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:practice_app/utils/app_bar.dart';
+import 'package:practice_app/utils/bottom_bar.dart';
+import 'package:practice_app/utils/drawer_widget.dart';
+import 'package:practice_app/utils/utils_all.dart';
 
 class ProfileCircle extends StatelessWidget {
+  const ProfileCircle({Key? key, this.size = 50.0}) : super(key: key);
   final double size;
-
-  ProfileCircle({this.size = 50.0});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class ProfileCircle extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: const Color(0xFF2D3047),
+        color: ColorShades.primaryColor1,
       ),
       child: Center(
         child: Icon(
@@ -27,56 +29,20 @@ class ProfileCircle extends StatelessWidget {
 }
 
 class MyCircle extends StatelessWidget {
+  MyCircle({Key? key}) : super(key: key);
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF2D3047),
-        leading: IconButton(
-          onPressed: () {
-            //navigatetoMenu(context);
-          },
-          icon: Icon(
-            Icons.menu,
-            color: Colors.yellow[700],
-            size: 40,
-          ),
-        ),
-        centerTitle: false,
-        title: Text(
-          'MediHealth',
-          style: TextStyle(
-            color: Colors.yellow[700],
-            fontSize: 40,
-            fontFamily: 'Tahoma',
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        toolbarHeight: 60,
-        actions: [
-          Column(
-            children: [
-              Icon(
-                Icons.help_outline,
-                color: Colors.yellow[700],
-                size: 30,
-              ),
-              Text(
-                "Help",
-                style: TextStyle(
-                  color: Colors.yellow[700],
-                ),
-              )
-            ],
-          ),
-          const SizedBox(width: 20)
-        ],
-      ),
+      drawer: const DrawerWidget(),
+      appBar: MediAppBar(importedKey: scaffoldKey),
+      key: scaffoldKey,
       body: Column(
         children: [
-          SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const SizedBox(height: 20),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Row(
               children: [
                 Text(
@@ -93,7 +59,7 @@ class MyCircle extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ProfileCircle(size: 60.0),
@@ -103,7 +69,7 @@ class MyCircle extends StatelessWidget {
                     ProfileCircle(size: 60.0),
                   ],
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Stack(
                   alignment: Alignment.center,
                   children: [
@@ -112,7 +78,7 @@ class MyCircle extends StatelessWidget {
                       height: 220,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: const Color(0xFF2D3047),
+                        color: ColorShades.primaryColor1,
                       ),
                     ),
                     Container(
@@ -120,9 +86,9 @@ class MyCircle extends StatelessWidget {
                       height: 200,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.yellow[700],
+                        color: ColorShades.primaryColor4,
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Icon(
                           Icons.person,
                           color: Colors.white,
@@ -132,8 +98,8 @@ class MyCircle extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 30),
-                Row(
+                const SizedBox(height: 30),
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ProfileCircle(size: 60.0),
@@ -148,37 +114,7 @@ class MyCircle extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Color(0xFF2D3047),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              IconButton(
-                onPressed: () {
-                  // Handle back arrow icon click
-                },
-                icon: Icon(Icons.arrow_back, color: Colors.yellow[700]),
-              ),
-              Text(
-                'Back',
-                style: TextStyle(
-                  color: Colors.yellow[700],
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      bottomNavigationBar: const BottomBar(),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: MyCircle(),
-  ));
 }

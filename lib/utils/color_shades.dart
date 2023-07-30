@@ -21,4 +21,5 @@ class ColorShades {
   // static Color secondaryColor1 = const Color(0xFFDC143C);
   // static Color secondaryColor2 = const Color(0xFFDC143C);
   // static Color secondaryColor3 = const Color(0xFFFFA500);
+  */
 }
