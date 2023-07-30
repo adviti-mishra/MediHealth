@@ -6,7 +6,7 @@ import 'package:practice_app/screens/auth/login/login_page.dart';
 import 'package:practice_app/screens/auth/signup/signup.dart';
 //DELETE EVENTUALLY
 import 'package:practice_app/screens/settings/settings.dart';
-import 'package:practice_app/screens/landingPage/promptPage.dart';
+import 'package:practice_app/screens/promptPage/promptPage.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:practice_app/screens/auth/signup/signup.dart';
 import '../../../utils/utils_all.dart';
 import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
-import 'package:practice_app/screens/landingPage/promptPage_message.dart';
-import 'package:practice_app/screens/landingPage/promptPage_tile.dart';
+import 'package:practice_app/screens/promptPage/promptPage_message.dart';
+import 'package:practice_app/screens/promptPage/promptPage_tile.dart';
 
 
 
