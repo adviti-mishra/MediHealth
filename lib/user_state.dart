@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/screens/auth/login/login_page.dart';
+import 'package:practice_app/screens/drawer_screens/my_circle.dart';
+import 'package:practice_app/screens/drawer_screens/user_profile.dart';
 import 'package:practice_app/screens/home_page/medicine/medicine_screen.dart';
 import 'package:practice_app/screens/landing_page/landing_page.dart';
 
@@ -14,6 +16,8 @@ class UserState extends StatelessWidget {
         // Listens to any changes in the authentication state
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, userSnapshot) {
+          return MyCircle();
+          //UserProfile(userID: "0");
           // case 1 : user is not logged in
           if (userSnapshot.data == null) {
             print('User has not logged in yet');
