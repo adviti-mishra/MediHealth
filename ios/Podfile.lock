@@ -654,7 +654,7 @@ PODS:
   - firebase_core (2.14.0):
     - Firebase/CoreOnly (= 10.10.0)
     - Flutter
-  - FirebaseAppCheckInterop (10.11.0)
+  - FirebaseAppCheckInterop (10.12.0)
   - FirebaseAuth (10.10.0):
     - FirebaseAppCheckInterop (~> 10.0)
     - FirebaseCore (~> 10.0)
@@ -665,7 +665,7 @@ PODS:
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/Logger (~> 7.8)
-  - FirebaseCoreInternal (10.11.0):
+  - FirebaseCoreInternal (10.12.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
   - FirebaseFirestore (10.10.0):
     - abseil/algorithm (~> 1.20220623.0)
@@ -683,7 +683,7 @@ PODS:
   - Flutter (1.0.0)
   - flutter_tts (0.0.1):
     - Flutter
-  - GoogleUtilities/AppDelegateSwizzler (7.11.1):
+  - GoogleUtilities/AppDelegateSwizzler (7.11.4):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
@@ -828,21 +828,22 @@ SPEC CHECKSUMS:
   Firebase: facd334e557a979bd03a0b58d90fd56b52b8aba0
   firebase_auth: 9905bc3d82328b5050a8b7cb410a959f150b6549
   firebase_core: 85b6664038311940ad60584eaabc73103c61f5de
-  FirebaseAppCheckInterop: 255b6c0292fe5da995c8b2df0c02f6a3ca7f61b4
+  FirebaseAppCheckInterop: f95a4feb9089867aff1a4bdc2ce309137e07736a
   FirebaseAuth: 5ddbe23ebc4e647469261f5c59cd12a04f37c8e6
   FirebaseCore: d027ff503d37edb78db98429b11f580a24a7df2a
-  FirebaseCoreInternal: 9e46c82a14a3b3a25be4e1e151ce6d21536b89c0
+  FirebaseCoreInternal: 950500ad8a08963657f6d8c67b579740c06d6aa1
   FirebaseFirestore: b3bb12a497c9d13e80ec3158dbb75ded03592e8d
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_tts: 0f492aab6accf87059b72354fcb4ba934304771d
-  GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
+  GoogleUtilities: c63691989bf362ba0505507da00eeb326192e83e
   "gRPC-C++": 0968bace703459fd3e5dcb0b2bed4c573dbff046
   gRPC-Core: 17108291d84332196d3c8466b48f016fc17d816d
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
+  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
-  PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
 
 PODFILE CHECKSUM: d1b6663fac464861dda0cb669c13e1a023801f39

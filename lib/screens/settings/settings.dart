@@ -1,10 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/auth/signup/signup.dart';
+import 'package:practice_app/screens/drawer_screens/user_profile.dart';
+import 'package:practice_app/utils/app_bar.dart';
+import 'package:practice_app/utils/bottom_bar.dart';
+import 'package:practice_app/utils/drawer_widget.dart';
 import '../../../../utils/utils_all.dart';
 import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
-import 'package:flutter/gestures.dart';
 import 'package:practice_app/screens/settings/settings_title.dart';
 
 class Settings extends StatefulWidget {
@@ -21,11 +23,16 @@ class _SettingsState extends State<Settings> {
   bool highContrastEnabled = false;
   bool somethingElseEnabled = false;
   double _speechSpeed = 5;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const DrawerWidget(),
+      appBar: MediAppBar(importedKey: scaffoldKey),
+      key: scaffoldKey,
       body: settingPageContent(context),
+      bottomNavigationBar: const BottomBar(),
     );
   }
 
@@ -37,13 +44,12 @@ class _SettingsState extends State<Settings> {
       ),
       child: Column(
         children: [
-          verticalSpace(80),
+          verticalSpace(20),
           settingsTitle(context),
           verticalSpace(20),
           textSize(),
           textToSpeech(),
           colorScheme(),
-          backWelcomeButton(),
         ],
       ),
     );
@@ -54,14 +60,10 @@ class _SettingsState extends State<Settings> {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          left: BorderSide(color: Color(0xff102542),
-            width: 4.0), 
-          right: BorderSide(color: Color(0xff102542),
-            width: 4.0), 
-          top: BorderSide(color: Color(0xff102542),
-            width: 4.0), 
-          bottom: BorderSide(color: Color(0xff102542),
-            width: 2.0),
+          left: BorderSide(color: Color(0xff102542), width: 4.0),
+          right: BorderSide(color: Color(0xff102542), width: 4.0),
+          top: BorderSide(color: Color(0xff102542), width: 4.0),
+          bottom: BorderSide(color: Color(0xff102542), width: 2.0),
         ),
       ),
       padding: const EdgeInsets.all(20.0),
@@ -87,7 +89,7 @@ class _SettingsState extends State<Settings> {
             alignment: Alignment.bottomLeft,
             child: Row(
               children: [
-                Text( 
+                Text(
                   "Size",
                   style: TextStyle(
                     color: Color(0xff102542),
@@ -128,12 +130,12 @@ class _SettingsState extends State<Settings> {
   }
 
   // Text Size slider content
-  Container textSizeSlider(){
+  Container textSizeSlider() {
     return Container(
       width: 330,
       decoration: new BoxDecoration(
         color: Colors.white,
-          borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
+        borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
       ),
       child: new Slider(
         value: _fontSize,
@@ -156,14 +158,10 @@ class _SettingsState extends State<Settings> {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          left: BorderSide(color: Color(0xff102542),
-            width: 4.0), 
-          right: BorderSide(color: Color(0xff102542),
-            width: 4.0), 
-          top: BorderSide(color: Color(0xff102542),
-            width: 2.0), 
-          bottom: BorderSide(color: Color(0xff102542),
-            width: 2.0),
+          left: BorderSide(color: Color(0xff102542), width: 4.0),
+          right: BorderSide(color: Color(0xff102542), width: 4.0),
+          top: BorderSide(color: Color(0xff102542), width: 2.0),
+          bottom: BorderSide(color: Color(0xff102542), width: 2.0),
         ),
       ),
       padding: const EdgeInsets.all(20.0),
@@ -191,7 +189,7 @@ class _SettingsState extends State<Settings> {
             alignment: Alignment.bottomLeft,
             child: Row(
               children: [
-                Text( 
+                Text(
                   "Speed",
                   style: TextStyle(
                     color: Color(0xff102542),
@@ -248,12 +246,12 @@ class _SettingsState extends State<Settings> {
   }
 
   // Text To Speech Speed
-  Container textToSpeechSpeed(){
+  Container textToSpeechSpeed() {
     return Container(
       width: 330,
       decoration: new BoxDecoration(
         color: Colors.white,
-          borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
+        borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
       ),
       child: new Slider(
         value: _speechSpeed,
@@ -270,83 +268,78 @@ class _SettingsState extends State<Settings> {
       ),
     );
   }
-    
 
   // Color Scheme field
-Container colorScheme() {
-  return Container(
-    decoration: BoxDecoration(
+  Container colorScheme() {
+    return Container(
+      decoration: BoxDecoration(
         border: Border(
-          left: BorderSide(color: Color(0xff102542),
-            width: 4.0), 
-          right: BorderSide(color: Color(0xff102542),
-            width: 4.0), 
-          top: BorderSide(color: Color(0xff102542),
-            width: 2.0), 
-          bottom: BorderSide(color: Color(0xff102542),
-            width: 4.0),
+          left: BorderSide(color: Color(0xff102542), width: 4.0),
+          right: BorderSide(color: Color(0xff102542), width: 4.0),
+          top: BorderSide(color: Color(0xff102542), width: 2.0),
+          bottom: BorderSide(color: Color(0xff102542), width: 4.0),
         ),
       ),
-    padding: const EdgeInsets.all(20.0),
-    child: Column(
-      children: [
-        Align(
-          alignment: Alignment.bottomLeft,
-          child: Row(
-            children: [
-              Text(
-                "Color Scheme",
-                style: TextStyle(
-                  color: Color(0xff102542),
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Row(
+              children: [
+                Text(
+                  "Color Scheme",
+                  style: TextStyle(
+                    color: Color(0xff102542),
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        verticalSpace(20),
-        Align(
-          alignment: Alignment.bottomLeft,
-          child: Row(
-            children: [
-              Text( 
-                "High Contrast",
-                style: TextStyle(
-                  color: Color(0xff102542),
-                  fontSize: 24,
-                  fontWeight: FontWeight.normal,
+          verticalSpace(20),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Row(
+              children: [
+                Text(
+                  "High Contrast",
+                  style: TextStyle(
+                    color: Color(0xff102542),
+                    fontSize: 24,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
-              ),
-              SizedBox(width: 175),
-              highContrastToggle(),
-            ],
+                SizedBox(width: 175),
+                highContrastToggle(),
+              ],
+            ),
           ),
-        ),
-        verticalSpace(10),
-        Align(
-          alignment: Alignment.bottomLeft,
-          child: Row(
-            children: [
-              Text( 
-                "Something Else",
-                style: TextStyle(
-                  color: Color(0xff102542),
-                  fontSize: 24,
-                  fontWeight: FontWeight.normal,
+          verticalSpace(10),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Row(
+              children: [
+                Text(
+                  "Something Else",
+                  style: TextStyle(
+                    color: Color(0xff102542),
+                    fontSize: 24,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
-              ),
-              SizedBox(width: 154),
-              somethingElseToggle(),
-            ],
+                SizedBox(width: 154),
+                somethingElseToggle(),
+              ],
+            ),
           ),
-        ),
-      ],
-    ),
-  );
-}
+        ],
+      ),
+    );
+  }
 
-Switch highContrastToggle() {
+  Switch highContrastToggle() {
     return Switch(
       activeTrackColor: Color.fromARGB(200, 16, 37, 66),
       activeColor: Color(0xff102542),
@@ -373,29 +366,6 @@ Switch highContrastToggle() {
           somethingElseEnabled = value;
         });
       },
-    );
-  }
-
-
-//WILL BE DELETED ONCE DRAWER IS PUT IN
-  // Back Button
-  TextButton backWelcomeButton() {
-    return TextButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Welcome()
-          )
-        );
-      },
-      child: const Text(
-        "Back",
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 24,
-        ),
-      )
     );
   }
 }
