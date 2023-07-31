@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/auth/login/login_page.dart';
+import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
 import 'package:practice_app/screens/home_page/medicine/medicine_screen.dart';
 import 'package:practice_app/screens/landing_page/landing_page.dart';
 
@@ -14,19 +14,18 @@ class UserState extends StatelessWidget {
         // Listens to any changes in the authentication state
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, userSnapshot) {
-          //UserProfile(userID: "0");
           // case 1 : user is not logged in
           if (userSnapshot.data == null) {
             print('User has not logged in yet');
             // return Login page
             return LandingPage();
+            return const Welcome();
           }
           // case 2 : user is already logged in
           else if (userSnapshot.hasData) {
             print('User is already logged in in');
             // retrn Medicine page
-            return MedicineScreen(
-                userID: FirebaseAuth.instance.currentUser!.uid);
+            return LandingPage();
           }
           // case 3 : error occurs during authentication process
           else if (userSnapshot.hasError) {

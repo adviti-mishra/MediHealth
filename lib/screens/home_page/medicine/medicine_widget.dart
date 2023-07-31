@@ -14,7 +14,8 @@ class MedicineWidget extends StatefulWidget {
   final String endDate;
   final String moreInfo;
 
-  const MedicineWidget({Key? key, 
+  const MedicineWidget({
+    Key? key,
     required this.uID,
     required this.docID,
     required this.name,

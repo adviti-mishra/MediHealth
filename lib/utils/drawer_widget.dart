@@ -5,6 +5,8 @@ import 'package:practice_app/screens/drawer_screens/my_circle.dart';
 import 'package:practice_app/screens/drawer_screens/user_profile.dart';
 import 'package:practice_app/screens/landing_page/landing_page.dart';
 import 'package:practice_app/screens/old_media_page/old_media.dart';
+import 'package:practice_app/screens/promptPage/promptPage.dart';
+import 'package:practice_app/screens/settings/settings.dart';
 import 'color_shades.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -76,6 +78,7 @@ class DrawerWidget extends StatelessWidget {
     // final User? user = _auth.currentUser;
     // final String uid = user!.uid;
 
+    Navigator.pop(context);
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -96,19 +99,22 @@ class DrawerWidget extends StatelessWidget {
 
   void navigatetoAccessibilityFeaturesScreen(context) {
     Navigator.pop(context);
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const AccessibilityFeatures()));
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Settings()),
+    );
   }
 
   void navigatetoCircleScreen(context) {
     // final FirebaseAuth _auth = FirebaseAuth.instance;
     // final User? user = _auth.currentUser;
     // final String uid = user!.uid;
+
+    Navigator.pop(context);
     Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MyCircle(),
-        ));
+      context,
+      MaterialPageRoute(builder: (context) => MyCircle()),
+    );
   }
 
   void navigatetoOldMediaScreen(context) {
@@ -120,6 +126,18 @@ class DrawerWidget extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => OldMedia()),
+    );
+  }
+
+  void navigatetoPromptScreen(context) {
+    // final FirebaseAuth _auth = FirebaseAuth.instance;
+    // final User? user = _auth.currentUser;
+    // final String uid = user!.uid;
+
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const PromptPage()),
     );
   }
 
@@ -200,6 +218,12 @@ class DrawerWidget extends StatelessWidget {
                 icon: Icons.perm_media,
                 ftor: () {
                   navigatetoOldMediaScreen(context);
+                }),
+            drawerMenuOption(
+                label: "Prompt",
+                icon: Icons.perm_media,
+                ftor: () {
+                  navigatetoPromptScreen(context);
                 }),
             Divider(
               thickness: 2,
