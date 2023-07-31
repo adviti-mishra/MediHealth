@@ -14,8 +14,6 @@ class UserProfile extends StatefulWidget {
   _UserProfileState createState() => _UserProfileState();
 }
 
-var scaffoldKey = GlobalKey<ScaffoldState>();
-
 class _UserProfileState extends State<UserProfile> {
   bool editMode = false;
   bool _isLoading = false;
@@ -23,6 +21,7 @@ class _UserProfileState extends State<UserProfile> {
   String name = "";
   String email = "";
   String createdAt = "";
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {

@@ -1,9 +1,9 @@
-// TO DO : implement getInfoTile similar to getInfoTile of login page
-
 import 'package:flutter/material.dart';
 import 'package:practice_app/utils/utils_all.dart';
 
-Center forgotPasswordTile({required Form recoveryEmail, required MaterialButton submitButton}) {
+Center welcomeTile(
+    {required MaterialButton loginPageButton,
+    required MaterialButton signupPageButton}) {
   return Center(
     child: Padding(
       padding: const EdgeInsets.all(20.0),
@@ -18,11 +18,19 @@ Center forgotPasswordTile({required Form recoveryEmail, required MaterialButton 
             padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 45),
             child: Column(
               children: [
-                // Email
-                recoveryEmail,
+                Text(
+                  'Login or Sign Up Below',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
                 verticalSpace(20),
-                // Submit
-                submitButton,
+                // Log In Button
+                loginPageButton,
+                verticalSpace(20),
+                // Sign In Button
+                signupPageButton,
               ],
             ),
           ),

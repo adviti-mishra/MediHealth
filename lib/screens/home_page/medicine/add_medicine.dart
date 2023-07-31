@@ -279,7 +279,7 @@ class _AddMedicine extends State<AddMedicine> {
                   ),
               textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(context)
+                    primary: Theme.of(context)
                         .colorScheme
                         .background // button text color
                     ),
@@ -333,10 +333,10 @@ class _AddMedicine extends State<AddMedicine> {
                   ),
               textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(context)
-                        .colorScheme
-                        .background // button text color
-                    ),
+                  primary: Theme.of(context)
+                      .colorScheme
+                      .primary, // button text color
+                ),
               ),
             ),
             child: child!,

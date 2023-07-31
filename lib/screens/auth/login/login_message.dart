@@ -1,26 +1,38 @@
 import 'package:flutter/material.dart';
 
 Column welcomeBackMessage(BuildContext context) {
-  return const Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: const [
       Text(
         'MediHealth',
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: 48, fontWeight: FontWeight.bold, color: Colors.white),
+            fontSize: 48,
+            fontWeight: FontWeight.bold,
+            color: Color(0xff102542)),
+      ),
+      SizedBox(
+        height: 20,
       ),
       Text(
-        'welcome back!',
+        'Welcome Back!',
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            color: Color(0xff102542)),
+      ),
+      SizedBox(
+        height: 10,
       ),
       Text(
-        'please fill in your credentials',
+        'Please Fill In Your Information',
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Color(0xff102542)),
       )
     ],
   );

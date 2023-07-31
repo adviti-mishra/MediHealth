@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:practice_app/screens/auth/signup/signup.dart';
 import '../../../utils/utils_all.dart';
 import 'package:practice_app/screens/auth/login/login_data_tile.dart';
 import 'package:practice_app/screens/auth/login/login_message.dart';
-import 'package:practice_app/screens/auth/login/forgot_password_link.dart';
+import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
+import 'package:practice_app/screens/auth/forgot_password/forgot_password_page.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -33,18 +35,17 @@ class _LoginState extends State<Login> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: Colors.white,
       ),
       child: Column(
         children: [
-          verticalSpace(20),
+          verticalSpace(80),
           welcomeBackMessage(context),
-          verticalSpace(20),
           getInfoTile(
-              emailPassword: emailPassword(),
-              forgotPassword: navigate_to_forgotPassword(context)),
-          verticalSpace(20),
-          loginButton(),
+              emailPassword: emailPassword(), loginButton: loginButton()),
+          forgotButton(),
+          signupPageButton(),
+          backWelcomeButton(),
         ],
       ),
     );
@@ -102,12 +103,24 @@ class _LoginState extends State<Login> {
 
   // Email field
   Column emailField() {
-    return Column(children: [
-      Align(
-          alignment: Alignment.bottomLeft,
-          child: mandatoryHeader(desiredHeader: "email: ")),
-      emailValidation()
-    ]);
+    return Column(
+      children: [
+        Align(
+            alignment: Alignment.bottomLeft,
+            child: Row(children: [
+              Text(
+                "Email",
+                style: TextStyle(
+                  color: ColorShades.maize,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ])),
+        verticalSpace(10),
+        emailValidation(),
+      ],
+    );
   }
 
   // Email validation
@@ -116,7 +129,7 @@ class _LoginState extends State<Login> {
       keyboardType: TextInputType.emailAddress,
       controller: _emailTextController,
       validator: (email) {
-        if (email!.isEmpty || !email.contains('@')) {
+        if (email!.isEmpty || !email.contains('@') || !email.contains('@')) {
           return "Please enter a valid email address";
         } else {
           return null;
@@ -124,31 +137,43 @@ class _LoginState extends State<Login> {
       },
       style: TextStyle(color: ColorShades.text2),
       decoration: InputDecoration(
-        hintText: 'Format: someone@example.com',
+        hintText: 'name@example.com',
         hintStyle:
             TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorShades.text1, width: 2.0),
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        fillColor: const Color(0xFFCDD7D6),
+        border: OutlineInputBorder(),
+        fillColor: Colors.white,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
-          borderRadius: BorderRadius.circular(15.0),
+        ),
+        errorStyle: TextStyle(
+          color: Colors.red,
         ),
       ),
+      cursorColor: Colors.black,
     );
   }
 
   // Password field
   Column passwordField() {
-    return Column(children: [
-      Align(
-          alignment: Alignment.bottomLeft,
-          child: mandatoryHeader(desiredHeader: "password: ")),
-      passwordValidation()
-    ]);
+    return Column(
+      children: [
+        Align(
+            alignment: Alignment.bottomLeft,
+            child: Row(children: [
+              Text(
+                "Password",
+                style: TextStyle(
+                  color: ColorShades.maize,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ])),
+        verticalSpace(10),
+        passwordValidation(),
+      ],
+    );
   }
 
   // Password validation
@@ -159,7 +184,7 @@ class _LoginState extends State<Login> {
       controller: _passwordTextController,
       validator: (value) {
         if (value!.isEmpty || value.length < 8) {
-          return "Please enter a password containing more than 8 characters";
+          return "Please enter password with at least 8 characters";
         } else {
           return null;
         }
@@ -172,18 +197,20 @@ class _LoginState extends State<Login> {
               _obscureText = !_obscureText;
             });
           },
-          child: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+          child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility,
+              color: Color(0xff102542)),
         ),
         filled: true,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        fillColor: const Color(0xFFCDD7D6),
+        border: OutlineInputBorder(),
+        fillColor: Colors.white,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
-          borderRadius: BorderRadius.circular(15.0),
+        ),
+        errorStyle: TextStyle(
+          color: Colors.red,
         ),
       ),
+      cursorColor: Colors.black,
     );
   }
 
@@ -191,30 +218,75 @@ class _LoginState extends State<Login> {
   MaterialButton loginButton() {
     return MaterialButton(
       onPressed: _submitLoginForm,
-      color: Colors.white,
-      child: const Padding(
-        padding: EdgeInsets.all(10.0),
+      color: ColorShades.maize,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
             Text(
               'Login',
               style: TextStyle(
-                color: Colors.black,
+                color: Color(0xff102542),
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
             ),
-            SizedBox(
-              width: 10,
-            ),
             Icon(
               Icons.login,
-              color: Colors.black,
+              color: Color(0xff102542),
             )
           ],
         ),
       ),
     );
+  }
+
+  // Forgot Button
+  TextButton forgotButton() {
+    return TextButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const ForgotPassword()));
+        },
+        child: const Text(
+          'Forgot Password?',
+          style: TextStyle(
+            color: Color(0xff102542),
+            fontSize: 24,
+          ),
+        ));
+  }
+
+  // Signup Page Button
+  TextButton signupPageButton() {
+    return TextButton(
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const SignUp()));
+        },
+        child: const Text(
+          "Don't have an account? Sign Up",
+          style: TextStyle(
+            color: Color(0xff102542),
+            fontSize: 24,
+          ),
+        ));
+  }
+
+  // Back Button
+  TextButton backWelcomeButton() {
+    return TextButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Welcome()));
+        },
+        child: const Text(
+          "Back",
+          style: TextStyle(
+            color: Color(0xff102542),
+            fontSize: 24,
+          ),
+        ));
   }
 }
