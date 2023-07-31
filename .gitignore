@@ -27,12 +27,9 @@ migrate_working_dir/
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
-../.flutter-plugins-dependencies
-../.dart_tool/package_config.json
 .packages
 .pub-cache/
 .pub/
-pubspec.lock
 /build/
 
 # Symbolication related
@@ -45,3 +42,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Needed for Dishita :(
+build/ios/Debug-iphonesimulator/gRPC-Core/grpc.framework/grpc

@@ -9,8 +9,8 @@ class AccessibilityFeatures extends StatefulWidget {
 
 class _AccessibilityFeatures extends State<AccessibilityFeatures> {
   Column accessibilityContent() {
-    return const Column(
-      children: [
+    return Column(
+      children: const [
         Text('To implement in main app: '),
         Text(
             '1. color schemes/font size adjustment for various visibility-related disabilities,'),
