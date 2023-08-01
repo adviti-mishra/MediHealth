@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:practice_app/utils/color_shades.dart';
+import '../../../../utils/utils_all.dart';
 
 Column settingsTitle(BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
-    children: const [
+    children: [
       Text(
         'Settings',
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: 48, fontWeight: FontWeight.bold, color: Color(0xff102542)),
+            fontSize: 48 * fontSizeMultiplier, fontWeight: FontWeight.bold, color: ColorShades.primaryColor1),
       ),
     ],
   );

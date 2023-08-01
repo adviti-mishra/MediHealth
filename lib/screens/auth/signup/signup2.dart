@@ -141,7 +141,7 @@ class _SignUpState2 extends State<SignUp2> {
           child: Text(
             "Full Name",
             style: TextStyle(
-              color: ColorShades.maize,
+              color: ColorShades.primaryColor4,
               fontSize: 30,
               fontWeight: FontWeight.bold,
             ),
@@ -234,7 +234,7 @@ class _SignUpState2 extends State<SignUp2> {
             Text(
               "Phone Number",
               style: TextStyle(
-                color: ColorShades.maize,
+                color: ColorShades.primaryColor4,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
@@ -293,7 +293,7 @@ class _SignUpState2 extends State<SignUp2> {
             Text(
               "Date of Birth",
               style: TextStyle(
-                color: ColorShades.maize,
+                color: ColorShades.primaryColor4,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
@@ -345,7 +345,7 @@ class _SignUpState2 extends State<SignUp2> {
   MaterialButton createButton() {
     return MaterialButton(
       onPressed: _submitSignUpForm,
-      color: ColorShades.maize,
+      color: ColorShades.primaryColor4,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(
@@ -382,7 +382,7 @@ class _SignUpState2 extends State<SignUp2> {
           )
         );
       },
-      color: ColorShades.maize,
+      color: ColorShades.primaryColor4,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(

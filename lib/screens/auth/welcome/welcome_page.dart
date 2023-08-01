@@ -45,7 +45,7 @@ class _WelcomeState extends State<Welcome> {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const Login()));
       },
-      color: ColorShades.maize,
+      color: ColorShades.primaryColor3,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(
@@ -71,7 +71,7 @@ class _WelcomeState extends State<Welcome> {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const SignUp()));
       },
-      color: ColorShades.maize,
+      color: ColorShades.primaryColor4,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(

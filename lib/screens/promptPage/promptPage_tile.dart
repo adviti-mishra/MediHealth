@@ -8,8 +8,8 @@ Center enterResponseTile({required Form response, required MaterialButton photoB
       child: Container(
         // TO DO : implement the blue box decoration
         decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Color(0xff102542), width: 5)
+          color: ColorShades.text1,
+          border: Border.all(color: ColorShades.primaryColor1, width: 5)
         ),
         child: SingleChildScrollView(
           child: Padding(
@@ -23,7 +23,7 @@ Center enterResponseTile({required Form response, required MaterialButton photoB
                   'Or submit alternative media',
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      fontSize: 20, color: Color(0xff102542)),
+                      fontSize: 20 * fontSizeMultiplier, color: ColorShades.primaryColor1),
                 ),
                 verticalSpace(20),
                 Row(

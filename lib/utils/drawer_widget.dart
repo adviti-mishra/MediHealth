@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/drawer_screens/accessibility/accessibility_features.dart';
 import 'package:practice_app/screens/drawer_screens/my_circle.dart';
 import 'package:practice_app/screens/drawer_screens/user_profile.dart';
 import 'package:practice_app/screens/landing_page/landing_page.dart';
 import 'package:practice_app/screens/old_media_page/old_media.dart';
 import 'package:practice_app/screens/promptPage/promptPage.dart';
 import 'package:practice_app/screens/settings/settings.dart';
+import 'package:practice_app/screens/auth/login/login_page.dart';
 import 'color_shades.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -57,8 +57,8 @@ class DrawerWidget extends StatelessWidget {
             actions: [
               TextButton(
                   onPressed: () {
-                    _auth.signOut();
-                    Navigator.canPop(context) ? Navigator.pop(context) : null;
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => const Login()));
                   },
                   child:
                       Text('Yes', style: TextStyle(color: ColorShades.text2))),
@@ -202,7 +202,7 @@ class DrawerWidget extends StatelessWidget {
                   navigatetoUserProfileScreen(context);
                 }),
             drawerMenuOption(
-                label: "Accessibility",
+                label: "Settings",
                 icon: Icons.settings,
                 ftor: () {
                   navigatetoAccessibilityFeaturesScreen(context);
@@ -247,7 +247,7 @@ class DrawerWidget extends StatelessWidget {
                 trailing: IconButton(
                   onPressed: () {
                     if (Navigator.canPop(context)) {
-                      Navigator.pop(context);
+                      logOutPopup(context);
                     }
                   },
                   icon: Icon(

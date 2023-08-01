@@ -111,7 +111,7 @@ class _LoginState extends State<Login> {
               Text(
                 "Email",
                 style: TextStyle(
-                  color: ColorShades.maize,
+                  color: ColorShades.primaryColor4,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
@@ -164,7 +164,7 @@ class _LoginState extends State<Login> {
               Text(
                 "Password",
                 style: TextStyle(
-                  color: ColorShades.maize,
+                  color: ColorShades.primaryColor4,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
@@ -218,7 +218,7 @@ class _LoginState extends State<Login> {
   MaterialButton loginButton() {
     return MaterialButton(
       onPressed: _submitLoginForm,
-      color: ColorShades.maize,
+      color: ColorShades.primaryColor4,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(

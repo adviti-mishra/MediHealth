@@ -99,3 +99,8 @@ Row mandatoryHeader({required String desiredHeader}) {
     content(desiredContent: '*', desiredColor: Colors.red)
   ]);
 }
+
+// multiplier for settings
+double fontSizeMultiplier = 1.0;
+double speechSpeed = 1.0;
+
