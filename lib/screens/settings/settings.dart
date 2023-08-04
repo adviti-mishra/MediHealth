@@ -28,7 +28,7 @@ class _SettingsState extends State<Settings> {
       drawer: const DrawerWidget(),
       appBar: MediAppBar(importedKey: scaffoldKey),
       key: scaffoldKey,
-      body: SingleChildScrollView(child: settingPageContent(context),),
+      body: SingleChildScrollView(child: settingPageContent(context)),
       bottomNavigationBar: const BottomBar(),
     );
   }
@@ -123,7 +123,7 @@ class _SettingsState extends State<Settings> {
                       "Aa",
                       style: TextStyle(
                         color: ColorShades.primaryColor1,
-                        fontSize: 25,
+                        fontSize: 20,
                         fontWeight: FontWeight.normal,
                       ),
                     ),

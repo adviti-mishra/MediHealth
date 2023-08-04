@@ -6,6 +6,7 @@ import 'package:practice_app/utils/drawer_widget.dart';
 import '../../../../utils/utils_all.dart';
 import 'package:practice_app/screens/promptPage/promptPage_message.dart';
 import 'package:practice_app/screens/promptPage/promptPage_tile.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PromptPage extends StatefulWidget {
   const PromptPage({Key? key}) : super(key: key);
@@ -100,9 +101,27 @@ class _PromptPageState extends State<PromptPage> {
     );
   }
 
+  // Image and Video Selection
+  Future<void> _selectImageOrVideo(ImageSource source) async 
+  {
+    XFile? mediaFile;
+    if (source == ImageSource.gallery) {
+      mediaFile = await ImagePicker().pickImage(source: source);
+    } 
+    else if (source == ImageSource.camera) {
+      mediaFile = await ImagePicker().pickVideo(source: source, maxDuration: const Duration(seconds: 60));
+    }
+
+    if (mediaFile != null) {
+      // Handle the selected media file (image or video) here.
+      // You can store the file path or display the media using a video player or image widget.
+      // For example, if it's a video, you can initialize a VideoPlayerController and show the video.
+    }
+  }
+
   MaterialButton photoButton() {
     return MaterialButton(
-      onPressed: _submitResponseForm,
+      onPressed: () => _selectImageOrVideo(ImageSource.gallery),
       color: ColorShades.primaryColor1,
       padding: const EdgeInsets.all(20.0),
       child: Row(
@@ -114,7 +133,7 @@ class _PromptPageState extends State<PromptPage> {
 
   MaterialButton videoButton() {
     return MaterialButton(
-      onPressed: _submitResponseForm,
+      onPressed: () => _selectImageOrVideo(ImageSource.gallery),
       color: ColorShades.primaryColor1,
       padding: const EdgeInsets.all(20.0),
       child: Row(
