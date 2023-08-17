@@ -49,57 +49,59 @@ class LandingPage extends StatelessWidget {
       key: scaffoldKey,
       body: Container(
         width: double.infinity,
-        margin: const EdgeInsets.only(top: 20, bottom: 20),
+        margin: const EdgeInsets.only(top: 20),
         child: Center(
-          child: Column(
-            children: [
-              Text(
-                "Hello, ____",
-                style: TextStyle(
-                  color: ColorShades.primaryColor1,
-                  fontSize: 40,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Tahoma',
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text(
+                  "Hello, ____",
+                  style: TextStyle(
+                    color: ColorShades.primaryColor1,
+                    fontSize: 40,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'Tahoma',
+                  ),
                 ),
-              ),
-              const SizedBox(height: 30),
-              Text(
-                "Welcome back to your account",
-                style: TextStyle(
-                  color: ColorShades.primaryColor1,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'Tahoma',
+                const SizedBox(height: 30),
+                Text(
+                  "Welcome back to your account",
+                  style: TextStyle(
+                    color: ColorShades.primaryColor1,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'Tahoma',
+                  ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 20),
-                child: Column(
-                  children: [
-                    userText(
-                      message: "I'm looking forward to seeing...",
-                      imagePath: 'assets/images/user.png',
-                      key: const Key('0'),
-                    ),
-                    userText(
-                      message: "I'm looking forward to seeing...",
-                      imagePath: 'assets/images/user.png',
-                      key: const Key('1'),
-                    ),
-                    userText(
-                      message: "I'm looking forward to seeing...",
-                      imagePath: 'assets/images/user.png',
-                      key: const Key('2'),
-                    ),
-                    userText(
-                      message: "I'm looking forward to seeing...",
-                      imagePath: 'assets/images/user.png',
-                      key: const Key('3'),
-                    ),
-                  ],
+                Container(
+                  margin: const EdgeInsets.only(left: 20),
+                  child: Column(
+                    children: [
+                      userText(
+                        message: "I'm looking forward to seeing...",
+                        imagePath: 'assets/images/user.png',
+                        key: const Key('0'),
+                      ),
+                      userText(
+                        message: "I'm looking forward to seeing...",
+                        imagePath: 'assets/images/user.png',
+                        key: const Key('1'),
+                      ),
+                      userText(
+                        message: "I'm looking forward to seeing...",
+                        imagePath: 'assets/images/user.png',
+                        key: const Key('2'),
+                      ),
+                      userText(
+                        message: "I'm looking forward to seeing...",
+                        imagePath: 'assets/images/user.png',
+                        key: const Key('3'),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

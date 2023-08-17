@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:practice_app/screens/drawer_screens/accessibility/accessibility_features.dart';
 import 'package:practice_app/screens/drawer_screens/my_circle.dart';
 import 'package:practice_app/screens/drawer_screens/user_profile.dart';
+import 'package:practice_app/screens/join_a_circle/join_circle.dart';
 import 'package:practice_app/screens/landing_page/landing_page.dart';
 import 'package:practice_app/screens/old_media_page/old_media.dart';
 import 'package:practice_app/screens/promptPage/promptPage.dart';
@@ -141,6 +142,18 @@ class DrawerWidget extends StatelessWidget {
     );
   }
 
+  void navigatetoJoinCircleScreen(context) {
+    // final FirebaseAuth _auth = FirebaseAuth.instance;
+    // final User? user = _auth.currentUser;
+    // final String uid = user!.uid;
+
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => JoinCircle()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -224,6 +237,12 @@ class DrawerWidget extends StatelessWidget {
                 icon: Icons.perm_media,
                 ftor: () {
                   navigatetoPromptScreen(context);
+                }),
+            drawerMenuOption(
+                label: "Join Circle",
+                icon: Icons.perm_media,
+                ftor: () {
+                  navigatetoJoinCircleScreen(context);
                 }),
             Divider(
               thickness: 2,
