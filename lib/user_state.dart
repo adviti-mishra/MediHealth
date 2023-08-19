@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
-import 'package:practice_app/screens/home_page/medicine/medicine_screen.dart';
 import 'package:practice_app/screens/landing_page/landing_page.dart';
 
 class UserState extends StatelessWidget {

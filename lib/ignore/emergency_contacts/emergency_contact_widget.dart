@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/drawer_screens/emergency_contacts/emergency_contact_details.dart';
+import 'package:practice_app/ignore/emergency_contacts/emergency_contact_details.dart';
 import '../../../utils/utils_all.dart';
 
 class EmergencyContactWidget extends StatefulWidget {

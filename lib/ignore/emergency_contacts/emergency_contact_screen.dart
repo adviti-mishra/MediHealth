@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/drawer_screens/emergency_contacts/add_emergency_contact.dart';
+import 'package:practice_app/ignore/add_emergency_contact.dart';
 import '../../../utils/color_shades.dart';
 import 'emergency_contact_widget.dart';
 
 class EmergencyContactScreen extends StatelessWidget {
   final String userID;
 
-  const EmergencyContactScreen({Key? key, required this.userID}) : super(key: key);
+  const EmergencyContactScreen({Key? key, required this.userID})
+      : super(key: key);
 
   RawMaterialButton addButton(BuildContext context) {
     return RawMaterialButton(
@@ -74,7 +75,8 @@ class EmergencyContactScreen extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return EmergencyContactWidget(
                         uID: userID,
-                        docID: snapshot.data!.docs[index].id.toString(),//index.toString(),
+                        docID: snapshot.data!.docs[index].id
+                            .toString(), //index.toString(),
                         name: snapshot.data!.docs[index]['name'],
                         email: snapshot.data!.docs[index]['email'],
                         phoneNumber: snapshot.data!.docs[index]['phoneNumber'],
