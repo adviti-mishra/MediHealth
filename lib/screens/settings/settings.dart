@@ -7,6 +7,7 @@ import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
 import '../../../../utils/utils_all.dart';
 import 'package:practice_app/screens/settings/settings_title.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -21,6 +22,22 @@ class _SettingsState extends State<Settings> {
   bool highContrastEnabled = false;
   bool somethingElseEnabled = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  // Function to save user settings to shared_preferences
+  Future<void> loadUserSettings() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('textToSpeechEnabled', textToSpeechEnabled);
+    prefs.setBool('highContrastEnabled', highContrastEnabled);
+    prefs.setBool('somethingElseEnabled', somethingElseEnabled);
+    prefs.setDouble('fontSize', fontSizeMultiplier);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadUserSettings();
+  }
+
 
   @override
   Widget build(BuildContext context) {

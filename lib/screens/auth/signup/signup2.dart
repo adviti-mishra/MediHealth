@@ -31,7 +31,7 @@ class _SignUpState2 extends State<SignUp2> {
   final TextEditingController _firstNameTextController = TextEditingController();
   final TextEditingController _lastNameTextController = TextEditingController();
   final TextEditingController _phoneNumberTextController = TextEditingController();
-  final TextEditingController _dobTextController = TextEditingController();
+  String? _circleOwnerTextController ;
   
   final _signUpFormKey = GlobalKey<FormState>();
 
@@ -57,7 +57,7 @@ class _SignUpState2 extends State<SignUp2> {
           verticalSpace(60),
           welcomeIn2Message(context),
           signUp2Tile(
-            nameDOBPhone: nameDOBPhone(),
+            namePhone: namePhone(),
             createButton: createButton(),
             backButton: backButton()
           ),
@@ -73,7 +73,6 @@ class _SignUpState2 extends State<SignUp2> {
     _firstNameTextController.dispose();
     _lastNameTextController.dispose();
     _phoneNumberTextController.dispose();
-    _dobTextController.dispose();
   }
 
   void _submitSignUpForm() async {
@@ -96,7 +95,7 @@ class _SignUpState2 extends State<SignUp2> {
           'lastName': _lastNameTextController.text,
           'email': widget.emailTextController.text,
           'phoneNumber': _phoneNumberTextController.text,
-          'dob': _dobTextController.text,
+          'circleOwner': _circleOwnerTextController,
           'createdAt': Timestamp.now(),
         });
         Navigator.canPop(context) ? Navigator.pop(context) : null;
@@ -113,7 +112,7 @@ class _SignUpState2 extends State<SignUp2> {
   }
 
 // Name, DOB, Phone Number
-  Form nameDOBPhone() {
+  Form namePhone() {
     return Form(
       key: _signUpFormKey,
       child: Column(
@@ -126,7 +125,7 @@ class _SignUpState2 extends State<SignUp2> {
           // BLANK LINE
           verticalSpace(20),
           // DOB
-          dobField(),
+          circleOwnerField(),
         ],
       ),
     );
@@ -283,18 +282,18 @@ class _SignUpState2 extends State<SignUp2> {
     );
   }
 
-  // DOB Number
-  Column dobField() {
+  // Whether you are an Owner
+  Column circleOwnerField() {
     return Column(children: [
       Align(
         alignment: Alignment.bottomLeft,
         child: Row(
           children: [
             Text(
-              "Date of Birth",
+              "Will You Own the Circle?",
               style: TextStyle(
                 color: ColorShades.primaryColor4,
-                fontSize: 30,
+                fontSize: 25,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -302,45 +301,50 @@ class _SignUpState2 extends State<SignUp2> {
         )
       ),
       verticalSpace(10),
-      dobValidation(),
+      circleOwnerValidation(),
     ]);
   }
 
-  // DOB Validation
-  TextFormField dobValidation() {
-    return TextFormField(
-      keyboardType: TextInputType.datetime,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-      controller: _dobTextController,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return "Please enter your date of birth";
-        }
-        else if (value.length != 8) {
-          return "Enter in format MMDDYYYY";
-        }
-        else {
-          return null;
-        }
-      },
-      style: TextStyle(color: ColorShades.text2),
-      decoration: InputDecoration(
-        hintText: 'MM/DD/YYYY',
-        hintStyle:
-            TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
-        filled: true,
-        border: OutlineInputBorder(),
-        fillColor: Colors.white,
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 2.0),
-        ),
-        errorStyle: TextStyle(
-          color: Colors.red,
-        ),
+  // Owner Validation
+  DropdownButtonFormField<String> circleOwnerValidation() {
+  return DropdownButtonFormField<String>(
+    value: _circleOwnerTextController, // Define this variable in your state
+    onChanged: (newValue) {
+      setState(() {
+        _circleOwnerTextController = newValue;
+      });
+    },
+    validator: (value) {
+      if (_circleOwnerTextController == null) {
+        return "Please select an answer";
+      }
+      return null;
+    },
+    decoration: InputDecoration(
+      hintText: 'Select an option',
+      filled: true,
+      border: OutlineInputBorder(),
+      fillColor: Colors.white,
+      errorBorder: OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.red, width: 2.0),
       ),
-    cursorColor: Colors.black,
-    );
-  }
+      errorStyle: TextStyle(
+        color: Colors.red,
+      ),
+    ),
+    items: [
+      DropdownMenuItem<String>(
+        value: 'Yes',
+        child: Text('Yes, I will own the circle'),
+      ),
+      DropdownMenuItem<String>(
+        value: 'No',
+        child: Text('No, I am a participant'),
+      ),
+    ],
+  );
+}
+
 
   MaterialButton createButton() {
     return MaterialButton(

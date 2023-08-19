@@ -23,7 +23,7 @@ class _WelcomeState extends State<Welcome> {
   Container welcomePageContent(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color(0xff102542),
       ),
       child: Column(
@@ -46,11 +46,11 @@ class _WelcomeState extends State<Welcome> {
             context, MaterialPageRoute(builder: (context) => const Login()));
       },
       color: ColorShades.primaryColor3,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
+      child: const Padding(
+        padding: EdgeInsets.all(20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               'Log In',
               style: TextStyle(
@@ -72,11 +72,11 @@ class _WelcomeState extends State<Welcome> {
             context, MaterialPageRoute(builder: (context) => const SignUp()));
       },
       color: ColorShades.primaryColor4,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
+      child: const Padding(
+        padding: EdgeInsets.all(20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               'Sign Up',
               style: TextStyle(
