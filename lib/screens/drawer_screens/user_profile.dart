@@ -5,6 +5,8 @@ import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/utils_all.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
 import 'package:practice_app/utils/color_shades.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key, required this.userID}) : super(key: key);
@@ -27,6 +29,22 @@ class _UserProfileState extends State<UserProfile> {
   void initState() {
     super.initState();
     getUserData();
+  }
+
+  Future<void> _changeProfilePicture() async {
+    final imagePicker = ImagePicker();
+    final pickedImage = await imagePicker.getImage(source: ImageSource.gallery);
+
+    if (pickedImage != null) {
+      // Here, you can handle the selected image, e.g., upload to Firebase Storage.
+      // For simplicity, we'll just update the profile picture locally.
+      setState(() {
+        // Update the profile picture using the selected image path.
+        // For example, you can use `pickedImage.path` as the new image URL.
+        // Replace 'YOUR_NEW_PROFILE_PICTURE_URL' with the actual URL.
+        // userProfileImageUrl = YOUR_NEW_PROFILE_PICTURE_URL;
+      });
+    }
   }
 
   void getUserData() async {
@@ -146,7 +164,7 @@ class _UserProfileState extends State<UserProfile> {
                     right: 0,
                     child: GestureDetector(
                       onTap: () {
-                        // Handle change profile picture button click
+                        _changeProfilePicture();
                       },
                       child: CircleAvatar(
                         radius: 20,
