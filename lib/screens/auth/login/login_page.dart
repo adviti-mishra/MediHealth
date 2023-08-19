@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/screens/auth/signup/signup.dart';
+import 'package:practice_app/screens/promptPage/promptPage.dart';
 import '../../../utils/utils_all.dart';
 import 'package:practice_app/screens/auth/login/login_data_tile.dart';
 import 'package:practice_app/screens/auth/login/login_message.dart';
@@ -72,6 +73,12 @@ class _LoginState extends State<Login> {
         await _auth.signInWithEmailAndPassword(
             email: _emailTextController.text.trim().toLowerCase(),
             password: _passwordTextController.text);
+
+        // Navigate to another page after successful login
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => PromptPage()), // Replace `YourNextPage` with the actual page you want to navigate to.
+        );
       } catch (error) {
         setState(() {
           _isLoading = false;
@@ -83,6 +90,7 @@ class _LoginState extends State<Login> {
       _isLoading = false;
     });
   }
+
 
   // Email and Password
   Form emailPassword() {
@@ -111,7 +119,7 @@ class _LoginState extends State<Login> {
               Text(
                 "Email",
                 style: TextStyle(
-                  color: ColorShades.maize,
+                  color: ColorShades.primaryColor4,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
@@ -164,7 +172,7 @@ class _LoginState extends State<Login> {
               Text(
                 "Password",
                 style: TextStyle(
-                  color: ColorShades.maize,
+                  color: ColorShades.primaryColor4,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
@@ -218,7 +226,7 @@ class _LoginState extends State<Login> {
   MaterialButton loginButton() {
     return MaterialButton(
       onPressed: _submitLoginForm,
-      color: ColorShades.maize,
+      color: ColorShades.primaryColor4,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(

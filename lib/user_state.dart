@@ -24,7 +24,7 @@ class UserState extends StatelessWidget {
           // case 2 : user is already logged in
           else if (userSnapshot.hasData) {
             print('User is already logged in in');
-            // retrn Medicine page
+            // return Landing page
             return LandingPage();
           }
           // case 3 : error occurs during authentication process

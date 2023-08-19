@@ -6,8 +6,8 @@ import 'package:practice_app/utils/app_bar.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
 import '../../../../utils/utils_all.dart';
-import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
 import 'package:practice_app/screens/settings/settings_title.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -18,12 +18,26 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   // values for sliders
-  double _fontSize = 5;
   bool textToSpeechEnabled = false;
   bool highContrastEnabled = false;
   bool somethingElseEnabled = false;
-  double _speechSpeed = 5;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  // Function to save user settings to shared_preferences
+  Future<void> loadUserSettings() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('textToSpeechEnabled', textToSpeechEnabled);
+    prefs.setBool('highContrastEnabled', highContrastEnabled);
+    prefs.setBool('somethingElseEnabled', somethingElseEnabled);
+    prefs.setDouble('fontSize', fontSizeMultiplier);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadUserSettings();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +45,7 @@ class _SettingsState extends State<Settings> {
       drawer: const DrawerWidget(),
       appBar: MediAppBar(importedKey: scaffoldKey),
       key: scaffoldKey,
-      body: settingPageContent(context),
+      body: SingleChildScrollView(child: settingPageContent(context)),
       bottomNavigationBar: const BottomBar(),
     );
   }
@@ -40,7 +54,7 @@ class _SettingsState extends State<Settings> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorShades.text1,
       ),
       child: Column(
         children: [
@@ -60,10 +74,8 @@ class _SettingsState extends State<Settings> {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          left: BorderSide(color: Color(0xff102542), width: 4.0),
-          right: BorderSide(color: Color(0xff102542), width: 4.0),
-          top: BorderSide(color: Color(0xff102542), width: 4.0),
-          bottom: BorderSide(color: Color(0xff102542), width: 2.0),
+          top: BorderSide(color: ColorShades.primaryColor1, width: 4.0),
+          bottom: BorderSide(color: ColorShades.primaryColor1, width: 2.0),
         ),
       ),
       padding: const EdgeInsets.all(20.0),
@@ -76,8 +88,8 @@ class _SettingsState extends State<Settings> {
                 Text(
                   "Text Size",
                   style: TextStyle(
-                    color: Color(0xff102542),
-                    fontSize: 26,
+                    color: ColorShades.primaryColor1,
+                    fontSize: 26 * fontSizeMultiplier,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -92,8 +104,8 @@ class _SettingsState extends State<Settings> {
                 Text(
                   "Size",
                   style: TextStyle(
-                    color: Color(0xff102542),
-                    fontSize: 24,
+                    color: ColorShades.primaryColor1,
+                    fontSize: 24 * fontSizeMultiplier,
                     fontWeight: FontWeight.normal,
                   ),
                 ),
@@ -104,21 +116,34 @@ class _SettingsState extends State<Settings> {
             alignment: Alignment.bottomLeft,
             child: Row(
               children: [
-                Text(
-                  ".5x",
-                  style: TextStyle(
-                    color: Color(0xff102542),
-                    fontSize: 20,
-                    fontWeight: FontWeight.normal,
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Aa",
+                      style: TextStyle(
+                        color: ColorShades.primaryColor1,
+                        fontSize: 10,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
                   ),
                 ),
-                textSizeSlider(),
-                Text(
-                  "2x",
-                  style: TextStyle(
-                    color: Color(0xff102542),
-                    fontSize: 20,
-                    fontWeight: FontWeight.normal,
+                Expanded(
+                  flex: 10,
+                  child: textSizeSlider(),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      "Aa",
+                      style: TextStyle(
+                        color: ColorShades.primaryColor1,
+                        fontSize: 20,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -129,26 +154,27 @@ class _SettingsState extends State<Settings> {
     );
   }
 
+
   // Text Size slider content
   Container textSizeSlider() {
     return Container(
       width: 330,
       decoration: new BoxDecoration(
-        color: Colors.white,
+        color: ColorShades.text1,
         borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
       ),
       child: new Slider(
-        value: _fontSize,
-        activeColor: Color(0xff102542),
-        inactiveColor: ColorShades.maize,
+        value: fontSizeMultiplier,
+        activeColor: ColorShades.primaryColor1,
+        inactiveColor: ColorShades.primaryColor4,
         onChanged: (double s) {
           setState(() {
-            _fontSize = s;
+            fontSizeMultiplier = s;
           });
         },
-        divisions: 9,
-        min: 1.0,
-        max: 10.0,
+        divisions: 10,
+        min: .5,
+        max: 2,
       ),
     );
   }
@@ -158,10 +184,8 @@ class _SettingsState extends State<Settings> {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          left: BorderSide(color: Color(0xff102542), width: 4.0),
-          right: BorderSide(color: Color(0xff102542), width: 4.0),
-          top: BorderSide(color: Color(0xff102542), width: 2.0),
-          bottom: BorderSide(color: Color(0xff102542), width: 2.0),
+          top: BorderSide(color: ColorShades.primaryColor1, width: 2.0),
+          bottom: BorderSide(color: ColorShades.primaryColor1, width: 2.0),
         ),
       ),
       padding: const EdgeInsets.all(20.0),
@@ -171,15 +195,16 @@ class _SettingsState extends State<Settings> {
             alignment: Alignment.bottomLeft,
             child: Row(
               children: [
-                Text(
-                  "Text to Speech",
-                  style: TextStyle(
-                    color: Color(0xff102542),
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    "Text to Speech",
+                    style: TextStyle(
+                      color: ColorShades.primaryColor1,
+                      fontSize: 26 * fontSizeMultiplier,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-                SizedBox(width: 150),
                 textToSpeechToggle(),
               ],
             ),
@@ -192,8 +217,8 @@ class _SettingsState extends State<Settings> {
                 Text(
                   "Speed",
                   style: TextStyle(
-                    color: Color(0xff102542),
-                    fontSize: 24,
+                    color: ColorShades.primaryColor1,
+                    fontSize: 24 * fontSizeMultiplier,
                     fontWeight: FontWeight.normal,
                   ),
                 ),
@@ -204,21 +229,34 @@ class _SettingsState extends State<Settings> {
             alignment: Alignment.bottomLeft,
             child: Row(
               children: [
-                Text(
-                  ".5x",
-                  style: TextStyle(
-                    color: Color(0xff102542),
-                    fontSize: 20,
-                    fontWeight: FontWeight.normal,
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      ".5x",
+                      style: TextStyle(
+                        color: ColorShades.primaryColor1,
+                        fontSize: 18 * fontSizeMultiplier,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
                   ),
                 ),
-                textToSpeechSpeed(),
-                Text(
-                  "2x",
-                  style: TextStyle(
-                    color: Color(0xff102542),
-                    fontSize: 20,
-                    fontWeight: FontWeight.normal,
+                Expanded(
+                  flex: fontSizeMultiplier > 1.0 ? (11 / fontSizeMultiplier).toInt() : 10,
+                  child: textToSpeechSpeed(),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      "2x",
+                      style: TextStyle(
+                        color: ColorShades.primaryColor1,
+                        fontSize: 18 * fontSizeMultiplier,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -229,13 +267,14 @@ class _SettingsState extends State<Settings> {
     );
   }
 
+
   // Text To Speech Toggle
   Switch textToSpeechToggle() {
     return Switch(
       activeTrackColor: Color.fromARGB(200, 16, 37, 66),
-      activeColor: Color(0xff102542),
+      activeColor: ColorShades.primaryColor1,
       inactiveTrackColor: Color.fromARGB(100, 16, 37, 66),
-      inactiveThumbColor: Color(0xff102542),
+      inactiveThumbColor: ColorShades.primaryColor1,
       value: textToSpeechEnabled,
       onChanged: (value) {
         setState(() {
@@ -250,21 +289,21 @@ class _SettingsState extends State<Settings> {
     return Container(
       width: 330,
       decoration: new BoxDecoration(
-        color: Colors.white,
+        color: ColorShades.text1,
         borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
       ),
       child: new Slider(
-        value: _speechSpeed,
-        activeColor: Color(0xff102542),
-        inactiveColor: ColorShades.maize,
+        value: speechSpeed,
+        activeColor: ColorShades.primaryColor1,
+        inactiveColor: ColorShades.primaryColor4,
         onChanged: (double s) {
           setState(() {
-            _speechSpeed = s;
+            speechSpeed = s;
           });
         },
-        divisions: 9,
-        min: 1.0,
-        max: 10.0,
+        divisions: 10,
+        min: .5,
+        max: 2,
       ),
     );
   }
@@ -274,10 +313,8 @@ class _SettingsState extends State<Settings> {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          left: BorderSide(color: Color(0xff102542), width: 4.0),
-          right: BorderSide(color: Color(0xff102542), width: 4.0),
-          top: BorderSide(color: Color(0xff102542), width: 2.0),
-          bottom: BorderSide(color: Color(0xff102542), width: 4.0),
+          top: BorderSide(color: ColorShades.primaryColor1, width: 2.0),
+          bottom: BorderSide(color: ColorShades.primaryColor1, width: 4.0),
         ),
       ),
       padding: const EdgeInsets.all(20.0),
@@ -290,8 +327,8 @@ class _SettingsState extends State<Settings> {
                 Text(
                   "Color Scheme",
                   style: TextStyle(
-                    color: Color(0xff102542),
-                    fontSize: 26,
+                    color: ColorShades.primaryColor1,
+                    fontSize: 26 * fontSizeMultiplier,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -303,15 +340,16 @@ class _SettingsState extends State<Settings> {
             alignment: Alignment.bottomLeft,
             child: Row(
               children: [
-                Text(
-                  "High Contrast",
-                  style: TextStyle(
-                    color: Color(0xff102542),
-                    fontSize: 24,
-                    fontWeight: FontWeight.normal,
+                Expanded(
+                  child: Text(
+                    "High Contrast",
+                    style: TextStyle(
+                      color: ColorShades.primaryColor1,
+                      fontSize: 24 * fontSizeMultiplier,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
                 ),
-                SizedBox(width: 175),
                 highContrastToggle(),
               ],
             ),
@@ -321,15 +359,16 @@ class _SettingsState extends State<Settings> {
             alignment: Alignment.bottomLeft,
             child: Row(
               children: [
-                Text(
-                  "Something Else",
-                  style: TextStyle(
-                    color: Color(0xff102542),
-                    fontSize: 24,
-                    fontWeight: FontWeight.normal,
+                Expanded(
+                  child: Text(
+                    "Something Else",
+                    style: TextStyle(
+                      color: ColorShades.primaryColor1,
+                      fontSize: 24 * fontSizeMultiplier,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
                 ),
-                SizedBox(width: 154),
                 somethingElseToggle(),
               ],
             ),
@@ -339,12 +378,13 @@ class _SettingsState extends State<Settings> {
     );
   }
 
+
   Switch highContrastToggle() {
     return Switch(
       activeTrackColor: Color.fromARGB(200, 16, 37, 66),
-      activeColor: Color(0xff102542),
+      activeColor: ColorShades.primaryColor1,
       inactiveTrackColor: Color.fromARGB(100, 16, 37, 66),
-      inactiveThumbColor: Color(0xff102542),
+      inactiveThumbColor: ColorShades.primaryColor1,
       value: highContrastEnabled,
       onChanged: (value) {
         setState(() {
@@ -357,9 +397,9 @@ class _SettingsState extends State<Settings> {
   Switch somethingElseToggle() {
     return Switch(
       activeTrackColor: Color.fromARGB(200, 16, 37, 66),
-      activeColor: Color(0xff102542),
+      activeColor: ColorShades.primaryColor1,
       inactiveTrackColor: Color.fromARGB(100, 16, 37, 66),
-      inactiveThumbColor: Color(0xff102542),
+      inactiveThumbColor: ColorShades.primaryColor1,
       value: somethingElseEnabled,
       onChanged: (value) {
         setState(() {

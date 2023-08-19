@@ -1,13 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/auth/signup/signup.dart';
 import 'package:practice_app/utils/app_bar.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
-import '../../../utils/utils_all.dart';
-import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
+import '../../../../utils/utils_all.dart';
 import 'package:practice_app/screens/promptPage/promptPage_message.dart';
 import 'package:practice_app/screens/promptPage/promptPage_tile.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PromptPage extends StatefulWidget {
   const PromptPage({Key? key}) : super(key: key);
@@ -27,7 +26,7 @@ class _PromptPageState extends State<PromptPage> {
       drawer: const DrawerWidget(),
       appBar: MediAppBar(importedKey: scaffoldKey),
       key: scaffoldKey,
-      body: promptPageContent(context),
+      body:  SingleChildScrollView(child: promptPageContent(context)),
       bottomNavigationBar: const BottomBar(),
     );
   }
@@ -36,7 +35,7 @@ class _PromptPageState extends State<PromptPage> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorShades.text1,
       ),
       child: Column(
         children: [
@@ -49,6 +48,7 @@ class _PromptPageState extends State<PromptPage> {
             voiceMemoButton: voiceMemoButton(),
           ),
           submitButton(),
+          verticalSpace(20),
         ],
       ),
     );
@@ -69,55 +69,76 @@ class _PromptPageState extends State<PromptPage> {
 
   TextFormField responseField() {
     return TextFormField(
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.multiline,
       controller: _responseTextController,
-      validator: (email) {
-        if (email!.isEmpty) {
+      validator: (response) {
+        if (response!.isEmpty) {
           return "Please enter a response or choose alternate media";
         } else {
           return null;
         }
       },
       maxLines: 16,
-      style: TextStyle(color: ColorShades.text2),
+      style: TextStyle(
+      color: ColorShades.text2,
+      fontSize: 16 * fontSizeMultiplier,
+    ),
       decoration: InputDecoration(
         hintText: 'Enter your response here...',
         hintStyle: TextStyle(
-            fontSize: 18, color: Colors.grey[600], fontStyle: FontStyle.italic),
+            fontSize: 16 * fontSizeMultiplier, color: ColorShades.grey, fontStyle: FontStyle.italic),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: ColorShades.text1,
         border: InputBorder.none,
         errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+          borderSide: BorderSide(color: ColorShades.error, width: 2.0),
         ),
         errorStyle: TextStyle(
-          color: Colors.red,
+          color: ColorShades.error,
         ),
       ),
-      cursorColor: Colors.black,
+      cursorColor: ColorShades.text2,
     );
+  }
+
+  // Image and Video Selection
+  Future<void> _selectImageOrVideo(ImageSource source) async 
+  {
+    XFile? mediaFile;
+    if (source == ImageSource.gallery) {
+      mediaFile = await ImagePicker().pickImage(source: source);
+    } 
+    else if (source == ImageSource.camera) {
+      mediaFile = await ImagePicker().pickVideo(source: source, maxDuration: const Duration(seconds: 60));
+    }
+
+    if (mediaFile != null) {
+      // Handle the selected media file (image or video) here.
+      // You can store the file path or display the media using a video player or image widget.
+      // For example, if it's a video, you can initialize a VideoPlayerController and show the video.
+    }
   }
 
   MaterialButton photoButton() {
     return MaterialButton(
-      onPressed: _submitResponseForm,
-      color: Color(0xff102542),
+      onPressed: () => _selectImageOrVideo(ImageSource.gallery),
+      color: ColorShades.primaryColor1,
       padding: const EdgeInsets.all(20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [Icon(Icons.image, color: Colors.white, size: 30)],
+        children: [Icon(Icons.image, color: ColorShades.text1, size: 30)],
       ),
     );
   }
 
   MaterialButton videoButton() {
     return MaterialButton(
-      onPressed: _submitResponseForm,
-      color: Color(0xff102542),
+      onPressed: () => _selectImageOrVideo(ImageSource.gallery),
+      color: ColorShades.primaryColor1,
       padding: const EdgeInsets.all(20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [Icon(Icons.videocam, color: Colors.white, size: 30)],
+        children: [Icon(Icons.videocam, color: ColorShades.text1, size: 30)],
       ),
     );
   }
@@ -125,11 +146,11 @@ class _PromptPageState extends State<PromptPage> {
   MaterialButton voiceMemoButton() {
     return MaterialButton(
       onPressed: _submitResponseForm,
-      color: Color(0xff102542),
+      color: ColorShades.primaryColor1,
       padding: const EdgeInsets.all(20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [Icon(Icons.mic, color: Colors.white, size: 30)],
+        children: [Icon(Icons.mic, color: ColorShades.text1, size: 30)],
       ),
     );
   }
@@ -139,22 +160,22 @@ class _PromptPageState extends State<PromptPage> {
         width: 200,
         child: MaterialButton(
           onPressed: _submitResponseForm,
-          color: Color(0xff102542),
+          color: ColorShades.primaryColor1,
           padding: const EdgeInsets.all(20.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Text(
                 'Send',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: ColorShades.text1,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: 20 * fontSizeMultiplier,
                 ),
               ),
               Icon(
                 Icons.done,
-                color: Colors.white,
+                color: ColorShades.text1,
               )
             ],
           ),
