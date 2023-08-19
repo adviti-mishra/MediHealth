@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/drawer_screens/personal_notes/personal_note_details.dart';
+import 'package:practice_app/ignore/personal_notes/personal_note_details.dart';
 import '../../../utils/utils_all.dart';
 
 class PersonalNoteWidget extends StatefulWidget {
@@ -9,7 +9,8 @@ class PersonalNoteWidget extends StatefulWidget {
   final String title;
   final String content;
 
-  const PersonalNoteWidget({Key? key, 
+  const PersonalNoteWidget({
+    Key? key,
     required this.uID,
     required this.docID,
     required this.title,
@@ -64,12 +65,14 @@ class _PersonalNoteWidgetState extends State<PersonalNoteWidget> {
     return ListTile(
       onTap: () {
         Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>  NoteDetails(
-            uID: widget.uID, docID: widget.docID, title: widget.title, content: widget.content)
-              ),
-            );
+          context,
+          MaterialPageRoute(
+              builder: (context) => NoteDetails(
+                  uID: widget.uID,
+                  docID: widget.docID,
+                  title: widget.title,
+                  content: widget.content)),
+        );
       },
       contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       leading: noteIcon(),
@@ -80,8 +83,14 @@ class _PersonalNoteWidgetState extends State<PersonalNoteWidget> {
       trailing: deleteButton(context),
     );
   }
-  void deleteNote(){
-    FirebaseFirestore.instance.collection("user").doc(widget.uID).collection('notes').doc(widget.docID).delete();
+
+  void deleteNote() {
+    FirebaseFirestore.instance
+        .collection("user")
+        .doc(widget.uID)
+        .collection('notes')
+        .doc(widget.docID)
+        .delete();
   }
 
   Card noteWidgetContent() {
@@ -99,53 +108,59 @@ class _PersonalNoteWidgetState extends State<PersonalNoteWidget> {
   }
 
   RawMaterialButton deleteButton(context) {
-  return RawMaterialButton(
-      child: const Icon(
-        Icons.cancel_outlined,
-        color: Colors.red,
-        size: 60,
-      ),
-      shape: const CircleBorder(),
-      onPressed: () {
-        showDialog(
-          context: context,
-          builder: (ctx) {
-            return deletePopup(context);
-          },
-        );
-      });
-}
+    return RawMaterialButton(
+        child: const Icon(
+          Icons.cancel_outlined,
+          color: Colors.red,
+          size: 60,
+        ),
+        shape: const CircleBorder(),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (ctx) {
+              return deletePopup(context);
+            },
+          );
+        });
+  }
 
-AlertDialog deletePopup(context) {
-  return AlertDialog(
-      backgroundColor: ColorShades.text1,
-      title: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(Icons.delete, color: ColorShades.primaryColor1),
-          ),
-          Padding(
+  AlertDialog deletePopup(context) {
+    return AlertDialog(
+        backgroundColor: ColorShades.text1,
+        title: Row(
+          children: [
+            Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text('Delete', style: TextStyle(color: ColorShades.text2)))
-        ],
-      ),
-      content: Text("Do you want to delete this?",
-          style: TextStyle(color: ColorShades.text2)),
-      actions: [
-        TextButton(
-            onPressed: () {
-              FirebaseFirestore.instance.collection("user").doc(widget.uID).collection('emergencyContacts').doc(widget.docID).delete();
-              Navigator.canPop(context) ? Navigator.pop(context) : null;
-            },
-            child: Text('Yes', style: TextStyle(color: ColorShades.text2))),
-        TextButton(
-            onPressed: () {
-              Navigator.canPop(context) ? Navigator.pop(context) : null;
-            },
-            child: Text('No', style: TextStyle(color: ColorShades.text2))),
-      ]);
-}
+              child: Icon(Icons.delete, color: ColorShades.primaryColor1),
+            ),
+            Padding(
+                padding: const EdgeInsets.all(8.0),
+                child:
+                    Text('Delete', style: TextStyle(color: ColorShades.text2)))
+          ],
+        ),
+        content: Text("Do you want to delete this?",
+            style: TextStyle(color: ColorShades.text2)),
+        actions: [
+          TextButton(
+              onPressed: () {
+                FirebaseFirestore.instance
+                    .collection("user")
+                    .doc(widget.uID)
+                    .collection('emergencyContacts')
+                    .doc(widget.docID)
+                    .delete();
+                Navigator.canPop(context) ? Navigator.pop(context) : null;
+              },
+              child: Text('Yes', style: TextStyle(color: ColorShades.text2))),
+          TextButton(
+              onPressed: () {
+                Navigator.canPop(context) ? Navigator.pop(context) : null;
+              },
+              child: Text('No', style: TextStyle(color: ColorShades.text2))),
+        ]);
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
-import 'package:practice_app/screens/home_page/medicine/medicine_screen.dart';
+import 'package:practice_app/ignore/home_page/medicine/medicine_screen.dart';
 import 'package:practice_app/utils/text_to_speach.dart';
 import '../../../../utils/utils_all.dart';
 
@@ -16,7 +16,8 @@ class MedicineDetails extends StatefulWidget {
   final String endDate;
   final String moreInfo;
 
-  const MedicineDetails({Key? key, 
+  const MedicineDetails({
+    Key? key,
     required this.uID,
     required this.docID,
     required this.name,

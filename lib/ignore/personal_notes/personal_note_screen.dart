@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/drawer_screens/personal_notes/personal_note_widget.dart';
+import 'package:practice_app/ignore/personal_notes/personal_note_widget.dart';
 import '../../../utils/color_shades.dart';
 import 'add_personal_note.dart';
 
@@ -22,10 +22,8 @@ class PersonalNoteScreen extends StatelessWidget {
         final FirebaseAuth _auth = FirebaseAuth.instance;
         final User? user = _auth.currentUser;
         final String uid = user!.uid;
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => AddNote(userID: uid)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => AddNote(userID: uid)));
       },
     );
   }
@@ -74,7 +72,8 @@ class PersonalNoteScreen extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return PersonalNoteWidget(
                         uID: userID,
-                        docID: snapshot.data!.docs[index].id.toString(),//index.toString(),
+                        docID: snapshot.data!.docs[index].id
+                            .toString(), //index.toString(),
                         title: snapshot.data!.docs[index]['title'],
                         content: snapshot.data!.docs[index]['content'],
                       );

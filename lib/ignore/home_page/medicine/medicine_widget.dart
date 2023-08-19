@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/home_page/medicine/medicine_details.dart';
+import 'package:practice_app/ignore/home_page/medicine/medicine_details.dart';
 import '../../../utils/utils_all.dart';
 
 class MedicineWidget extends StatefulWidget {
