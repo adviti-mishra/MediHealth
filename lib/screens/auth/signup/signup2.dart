@@ -2,21 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../utils/utils_all.dart';
-import 'package:flutter/gestures.dart';
+import 'package:practice_app/utils/models.dart';
+import 'package:practice_app/utils/utils_all.dart';
 import 'package:practice_app/screens/auth/signup/signup.dart';
 import 'package:practice_app/screens/auth/signup/signup2_tile.dart';
 import 'package:practice_app/screens/auth/signup/signup2_message.dart';
 import 'package:practice_app/screens/auth/login/login_page.dart';
-
 
 class SignUp2 extends StatefulWidget {
   final TextEditingController emailTextController;
   final TextEditingController passwordTextController;
   final TextEditingController rePasswordTextController;
 
-
-  SignUp2({
+  const SignUp2({
     required this.emailTextController,
     required this.passwordTextController,
     required this.rePasswordTextController,
@@ -28,16 +26,18 @@ class SignUp2 extends StatefulWidget {
 }
 
 class _SignUpState2 extends State<SignUp2> {
-  final TextEditingController _firstNameTextController = TextEditingController();
+  final TextEditingController _firstNameTextController =
+      TextEditingController();
   final TextEditingController _lastNameTextController = TextEditingController();
-  final TextEditingController _phoneNumberTextController = TextEditingController();
-  String? _circleOwnerTextController ;
-  
+  final TextEditingController _phoneNumberTextController =
+      TextEditingController();
+  String? _circleOwnerTextController;
+
   final _signUpFormKey = GlobalKey<FormState>();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _isLoading = false;
-  
+  bool _isCircleOwner = false;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _SignUpState2 extends State<SignUp2> {
   Container signUpPageContent(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Column(
@@ -57,10 +57,9 @@ class _SignUpState2 extends State<SignUp2> {
           verticalSpace(60),
           welcomeIn2Message(context),
           signUp2Tile(
-            namePhone: namePhone(),
-            createButton: createButton(),
-            backButton: backButton()
-          ),
+              namePhone: namePhone(),
+              createButton: createButton(),
+              backButton: backButton()),
           loginPageButton(),
         ],
       ),
@@ -76,7 +75,7 @@ class _SignUpState2 extends State<SignUp2> {
   }
 
   void _submitSignUpForm() async {
-  final isValid = _signUpFormKey.currentState!.validate();
+    final isValid = _signUpFormKey.currentState!.validate();
     if (isValid) {
       setState(() {
         _isLoading = true;
@@ -89,6 +88,8 @@ class _SignUpState2 extends State<SignUp2> {
         final User? user = _auth.currentUser;
         final _uid = user!.uid;
 
+        Timestamp now = Timestamp.now();
+
         FirebaseFirestore.instance.collection('user').doc(_uid).set({
           'id': _uid,
           'firstName': _firstNameTextController.text,
@@ -96,8 +97,21 @@ class _SignUpState2 extends State<SignUp2> {
           'email': widget.emailTextController.text,
           'phoneNumber': _phoneNumberTextController.text,
           'circleOwner': _circleOwnerTextController,
-          'createdAt': Timestamp.now(),
+          'createdAt': now,
         });
+
+        UserCustom(
+          id: _uid,
+          circleId: null,
+          firstName: _firstNameTextController.text,
+          lastName: _lastNameTextController.text,
+          email: widget.emailTextController.text,
+          phoneNumber: _phoneNumberTextController.text,
+          profileCode: null,
+          isCircleOwner: _isCircleOwner,
+          createdAt: now,
+        );
+
         Navigator.canPop(context) ? Navigator.pop(context) : null;
       } catch (error) {
         setState(() {
@@ -154,7 +168,7 @@ class _SignUpState2 extends State<SignUp2> {
               Expanded(
                 child: firstNameValidation(),
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               Expanded(
                 child: lastNameValidation(),
               ),
@@ -164,7 +178,7 @@ class _SignUpState2 extends State<SignUp2> {
       ],
     );
   }
-  
+
   TextFormField firstNameValidation() {
     return TextFormField(
       keyboardType: TextInputType.name,
@@ -176,17 +190,18 @@ class _SignUpState2 extends State<SignUp2> {
           return null;
         }
       },
-      style: TextStyle(color: Colors.black),
+      style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         hintText: 'First Name',
-        hintStyle: TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
+        hintStyle:
+            TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         fillColor: Colors.white,
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red, width: 2.0),
         ),
-        errorStyle: TextStyle(
+        errorStyle: const TextStyle(
           color: Colors.red,
         ),
       ),
@@ -205,17 +220,18 @@ class _SignUpState2 extends State<SignUp2> {
           return null;
         }
       },
-      style: TextStyle(color: Colors.black),
+      style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         hintText: 'Last Name',
-        hintStyle: TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
+        hintStyle:
+            TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         fillColor: Colors.white,
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red, width: 2.0),
         ),
-        errorStyle: TextStyle(
+        errorStyle: const TextStyle(
           color: Colors.red,
         ),
       ),
@@ -227,9 +243,8 @@ class _SignUpState2 extends State<SignUp2> {
   Column phoneNumberField() {
     return Column(children: [
       Align(
-        alignment: Alignment.bottomLeft,
-        child: Row(
-          children: [
+          alignment: Alignment.bottomLeft,
+          child: Row(children: [
             Text(
               "Phone Number",
               style: TextStyle(
@@ -238,9 +253,7 @@ class _SignUpState2 extends State<SignUp2> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-          ]
-        )
-      ),
+          ])),
       verticalSpace(10),
       phoneNumberValidation(),
     ]);
@@ -255,11 +268,9 @@ class _SignUpState2 extends State<SignUp2> {
       validator: (value) {
         if (value!.isEmpty) {
           return "Please enter your phone number";
-        }
-        else if (value.length != 10) {
+        } else if (value.length != 10) {
           return "Phone number must be 10 digits";
-        }
-        else {
+        } else {
           return null;
         }
       },
@@ -269,16 +280,16 @@ class _SignUpState2 extends State<SignUp2> {
         hintStyle:
             TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         fillColor: Colors.white,
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red, width: 2.0),
         ),
-        errorStyle: TextStyle(
+        errorStyle: const TextStyle(
           color: Colors.red,
         ),
       ),
-    cursorColor: Colors.black,
+      cursorColor: Colors.black,
     );
   }
 
@@ -286,9 +297,8 @@ class _SignUpState2 extends State<SignUp2> {
   Column circleOwnerField() {
     return Column(children: [
       Align(
-        alignment: Alignment.bottomLeft,
-        child: Row(
-          children: [
+          alignment: Alignment.bottomLeft,
+          child: Row(children: [
             Text(
               "Will You Own the Circle?",
               style: TextStyle(
@@ -297,64 +307,49 @@ class _SignUpState2 extends State<SignUp2> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-          ]
-        )
-      ),
+          ])),
       verticalSpace(10),
       circleOwnerValidation(),
     ]);
   }
 
   // Owner Validation
-  DropdownButtonFormField<String> circleOwnerValidation() {
-  return DropdownButtonFormField<String>(
-    value: _circleOwnerTextController, // Define this variable in your state
-    onChanged: (newValue) {
-      setState(() {
-        _circleOwnerTextController = newValue;
-      });
-    },
-    validator: (value) {
-      if (_circleOwnerTextController == null) {
-        return "Please select an answer";
-      }
-      return null;
-    },
-    decoration: InputDecoration(
-      hintText: 'Select an option',
-      filled: true,
-      border: OutlineInputBorder(),
-      fillColor: Colors.white,
-      errorBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: Colors.red, width: 2.0),
-      ),
-      errorStyle: TextStyle(
-        color: Colors.red,
-      ),
-    ),
-    items: [
-      DropdownMenuItem<String>(
-        value: 'Yes',
-        child: Text('Yes, I will own the circle'),
-      ),
-      DropdownMenuItem<String>(
-        value: 'No',
-        child: Text('No, I am a participant'),
-      ),
-    ],
-  );
-}
-
+  DropdownButtonFormField<bool> circleOwnerValidation() {
+    return DropdownButtonFormField<bool>(
+      value: _isCircleOwner,
+      onChanged: (newValue) {
+        setState(() {
+          _isCircleOwner = newValue!;
+        });
+      },
+      validator: (value) {
+        if (_isCircleOwner == null) {
+          return "Please select an answer";
+        }
+        return null;
+      },
+      items: const [
+        DropdownMenuItem<bool>(
+          value: true,
+          child: Text('Yes, I will own the circle'),
+        ),
+        DropdownMenuItem<bool>(
+          value: false,
+          child: Text('No, I am a participant'),
+        ),
+      ],
+    );
+  }
 
   MaterialButton createButton() {
     return MaterialButton(
       onPressed: _submitSignUpForm,
       color: ColorShades.primaryColor4,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
+      child: const Padding(
+        padding: EdgeInsets.all(20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               'Create Account',
               style: TextStyle(
@@ -380,18 +375,14 @@ class _SignUpState2 extends State<SignUp2> {
     return MaterialButton(
       onPressed: () {
         Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const SignUp()
-          )
-        );
+            context, MaterialPageRoute(builder: (context) => const SignUp()));
       },
       color: ColorShades.primaryColor4,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
+      child: const Padding(
+        padding: EdgeInsets.all(20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               'Back',
               style: TextStyle(
@@ -409,21 +400,16 @@ class _SignUpState2 extends State<SignUp2> {
   // Login Page Button
   TextButton loginPageButton() {
     return TextButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Login()
-          )
-        );
-      },
-      child: const Text(
-        "Already have an account? Login",
-        style: TextStyle(
-          color: Color(0xff102542),
-          fontSize: 24,
-        ),
-      )
-    );
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const Login()));
+        },
+        child: const Text(
+          "Already have an account? Login",
+          style: TextStyle(
+            color: Color(0xff102542),
+            fontSize: 24,
+          ),
+        ));
   }
 }

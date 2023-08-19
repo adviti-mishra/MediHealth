@@ -1,11 +1,8 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/screens/drawer_screens/user_profile.dart';
 import 'package:practice_app/utils/app_bar.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
-import '../../../../utils/utils_all.dart';
+import 'package:practice_app/utils/utils_all.dart';
 import 'package:practice_app/screens/settings/settings_title.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -37,7 +34,6 @@ class _SettingsState extends State<Settings> {
     super.initState();
     loadUserSettings();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -154,16 +150,15 @@ class _SettingsState extends State<Settings> {
     );
   }
 
-
   // Text Size slider content
   Container textSizeSlider() {
     return Container(
       width: 330,
-      decoration: new BoxDecoration(
+      decoration: BoxDecoration(
         color: ColorShades.text1,
-        borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
       ),
-      child: new Slider(
+      child: Slider(
         value: fontSizeMultiplier,
         activeColor: ColorShades.primaryColor1,
         inactiveColor: ColorShades.primaryColor4,
@@ -243,7 +238,8 @@ class _SettingsState extends State<Settings> {
                   ),
                 ),
                 Expanded(
-                  flex: fontSizeMultiplier > 1.0 ? (11 / fontSizeMultiplier).toInt() : 10,
+                  flex:
+                      fontSizeMultiplier > 1.0 ? 11 ~/ fontSizeMultiplier : 10,
                   child: textToSpeechSpeed(),
                 ),
                 Expanded(
@@ -267,13 +263,12 @@ class _SettingsState extends State<Settings> {
     );
   }
 
-
   // Text To Speech Toggle
   Switch textToSpeechToggle() {
     return Switch(
-      activeTrackColor: Color.fromARGB(200, 16, 37, 66),
+      activeTrackColor: const Color.fromARGB(200, 16, 37, 66),
       activeColor: ColorShades.primaryColor1,
-      inactiveTrackColor: Color.fromARGB(100, 16, 37, 66),
+      inactiveTrackColor: const Color.fromARGB(100, 16, 37, 66),
       inactiveThumbColor: ColorShades.primaryColor1,
       value: textToSpeechEnabled,
       onChanged: (value) {
@@ -288,11 +283,11 @@ class _SettingsState extends State<Settings> {
   Container textToSpeechSpeed() {
     return Container(
       width: 330,
-      decoration: new BoxDecoration(
+      decoration: BoxDecoration(
         color: ColorShades.text1,
-        borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
       ),
-      child: new Slider(
+      child: Slider(
         value: speechSpeed,
         activeColor: ColorShades.primaryColor1,
         inactiveColor: ColorShades.primaryColor4,
@@ -378,12 +373,11 @@ class _SettingsState extends State<Settings> {
     );
   }
 
-
   Switch highContrastToggle() {
     return Switch(
-      activeTrackColor: Color.fromARGB(200, 16, 37, 66),
+      activeTrackColor: const Color.fromARGB(200, 16, 37, 66),
       activeColor: ColorShades.primaryColor1,
-      inactiveTrackColor: Color.fromARGB(100, 16, 37, 66),
+      inactiveTrackColor: const Color.fromARGB(100, 16, 37, 66),
       inactiveThumbColor: ColorShades.primaryColor1,
       value: highContrastEnabled,
       onChanged: (value) {
@@ -396,9 +390,9 @@ class _SettingsState extends State<Settings> {
 
   Switch somethingElseToggle() {
     return Switch(
-      activeTrackColor: Color.fromARGB(200, 16, 37, 66),
+      activeTrackColor: const Color.fromARGB(200, 16, 37, 66),
       activeColor: ColorShades.primaryColor1,
-      inactiveTrackColor: Color.fromARGB(100, 16, 37, 66),
+      inactiveTrackColor: const Color.fromARGB(100, 16, 37, 66),
       inactiveThumbColor: ColorShades.primaryColor1,
       value: somethingElseEnabled,
       onChanged: (value) {

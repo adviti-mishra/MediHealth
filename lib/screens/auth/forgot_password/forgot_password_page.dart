@@ -12,7 +12,6 @@ class ForgotPassword extends StatefulWidget {
   _ForgotPasswordState createState() => _ForgotPasswordState();
 }
 
-
 class _ForgotPasswordState extends State<ForgotPassword> {
   final TextEditingController _emailTextController = TextEditingController();
   final _ForgetPasswordFormKey = GlobalKey<FormState>();
@@ -31,7 +30,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   Container forgetPasswordPageContent() {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Column(
@@ -39,9 +38,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           verticalSpace(200),
           welcomeBackMessage(context),
           forgotPasswordTile(
-            recoveryEmail: email(),
-            submitButton: submitButton()
-          ),
+              recoveryEmail: email(), submitButton: submitButton()),
           backLoginButton(),
         ],
       ),
@@ -58,7 +55,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     _emailTextController.dispose();
   }
 
-  void _submitForgetPasswordForm() async{
+  void _submitForgetPasswordForm() async {
     final isValid = _ForgetPasswordFormKey.currentState!.validate();
     if (isValid) {
       setState(() {
@@ -68,8 +65,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         await _auth.sendPasswordResetEmail(
           email: _emailTextController.text.trim().toLowerCase(),
         );
-      } 
-      catch (error) {
+      } catch (error) {
         setState(() {
           _isLoading = false;
         });
@@ -93,20 +89,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return Column(children: [
       Align(
           alignment: Alignment.bottomLeft,
-          child: Row(
-            children: [
-              Text(
-                "Email",
-                style: TextStyle(
-                  color: ColorShades.primaryColor4,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
+          child: Row(children: [
+            Text(
+              "Email",
+              style: TextStyle(
+                color: ColorShades.primaryColor4,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
               ),
-            ]
-          )
-        ),
-      verticalSpace(10),     
+            ),
+          ])),
+      verticalSpace(10),
       emailValidation()
     ]);
   }
@@ -118,11 +111,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       validator: (email) {
         if (email!.isEmpty) {
           return "Please enter a valid email address";
-        } 
-        else if (!email.contains('@') || !email.contains('.')) {
+        } else if (!email.contains('@') || !email.contains('.')) {
           return "Email address is not valid";
-        }
-        else {
+        } else {
           return null;
         }
       },
@@ -132,30 +123,29 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         hintStyle:
             TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         fillColor: Colors.white,
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red, width: 2.0),
         ),
-        errorStyle: TextStyle(
+        errorStyle: const TextStyle(
           color: Colors.red,
         ),
       ),
-    cursorColor: Colors.black,
+      cursorColor: Colors.black,
     );
   }
-
 
   // TO DO : implement submitButton similar to loginButton
   MaterialButton submitButton() {
     return MaterialButton(
       onPressed: _submitForgetPasswordForm,
       color: ColorShades.primaryColor4,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
+      child: const Padding(
+        padding: EdgeInsets.all(20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               'Submit',
               style: TextStyle(
@@ -172,21 +162,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   TextButton backLoginButton() {
     return TextButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Login()
-          )
-        );
-      },
-      child: const Text(
-        'Return to Login',
-        style: TextStyle(
-          color: Color(0xff102542),
-          fontSize: 24,
-        ),
-      )
-    );
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const Login()));
+        },
+        child: const Text(
+          'Return to Login',
+          style: TextStyle(
+            color: Color(0xff102542),
+            fontSize: 24,
+          ),
+        ));
   }
 }

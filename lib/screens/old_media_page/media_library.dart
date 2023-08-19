@@ -10,57 +10,53 @@ class MediaLibrary extends StatelessWidget {
   final String mediaType;
 
   Widget entry(String prompt, String answer, String date) {
-    return Container(
-      child: Column(
-        children: [
-          const SizedBox(height: 30),
-          Container(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      prompt,
-                      style: TextStyle(
-                        color: ColorShades.primaryColor4,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Tahoma',
-                      ),
-                    ),
-                    const Spacer(),
-                    Text(
-                      date,
-                      style: TextStyle(
-                        color: ColorShades.primaryColor4,
-                        fontSize: 24,
-                        fontFamily: 'Tahoma',
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 30),
-                Container(
-                  child: Text(
-                    answer,
+    return Column(
+      children: [
+        const SizedBox(height: 30),
+        Container(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Text(
+                    prompt,
                     style: TextStyle(
-                      color: ColorShades.text1,
-                      fontSize: 18,
+                      color: ColorShades.primaryColor4,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                       fontFamily: 'Tahoma',
                     ),
                   ),
-                )
-              ],
-              mainAxisAlignment: MainAxisAlignment.center,
-            ),
-            decoration: BoxDecoration(
-              color: ColorShades.primaryColor1,
-              borderRadius: BorderRadius.circular(40),
-            ),
-            padding: const EdgeInsets.all(20),
+                  const Spacer(),
+                  Text(
+                    date,
+                    style: TextStyle(
+                      color: ColorShades.primaryColor4,
+                      fontSize: 24,
+                      fontFamily: 'Tahoma',
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 30),
+              Text(
+                answer,
+                style: TextStyle(
+                  color: ColorShades.text1,
+                  fontSize: 18,
+                  fontFamily: 'Tahoma',
+                ),
+              )
+            ],
+            mainAxisAlignment: MainAxisAlignment.center,
           ),
-        ],
-      ),
+          decoration: BoxDecoration(
+            color: ColorShades.primaryColor1,
+            borderRadius: BorderRadius.circular(40),
+          ),
+          padding: const EdgeInsets.all(20),
+        ),
+      ],
     );
   }
 

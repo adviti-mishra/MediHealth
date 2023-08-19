@@ -43,12 +43,12 @@ class InviteButton extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => UserProfile(userID: "YOUR_USER_ID"),
+            builder: (context) => const UserProfile(userID: "YOUR_USER_ID"),
           ),
         );
       },
       style: ElevatedButton.styleFrom(
-        primary: ColorShades.primaryColor1, // Set the button color here
+        backgroundColor: ColorShades.primaryColor1, // Set the button color here
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
                 8)), // Make the button a rectangle with rounded corners
@@ -99,7 +99,7 @@ class MyCircle extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 60), // Move the animation up
+                const SizedBox(height: 60), // Move the animation up
 
                 // Move main profile circle to the middle of the screen
                 Container(
@@ -118,7 +118,7 @@ class MyCircle extends StatelessWidget {
                                       2 *
                                       math.pi /
                                       6), // Move slightly to the left
-                          child: ProfileCircle(size: 60.0),
+                          child: const ProfileCircle(size: 60.0),
                         ),
                       Container(
                         width: 160,
@@ -147,14 +147,14 @@ class MyCircle extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 100), // Increase spacing at the bottom
+                const SizedBox(height: 100), // Increase spacing at the bottom
               ],
             ),
           ),
         ],
       ),
       bottomNavigationBar: const BottomBar(),
-      floatingActionButton: InviteButton(), // Add the InviteButton here
+      floatingActionButton: const InviteButton(), // Add the InviteButton here
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }

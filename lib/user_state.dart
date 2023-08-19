@@ -15,14 +15,14 @@ class UserState extends StatelessWidget {
         builder: (ctx, userSnapshot) {
           // case 1 : user is not logged in
           if (userSnapshot.data == null) {
-            print('User has not logged in yet');
+            // print('User has not logged in yet');
             // return Login page
             // return LandingPage();
             return const Welcome();
           }
           // case 2 : user is already logged in
           else if (userSnapshot.hasData) {
-            print('User is already logged in in');
+            // print('User is already logged in in');
             // return Landing page
             return LandingPage();
           }

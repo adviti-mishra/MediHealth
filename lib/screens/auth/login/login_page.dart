@@ -35,7 +35,7 @@ class _LoginState extends State<Login> {
   Container loginPageContent(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Column(
@@ -77,7 +77,9 @@ class _LoginState extends State<Login> {
         // Navigate to another page after successful login
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => PromptPage()), // Replace `YourNextPage` with the actual page you want to navigate to.
+          MaterialPageRoute(
+              builder: (context) =>
+                  const PromptPage()), // Replace `YourNextPage` with the actual page you want to navigate to.
         );
       } catch (error) {
         setState(() {
@@ -90,7 +92,6 @@ class _LoginState extends State<Login> {
       _isLoading = false;
     });
   }
-
 
   // Email and Password
   Form emailPassword() {
@@ -149,12 +150,12 @@ class _LoginState extends State<Login> {
         hintStyle:
             TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         fillColor: Colors.white,
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red, width: 2.0),
         ),
-        errorStyle: TextStyle(
+        errorStyle: const TextStyle(
           color: Colors.red,
         ),
       ),
@@ -206,15 +207,15 @@ class _LoginState extends State<Login> {
             });
           },
           child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility,
-              color: Color(0xff102542)),
+              color: const Color(0xff102542)),
         ),
         filled: true,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         fillColor: Colors.white,
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red, width: 2.0),
         ),
-        errorStyle: TextStyle(
+        errorStyle: const TextStyle(
           color: Colors.red,
         ),
       ),
@@ -227,11 +228,11 @@ class _LoginState extends State<Login> {
     return MaterialButton(
       onPressed: _submitLoginForm,
       color: ColorShades.primaryColor4,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
+      child: const Padding(
+        padding: EdgeInsets.all(20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               'Login',
               style: TextStyle(

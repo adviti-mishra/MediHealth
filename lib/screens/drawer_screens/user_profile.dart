@@ -6,7 +6,6 @@ import 'package:practice_app/utils/utils_all.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
 import 'package:practice_app/utils/color_shades.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key, required this.userID}) : super(key: key);

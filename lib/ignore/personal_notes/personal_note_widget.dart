@@ -35,14 +35,10 @@ class _PersonalNoteWidgetState extends State<PersonalNoteWidget> {
           .collection('notes')
           .doc(widget.docID)
           .get();
-      if (userDoc == null) {
-        return;
-      } else {
-        setState(() {
-          title = userDoc.get('email');
-          content = userDoc.get('name');
-        });
-      }
+      setState(() {
+        title = userDoc.get('email');
+        content = userDoc.get('name');
+      });
     } finally {
       _isLoading = false;
     }

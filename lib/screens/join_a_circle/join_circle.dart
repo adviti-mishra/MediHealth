@@ -60,7 +60,7 @@ class _JoinCircleState extends State<JoinCircle> {
                     const SizedBox(height: 30),
                     ElevatedButton.icon(
                       onPressed: () {
-                        print("Submitted");
+                        // print("Submitted");
                       },
                       icon: const Icon(
                         Icons.add,

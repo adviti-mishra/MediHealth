@@ -38,15 +38,11 @@ class _EmergencyContactWidgetState extends State<EmergencyContactWidget> {
           .collection('emergencyContacts')
           .doc(widget.docID)
           .get();
-      if (userDoc == null) {
-        return;
-      } else {
-        setState(() {
-          email = userDoc.get('email');
-          name = userDoc.get('name');
-          phoneNumber = userDoc.get('phoneNumber');
-        });
-      }
+      setState(() {
+        email = userDoc.get('email');
+        name = userDoc.get('name');
+        phoneNumber = userDoc.get('phoneNumber');
+      });
     } finally {
       _isLoading = false;
     }

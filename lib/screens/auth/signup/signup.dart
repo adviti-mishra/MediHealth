@@ -1,13 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/utils_all.dart';
-import 'package:flutter/gestures.dart';
 import 'package:practice_app/screens/auth/signup/signup_message.dart';
 import 'package:practice_app/screens/auth/signup/signup_tile.dart';
 import 'package:practice_app/screens/auth/signup/signup2.dart';
 import 'package:practice_app/screens/auth/login/login_page.dart';
-
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -19,17 +16,19 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
-  final TextEditingController _rePasswordTextController = TextEditingController();
+  final TextEditingController _rePasswordTextController =
+      TextEditingController();
   final TextEditingController _dobTextController = TextEditingController();
   final TextEditingController _nameTextController = TextEditingController();
-  final TextEditingController _phoneNumberTextController = TextEditingController();
+  final TextEditingController _phoneNumberTextController =
+      TextEditingController();
 
   bool _passwordObscureText = true;
   bool _rePasswordObscureText = true;
   final _signUpFormKey = GlobalKey<FormState>();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  bool _isLoading = false;
+  final _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,7 @@ class _SignUpState extends State<SignUp> {
   Container signUpPageContent(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Column(
@@ -49,9 +48,7 @@ class _SignUpState extends State<SignUp> {
           verticalSpace(80),
           welcomeInMessage(context),
           signUpTile(
-            emailPasswords: emailPasswords(),
-            nextButton: nextButton()
-          ),
+              emailPasswords: emailPasswords(), nextButton: nextButton()),
           loginPageButton(),
         ],
       ),
@@ -92,9 +89,8 @@ class _SignUpState extends State<SignUp> {
     return Column(
       children: [
         Align(
-          alignment: Alignment.bottomLeft,
-          child: Row(
-            children: [
+            alignment: Alignment.bottomLeft,
+            child: Row(children: [
               Text(
                 "Email",
                 style: TextStyle(
@@ -103,9 +99,7 @@ class _SignUpState extends State<SignUp> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ]
-          )
-        ),
+            ])),
         verticalSpace(10),
         emailValidation(),
       ],
@@ -119,11 +113,9 @@ class _SignUpState extends State<SignUp> {
       validator: (email) {
         if (email!.isEmpty) {
           return "Please enter a valid email address";
-        } 
-        else if (!email.contains('@') || !email.contains('.')) {
+        } else if (!email.contains('@') || !email.contains('.')) {
           return "Email address is not valid";
-        }
-        else {
+        } else {
           return null;
         }
       },
@@ -133,12 +125,12 @@ class _SignUpState extends State<SignUp> {
         hintStyle:
             TextStyle(color: Colors.grey[600], fontStyle: FontStyle.italic),
         filled: true,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         fillColor: Colors.white,
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red, width: 2.0),
         ),
-        errorStyle: TextStyle(
+        errorStyle: const TextStyle(
           color: Colors.red,
         ),
       ),
@@ -150,9 +142,8 @@ class _SignUpState extends State<SignUp> {
     return Column(
       children: [
         Align(
-          alignment: Alignment.bottomLeft,
-          child: Row(
-            children: [
+            alignment: Alignment.bottomLeft,
+            child: Row(children: [
               Text(
                 "Password",
                 style: TextStyle(
@@ -161,9 +152,7 @@ class _SignUpState extends State<SignUp> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ]
-          )
-        ),
+            ])),
         verticalSpace(10),
         passwordValidation(),
       ],
@@ -178,11 +167,9 @@ class _SignUpState extends State<SignUp> {
       validator: (value) {
         if (value!.isEmpty) {
           return "Please enter a password";
-        } 
-        else if (value.length < 8) {
+        } else if (value.length < 8) {
           return "Password must contain at least 8 characters";
-        }
-        else {
+        } else {
           return null;
         }
       },
@@ -195,17 +182,16 @@ class _SignUpState extends State<SignUp> {
             });
           },
           child: Icon(
-            _passwordObscureText ? Icons.visibility_off : Icons.visibility, 
-            color: Color(0xff102542)
-          ),
+              _passwordObscureText ? Icons.visibility_off : Icons.visibility,
+              color: const Color(0xff102542)),
         ),
         filled: true,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         fillColor: Colors.white,
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red, width: 2.0),
         ),
-        errorStyle: TextStyle(
+        errorStyle: const TextStyle(
           color: Colors.red,
         ),
       ),
@@ -217,9 +203,8 @@ class _SignUpState extends State<SignUp> {
     return Column(
       children: [
         Align(
-          alignment: Alignment.bottomLeft,
-          child: Row(
-            children: [
+            alignment: Alignment.bottomLeft,
+            child: Row(children: [
               Text(
                 "Repeat Password",
                 style: TextStyle(
@@ -228,9 +213,7 @@ class _SignUpState extends State<SignUp> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ]
-          )
-        ),
+            ])),
         verticalSpace(10),
         rePasswordValidation(),
       ],
@@ -245,11 +228,9 @@ class _SignUpState extends State<SignUp> {
       validator: (value) {
         if (value!.isEmpty) {
           return "Please repeat password";
-        } 
-        else if (value != _passwordTextController.text) {
+        } else if (value != _passwordTextController.text) {
           return "Password does not match";
-        }
-        else {
+        } else {
           return null;
         }
       },
@@ -262,17 +243,16 @@ class _SignUpState extends State<SignUp> {
             });
           },
           child: Icon(
-            _rePasswordObscureText ? Icons.visibility_off : Icons.visibility, 
-            color: Color(0xff102542)
-          ),
+              _rePasswordObscureText ? Icons.visibility_off : Icons.visibility,
+              color: const Color(0xff102542)),
         ),
         filled: true,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         fillColor: Colors.white,
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red, width: 2.0),
         ),
-        errorStyle: TextStyle(
+        errorStyle: const TextStyle(
           color: Colors.red,
         ),
       ),
@@ -281,61 +261,55 @@ class _SignUpState extends State<SignUp> {
   }
 
   MaterialButton nextButton() {
-  return MaterialButton(
-    onPressed: () {
-      if (_signUpFormKey.currentState!.validate()) {
-        // All fields are valid, proceed to the next screen
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SignUp2(
-              emailTextController: _emailTextController,
-              passwordTextController: _passwordTextController,
-              rePasswordTextController: _rePasswordTextController,
+    return MaterialButton(
+      onPressed: () {
+        if (_signUpFormKey.currentState!.validate()) {
+          // All fields are valid, proceed to the next screen
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SignUp2(
+                emailTextController: _emailTextController,
+                passwordTextController: _passwordTextController,
+                rePasswordTextController: _rePasswordTextController,
+              ),
             ),
-          ),
-        );
-      }
-    },
-    color: ColorShades.primaryColor4,
-    child: Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text(
-            'Next',
-            style: TextStyle(
-              color: Color(0xff102542),
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
+          );
+        }
+      },
+      color: ColorShades.primaryColor4,
+      child: const Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Next',
+              style: TextStyle(
+                color: Color(0xff102542),
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 
   // Login Page Button
   TextButton loginPageButton() {
     return TextButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Login()
-          )
-        );
-      },
-      child: const Text(
-        "Already have an account? Login",
-        style: TextStyle(
-          color: Color(0xff102542),
-          fontSize: 24,
-        ),
-      )
-    );
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const Login()));
+        },
+        child: const Text(
+          "Already have an account? Login",
+          style: TextStyle(
+            color: Color(0xff102542),
+            fontSize: 24,
+          ),
+        ));
   }
 }

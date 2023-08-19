@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/utils/app_bar.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
@@ -26,7 +25,7 @@ class _PromptPageState extends State<PromptPage> {
       drawer: const DrawerWidget(),
       appBar: MediAppBar(importedKey: scaffoldKey),
       key: scaffoldKey,
-      body:  SingleChildScrollView(child: promptPageContent(context)),
+      body: SingleChildScrollView(child: promptPageContent(context)),
       bottomNavigationBar: const BottomBar(),
     );
   }
@@ -80,13 +79,15 @@ class _PromptPageState extends State<PromptPage> {
       },
       maxLines: 16,
       style: TextStyle(
-      color: ColorShades.text2,
-      fontSize: 16 * fontSizeMultiplier,
-    ),
+        color: ColorShades.text2,
+        fontSize: 16 * fontSizeMultiplier,
+      ),
       decoration: InputDecoration(
         hintText: 'Enter your response here...',
         hintStyle: TextStyle(
-            fontSize: 16 * fontSizeMultiplier, color: ColorShades.grey, fontStyle: FontStyle.italic),
+            fontSize: 16 * fontSizeMultiplier,
+            color: ColorShades.grey,
+            fontStyle: FontStyle.italic),
         filled: true,
         fillColor: ColorShades.text1,
         border: InputBorder.none,
@@ -102,14 +103,13 @@ class _PromptPageState extends State<PromptPage> {
   }
 
   // Image and Video Selection
-  Future<void> _selectImageOrVideo(ImageSource source) async 
-  {
+  Future<void> _selectImageOrVideo(ImageSource source) async {
     XFile? mediaFile;
     if (source == ImageSource.gallery) {
       mediaFile = await ImagePicker().pickImage(source: source);
-    } 
-    else if (source == ImageSource.camera) {
-      mediaFile = await ImagePicker().pickVideo(source: source, maxDuration: const Duration(seconds: 60));
+    } else if (source == ImageSource.camera) {
+      mediaFile = await ImagePicker()
+          .pickVideo(source: source, maxDuration: const Duration(seconds: 60));
     }
 
     if (mediaFile != null) {

@@ -10,7 +10,7 @@ Center welcomeTile(
       child: Container(
         // TO DO : implement the blue box decoration
         decoration: BoxDecoration(
-          color: Color(0xff102542),
+          color: const Color(0xff102542),
           borderRadius: BorderRadius.circular(32),
         ),
         child: SingleChildScrollView(
@@ -18,7 +18,7 @@ Center welcomeTile(
             padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 45),
             child: Column(
               children: [
-                Text(
+                const Text(
                   'Login or Sign Up Below',
                   style: TextStyle(
                     color: Colors.white,
