@@ -47,16 +47,5 @@
 	<false/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<!-- Allows acccess to iPhones photos and library -->
-	<key>NSCameraUsageDescription</key>
-	<string>Allow access to the camera to take photos and record videos.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow access to the photo library to select photos and videos.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Camera access is required to take photos and record videos.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Microphone access is required to record videos with sound.</string>
-
-
 </dict>
 </plist>

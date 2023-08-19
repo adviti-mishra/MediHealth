@@ -45,7 +45,7 @@ class _WelcomeState extends State<Welcome> {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const Login()));
       },
-      color: ColorShades.primaryColor3,
+      color: ColorShades.primaryColor4,
       child: const Padding(
         padding: EdgeInsets.all(20.0),
         child: Row(

@@ -18,7 +18,7 @@ class UserState extends StatelessWidget {
           if (userSnapshot.data == null) {
             print('User has not logged in yet');
             // return Login page
-            return LandingPage();
+            // return LandingPage();
             return const Welcome();
           }
           // case 2 : user is already logged in

@@ -26,60 +26,62 @@ class _JoinCircleState extends State<JoinCircle> {
         width: double.infinity,
         margin: const EdgeInsets.only(top: 20, right: 20, left: 20),
         child: Center(
-          child: Column(
-            children: [
-              Text(
-                "Join a Circle!",
-                style: TextStyle(
-                  color: ColorShades.primaryColor1,
-                  fontSize: 40,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Tahoma',
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text(
+                  "Join a Circle!",
+                  style: TextStyle(
+                    color: ColorShades.primaryColor1,
+                    fontSize: 40,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'Tahoma',
+                  ),
                 ),
-              ),
-              const SizedBox(height: 50),
-              Column(
-                children: [
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      labelText: 'Click to start typing',
-                      labelStyle: TextStyle(
-                        color: ColorShades.primaryColor1,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Tahoma',
+                const SizedBox(height: 50),
+                Column(
+                  children: [
+                    TextFormField(
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        labelText: 'Click to start typing',
+                        labelStyle: TextStyle(
+                          color: ColorShades.primaryColor1,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Tahoma',
+                        ),
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          code = value;
+                        });
+                      },
                     ),
-                    onChanged: (value) {
-                      setState(() {
-                        code = value;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 30),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      print("Submitted");
-                    },
-                    icon: const Icon(
-                      Icons.add,
-                      color: Colors.white,
-                    ),
-                    label: const Text(
-                      'Join a Circle',
-                      style: TextStyle(
+                    const SizedBox(height: 30),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        print("Submitted");
+                      },
+                      icon: const Icon(
+                        Icons.add,
                         color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Tahoma',
+                      ),
+                      label: const Text(
+                        'Join a Circle',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Tahoma',
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorShades.primaryColor1,
                       ),
                     ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorShades.primaryColor1,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

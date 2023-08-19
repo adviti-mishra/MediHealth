@@ -69,36 +69,38 @@ class OldMedia extends StatelessWidget {
         width: double.infinity,
         margin: const EdgeInsets.only(top: 20),
         child: Center(
-          child: Column(
-            children: [
-              Text(
-                "Media Library",
-                style: TextStyle(
-                  color: ColorShades.primaryColor1,
-                  fontFamily: "Tahoma",
-                  fontSize: 40,
-                  fontWeight: FontWeight.w700,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text(
+                  "Media Library",
+                  style: TextStyle(
+                    color: ColorShades.primaryColor1,
+                    fontFamily: "Tahoma",
+                    fontSize: 40,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  mediaBubble(IconlyBold.image, "Photos", context),
-                  const SizedBox(width: 35),
-                  mediaBubble(IconlyBold.video, "Videos", context),
-                ],
-              ),
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  mediaBubble(IconlyBold.volume_up, "Voice Memos", context),
-                  const SizedBox(width: 35),
-                  mediaBubble(IconlyBold.chat, "Messages", context),
-                ],
-              ),
-            ],
+                const SizedBox(height: 50),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    mediaBubble(IconlyBold.image, "Photos", context),
+                    const SizedBox(width: 35),
+                    mediaBubble(IconlyBold.video, "Videos", context),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    mediaBubble(IconlyBold.volume_up, "Voice Memos", context),
+                    const SizedBox(width: 35),
+                    mediaBubble(IconlyBold.chat, "Messages", context),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

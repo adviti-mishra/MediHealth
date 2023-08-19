@@ -58,8 +58,8 @@ class DrawerWidget extends StatelessWidget {
             actions: [
               TextButton(
                   onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => const Login()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Login()));
                   },
                   child:
                       Text('Yes', style: TextStyle(color: ColorShades.text2))),
@@ -215,22 +215,16 @@ class DrawerWidget extends StatelessWidget {
                   navigatetoUserProfileScreen(context);
                 }),
             drawerMenuOption(
-                label: "Settings",
-                icon: Icons.settings,
-                ftor: () {
-                  navigatetoAccessibilityFeaturesScreen(context);
-                }),
-            drawerMenuOption(
                 label: "My Circle",
                 icon: Icons.people,
                 ftor: () {
                   navigatetoCircleScreen(context);
                 }),
             drawerMenuOption(
-                label: "Old Media",
+                label: "Join Circle",
                 icon: Icons.perm_media,
                 ftor: () {
-                  navigatetoOldMediaScreen(context);
+                  navigatetoJoinCircleScreen(context);
                 }),
             drawerMenuOption(
                 label: "Prompt",
@@ -239,10 +233,16 @@ class DrawerWidget extends StatelessWidget {
                   navigatetoPromptScreen(context);
                 }),
             drawerMenuOption(
-                label: "Join Circle",
+                label: "Old Media",
                 icon: Icons.perm_media,
                 ftor: () {
-                  navigatetoJoinCircleScreen(context);
+                  navigatetoOldMediaScreen(context);
+                }),
+            drawerMenuOption(
+                label: "Settings",
+                icon: Icons.settings,
+                ftor: () {
+                  navigatetoAccessibilityFeaturesScreen(context);
                 }),
             Divider(
               thickness: 2,
