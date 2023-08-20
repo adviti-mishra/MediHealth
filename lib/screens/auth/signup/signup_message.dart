@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../../utils/utils_all.dart';
 
 Column welcomeInMessage(BuildContext context) {
-  return const Column(
+  return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       Text(
@@ -10,9 +11,9 @@ Column welcomeInMessage(BuildContext context) {
         style: TextStyle(
             fontSize: 40,
             fontWeight: FontWeight.bold,
-            color: Color(0xff102542)),
+            color: ColorShades.primaryColor1),
       ),
-      SizedBox(
+      const SizedBox(
         height: 20,
       ),
       Text(
@@ -21,7 +22,7 @@ Column welcomeInMessage(BuildContext context) {
         style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: Color(0xff102542)),
+            color: ColorShades.primaryColor1),
       )
     ],
   );

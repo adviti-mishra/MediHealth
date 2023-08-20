@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../../utils/utils_all.dart';
+import 'package:practice_app/utils/utils_all.dart';
 import 'package:practice_app/screens/auth/signup/signup_message.dart';
 import 'package:practice_app/screens/auth/signup/signup_tile.dart';
 import 'package:practice_app/screens/auth/signup/signup2.dart';
@@ -89,17 +89,20 @@ class _SignUpState extends State<SignUp> {
     return Column(
       children: [
         Align(
-            alignment: Alignment.bottomLeft,
-            child: Row(children: [
+          alignment: Alignment.bottomLeft,
+          child: Row(
+            children: [
               Text(
                 "Email",
                 style: TextStyle(
-                  color: ColorShades.primaryColor4,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
+                  color: ColorShades.primaryColor4,
                 ),
               ),
-            ])),
+            ],
+          ),
+        ),
         verticalSpace(10),
         emailValidation(),
       ],
@@ -183,7 +186,7 @@ class _SignUpState extends State<SignUp> {
           },
           child: Icon(
               _passwordObscureText ? Icons.visibility_off : Icons.visibility,
-              color: const Color(0xff102542)),
+              color: ColorShades.primaryColor1),
         ),
         filled: true,
         border: const OutlineInputBorder(),
@@ -244,7 +247,7 @@ class _SignUpState extends State<SignUp> {
           },
           child: Icon(
               _rePasswordObscureText ? Icons.visibility_off : Icons.visibility,
-              color: const Color(0xff102542)),
+              color: ColorShades.primaryColor1),
         ),
         filled: true,
         border: const OutlineInputBorder(),
@@ -278,15 +281,15 @@ class _SignUpState extends State<SignUp> {
         }
       },
       color: ColorShades.primaryColor4,
-      child: const Padding(
-        padding: EdgeInsets.all(20.0),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Next',
               style: TextStyle(
-                color: Color(0xff102542),
+                color: ColorShades.primaryColor1,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
@@ -304,10 +307,10 @@ class _SignUpState extends State<SignUp> {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => const Login()));
         },
-        child: const Text(
+        child: Text(
           "Already have an account? Login",
           style: TextStyle(
-            color: Color(0xff102542),
+            color: ColorShades.primaryColor1,
             fontSize: 24,
           ),
         ));

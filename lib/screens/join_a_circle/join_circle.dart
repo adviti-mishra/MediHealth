@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:practice_app/utils/app_bar.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
-import 'package:practice_app/utils/color_shades.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
+import 'package:practice_app/utils/utils_all.dart';
 
 class JoinCircle extends StatefulWidget {
   JoinCircle({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class _JoinCircleState extends State<JoinCircle> {
                   "Join a Circle!",
                   style: TextStyle(
                     color: ColorShades.primaryColor1,
-                    fontSize: 40,
+                    fontSize: 40 * fontSizeMultiplier,
                     fontWeight: FontWeight.w700,
                     fontFamily: 'Tahoma',
                   ),

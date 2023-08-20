@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:practice_app/utils/utils_all.dart';
 
 Column welcomeMessage(BuildContext context) {
-  return const Column(
+  return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       Text(
         'MediHealth',
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: 60, fontWeight: FontWeight.bold, color: Color(0xFFF8CD51)),
+            fontSize: 60,
+            fontWeight: FontWeight.bold,
+            color: ColorShades.primaryColor4),
       ),
-      SizedBox(height: 20,),
-      Text(
+      const SizedBox(
+        height: 20,
+      ),
+      const Text(
         'Lets Heal Together',
         textAlign: TextAlign.center,
         style: TextStyle(
             fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
       ),
-      SizedBox(height: 20,),
-      Text(
+      const SizedBox(
+        height: 20,
+      ),
+      const Text(
         'Welcome!',
         textAlign: TextAlign.center,
         style: TextStyle(

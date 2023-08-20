@@ -4,7 +4,6 @@ import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
 import 'package:practice_app/utils/utils_all.dart';
 import 'package:practice_app/screens/drawer_screens/user_profile.dart';
-import 'package:practice_app/utils/color_shades.dart';
 import 'dart:math' as math;
 
 class ProfileCircle extends StatelessWidget {
@@ -58,7 +57,7 @@ class InviteButton extends StatelessWidget {
         style: TextStyle(
           color: ColorShades.primaryColor4, // Set the text color to yellow
           fontWeight: FontWeight.bold,
-          fontSize: 18,
+          fontSize: 18 * fontSizeMultiplier,
         ),
       ),
     );
@@ -78,15 +77,15 @@ class MyCircle extends StatelessWidget {
       body: Column(
         children: [
           const SizedBox(height: 20),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
                 Text(
                   'My Circle',
                   style: TextStyle(
-                    fontSize: 20,
-                    color: Color(0xFF102542),
+                    fontSize: 20 * fontSizeMultiplier,
+                    color: ColorShades.primaryColor1,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Tahoma',
                   ),

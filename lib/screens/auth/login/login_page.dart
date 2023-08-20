@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/screens/auth/signup/signup.dart';
-import 'package:practice_app/screens/promptPage/promptPage.dart';
-import '../../../utils/utils_all.dart';
+import 'package:practice_app/screens/landing_page/landing_page.dart';
+import 'package:practice_app/utils/utils_all.dart';
 import 'package:practice_app/screens/auth/login/login_data_tile.dart';
 import 'package:practice_app/screens/auth/login/login_message.dart';
 import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
@@ -71,15 +71,17 @@ class _LoginState extends State<Login> {
       });
       try {
         await _auth.signInWithEmailAndPassword(
-            email: _emailTextController.text.trim().toLowerCase(),
-            password: _passwordTextController.text);
+          email: _emailTextController.text.trim().toLowerCase(),
+          password: _passwordTextController.text,
+        );
 
         // Navigate to another page after successful login
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  const PromptPage()), // Replace `YourNextPage` with the actual page you want to navigate to.
+            builder: (context) => LandingPage(),
+          ), // Replace `YourNextPage` with the actual page you want to navigate to.
+          (Route<dynamic> route) => false,
         );
       } catch (error) {
         setState(() {
@@ -207,7 +209,7 @@ class _LoginState extends State<Login> {
             });
           },
           child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility,
-              color: const Color(0xff102542)),
+              color: ColorShades.primaryColor1),
         ),
         filled: true,
         border: const OutlineInputBorder(),
@@ -228,22 +230,22 @@ class _LoginState extends State<Login> {
     return MaterialButton(
       onPressed: _submitLoginForm,
       color: ColorShades.primaryColor4,
-      child: const Padding(
-        padding: EdgeInsets.all(20.0),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Login',
               style: TextStyle(
-                color: Color(0xff102542),
+                color: ColorShades.primaryColor1,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
             ),
             Icon(
               Icons.login,
-              color: Color(0xff102542),
+              color: ColorShades.primaryColor1,
             )
           ],
         ),
@@ -258,10 +260,10 @@ class _LoginState extends State<Login> {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const ForgotPassword()));
         },
-        child: const Text(
+        child: Text(
           'Forgot Password?',
           style: TextStyle(
-            color: Color(0xff102542),
+            color: ColorShades.primaryColor1,
             fontSize: 24,
           ),
         ));
@@ -274,10 +276,10 @@ class _LoginState extends State<Login> {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => const SignUp()));
         },
-        child: const Text(
+        child: Text(
           "Don't have an account? Sign Up",
           style: TextStyle(
-            color: Color(0xff102542),
+            color: ColorShades.primaryColor1,
             fontSize: 24,
           ),
         ));
@@ -290,10 +292,10 @@ class _LoginState extends State<Login> {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const Welcome()));
         },
-        child: const Text(
+        child: Text(
           "Back",
           style: TextStyle(
-            color: Color(0xff102542),
+            color: ColorShades.primaryColor1,
             fontSize: 24,
           ),
         ));

@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:practice_app/screens/landing_page/landing_page.dart';
 import 'package:practice_app/utils/models.dart';
 import 'package:practice_app/utils/utils_all.dart';
 import 'package:practice_app/screens/auth/signup/signup.dart';
@@ -38,6 +41,52 @@ class _SignUpState2 extends State<SignUp2> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _isLoading = false;
   bool _isCircleOwner = false;
+
+  String randomCircleCode() {
+    String code = '';
+    const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const codeLength = 6;
+
+    for (int i = 0; i < codeLength; i++) {
+      code += alpha[Random().nextInt(26)];
+    }
+
+    return code;
+  }
+
+  String randomProfileCode() {
+    String code = '';
+    const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const codeLength = 8;
+
+    for (int i = 0; i < codeLength; i++) {
+      code += alpha[Random().nextInt(26)];
+    }
+
+    return code;
+  }
+
+  Future<bool> checkCircleCode(String circleCode) async {
+    final db = FirebaseFirestore.instance;
+
+    QuerySnapshot querySnapshot = await db
+        .collection('circles')
+        .where('circleId', isEqualTo: circleCode)
+        .get();
+
+    return querySnapshot.docs.isNotEmpty;
+  }
+
+  Future<bool> checkProfileCode(String profileCode) async {
+    final db = FirebaseFirestore.instance;
+
+    QuerySnapshot querySnapshot = await db
+        .collection('users')
+        .where('profileCode', isEqualTo: profileCode)
+        .get();
+
+    return querySnapshot.docs.isNotEmpty;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,30 +138,47 @@ class _SignUpState2 extends State<SignUp2> {
         final _uid = user!.uid;
 
         Timestamp now = Timestamp.now();
+        String circleId = "";
+        String profileCode = "";
 
-        FirebaseFirestore.instance.collection('user').doc(_uid).set({
-          'id': _uid,
-          'firstName': _firstNameTextController.text,
-          'lastName': _lastNameTextController.text,
-          'email': widget.emailTextController.text,
-          'phoneNumber': _phoneNumberTextController.text,
-          'circleOwner': _circleOwnerTextController,
-          'createdAt': now,
-        });
+        if (_isCircleOwner) {
+          do {
+            circleId = randomCircleCode();
+          } while (await checkCircleCode(circleId));
+        }
 
-        UserCustom(
-          id: _uid,
-          circleId: null,
-          firstName: _firstNameTextController.text,
-          lastName: _lastNameTextController.text,
-          email: widget.emailTextController.text,
-          phoneNumber: _phoneNumberTextController.text,
-          profileCode: null,
-          isCircleOwner: _isCircleOwner,
+        do {
+          profileCode = randomProfileCode();
+        } while (await checkProfileCode(profileCode));
+
+        final newUser = UserCustom(
+          circleId: circleId,
           createdAt: now,
+          email: widget.emailTextController.text,
+          firstName: _firstNameTextController.text,
+          isCircleOwner: _isCircleOwner,
+          lastName: _lastNameTextController.text,
+          phoneNumber: _phoneNumberTextController.text,
+          profileCode: profileCode,
         );
 
-        Navigator.canPop(context) ? Navigator.pop(context) : null;
+        final db = FirebaseFirestore.instance;
+        final docRef = db
+            .collection('user')
+            .withConverter(
+              fromFirestore: UserCustom.fromFirestore,
+              toFirestore: (UserCustom user, options) => user.toFirestore(),
+            )
+            .doc(_uid);
+        await docRef.set(newUser);
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LandingPage(),
+          ), // Replace `YourNextPage` with the actual page you want to navigate to.
+          (Route<dynamic> route) => false,
+        );
       } catch (error) {
         setState(() {
           _isLoading = false;
@@ -345,25 +411,25 @@ class _SignUpState2 extends State<SignUp2> {
     return MaterialButton(
       onPressed: _submitSignUpForm,
       color: ColorShades.primaryColor4,
-      child: const Padding(
-        padding: EdgeInsets.all(20.0),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Create Account',
               style: TextStyle(
-                color: Color(0xff102542),
+                color: ColorShades.primaryColor1,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Icon(
               Icons.login,
-              color: Color(0xff102542),
+              color: ColorShades.primaryColor1,
             )
           ],
         ),
@@ -378,15 +444,15 @@ class _SignUpState2 extends State<SignUp2> {
             context, MaterialPageRoute(builder: (context) => const SignUp()));
       },
       color: ColorShades.primaryColor4,
-      child: const Padding(
-        padding: EdgeInsets.all(20.0),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Back',
               style: TextStyle(
-                color: Color(0xff102542),
+                color: ColorShades.primaryColor1,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
@@ -404,10 +470,10 @@ class _SignUpState2 extends State<SignUp2> {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => const Login()));
         },
-        child: const Text(
+        child: Text(
           "Already have an account? Login",
           style: TextStyle(
-            color: Color(0xff102542),
+            color: ColorShades.primaryColor1,
             fontSize: 24,
           ),
         ));

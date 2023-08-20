@@ -40,7 +40,7 @@ class OldMedia extends StatelessWidget {
               style: TextStyle(
                 color: ColorShades.primaryColor4,
                 fontFamily: "Tahoma",
-                fontSize: 28,
+                fontSize: 28 * fontSizeMultiplier,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -77,7 +77,7 @@ class OldMedia extends StatelessWidget {
                   style: TextStyle(
                     color: ColorShades.primaryColor1,
                     fontFamily: "Tahoma",
-                    fontSize: 40,
+                    fontSize: 40 * fontSizeMultiplier,
                     fontWeight: FontWeight.w700,
                   ),
                 ),

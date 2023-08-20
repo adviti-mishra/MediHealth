@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:practice_app/utils/app_bar.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
+import 'package:practice_app/utils/models.dart';
 import '../../../../utils/utils_all.dart';
 import 'package:practice_app/screens/promptPage/promptPage_message.dart';
 import 'package:practice_app/screens/promptPage/promptPage_tile.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PromptPage extends StatefulWidget {
   const PromptPage({Key? key}) : super(key: key);
@@ -19,6 +21,14 @@ class _PromptPageState extends State<PromptPage> {
   final _ResponseFormKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  String prompt = "TEST";
+
+  @override
+  void initState() {
+    super.initState();
+    fetchPromptByPostDate();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +40,32 @@ class _PromptPageState extends State<PromptPage> {
     );
   }
 
+  Future<void> fetchPromptByPostDate() async {
+    try {
+      var now = DateTime.now();
+      var lastMidnight = DateTime(now.year, now.month, now.day);
+      QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+          .instance
+          .collection('prompts')
+          .where('postDate', isEqualTo: lastMidnight)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        PromptsCustom promptData =
+            PromptsCustom.fromFirestore(snapshot.docs[0], null);
+        setState(() {
+          prompt = promptData.prompt ?? "Default Prompt";
+        });
+      } else {
+        setState(() {
+          prompt = "No prompt found for today.";
+        });
+      }
+    } catch (error) {
+      print("Error fetching prompt: $error");
+    }
+  }
+
   Container promptPageContent(BuildContext context) {
     return Container(
       width: double.infinity,
@@ -39,7 +75,7 @@ class _PromptPageState extends State<PromptPage> {
       child: Column(
         children: [
           verticalSpace(20),
-          promptPageMessage(context),
+          promptPageMessage(context, prompt),
           enterResponseTile(
             response: response(),
             photoButton: photoButton(),

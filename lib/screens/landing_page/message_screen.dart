@@ -1,5 +1,5 @@
 import 'dart:math' as math; // import this
-
+import 'package:practice_app/utils/utils_all.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/screens/landing_page/custom_shape.dart';
 
@@ -25,7 +25,7 @@ class MessageScreen extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 transform: Matrix4.rotationY(math.pi),
                 child: CustomPaint(
-                  painter: CustomShape(const Color(0xFF102542)),
+                  painter: CustomShape(ColorShades.primaryColor1),
                 ),
               ),
             ],
@@ -33,9 +33,9 @@ class MessageScreen extends StatelessWidget {
           Container(
             width: 250,
             padding: const EdgeInsets.all(14),
-            decoration: const BoxDecoration(
-              color: Color(0xFF102542),
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: ColorShades.primaryColor1,
+              borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(18),
                 topLeft: Radius.circular(18),
                 bottomRight: Radius.circular(18),
@@ -43,7 +43,8 @@ class MessageScreen extends StatelessWidget {
             ),
             child: Text(
               message,
-              style: const TextStyle(color: Colors.white, fontSize: 24),
+              style: TextStyle(
+                  color: Colors.white, fontSize: 24 * fontSizeMultiplier),
             ),
           ),
         ],

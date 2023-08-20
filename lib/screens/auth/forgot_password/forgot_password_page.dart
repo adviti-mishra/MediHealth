@@ -141,15 +141,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return MaterialButton(
       onPressed: _submitForgetPasswordForm,
       color: ColorShades.primaryColor4,
-      child: const Padding(
-        padding: EdgeInsets.all(20.0),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Submit',
               style: TextStyle(
-                color: Color(0xff102542),
+                color: ColorShades.primaryColor1,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
@@ -166,10 +166,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => const Login()));
         },
-        child: const Text(
+        child: Text(
           'Return to Login',
           style: TextStyle(
-            color: Color(0xff102542),
+            color: ColorShades.primaryColor1,
             fontSize: 24,
           ),
         ));

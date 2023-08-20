@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import '../../../utils/utils_all.dart';
 
 Column welcomeBackMessage(BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
-    children: const [
+    children: [
       Text(
         'MediHealth',
         textAlign: TextAlign.center,
         style: TextStyle(
             fontSize: 48,
             fontWeight: FontWeight.bold,
-            color: Color(0xff102542)),
+            color: ColorShades.primaryColor1),
       ),
-      SizedBox(
+      const SizedBox(
         height: 20,
       ),
       Text(
@@ -21,9 +22,9 @@ Column welcomeBackMessage(BuildContext context) {
         style: TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.bold,
-            color: Color(0xff102542)),
+            color: ColorShades.primaryColor1),
       ),
-      SizedBox(
+      const SizedBox(
         height: 10,
       ),
       Text(
@@ -32,7 +33,7 @@ Column welcomeBackMessage(BuildContext context) {
         style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: Color(0xff102542)),
+            color: ColorShades.primaryColor1),
       )
     ],
   );

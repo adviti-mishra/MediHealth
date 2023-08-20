@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:practice_app/utils/app_bar.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
-import 'package:practice_app/utils/color_shades.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
+import 'package:practice_app/utils/utils_all.dart';
 
 class MediaLibrary extends StatelessWidget {
   MediaLibrary({Key? key, required this.mediaType}) : super(key: key);
@@ -22,7 +22,7 @@ class MediaLibrary extends StatelessWidget {
                     prompt,
                     style: TextStyle(
                       color: ColorShades.primaryColor4,
-                      fontSize: 24,
+                      fontSize: 24 * fontSizeMultiplier,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Tahoma',
                     ),
@@ -32,7 +32,7 @@ class MediaLibrary extends StatelessWidget {
                     date,
                     style: TextStyle(
                       color: ColorShades.primaryColor4,
-                      fontSize: 24,
+                      fontSize: 24 * fontSizeMultiplier,
                       fontFamily: 'Tahoma',
                     ),
                   ),
@@ -43,7 +43,7 @@ class MediaLibrary extends StatelessWidget {
                 answer,
                 style: TextStyle(
                   color: ColorShades.text1,
-                  fontSize: 18,
+                  fontSize: 18 * fontSizeMultiplier,
                   fontFamily: 'Tahoma',
                 ),
               )
@@ -77,7 +77,7 @@ class MediaLibrary extends StatelessWidget {
                   mediaType,
                   style: TextStyle(
                     color: ColorShades.primaryColor1,
-                    fontSize: 40,
+                    fontSize: 40 * fontSizeMultiplier,
                     fontWeight: FontWeight.w700,
                     fontFamily: 'Tahoma',
                   ),

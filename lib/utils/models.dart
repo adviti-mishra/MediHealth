@@ -1,65 +1,165 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserCustom {
-  final int id;
-  final int circleId;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String phoneNumber;
-  final String profileCode;
-  final bool isCircleOwner;
-  final DateTime createdAt;
+  final String? id;
+  final String? circleId;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? phoneNumber;
+  final String? profileCode;
+  final bool? isCircleOwner;
+  final Timestamp? createdAt;
 
   UserCustom({
-    required this.id,
-    required this.circleId,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.phoneNumber,
-    required this.profileCode,
-    required this.isCircleOwner,
-    required this.createdAt,
+    this.id,
+    this.circleId,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.phoneNumber,
+    this.profileCode,
+    this.isCircleOwner,
+    this.createdAt,
   });
+
+  factory UserCustom.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
+    final data = snapshot.data();
+    return UserCustom(
+      id: data?['id'],
+      circleId: data?['circleId'],
+      firstName: data?['firstName'],
+      lastName: data?['lastName'],
+      email: data?['email'],
+      phoneNumber: data?['phoneNumber'],
+      profileCode: data?['profileCode'],
+      isCircleOwner: data?['isCircleOwner'],
+      createdAt: data?['createdAt'],
+    );
+  }
+
+  Map<String, dynamic> toFirestore() {
+    return {
+      if (id != null) "id": id,
+      if (circleId != null) "circleId": circleId,
+      if (firstName != null) "firstName": firstName,
+      if (lastName != null) "lastName": lastName,
+      if (email != null) "email": email,
+      if (phoneNumber != null) "phoneNumber": phoneNumber,
+      if (profileCode != null) "profileCode": profileCode,
+      if (isCircleOwner != null) "isCircleOwner": isCircleOwner,
+      if (createdAt != null) "createdAt": createdAt,
+    };
+  }
 }
 
-class Media {
-  final int id;
-  final int userId;
-  final int circleId;
-  final int promptId;
-  final int type;
-  final DateTime postDate;
-  final String firebaseUrl;
-  final String textContent;
+class MediaCustom {
+  final int? id;
+  final int? userId;
+  final String? circleId;
+  final int? promptId;
+  final int? type;
+  final DateTime? postDate;
+  final String? firebaseUrl;
+  final String? textContent;
 
-  Media({
-    required this.id,
-    required this.userId,
-    required this.circleId,
-    required this.promptId,
-    required this.type,
-    required this.postDate,
-    required this.firebaseUrl,
-    required this.textContent,
+  MediaCustom({
+    this.id,
+    this.userId,
+    this.circleId,
+    this.promptId,
+    this.type,
+    this.postDate,
+    this.firebaseUrl,
+    this.textContent,
   });
+
+  factory MediaCustom.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
+    final data = snapshot.data();
+    return MediaCustom(
+      id: data?['id'],
+      circleId: data?['circleId'],
+      userId: data?['userId'],
+      promptId: data?['promptId'],
+      type: data?['type'],
+      postDate: data?['postDate'],
+      firebaseUrl: data?['firebaseUrl'],
+      textContent: data?['textContent'],
+    );
+  }
+
+  Map<String, dynamic> toFirestore() {
+    return {
+      if (id != null) "id": id,
+      if (circleId != null) "circleId": circleId,
+      if (userId != null) "firstName": userId,
+      if (promptId != null) "lastName": promptId,
+      if (type != null) "email": type,
+      if (postDate != null) "phoneNumber": postDate,
+      if (firebaseUrl != null) "profileCode": firebaseUrl,
+      if (textContent != null) "isCircleOwner": textContent,
+    };
+  }
 }
 
-class Prompts {
-  final int id;
-  final String prompt;
-  final DateTime postDate;
+class PromptsCustom {
+  final int? id;
+  final String? prompt;
+  final DateTime? postDate;
 
-  Prompts({
-    required this.id,
-    required this.prompt,
-    required this.postDate,
+  PromptsCustom({
+    this.id,
+    this.prompt,
+    this.postDate,
   });
+
+  factory PromptsCustom.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
+    final data = snapshot.data();
+    return PromptsCustom(
+      id: data?['id'],
+      prompt: data?['prompt'],
+      postDate: data?['postDate'],
+    );
+  }
+
+  Map<String, dynamic> toFirestore() {
+    return {
+      if (id != null) "id": id,
+      if (prompt != null) "circleId": prompt,
+      if (postDate != null) "firstName": postDate,
+    };
+  }
 }
 
-class Circles {
-  final int id;
+class CirclesCustom {
+  final String? id;
 
-  Circles({
-    required this.id,
+  CirclesCustom({
+    this.id,
   });
+
+  factory CirclesCustom.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
+    final data = snapshot.data();
+    return CirclesCustom(
+      id: data?['id'],
+    );
+  }
+
+  Map<String, dynamic> toFirestore() {
+    return {
+      if (id != null) "id": id,
+    };
+  }
 }

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:practice_app/utils/utils_all.dart';
+import '../../../utils/utils_all.dart';
 
 Center forgotPasswordTile(
     {required Form recoveryEmail, required MaterialButton submitButton}) {
@@ -11,7 +12,7 @@ Center forgotPasswordTile(
       child: Container(
         // TO DO : implement the blue box decoration
         decoration: BoxDecoration(
-          color: const Color(0xff102542),
+          color: ColorShades.primaryColor1,
           borderRadius: BorderRadius.circular(32),
         ),
         child: SingleChildScrollView(

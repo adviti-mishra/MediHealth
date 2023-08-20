@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/utils/app_bar.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/utils_all.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
-import 'package:practice_app/utils/color_shades.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserProfile extends StatefulWidget {
@@ -18,7 +18,8 @@ class UserProfile extends StatefulWidget {
 class _UserProfileState extends State<UserProfile> {
   bool editMode = false;
   bool _isLoading = false;
-  String phoneNumber = "";
+  int phoneNumber = 0;
+  String profileCode = "";
   String name = "";
   String email = "";
   String createdAt = "";
@@ -52,15 +53,19 @@ class _UserProfileState extends State<UserProfile> {
         _isLoading = true;
       });
 
-      final DocumentSnapshot userDoc = await FirebaseFirestore.instance
-          .collection('user')
-          .doc(widget.userID)
-          .get();
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final User? user = auth.currentUser;
+      final uid = user!.uid;
+      final DocumentSnapshot userDoc =
+          await FirebaseFirestore.instance.collection('user').doc(uid).get();
+      final data = userDoc.data() as Map<String, dynamic>;
 
+      print((data['profileCode']));
       setState(() {
-        email = userDoc.get('email');
-        name = userDoc.get('name');
-        phoneNumber = userDoc.get('phoneNumber');
+        email = data['email'];
+        name = data['firstName'] + " " + data['lastName'];
+        phoneNumber = data['phoneNumber'];
+        profileCode = data['profileCode'];
       });
     } catch (error) {
       // Handle error
@@ -77,7 +82,7 @@ class _UserProfileState extends State<UserProfile> {
         Text(
           headerIn,
           style: TextStyle(
-            fontSize: 18,
+            fontSize: 18 * fontSizeMultiplier,
             color: ColorShades.primaryColor1,
             fontWeight: FontWeight.bold,
             fontFamily: 'Tahoma',
@@ -87,7 +92,7 @@ class _UserProfileState extends State<UserProfile> {
         Text(
           contentIn,
           style: TextStyle(
-            fontSize: 18,
+            fontSize: 18 * fontSizeMultiplier,
             color: ColorShades.primaryColor1,
             fontWeight: FontWeight.bold,
             fontFamily: 'Tahoma',
@@ -107,7 +112,7 @@ class _UserProfileState extends State<UserProfile> {
             'Customize your profile below',
             style: TextStyle(
               color: ColorShades.text1,
-              fontSize: 20,
+              fontSize: 20 * fontSizeMultiplier,
               fontWeight: FontWeight.bold,
               fontFamily: 'Tahoma',
             ),
@@ -132,7 +137,7 @@ class _UserProfileState extends State<UserProfile> {
                 child: Text(
                   'Profile',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 20 * fontSizeMultiplier,
                     color: ColorShades.primaryColor1,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Tahoma',
@@ -181,14 +186,34 @@ class _UserProfileState extends State<UserProfile> {
             ),
             const SizedBox(height: 20),
             Align(
-              alignment: Alignment.center,
-              child: Text(
-                'Your profile code:',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: ColorShades.primaryColor1,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Tahoma',
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  'Profile Code: ',
+                  style: TextStyle(
+                    fontSize: 18 * fontSizeMultiplier,
+                    color: ColorShades.primaryColor1,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                    fontFamily: 'Tahoma',
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  profileCode,
+                  style: TextStyle(
+                    fontSize: 18 * fontSizeMultiplier,
+                    color: ColorShades.primaryColor1,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                    fontFamily: 'Tahoma',
+                  ),
                 ),
               ),
             ),
@@ -203,7 +228,7 @@ class _UserProfileState extends State<UserProfile> {
                     Text(
                       'Share your code',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 18 * fontSizeMultiplier,
                         color: ColorShades.primaryColor1,
                         fontWeight: FontWeight.bold,
                         decoration: TextDecoration.underline,
@@ -228,7 +253,7 @@ class _UserProfileState extends State<UserProfile> {
                 child: Text(
                   'Name:',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 18 * fontSizeMultiplier,
                     color: ColorShades.primaryColor1,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Tahoma',
@@ -244,7 +269,7 @@ class _UserProfileState extends State<UserProfile> {
                 child: Text(
                   name,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 18 * fontSizeMultiplier,
                     color: ColorShades.primaryColor1,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Tahoma',
@@ -260,7 +285,7 @@ class _UserProfileState extends State<UserProfile> {
                 child: Text(
                   'Email:',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 18 * fontSizeMultiplier,
                     color: ColorShades.primaryColor1,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Tahoma',
@@ -276,7 +301,7 @@ class _UserProfileState extends State<UserProfile> {
                 child: Text(
                   email,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 18 * fontSizeMultiplier,
                     color: ColorShades.primaryColor1,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Tahoma',
@@ -317,7 +342,6 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   SingleChildScrollView editProfileContent() {
-    // ... (existing code for editProfileContent())
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -369,7 +393,7 @@ class _UserProfileState extends State<UserProfile> {
               child: Text(
                 'Change profile picture',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 18 * fontSizeMultiplier,
                   color: ColorShades.primaryColor1,
                   fontWeight: FontWeight.bold,
                   decoration: TextDecoration.underline,
@@ -386,7 +410,7 @@ class _UserProfileState extends State<UserProfile> {
               child: Text(
                 'Name:',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 18 * fontSizeMultiplier,
                   color: ColorShades.primaryColor1,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Tahoma',
@@ -425,7 +449,7 @@ class _UserProfileState extends State<UserProfile> {
               child: Text(
                 'Email:',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 18 * fontSizeMultiplier,
                   color: ColorShades.primaryColor1,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Tahoma',
