@@ -113,7 +113,7 @@ class _PromptPageState extends State<PromptPage> {
           return null;
         }
       },
-      maxLines: 16,
+      maxLines: 14,
       style: TextStyle(
         color: ColorShades.text2,
         fontSize: 16 * fontSizeMultiplier,

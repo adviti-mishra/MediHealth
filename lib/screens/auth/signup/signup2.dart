@@ -397,15 +397,24 @@ class _SignUpState2 extends State<SignUp2> {
       items: const [
         DropdownMenuItem<bool>(
           value: true,
-          child: Text('Yes, I will own the circle'),
+          child: Text(
+            'Yes, I will own the circle',
+          ),
         ),
         DropdownMenuItem<bool>(
           value: false,
-          child: Text('No, I am a participant'),
+          child: Text(
+            'No, I am a participant',
+          ),
         ),
       ],
+      decoration: const InputDecoration(
+        filled: true,
+        fillColor: Colors.white, // Set background color to white
+      ),
     );
   }
+
 
   MaterialButton createButton() {
     return MaterialButton(

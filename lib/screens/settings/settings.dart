@@ -350,24 +350,6 @@ class _SettingsState extends State<Settings> {
             ),
           ),
           verticalSpace(10),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    "Something Else",
-                    style: TextStyle(
-                      color: ColorShades.primaryColor1,
-                      fontSize: 24 * fontSizeMultiplier,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                ),
-                somethingElseToggle(),
-              ],
-            ),
-          ),
         ],
       ),
     );
@@ -383,21 +365,6 @@ class _SettingsState extends State<Settings> {
       onChanged: (value) {
         setState(() {
           highContrastEnabled = value;
-        });
-      },
-    );
-  }
-
-  Switch somethingElseToggle() {
-    return Switch(
-      activeTrackColor: const Color.fromARGB(200, 16, 37, 66),
-      activeColor: ColorShades.primaryColor1,
-      inactiveTrackColor: const Color.fromARGB(100, 16, 37, 66),
-      inactiveThumbColor: ColorShades.primaryColor1,
-      value: somethingElseEnabled,
-      onChanged: (value) {
-        setState(() {
-          somethingElseEnabled = value;
         });
       },
     );
