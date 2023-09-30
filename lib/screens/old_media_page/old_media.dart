@@ -9,6 +9,7 @@ import 'package:iconly/iconly.dart';
 class OldMedia extends StatelessWidget {
   OldMedia({Key? key}) : super(key: key);
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final mediaTypes = ["Messages", "Photos", "Videos", "Voice Memos"];
 
   void navigateToMediaLibrary(context, mediaType) {
     // final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -22,8 +23,7 @@ class OldMedia extends StatelessWidget {
             builder: (context) => MediaLibrary(mediaType: mediaType)));
   }
 
-  InkWell mediaBubble(
-      IconData mediaIcon, String mediaText, BuildContext context) {
+  InkWell mediaBubble(IconData mediaIcon, int mediaType, BuildContext context) {
     return InkWell(
       child: Container(
         child: Column(
@@ -35,7 +35,7 @@ class OldMedia extends StatelessWidget {
               size: 100,
             ),
             Text(
-              mediaText,
+              mediaTypes[mediaType],
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: ColorShades.primaryColor4,
@@ -54,7 +54,7 @@ class OldMedia extends StatelessWidget {
         width: 170,
       ),
       onTap: () {
-        navigateToMediaLibrary(context, mediaText);
+        navigateToMediaLibrary(context, mediaType);
       },
     );
   }
