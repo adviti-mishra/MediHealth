@@ -40,13 +40,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
     setState(() {
       owner = data['isCircleOwner'];
-      circleID = data['circleID'];
-      if (circleID == "")
-      {
+      circleID = data['circleId'];
+      if (circleID == "") {
         hasCircle = false;
-      }
-      else
-      {
+      } else {
         hasCircle = true;
       }
     });
@@ -266,8 +263,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   } else {
                     if (hasCircle) {
                       navigatetoCircleScreen(context);
-                    } 
-                    else {
+                    } else {
                       navigatetoJoinCircleScreen(context);
                     }
                   }
