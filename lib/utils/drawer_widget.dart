@@ -12,6 +12,8 @@ import 'color_shades.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({Key? key}) : super(key: key);
+  final bool owner = true; // CHANGE
+  final bool hasCircle = true;
 
   Container drawerMenuOption(
       {required String label, required IconData icon, required Function ftor}) {
@@ -206,7 +208,11 @@ class DrawerWidget extends StatelessWidget {
                 label: "Home Page",
                 icon: Icons.perm_media,
                 ftor: () {
-                  navigagetoLandingPageScreen(context);
+                  if (owner) {
+                    navigagetoLandingPageScreen(context);
+                  } else {
+                    navigatetoPromptScreen(context);
+                  }
                 }),
             drawerMenuOption(
                 label: "Profile",
@@ -218,19 +224,15 @@ class DrawerWidget extends StatelessWidget {
                 label: "My Circle",
                 icon: Icons.people,
                 ftor: () {
-                  navigatetoCircleScreen(context);
-                }),
-            drawerMenuOption(
-                label: "Join Circle",
-                icon: Icons.perm_media,
-                ftor: () {
-                  navigatetoJoinCircleScreen(context);
-                }),
-            drawerMenuOption(
-                label: "Prompt",
-                icon: Icons.perm_media,
-                ftor: () {
-                  navigatetoPromptScreen(context);
+                  if (owner) {
+                    navigatetoCircleScreen(context);
+                  } else {
+                    if (hasCircle /*doesnt have a circle yet*/) {
+                      navigatetoCircleScreen(context);
+                    } else {
+                      navigatetoJoinCircleScreen(context);
+                    }
+                  }
                 }),
             drawerMenuOption(
                 label: "Old Media",

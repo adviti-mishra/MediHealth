@@ -33,6 +33,8 @@ pubspec.lock
 .pub/
 /build/
 /ios/
+ios/
+build/
 
 # Symbolication related
 app.*.symbols
@@ -44,6 +46,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+android/
+/android/
 
 # Needed for Dishita :(
 build/ios/Debug-iphonesimulator/gRPC-Core/grpc.framework/grpc

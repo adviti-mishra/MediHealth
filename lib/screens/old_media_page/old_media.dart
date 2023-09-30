@@ -15,7 +15,7 @@ class OldMedia extends StatelessWidget {
     // final User? user = _auth.currentUser;
     // final String uid = user!.uid;
 
-    Navigator.pop(context);
+    // Navigator.pop(context);
     Navigator.push(
         context,
         MaterialPageRoute(
