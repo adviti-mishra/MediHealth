@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
 import 'package:practice_app/utils/utils_all.dart';
-import 'package:practice_app/screens/landing_page/message_screen.dart';
+// import 'package:practice_app/screens/landing_page/message_screen.dart';
 import 'package:practice_app/utils/app_bar.dart';
 
 class LandingPage extends StatefulWidget {
@@ -65,10 +65,25 @@ class _LandingPageState extends State<LandingPage> {
               width: 80,
             ),
             const SizedBox(width: 40),
-            MessageScreen(
-              key: key,
-              message: message,
+            Container(
+              width: 250,
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: ColorShades.primaryColor1,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(18),
+                ),
+              ),
+              child: Text(
+                message,
+                style: TextStyle(
+                    color: Colors.white, fontSize: 24 * fontSizeMultiplier),
+              ),
             ),
+            // MessageScreen(
+            //   key: key,
+            //   message: message,
+            // ),
           ],
         ),
       ],
@@ -118,29 +133,31 @@ class _LandingPageState extends State<LandingPage> {
         ),
         Container(
           margin: const EdgeInsets.only(left: 20),
-          child: Column(
-            children: [
-              userText(
-                message: "I'm looking forward to seeing...",
-                imagePath: 'assets/images/user.png',
-                key: const Key('0'),
-              ),
-              userText(
-                message: "I'm looking forward to seeing...",
-                imagePath: 'assets/images/user.png',
-                key: const Key('1'),
-              ),
-              userText(
-                message: "I'm looking forward to seeing...",
-                imagePath: 'assets/images/user.png',
-                key: const Key('2'),
-              ),
-              userText(
-                message: "I'm looking forward to seeing...",
-                imagePath: 'assets/images/user.png',
-                key: const Key('3'),
-              ),
-            ],
+          child: Center(
+            child: Column(
+              children: [
+                userText(
+                  message: "I'm looking forward to seeing...",
+                  imagePath: 'assets/images/user.png',
+                  key: const Key('0'),
+                ),
+                userText(
+                  message: "I'm looking forward to seeing...",
+                  imagePath: 'assets/images/user.png',
+                  key: const Key('1'),
+                ),
+                userText(
+                  message: "I'm looking forward to seeing...",
+                  imagePath: 'assets/images/user.png',
+                  key: const Key('2'),
+                ),
+                userText(
+                  message: "I'm looking forward to seeing...",
+                  imagePath: 'assets/images/user.png',
+                  key: const Key('3'),
+                ),
+              ],
+            ),
           ),
         ),
       ],

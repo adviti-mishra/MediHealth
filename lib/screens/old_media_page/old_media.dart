@@ -85,18 +85,18 @@ class OldMedia extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    mediaBubble(IconlyBold.image, "Photos", context),
+                    mediaBubble(IconlyBold.image, 1, context),
                     const SizedBox(width: 35),
-                    mediaBubble(IconlyBold.video, "Videos", context),
+                    mediaBubble(IconlyBold.video, 2, context),
                   ],
                 ),
                 const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    mediaBubble(IconlyBold.volume_up, "Voice Memos", context),
+                    mediaBubble(IconlyBold.volume_up, 3, context),
                     const SizedBox(width: 35),
-                    mediaBubble(IconlyBold.chat, "Messages", context),
+                    mediaBubble(IconlyBold.chat, 0, context),
                   ],
                 ),
               ],
