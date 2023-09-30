@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
 import 'package:practice_app/utils/utils_all.dart';
-// import 'package:practice_app/screens/landing_page/message_screen.dart';
 import 'package:practice_app/utils/app_bar.dart';
 
 class LandingPage extends StatefulWidget {
@@ -17,6 +16,7 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   String welcomeMessage = "Hello, ";
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  String? currentUserCircleID;
 
   Future<void> fetchData() async {
     try {
@@ -27,10 +27,9 @@ class _LandingPageState extends State<LandingPage> {
       final docRef = db.collection('user').doc(uid);
       DocumentSnapshot doc = await docRef.get();
       final data = doc.data() as Map<String, dynamic>;
-      String firstName = data['firstName'];
-      String message = firstName;
       setState(() {
-        welcomeMessage = message;
+        welcomeMessage = "Hello, " + data['firstName'];
+        currentUserCircleID = data['circleId'];
       });
     } catch (e) {
       print("Error getting document: $e");
@@ -41,53 +40,6 @@ class _LandingPageState extends State<LandingPage> {
   void initState() {
     super.initState();
     fetchData();
-  }
-
-  Widget userText(
-      {required String message, required String imagePath, required Key key}) {
-    return Column(
-      children: [
-        const SizedBox(height: 40),
-        Row(
-          children: [
-            Container(
-              margin: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                image: DecorationImage(
-                  image: AssetImage(
-                    imagePath,
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              height: 80,
-              width: 80,
-            ),
-            const SizedBox(width: 40),
-            Container(
-              width: 250,
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: ColorShades.primaryColor1,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(18),
-                ),
-              ),
-              child: Text(
-                message,
-                style: TextStyle(
-                    color: Colors.white, fontSize: 24 * fontSizeMultiplier),
-              ),
-            ),
-            // MessageScreen(
-            //   key: key,
-            //   message: message,
-            // ),
-          ],
-        ),
-      ],
-    );
   }
 
   @override
@@ -113,7 +65,7 @@ class _LandingPageState extends State<LandingPage> {
     return Column(
       children: [
         Text(
-          "Hello, " + welcomeMessage,
+          welcomeMessage,
           style: TextStyle(
             color: ColorShades.primaryColor1,
             fontSize: 40 * fontSizeMultiplier,
@@ -131,34 +83,94 @@ class _LandingPageState extends State<LandingPage> {
             fontFamily: 'Tahoma',
           ),
         ),
-        Container(
-          margin: const EdgeInsets.only(left: 20),
-          child: Center(
-            child: Column(
+        currentUserCircleID == null
+            ? CircularProgressIndicator()
+            : StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('user')
+                    .where('circleId', isEqualTo: currentUserCircleID)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  }
+                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                    return Text('No users in this circle.');
+                  }
+                  return Column(
+                    children: snapshot.data!.docs
+                        .where((doc) =>
+                            doc.id !=
+                            FirebaseAuth.instance.currentUser!
+                                .uid) // Filtering out current user
+                        .map((doc) {
+                      Map<String, dynamic> data =
+                          doc.data() as Map<String, dynamic>;
+                      return userText(
+                        message: data[
+                            'firstName'], // passing only the first name to userText
+                        imagePath: 'assets/images/user.png',
+                        key: Key(doc.id),
+                      );
+                    }).toList(),
+                  );
+                },
+              ),
+      ],
+    );
+  }
+
+  Widget userText(
+      {required String message, required String imagePath, required Key key}) {
+    return Column(
+      children: [
+        const SizedBox(height: 40),
+        Row(
+          children: [
+            Column(
               children: [
-                userText(
-                  message: "I'm looking forward to seeing...",
-                  imagePath: 'assets/images/user.png',
-                  key: const Key('0'),
+                Container(
+                  margin: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    image: DecorationImage(
+                      image: AssetImage(imagePath),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  height: 80,
+                  width: 80,
                 ),
-                userText(
-                  message: "I'm looking forward to seeing...",
-                  imagePath: 'assets/images/user.png',
-                  key: const Key('1'),
-                ),
-                userText(
-                  message: "I'm looking forward to seeing...",
-                  imagePath: 'assets/images/user.png',
-                  key: const Key('2'),
-                ),
-                userText(
-                  message: "I'm looking forward to seeing...",
-                  imagePath: 'assets/images/user.png',
-                  key: const Key('3'),
+                const SizedBox(height: 8),
+                Text(
+                  message, // Displaying the first name under the profile picture
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
                 ),
               ],
             ),
-          ),
+            const SizedBox(width: 40),
+            Container(
+              width: 250,
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: ColorShades.primaryColor1,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(18),
+                ),
+              ),
+              child: Text(
+                "I'm looking forward to seeing " + message,
+                style: TextStyle(
+                    color: Colors.white, fontSize: 24 * fontSizeMultiplier),
+              ),
+            ),
+          ],
         ),
       ],
     );

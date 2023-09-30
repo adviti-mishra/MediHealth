@@ -46,6 +46,7 @@ dependencies:
   flutter_tts: ^3.4.0
   iconly: ^1.0.1
   firebase_storage: ^11.2.7
+  audioplayers: ^5.1.0
 
 dev_dependencies:
   flutter_test:

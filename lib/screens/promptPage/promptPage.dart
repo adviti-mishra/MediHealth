@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:practice_app/utils/app_bar.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
@@ -8,6 +10,8 @@ import 'package:practice_app/screens/promptPage/promptPage_message.dart';
 import 'package:practice_app/screens/promptPage/promptPage_tile.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class PromptPage extends StatefulWidget {
   const PromptPage({Key? key}) : super(key: key);
@@ -22,6 +26,7 @@ class _PromptPageState extends State<PromptPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   String prompt = "TEST";
+  XFile? mediaFile; // The selected media file (photo, video, or voice memo)
 
   @override
   void initState() {
@@ -39,6 +44,7 @@ class _PromptPageState extends State<PromptPage> {
       bottomNavigationBar: const BottomBar(),
     );
   }
+
 
   Future<void> fetchPromptByPostDate() async {
     try {
@@ -139,25 +145,58 @@ class _PromptPageState extends State<PromptPage> {
   }
 
   // Image and Video Selection
-  Future<void> _selectImageOrVideo(ImageSource source) async {
-    XFile? mediaFile;
-    if (source == ImageSource.gallery) {
-      mediaFile = await ImagePicker().pickImage(source: source);
-    } else if (source == ImageSource.camera) {
-      mediaFile = await ImagePicker()
-          .pickVideo(source: source, maxDuration: const Duration(seconds: 60));
+  Future<void> _selectImageOrVideo(ImageSource source, bool isVideo) async {
+    XFile? pickedFile;
+
+    if (isVideo) {
+      pickedFile = await ImagePicker().pickVideo(source: source);
+    } else {
+      pickedFile = await ImagePicker().pickImage(source: source);
     }
 
-    if (mediaFile != null) {
-      // Handle the selected media file (image or video) here.
-      // You can store the file path or display the media using a video player or image widget.
-      // For example, if it's a video, you can initialize a VideoPlayerController and show the video.
+    if (pickedFile != null) {
+      setState(() {
+        mediaFile = pickedFile;
+      });
+      // Do what you want with mediaFile here (e.g., upload it or display it on the page)
+      _uploadMediaFile();
     }
   }
 
+  Future<void> _uploadMediaFile() async {
+  try {
+    // Create a Reference to the file
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference ref = storage.ref().child('responses/${mediaFile!.name}');
+
+    // Upload the file
+    UploadTask uploadTask = ref.putFile(File(mediaFile!.path));
+
+    // Get the download URL
+    await uploadTask.whenComplete(() async {
+      final String downloadURL = await ref.getDownloadURL();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('File uploaded successfully')),
+      );
+
+      // Update the UI with the file info
+      setState(() {
+        // store downloadURL to display later
+      });
+    });
+  } catch (e) {
+    print(e);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Failed to upload file')),
+    );
+  }
+}
+
+
+
   MaterialButton photoButton() {
     return MaterialButton(
-      onPressed: () => _selectImageOrVideo(ImageSource.gallery),
+      onPressed: () => _selectImageOrVideo(ImageSource.gallery, false),
       color: ColorShades.primaryColor1,
       padding: const EdgeInsets.all(20.0),
       child: Row(
@@ -169,7 +208,7 @@ class _PromptPageState extends State<PromptPage> {
 
   MaterialButton videoButton() {
     return MaterialButton(
-      onPressed: () => _selectImageOrVideo(ImageSource.gallery),
+      onPressed: () => _selectImageOrVideo(ImageSource.gallery, true),
       color: ColorShades.primaryColor1,
       padding: const EdgeInsets.all(20.0),
       child: Row(
@@ -179,9 +218,15 @@ class _PromptPageState extends State<PromptPage> {
     );
   }
 
+  void _recordVoiceMemo() {
+    // Placeholder: Add code to record a voice memo here
+    // You can use a package like audioplayers or flutter_sound
+    print("Voice memo recording feature is not yet implemented");
+  }
+
   MaterialButton voiceMemoButton() {
     return MaterialButton(
-      onPressed: _submitResponseForm,
+      onPressed: _recordVoiceMemo,
       color: ColorShades.primaryColor1,
       padding: const EdgeInsets.all(20.0),
       child: Row(
