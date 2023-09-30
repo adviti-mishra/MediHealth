@@ -40,7 +40,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
     setState(() {
       owner = data['isCircleOwner'];
-      circleID = data['isCircleOwner'];
+      circleID = data['circleID'];
       if (circleID == "")
       {
         hasCircle = false;

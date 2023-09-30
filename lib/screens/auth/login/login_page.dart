@@ -103,11 +103,7 @@ class _LoginState extends State<Login> {
       
       // Determine the page to navigate to
       Widget Function(BuildContext) builder;
-      if (owner) {
-        builder = (context) => LandingPage();
-      } else {
-        builder = (context) => PromptPage();
-      }
+      builder = (context) => owner ? const LandingPage() : const PromptPage();
       // Navigate to the determined page
       Navigator.pushAndRemoveUntil(
         context,
