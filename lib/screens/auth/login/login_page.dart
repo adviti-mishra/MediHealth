@@ -30,8 +30,6 @@ class _LoginState extends State<Login> {
   bool _isLoading = false;
 
   bool owner = false;
-  String circleID = "";
-  bool hasCircle = false;
 
   @override
   void initState() {
@@ -50,15 +48,6 @@ class _LoginState extends State<Login> {
 
     setState(() {
       owner = data['isCircleOwner'];
-      circleID = data['isCircleOwner'];
-      if (circleID == "")
-      {
-        hasCircle = false;
-      }
-      else
-      {
-        hasCircle = true;
-      }
     });
   }
 

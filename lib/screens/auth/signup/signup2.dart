@@ -12,6 +12,8 @@ import 'package:practice_app/screens/auth/signup/signup2_tile.dart';
 import 'package:practice_app/screens/auth/signup/signup2_message.dart';
 import 'package:practice_app/screens/auth/login/login_page.dart';
 
+import '../../promptPage/promptPage.dart';
+
 class SignUp2 extends StatefulWidget {
   final TextEditingController emailTextController;
   final TextEditingController passwordTextController;
@@ -35,6 +37,28 @@ class _SignUpState2 extends State<SignUp2> {
   final TextEditingController _phoneNumberTextController =
       TextEditingController();
   String? _circleOwnerTextController;
+
+  bool owner = false;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    final db = FirebaseFirestore.instance;
+    final docRef = db.collection('user').doc(uid);
+    DocumentSnapshot doc = await docRef.get();
+    final data = doc.data() as Map<String, dynamic>;
+
+    setState(() {
+      owner = data['isCircleOwner'];
+    });
+  }
 
   final _signUpFormKey = GlobalKey<FormState>();
 
@@ -188,8 +212,8 @@ class _SignUpState2 extends State<SignUp2> {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => LandingPage(),
-          ), // Replace `YourNextPage` with the actual page you want to navigate to.
+            builder: (context) => _isCircleOwner ? const LandingPage() : const PromptPage(),
+          ),
           (Route<dynamic> route) => false,
         );
       } catch (error) {

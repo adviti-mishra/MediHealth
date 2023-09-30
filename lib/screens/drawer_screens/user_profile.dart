@@ -48,6 +48,116 @@ class _UserProfileState extends State<UserProfile> {
     }
   }
 
+  Future<void> updateUserData() async {
+    try {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final User? user = auth.currentUser;
+      final uid = user!.uid;
+
+      await FirebaseFirestore.instance.collection('user').doc(uid).update({
+        'firstName': firstname,
+        'lastName': lastname,
+        // Any other field you would like to update.
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('User details updated successfully!')),
+      );
+    } catch (e) {
+      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to update user details!')),
+      );
+    }
+  }
+
+  Future<void> updateEmail(String newEmail) async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+    final uid = user.uid;
+    final String currentEmail = user.email ?? ''; // Get the current email
+
+    String? password = await _showPasswordDialog();
+    if (password == null) return; // User cancelled.
+
+    // Reauthenticate the user.
+    try {
+      AuthCredential credential = EmailAuthProvider.credential(
+        email: currentEmail, // use the current email
+        password: password,
+      );
+      await user.reauthenticateWithCredential(credential);
+    } catch (e) {
+      print('Reauthentication error: $e'); // print the error message
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Reauthentication failed! Please try again.'),
+      ));
+      return;
+    }
+    // Update email in FirebaseAuth.
+    try {
+      await user.updateEmail(newEmail);
+      await user.reload();
+      User? updatedUser = FirebaseAuth.instance.currentUser;
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Failed to update email! $e'),
+      ));
+      return;
+    }
+
+    // Update email in Firestore.
+    try {
+      await FirebaseFirestore.instance.collection('user').doc(uid).update({
+        'email': newEmail,
+      });
+      setState(() {
+        email = newEmail;
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Failed to update email in Firestore! $e'),
+      ));
+    }
+  }
+
+  Future<String?> _showPasswordDialog() async {
+    String? password;
+    bool shouldRetry = true;
+    while (shouldRetry) {
+      await showDialog<String>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Enter your password'),
+            content: TextField(
+              obscureText: true,
+              onChanged: (val) => password = val,
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  shouldRetry = false;
+                  Navigator.of(context).pop();
+                },
+                child: const Text('CANCEL'),
+              ),
+              TextButton(
+                onPressed: () {
+                  shouldRetry = false;
+                  Navigator.of(context).pop(password);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      if (password?.isNotEmpty == true) return password;
+    }
+    return null;
+  }
+
   void getUserData() async {
     try {
       setState(() {
@@ -545,7 +655,9 @@ class _UserProfileState extends State<UserProfile> {
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  await updateEmail(email);
+                  await updateUserData();
                   setState(() {
                     editMode = false;
                   });
