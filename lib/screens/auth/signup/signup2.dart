@@ -162,6 +162,10 @@ class _SignUpState2 extends State<SignUp2> {
           profileCode: profileCode,
         );
 
+        final newCircle = CirclesCustom(
+          id: circleId,
+        )
+
         final db = FirebaseFirestore.instance;
         final docRef = db
             .collection('user')
@@ -171,6 +175,15 @@ class _SignUpState2 extends State<SignUp2> {
             )
             .doc(_uid);
         await docRef.set(newUser);
+
+        final doc2Ref = db
+            .collection('circles')
+            .withConverter(
+              fromFirestore: CirclesCustom.fromFirestore, 
+              toFirestore: (CirclesCustom circle, options) => circle.toFirestore(),
+            )
+            .doc(_uid);
+        await doc2Ref.set(newCircle);
 
         Navigator.pushAndRemoveUntil(
           context,

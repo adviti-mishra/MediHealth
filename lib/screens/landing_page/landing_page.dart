@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
 import 'package:practice_app/utils/utils_all.dart';
-import 'package:practice_app/screens/landing_page/message_screen.dart';
+// import 'package:practice_app/screens/landing_page/message_screen.dart';
 import 'package:practice_app/utils/app_bar.dart';
 
 class LandingPage extends StatefulWidget {
