@@ -5,6 +5,8 @@ import 'package:practice_app/utils/drawer_widget.dart';
 import 'package:practice_app/utils/utils_all.dart';
 import 'package:practice_app/screens/drawer_screens/user_profile.dart';
 import 'dart:math' as math;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfileCircle extends StatelessWidget {
   const ProfileCircle({Key? key, this.size = 50.0}) : super(key: key);
@@ -37,8 +39,6 @@ class InviteButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        // Navigate to the profile page here
-        // You can replace "UserProfile()" with the actual route you want to navigate to
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -47,15 +47,15 @@ class InviteButton extends StatelessWidget {
         );
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: ColorShades.primaryColor1, // Set the button color here
+        backgroundColor: ColorShades.primaryColor1,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                8)), // Make the button a rectangle with rounded corners
+          borderRadius: BorderRadius.circular(8),
+        ),
       ),
       child: Text(
         'Invite members to your circle',
         style: TextStyle(
-          color: ColorShades.primaryColor4, // Set the text color to yellow
+          color: ColorShades.primaryColor4,
           fontWeight: FontWeight.bold,
           fontSize: 18 * fontSizeMultiplier,
         ),
@@ -64,9 +64,35 @@ class InviteButton extends StatelessWidget {
   }
 }
 
-class MyCircle extends StatelessWidget {
+class MyCircle extends StatefulWidget {
   MyCircle({Key? key}) : super(key: key);
+
+  @override
+  _MyCircleState createState() => _MyCircleState();
+}
+
+class _MyCircleState extends State<MyCircle> {
+  bool? isCircleOwner;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    final DocumentSnapshot doc =
+        await FirebaseFirestore.instance.collection('user').doc(uid).get();
+    final data = doc.data() as Map<String, dynamic>;
+
+    setState(() {
+      isCircleOwner = data['isCircleOwner'] as bool?;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,25 +124,17 @@ class MyCircle extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 60), // Move the animation up
-
-                // Move main profile circle to the middle of the screen
+                const SizedBox(height: 60),
                 Container(
                   width: 320,
                   height: 320,
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      // Smaller circles positioned around the main profile circle
                       for (int i = 0; i < 6; i++)
                         Positioned(
                           top: 130 + 130 * math.cos(i * 2 * math.pi / 6),
-                          left: 127 +
-                              130 *
-                                  math.sin(i *
-                                      2 *
-                                      math.pi /
-                                      6), // Move slightly to the left
+                          left: 127 + 130 * math.sin(i * 2 * math.pi / 6),
                           child: const ProfileCircle(size: 60.0),
                         ),
                       Container(
@@ -145,15 +163,14 @@ class MyCircle extends StatelessWidget {
                     ],
                   ),
                 ),
-
-                const SizedBox(height: 100), // Increase spacing at the bottom
+                const SizedBox(height: 100),
               ],
             ),
           ),
         ],
       ),
       bottomNavigationBar: const BottomBar(),
-      floatingActionButton: const InviteButton(), // Add the InviteButton here
+      floatingActionButton: isCircleOwner == true ? const InviteButton() : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }

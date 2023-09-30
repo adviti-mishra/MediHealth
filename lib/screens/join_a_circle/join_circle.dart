@@ -3,6 +3,9 @@ import 'package:practice_app/utils/app_bar.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
 import 'package:practice_app/utils/utils_all.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class JoinCircle extends StatefulWidget {
   JoinCircle({Key? key}) : super(key: key);
@@ -11,6 +14,16 @@ class JoinCircle extends StatefulWidget {
   _JoinCircleState createState() => _JoinCircleState();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 }
+
+void joinCircle(String code) async {
+  User? user = FirebaseAuth.instance.currentUser;
+  if (user != null) {
+    // Update Firestore
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    users.doc(user.uid).update({'circleId': code});
+  }
+}
+
 
 class _JoinCircleState extends State<JoinCircle> {
   String code = "";
@@ -60,7 +73,7 @@ class _JoinCircleState extends State<JoinCircle> {
                     const SizedBox(height: 30),
                     ElevatedButton.icon(
                       onPressed: () {
-                        // print("Submitted");
+                        joinCircle(code);
                       },
                       icon: const Icon(
                         Icons.add,
