@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/screens/auth/signup/signup.dart';
@@ -6,7 +7,10 @@ import 'package:practice_app/utils/utils_all.dart';
 import 'package:practice_app/screens/auth/login/login_data_tile.dart';
 import 'package:practice_app/screens/auth/login/login_message.dart';
 import 'package:practice_app/screens/auth/welcome/welcome_page.dart';
+import 'package:practice_app/screens/promptPage/promptPage.dart';
 import 'package:practice_app/screens/auth/forgot_password/forgot_password_page.dart';
+
+
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -24,6 +28,39 @@ class _LoginState extends State<Login> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _isLoading = false;
+
+  bool owner = false;
+  String circleID = "";
+  bool hasCircle = false;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    final db = FirebaseFirestore.instance;
+    final docRef = db.collection('user').doc(uid);
+    DocumentSnapshot doc = await docRef.get();
+    final data = doc.data() as Map<String, dynamic>;
+
+    setState(() {
+      owner = data['isCircleOwner'];
+      circleID = data['isCircleOwner'];
+      if (circleID == "")
+      {
+        hasCircle = false;
+      }
+      else
+      {
+        hasCircle = true;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,36 +101,44 @@ class _LoginState extends State<Login> {
   }
 
   void _submitLoginForm() async {
-    final isValid = _loginFormKey.currentState!.validate();
-    if (isValid) {
-      setState(() {
-        _isLoading = true;
-      });
-      try {
-        await _auth.signInWithEmailAndPassword(
-          email: _emailTextController.text.trim().toLowerCase(),
-          password: _passwordTextController.text,
-        );
-
-        // Navigate to another page after successful login
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LandingPage(),
-          ), // Replace `YourNextPage` with the actual page you want to navigate to.
-          (Route<dynamic> route) => false,
-        );
-      } catch (error) {
-        setState(() {
-          _isLoading = false;
-        });
-        errorPopup(context, error.toString());
-      }
-    }
+  final isValid = _loginFormKey.currentState!.validate();
+  if (isValid) {
     setState(() {
-      _isLoading = false;
+      _isLoading = true;
     });
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: _emailTextController.text.trim().toLowerCase(),
+        password: _passwordTextController.text,
+      );
+      
+      // Determine the page to navigate to
+      Widget Function(BuildContext) builder;
+      if (owner) {
+        builder = (context) => LandingPage();
+      } else {
+        builder = (context) => PromptPage();
+      }
+      // Navigate to the determined page
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: builder
+        ),
+        (Route<dynamic> route) => false,
+      );
+    } catch (error) {
+      setState(() {
+        _isLoading = false;
+      });
+      errorPopup(context, error.toString());
+    }
   }
+  setState(() {
+    _isLoading = false;
+  });
+}
+
 
   // Email and Password
   Form emailPassword() {

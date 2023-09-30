@@ -164,7 +164,7 @@ class _SignUpState2 extends State<SignUp2> {
 
         final newCircle = CirclesCustom(
           id: circleId,
-        )
+        );
 
         final db = FirebaseFirestore.instance;
         final docRef = db

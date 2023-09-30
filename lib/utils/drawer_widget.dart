@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/screens/drawer_screens/my_circle.dart';
@@ -6,14 +7,50 @@ import 'package:practice_app/screens/join_a_circle/join_circle.dart';
 import 'package:practice_app/screens/landing_page/landing_page.dart';
 import 'package:practice_app/screens/old_media_page/old_media.dart';
 import 'package:practice_app/screens/promptPage/promptPage.dart';
-import 'package:practice_app/screens/settings/settings.dart';
+import 'package:practice_app/screens/settings/settings.dart' as settings;
 import 'package:practice_app/screens/auth/login/login_page.dart';
 import 'color_shades.dart';
 
-class DrawerWidget extends StatelessWidget {
+class DrawerWidget extends StatefulWidget {
   const DrawerWidget({Key? key}) : super(key: key);
-  final bool owner = true; // CHANGE
-  final bool hasCircle = true;
+
+  @override
+  _DrawerWidgetState createState() => _DrawerWidgetState();
+}
+
+class _DrawerWidgetState extends State<DrawerWidget> {
+  bool owner = false;
+  String circleID = "";
+  bool hasCircle = false;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    final db = FirebaseFirestore.instance;
+    final docRef = db.collection('user').doc(uid);
+    DocumentSnapshot doc = await docRef.get();
+    final data = doc.data() as Map<String, dynamic>;
+
+    setState(() {
+      owner = data['isCircleOwner'];
+      circleID = data['isCircleOwner'];
+      if (circleID == "")
+      {
+        hasCircle = false;
+      }
+      else
+      {
+        hasCircle = true;
+      }
+    });
+  }
 
   Container drawerMenuOption(
       {required String label, required IconData icon, required Function ftor}) {
@@ -104,7 +141,7 @@ class DrawerWidget extends StatelessWidget {
     Navigator.pop(context);
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const Settings()),
+      MaterialPageRoute(builder: (context) => const settings.Settings()),
     );
   }
 
@@ -227,9 +264,10 @@ class DrawerWidget extends StatelessWidget {
                   if (owner) {
                     navigatetoCircleScreen(context);
                   } else {
-                    if (hasCircle /*doesnt have a circle yet*/) {
+                    if (hasCircle) {
                       navigatetoCircleScreen(context);
-                    } else {
+                    } 
+                    else {
                       navigatetoJoinCircleScreen(context);
                     }
                   }
