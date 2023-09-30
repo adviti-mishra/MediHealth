@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practice_app/screens/drawer_screens/my_circle.dart';
 import 'package:practice_app/utils/app_bar.dart';
 import 'package:practice_app/utils/bottom_bar.dart';
 import 'package:practice_app/utils/drawer_widget.dart';
@@ -15,15 +16,23 @@ class JoinCircle extends StatefulWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 }
 
-void joinCircle(String code) async {
+void joinCircle(String code, BuildContext context) async {
   User? user = FirebaseAuth.instance.currentUser;
-  if (user != null) {
+  if (code.length != 6) {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Invalid code'),
+      backgroundColor: Colors.red,
+    ));
+    return;
+  }
+
+  if (code != "") {
     // Update Firestore
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
-    users.doc(user.uid).update({'circleId': code});
+    CollectionReference users = FirebaseFirestore.instance.collection('user');
+    users.doc(user!.uid).update({'circleId': code});
+
   }
 }
-
 
 class _JoinCircleState extends State<JoinCircle> {
   String code = "";
@@ -72,9 +81,15 @@ class _JoinCircleState extends State<JoinCircle> {
                     ),
                     const SizedBox(height: 30),
                     ElevatedButton.icon(
-                      onPressed: () {
-                        joinCircle(code);
-                      },
+                    onPressed: () {
+                      joinCircle(code, context);
+                      if (code.length == 6) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyCircle()));
+                      }
+                    },
                       icon: const Icon(
                         Icons.add,
                         color: Colors.white,
