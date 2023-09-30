@@ -22,16 +22,52 @@ class _MediaLibraryState extends State<MediaLibrary> {
   bool isCircleOnwer = false;
   String circleId = "";
   String userId = "";
+  List<dynamic> mediaEntries = [];
+  List<Widget> finalEntries = [];
 
   Future<void> fetchMediaList() async {
-    final db = FirebaseFirestore.instance;
-    final docRef = await db
-        .collection('media')
-        .where('circleId', isEqualTo: circleId)
-        .get();
-    final docs = docRef.docs;
-    // final data = doc.data() as Map<String, dynamic>;
-    print(docs);
+    try {
+      var docRef;
+      // print(isCircleOnwer);
+
+      if (isCircleOnwer) {
+        docRef = await db
+            .collection('media')
+            .where('circleId', isEqualTo: circleId)
+            .where('type', isEqualTo: widget.mediaType)
+            .get();
+      } else {
+        docRef = await db
+            .collection('media')
+            .where('circleId', isEqualTo: circleId)
+            .where('userId', isEqualTo: userId)
+            .where('type', isEqualTo: widget.mediaType)
+            .get();
+      }
+
+      final docs = docRef.docs;
+      List<dynamic> list = [];
+      final mappedResult =
+          (docs.map((doc) => (doc.data() as Map<dynamic, dynamic>)));
+      // print(mappedResult);
+      // print(mappedResult.runtimeType);
+      final singleDynamicList = mappedResult.toList();
+      // print(singleDynamicList);
+      // print(singleDynamicList.runtimeType);
+      // final mapList = singleDynamicList as List<dynamic>;
+      // // singleDynamicList.map((item) => (item as Map<dynamic, dynamic>));
+      // print(mapList.toList());
+      // print(mapList.toList().runtimeType);
+      list = singleDynamicList.toList();
+
+      setState(() {
+        mediaEntries = list;
+      });
+
+      entries();
+    } catch (e) {
+      print("Error getting media entries: $e");
+    }
   }
 
   Future<void> fetchData() async {
@@ -56,7 +92,7 @@ class _MediaLibraryState extends State<MediaLibrary> {
         fetchMediaList();
       }
     } catch (e) {
-      print("Error getting document: $e");
+      print("Error getting user: $e");
     }
   }
 
@@ -66,7 +102,7 @@ class _MediaLibraryState extends State<MediaLibrary> {
     fetchData();
   }
 
-  Widget entry(String prompt, String answer, String date) {
+  Widget messageEntry(String prompt, String answer, String date) {
     return Column(
       children: [
         const SizedBox(height: 30),
@@ -117,26 +153,32 @@ class _MediaLibraryState extends State<MediaLibrary> {
     );
   }
 
+  Future<void> getPrompt(
+      String promptId, String response, String postDate) async {
+    final docRef = db.collection('prompts').doc(promptId);
+    DocumentSnapshot doc = await docRef.get();
+    final data = doc.data() as Map<String, dynamic>;
+    final prompt = data['prompt'];
+    final curEntry = messageEntry(prompt, response, postDate);
+    final tempList = [...finalEntries, curEntry];
+
+    setState(() {
+      finalEntries = tempList;
+    });
+  }
+
   Widget entries() {
+    for (var i = 0; i < mediaEntries.length; i++) {
+      final media = mediaEntries[i];
+      final response = media['textContent'];
+      final postDate = media['postDate'];
+      final finalDate =
+          DateTime.fromMillisecondsSinceEpoch((postDate.seconds) * 1000);
+      getPrompt(media['promptId'], response, finalDate.toString());
+    }
+
     return Column(
-      children: [
-        entry(
-            "How do you feel?",
-            "Lorem ipsum dolor, sit amet, consectetur adipiscing elit. Duis vitae tincidunt ipsum, nec semper tellus. Nam semper ex in accumsan sollicitudin. Vestibulum dictum ut ipsum ut viverra. Phasellus tincidunt feugiat bibendum. Ut sapien erat, ornare eu auctor hendrerit, finibus non sapien. Nulla eleifend ante id fringilla bibendum. Donec facilisis, tortor.",
-            "08/02/23"),
-        entry(
-            "How do you feel?",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae tincidunt ipsum, nec semper tellus. Nam semper ex in accumsan sollicitudin. Vestibulum dictum ut ipsum ut viverra. Phasellus tincidunt feugiat bibendum. Ut sapien erat, ornare eu auctor hendrerit, finibus non sapien. Nulla eleifend ante id fringilla bibendum. Donec facilisis, tortor.",
-            "08/02/23"),
-        entry(
-            "How do you feel?",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae tincidunt ipsum, nec semper tellus. Nam semper ex in accumsan sollicitudin. Vestibulum dictum ut ipsum ut viverra. Phasellus tincidunt feugiat bibendum. Ut sapien erat, ornare eu auctor hendrerit, finibus non sapien. Nulla eleifend ante id fringilla bibendum. Donec facilisis, tortor.",
-            "08/02/23"),
-        entry(
-            "How do you feel?",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae tincidunt ipsum, nec semper tellus. Nam semper ex in accumsan sollicitudin. Vestibulum dictum ut ipsum ut viverra. Phasellus tincidunt feugiat bibendum. Ut sapien erat, ornare eu auctor hendrerit, finibus non sapien. Nulla eleifend ante id fringilla bibendum. Donec facilisis, tortor.",
-            "08/02/23"),
-      ],
+      children: finalEntries,
     );
   }
 
@@ -162,7 +204,9 @@ class _MediaLibraryState extends State<MediaLibrary> {
                     fontFamily: 'Tahoma',
                   ),
                 ),
-                hasCircle ? entries() : const Text("NO CIRCLE"),
+                hasCircle
+                    ? Column(children: finalEntries)
+                    : const Text("NO CIRCLE"),
               ],
             ),
           ),
