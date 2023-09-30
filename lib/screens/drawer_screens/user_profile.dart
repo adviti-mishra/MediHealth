@@ -20,7 +20,8 @@ class _UserProfileState extends State<UserProfile> {
   bool _isLoading = false;
   int phoneNumber = 0;
   String profileCode = "";
-  String name = "";
+  String firstname = "";
+  String lastname = "";
   String email = "";
   String createdAt = "";
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -63,7 +64,8 @@ class _UserProfileState extends State<UserProfile> {
       print((data['profileCode']));
       setState(() {
         email = data['email'];
-        name = data['firstName'] + " " + data['lastName'];
+        firstname = data['firstName'];
+        lastname = data['lastName'];
         phoneNumber = data['phoneNumber'];
         profileCode = data['profileCode'];
       });
@@ -250,65 +252,87 @@ class _UserProfileState extends State<UserProfile> {
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  'Name:',
-                  style: TextStyle(
-                    fontSize: 18 * fontSizeMultiplier,
-                    color: ColorShades.primaryColor1,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Tahoma',
-                  ),
+                child: Row(
+                  children: [
+                    Text(
+                      'First Name: ',
+                      style: TextStyle(
+                        fontSize: 18 * fontSizeMultiplier,
+                        color: ColorShades.primaryColor1,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Tahoma',
+                      ),
+                    ),
+                    Text(
+                      firstname,
+                      style: TextStyle(
+                        fontSize: 18 * fontSizeMultiplier,
+                        color: ColorShades.primaryColor1,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Tahoma',
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            const SizedBox(height: 10),
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  name,
-                  style: TextStyle(
-                    fontSize: 18 * fontSizeMultiplier,
-                    color: ColorShades.primaryColor1,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Tahoma',
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  'Email:',
-                  style: TextStyle(
-                    fontSize: 18 * fontSizeMultiplier,
-                    color: ColorShades.primaryColor1,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Tahoma',
-                  ),
+                child: Row(
+                  children: [
+                    Text(
+                      'Last Name: ',
+                      style: TextStyle(
+                        fontSize: 18 * fontSizeMultiplier,
+                        color: ColorShades.primaryColor1,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Tahoma',
+                      ),
+                    ),
+                    Text(
+                      lastname,
+                      style: TextStyle(
+                        fontSize: 18 * fontSizeMultiplier,
+                        color: ColorShades.primaryColor1,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Tahoma',
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            const SizedBox(height: 10),
             Align(
-              alignment: Alignment.center,
+              alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  email,
-                  style: TextStyle(
-                    fontSize: 18 * fontSizeMultiplier,
-                    color: ColorShades.primaryColor1,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Tahoma',
-                  ),
+                child: Row(
+                  children: [
+                    Text(
+                      'Email: ',
+                      style: TextStyle(
+                        fontSize: 18 * fontSizeMultiplier,
+                        color: ColorShades.primaryColor1,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Tahoma',
+                      ),
+                    ),
+                    Text(
+                      email,
+                      style: TextStyle(
+                        fontSize: 18 * fontSizeMultiplier,
+                        color: ColorShades.primaryColor1,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Tahoma',
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
+            const SizedBox(height: 20),
             const SizedBox(height: 20),
             Align(
               alignment: Alignment.center,
@@ -408,7 +432,7 @@ class _UserProfileState extends State<UserProfile> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
-                'Name:',
+                'First Name:',
                 style: TextStyle(
                   fontSize: 18 * fontSizeMultiplier,
                   color: ColorShades.primaryColor1,
@@ -424,7 +448,7 @@ class _UserProfileState extends State<UserProfile> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: TextFormField(
-                initialValue: name,
+                initialValue: firstname,
                 decoration: InputDecoration(
                   labelText: 'Click to start typing',
                   labelStyle: TextStyle(
@@ -435,9 +459,43 @@ class _UserProfileState extends State<UserProfile> {
                 ),
                 onChanged: (value) {
                   setState(() {
-                    name = value;
+                    firstname = value;
                   });
                 },
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Last Name:',
+                style: TextStyle(
+                  fontSize: 18 * fontSizeMultiplier,
+                  color: ColorShades.primaryColor1,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Tahoma',
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: TextFormField(
+                initialValue: lastname,
+                decoration: InputDecoration(
+                  labelText: 'Click to start typing',
+                  labelStyle: TextStyle(
+                    color: ColorShades.primaryColor1,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Tahoma',
+                  ),
+                ),
+                onChanged: (value) => setState(() => lastname = value),
               ),
             ),
           ),
